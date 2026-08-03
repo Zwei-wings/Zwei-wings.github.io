@@ -1,0 +1,614 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据结构-1 | Zweiwings</title><meta name="keywords" content="数据结构"><meta name="author" content="Zweiwings"><meta name="copyright" content="Zweiwings"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="关于线性表中顺序表的创建&#x2F;初始化、取值、查找、插入、删除以及代码实例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-1">
+<meta property="og:url" content="https://zwei-wings.github.io/2021/03/24/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/index.html">
+<meta property="og:site_name" content="Zweiwings">
+<meta property="og:description" content="关于线性表中顺序表的创建&#x2F;初始化、取值、查找、插入、删除以及代码实例">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zwei-wings.github.io/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp">
+<meta property="article:published_time" content="2021-03-24T11:02:30.000Z">
+<meta property="article:modified_time" content="2026-08-01T18:41:11.179Z">
+<meta property="article:author" content="Zweiwings">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zwei-wings.github.io/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp"><link rel="shortcut icon" href="/img/favicon1.png"><link rel="canonical" href="https://zwei-wings.github.io/2021/03/24/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-02 02:41:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/add2.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" ><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/add2.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><style>
+/* ===== 文章标题自定义装饰 ===== */
+
+/* 去掉 h3-h6 默认前缀图标 */
+#article-container h3::before,
+#article-container h4::before,
+#article-container h5::before,
+#article-container h6::before {
+  content: none !important;
+}
+
+/* 无序列表圆点标记 → 主题色 */
+#article-container ul > li::marker {
+  color: #ff9a5c;
+}
+
+/* h1：居中 + 底部渐变线 + 菱形 */
+#article-container h1 {
+  text-align: center;
+  padding-left: 0 !important;
+  padding-bottom: 20px;
+  margin: 1.5em 0 1.2em;
+  position: relative;
+}
+#article-container h1::before {
+  content: '' !important;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  border: 3px solid #ffba88;
+  background: #fff;
+  z-index: 2;
+}
+#article-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,186,136,.15), #ffba88, rgba(255,186,136,.15));
+}
+#article-container h1:hover {
+  padding-left: 0 !important;
+}
+
+/* h2：居左 + 左侧双竖线（长粗 + 短细） */
+#article-container h2 {
+  padding-left: 20px !important;
+  position: relative;
+}
+#article-container h2::before {
+  content: '' !important;
+  position: absolute;
+  left: 0;
+  top: .3em;
+  width: 3px;
+  height: calc(100% - .6em);
+  border-radius: 2px;
+  background: #ff9a5c;
+}
+#article-container h2::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: .45em;
+  width: 2px;
+  height: calc(100% - .9em);
+  border-radius: 1px;
+  background: #ffba88;
+}
+
+/* ===== 导航栏居中音乐控件（默认白色，亮底切换暗色） ===== */
+#nav-music-ui {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  min-width: 300px;
+  font-size: 13px;
+  border: 1px solid var(--nm-border);
+  border-radius: 8px;
+  padding: 0 14px;
+  transition: border-color 0.3s, opacity 0.3s;
+  /* 默认白色方案（匹配首页 Hero 暗底导航栏） */
+  --nm-border: rgba(255,255,255,0.4);
+  --nm-text: rgba(255,255,255,0.9);
+  --nm-play: rgba(255,255,255,0.85);
+  --nm-play-bg: transparent;
+  --nm-play-bd: rgba(255,255,255,0.5);
+  --nm-btn: rgba(255,255,255,0.55);
+  --nm-accent: #fff;
+}
+/* 导航栏亮底时：暗色主题点缀方案 */
+#nav-music-ui.nm-dark {
+  --nm-border: #ddd;
+  --nm-text: #555;
+  --nm-play: #fff;
+  --nm-play-bg: #ff9a5c;
+  --nm-play-bd: #ff9a5c;
+  --nm-btn: #ffba88;
+  --nm-accent: #ff9a5c;
+}
+#nav-music-ui .nm-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 13px;
+  color: var(--nm-play);
+  background: var(--nm-play-bg);
+  border: 1px solid var(--nm-play-bd);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+#nav-music-ui .nm-play:hover { color: var(--nm-accent); border-color: var(--nm-accent); }
+#nav-music-ui .nm-btns {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+#nav-music-ui .nm-title {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--nm-text);
+  font-size: 14px;
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-title:hover { color: var(--nm-accent); }
+#nav-music-ui .nm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 12px;
+  color: var(--nm-btn);
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-btn:hover { color: var(--nm-accent); }
+@media (max-width: 900px) {
+  #nav-music-ui .nm-title { display: none; }
+  #nav-music-ui { min-width: auto; padding: 0 4px; }
+}
+</style>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Zweiwings" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="onerror=null;src='/img/cover2.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Top_img-%E7%90%86%E8%AE%BA.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zweiwings</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据结构-1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-24T11:02:30.000Z" title="发表于 2021-03-24 19:02:30">2021-03-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-01T18:41:11.179Z" title="更新于 2026-08-02 02:41:11">2026-08-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/">专业课程</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据结构-1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2021/03/24/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/#post-comment"><span class="gitalk-comment-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="线性表-顺序表"><a href="#线性表-顺序表" class="headerlink" title="线性表-顺序表"></a>线性表-顺序表</h1><h2 id="创建（初始化）"><a href="#创建（初始化）" class="headerlink" title="创建（初始化）"></a>创建（初始化）</h2><p>以数组的形式创建顺序表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct      &#x2F;&#x2F;理解为将定义的结构体改称为&#123;&#125;后的名字，如SQlist</span><br><span class="line">&#123;</span><br><span class="line">	Elemtype *elem； &#x2F;&#x2F;定义顺序表具有首元素地址</span><br><span class="line">	int length;     &#x2F;&#x2F;定义顺序表具有表长这一属性</span><br><span class="line">&#125;SQlist;</span><br></pre></td></tr></table></figure>
+<p>初始化设置顺序表的最大存储空间，以及初始化其表长为0</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool initList(SQlist &amp;sq)     &#x2F;&#x2F;将需要初始化的表传址</span><br><span class="line">&#123;</span><br><span class="line">	sq.elem&#x3D;new maxsize;        &#x2F;&#x2F;为顺序表分配maxsize的空间作为最大上限</span><br><span class="line">	if(!sq.elem) return false;      &#x2F;&#x2F;如果空间分配失败，直接返回提示错误</span><br><span class="line">	sq.length&#x3D;0;                    &#x2F;&#x2F;如果分配空间成功，则继续初始化表长为0</span><br><span class="line">	return true;                    &#x2F;&#x2F;返回参数提示顺序表初始化成功</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h2><p>顺序表能够随机存取，故而方便存取指定位置的值，即可以随机存取</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool getelem(SQlist &amp;sq,int i，elemtype &amp;a)  </span><br><span class="line">&#x2F;&#x2F;将需要初始化的表传址，并且传值需要获取的是第i个值，返回的值传给a</span><br><span class="line">&#123;</span><br><span class="line">	if(i&lt;1||i&gt;sq.length) return false;    &#x2F;&#x2F;如果i为非法位置，返回提示错误</span><br><span class="line">	a&#x3D;sq.elem[i];                 &#x2F;&#x2F;否则返回第i个元素给a</span><br><span class="line">	return true;                  &#x2F;&#x2F;返回提示执行正常</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>顺序表的查找就是顺序比较表内元素和待查找元素，相同查找成功，始终不同查找失败</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int find(SQlist &amp;sq,elemtype a)</span><br><span class="line">&#x2F;&#x2F;传址需要查找的表，并传值需要查找的数值a,返回查找到的序号为int类型</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	for(i&#x3D;0;i&lt;sq.length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">	if(sq.elem[i]&#x3D;&#x3D;a) return i;</span><br><span class="line">	&#x2F;&#x2F;如果查找到了，返回该值在表中的序号，此处为数组下标，若返回第几个元素序号，则需要i+1</span><br><span class="line">	&#125;</span><br><span class="line">	return -1;            &#x2F;&#x2F;查找失败，返回负数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>顺序表为紧邻的线性表，故而插入时需要向后移动较多元素，并且需要从最后一个元素开始向后移动，以免数据被覆盖</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool insert(SQlist &amp;sq,elemtype a,int i)</span><br><span class="line">&#x2F;&#x2F;将元素a的值插入表中第i个位置，传址需要做插入的表，以及传值a，i</span><br><span class="line">&#123;</span><br><span class="line">	int j;</span><br><span class="line">	if(i&lt;1||i&gt;sq.length+1) return false;&#x2F;&#x2F;如果i值不合法，则不作插入</span><br><span class="line">	if(sq.length&#x3D;&#x3D;maxsize) return false;&#x2F;&#x2F;如果表长已经达到最大，则判断表满，不作插入</span><br><span class="line">	for(j&#x3D;sq.length-1;j&gt;&#x3D;i-1;j--)</span><br><span class="line">	&#x2F;&#x2F;让j为最后一个元素的角标，循环递减，并且当j等于插入位置i的前驱时，停止循环</span><br><span class="line">	&#123;</span><br><span class="line">		sq.elem[j+1]&#x3D;sq.elem[j];        &#x2F;&#x2F;给j+1角标的空间赋值当前j角标的值，实现后移</span><br><span class="line">	&#125;</span><br><span class="line">	sq.elem[i-1]&#x3D;a;                     &#x2F;&#x2F;赋值第i个位置，即角标为i-1的空间为a</span><br><span class="line">	sq.length++;                        &#x2F;&#x2F;表长增加</span><br><span class="line">	return true;                        &#x2F;&#x2F;返回插入成功</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>顺序表的删除是将待删除位置后面的全部往前覆盖，向前移动较多元素，并且需要从待删除位置的后一个开始移动，以免覆盖数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool delete(SQlist &amp;sq,int i)</span><br><span class="line">&#x2F;&#x2F;传址需要删除元素的顺序表，并且传值需要删除的元素位置</span><br><span class="line">&#123;</span><br><span class="line">	int j;</span><br><span class="line">	if(i&lt;1||i&gt;sq.length) return false;   &#x2F;&#x2F;如果i值不合法，则不作插入</span><br><span class="line">	for(j&#x3D;i;j&lt;&#x3D;sq.length-1;j++)</span><br><span class="line">	&#x2F;&#x2F;将i位置之后的所有元素都向前移，并且循环在将最后一个元素移动到表长减一后的位置停止</span><br><span class="line">	&#123;</span><br><span class="line">		sq.elem[j-1]&#x3D;sq.elem[j];        &#x2F;&#x2F;被删位置后的元素全部前移</span><br><span class="line">	&#125;</span><br><span class="line">	sq.length--;                        &#x2F;&#x2F;表长减少</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="实际题目"><a href="#实际题目" class="headerlink" title="实际题目"></a>实际题目</h2><h3 id="R7-1-顺序表的建立及遍历-20-分"><a href="#R7-1-顺序表的建立及遍历-20-分" class="headerlink" title="R7-1 顺序表的建立及遍历 (20 分)"></a>R7-1 顺序表的建立及遍历 (20 分)</h3><p>读入n值及n个整数，建立顺序表并遍历输出。</p>
+<p>输入格式:<br>读入n及n个整数</p>
+<p>输出格式:<br>输出n个整数，以空格分隔（最后一个数的后面没有空格）。</p>
+<p>输入样例:<br>在这里给出一组输入。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4</span><br><span class="line">-3 10 20 78</span><br></pre></td></tr></table></figure>
+<p>输出样例:<br>在这里给出相应的输出。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-3 10 20 78</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>解法：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> *a;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;List;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">(List &amp;sq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sq.a= <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">if</span>(!sq.a) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    sq.length=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">output</span><span class="params">(List &amp;sq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;sq.a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;sq.length;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;sq.a[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    List sqlist;</span><br><span class="line">    <span class="keyword">int</span> i,n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    create(sqlist);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;sqlist.a[i];</span><br><span class="line">        sqlist.length++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(sqlist.length!=<span class="number">0</span>) </span><br><span class="line">        output(sqlist);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="R7-2-jmu-ds-顺序表区间元素删除-20-分"><a href="#R7-2-jmu-ds-顺序表区间元素删除-20-分" class="headerlink" title="R7-2 jmu-ds-顺序表区间元素删除 (20 分)"></a>R7-2 jmu-ds-顺序表区间元素删除 (20 分)</h3><p>若一个线性表L采用顺序存储结构存储，其中所有的元素为整数。设计一个算法，删除元素值在[x,y]之间的所有元素，要求算法的时间复杂度为O(n)，空间复杂度为O(1)。</p>
+<p>输入格式:<br>三行数据，第一行是顺序表的元素个数，第二行是顺序表的元素，第三行是x和y。</p>
+<p>输出格式:<br>删除元素值在[x,y]之间的所有元素后的顺序表。</p>
+<p>输入样例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">10</span><br><span class="line">5 1 9 10 67 12 8 33 6 2</span><br><span class="line">3 10</span><br></pre></td></tr></table></figure>
+<p>输出样例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 67 12 33 2</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>解法：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> *a;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;sqlist;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">create</span><span class="params">(sqlist &amp;sq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sq.a= <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">if</span>(!sq.a) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    sq.length=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">del</span><span class="params">(sqlist &amp;sq,<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j,i;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;sq.length;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(sq.a[j]&gt;=x&amp;&amp;sq.a[j]&lt;=y)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=j;i&lt;sq.length;i++)</span><br><span class="line">            &#123;</span><br><span class="line">                sq.a[i]=sq.a[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            sq.length--;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sqlist List;</span><br><span class="line">    <span class="keyword">int</span> n,i,x,y;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    create(List);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;List.a[i];</span><br><span class="line">        List.length++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    del(List,x,y);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;List.a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;List.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;List.a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:zweiwings@foxmail.com">Zweiwings</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zwei-wings.github.io/2021/03/24/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/">https://zwei-wings.github.io/2021/03/24/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zwei-wings.github.io" target="_blank">Zweiwings</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div><div class="post_share"><div class="social-share" data-image="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2/"><img class="prev-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据结构-2</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/23/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-5/"><img class="next-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">c++拓展-2：string头文件</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/19/学习笔记/数据结构-7/" title="数据结构-7"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">数据结构-7</div></div></a></div><div><a href="/2021/04/27/学习笔记/数据结构-6/" title="数据结构-6"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">数据结构-6</div></div></a></div><div><a href="/2021/04/26/学习笔记/数据结构-5/" title="数据结构-5"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">数据结构-5</div></div></a></div><div><a href="/2021/04/14/学习笔记/数据结构-4/" title="数据结构-4"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">数据结构-4</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="this.onerror=null;this.src='/img/cover2.jpg'" alt="avatar"/><div class="author-info__name">Zweiwings</div><div class="author-info__description">人间失宠的笨蛋咕咕们</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" href="https://zwei-wings.github.io/about/"><i class="fas fa-chess"></i><span>关于咕咕</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本博客主要用于记录一些学习笔记，可能也包含一些同人文、OC和世界观的分享与展示。（PS：搞OC的人是这样的，请多担待。）</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8-%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">线性表-顺序表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%EF%BC%88%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">创建（初始化）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E5%80%BC"><span class="toc-number">1.2.</span> <span class="toc-text">取值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE"><span class="toc-number">1.3.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5"><span class="toc-number">1.4.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">1.5.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E9%A2%98%E7%9B%AE"><span class="toc-number">1.6.</span> <span class="toc-text">实际题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#R7-1-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%8F%8A%E9%81%8D%E5%8E%86-20-%E5%88%86"><span class="toc-number">1.6.1.</span> <span class="toc-text">R7-1 顺序表的建立及遍历 (20 分)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R7-2-jmu-ds-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%8C%BA%E9%97%B4%E5%85%83%E7%B4%A0%E5%88%A0%E9%99%A4-20-%E5%88%86"><span class="toc-number">1.6.2.</span> <span class="toc-text">R7-2 jmu-ds-顺序表区间元素删除 (20 分)</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）"><img data-lazy-src="/img/%E5%90%8D%E6%9F%AFcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第 3 章 伊戈尔暗杀事件（下）"/></a><div class="content"><a class="title" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）">第 3 章 伊戈尔暗杀事件（下）</a><time datetime="2026-08-03T16:06:55.257Z" title="更新于 2026-08-04 00:06:55">2026-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1"><img data-lazy-src="/img/%E6%9C%AA%E5%88%86%E7%B1%BBcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客更新日志-1"/></a><div class="content"><a class="title" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1">博客更新日志-1</a><time datetime="2026-08-03T15:02:39.597Z" title="更新于 2026-08-03 23:02:39">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试"><img data-lazy-src="/img/Top_img-%E9%BB%98%E8%AE%A4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试"/></a><div class="content"><a class="title" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试">测试</a><time datetime="2026-08-03T10:23:10.428Z" title="更新于 2026-08-03 18:23:10">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计"><img data-lazy-src="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Web程序设计"/></a><div class="content"><a class="title" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计">Web程序设计</a><time datetime="2026-08-03T08:10:48.094Z" title="更新于 2026-08-03 16:10:48">2026-08-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Zweiwings</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我知世间来往步履匆匆，知一切烈火将熄于凉薄，知世间人皆将归于赴死，知我人间失宠无比落魄，却从不知何谓退缩。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7ab654b08de6e920553a',
+      clientSecret: 'e674cd1fcfc534caa60f1ff36274a58b594989e9',
+      repo: 'Zwei-wings.github.io',
+      owner: 'Zwei-wings',
+      admin: ['Zwei-wings'],
+      id: '4f840915812add3595ee356c636f580d',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="/js/title.js"></script><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div id="nav-music-engine" class="aplayer no-destroy" data-server="tencent" data-type="playlist" data-id="7993423839" data-fixed="true" data-theme="#ffcb8e" data-loop="all" data-order="random" data-preload="auto" data-volume="0.7" data-listFolded="true" data-listMaxHeight="250px"></div><span id="nav-music-ui"><span class="nm-title">未播放</span><span class="nm-btns"><span class="nm-btn nm-prev">◀</span><span class="nm-btn nm-play">▶</span><span class="nm-btn nm-next">▶</span></span></span><script>
+(function() {
+  var initDone = false, playerReady = false;
+  var navAp = null, uiEl = null, titleEl = null, playEl = null;
+
+  function updateUI() {
+    if (!navAp || !playEl || !titleEl) return;
+    var playing = !navAp.audio.paused;
+    playEl.innerHTML = playing ? '\u23F8' : '\u25B6';
+    if (navAp.list && navAp.list.audios && navAp.list.audios[navAp.list.index]) {
+      titleEl.textContent = navAp.list.audios[navAp.list.index].title;
+    }
+  }
+
+  function initMusic() {
+    if (initDone) return;
+    if (typeof loadMeting !== 'function') return;
+    loadMeting();
+    initDone = true;
+
+    // 劫持 loadMeting：每次调用后恢复保护
+    var origLoadMeting = window.loadMeting;
+    window.loadMeting = function() {
+      origLoadMeting();
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && navAp) {
+        engine.classList.add('no-reload');
+        if (window.aplayers.indexOf(navAp) === -1) {
+          window.aplayers.unshift(navAp);
+        }
+      }
+    };
+
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && engine.classList.contains('aplayer-fixed') && window.aplayers && window.aplayers.length > 0) {
+        clearInterval(timer);
+        playerReady = true;
+
+        // 找到 APlayer 实例
+        for (var i = 0; i < window.aplayers.length; i++) {
+          if (window.aplayers[i].container.id === 'nav-music-engine') {
+            navAp = window.aplayers[i];
+            break;
+          }
+        }
+        engine.classList.add('no-reload');
+        // 隐藏 APlayer 原生 UI
+        engine.style.display = 'none';
+
+        // 获取自定义 UI 元素
+        uiEl = document.getElementById('nav-music-ui');
+        if (uiEl) {
+          playEl = uiEl.querySelector('.nm-play');
+          titleEl = uiEl.querySelector('.nm-title');
+          var prevEl = uiEl.querySelector('.nm-prev');
+          var nextEl = uiEl.querySelector('.nm-next');
+
+          // 事件绑定
+          if (playEl) playEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.toggle(); });
+          if (prevEl) prevEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipBack(); });
+          if (nextEl) nextEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipForward(); });
+          if (titleEl) {
+            titleEl.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+              if (mi) location.href = mi.href;
+            });
+          }
+
+          // 监听 APlayer 事件
+          navAp.on('play', updateUI);
+          navAp.on('pause', updateUI);
+          updateUI();
+          positionUI();
+        }
+      }
+      if (attempts > 30) clearInterval(timer);
+    }, 200);
+  }
+
+  function positionUI() {
+    if (!uiEl) return;
+    var mr = (function() {
+      var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+      return mi ? mi.getBoundingClientRect() : null;
+    })();
+    if (!mr) return;
+    uiEl.style.top = mr.top + 'px';
+    uiEl.style.left = '50%';
+    uiEl.style.transform = 'translateX(-50%)';
+    uiEl.style.right = 'auto';
+    uiEl.style.bottom = 'auto';
+  }
+
+  // 检测导航栏底色 + 折叠状态，同步播放器
+  function updateScheme() {
+    if (!uiEl) return;
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+
+    // 折叠跟随：导航栏滚出屏幕时隐藏播放器
+    var navRect = nav.getBoundingClientRect();
+    if (navRect.bottom < 5) {
+      uiEl.style.opacity = '0';
+      uiEl.style.pointerEvents = 'none';
+      return;
+    }
+    uiEl.style.opacity = '1';
+    uiEl.style.pointerEvents = 'auto';
+
+    // 明暗切换：透明/半透明 → 白色方案；不透明白底 → 暗色方案
+    var bg = getComputedStyle(nav).backgroundColor;
+    var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!m) return;
+    var r = parseInt(m[1]), g = parseInt(m[2]), b = parseInt(m[3]);
+    var a = m[4] !== undefined ? parseFloat(m[4]) : 1;
+    // 半透明（Hero 模式）→ 白色方案
+    if (a < 0.5) {
+      uiEl.classList.remove('nm-dark');
+      return;
+    }
+    // 不透明白底 → 暗色主题点缀方案
+    var bright = (r*299 + g*587 + b*114) / 1000;
+    if (bright > 150) {
+      uiEl.classList.add('nm-dark');
+    } else {
+      uiEl.classList.remove('nm-dark');
+    }
+  }
+
+  document.addEventListener('pjax:complete', function() {
+    if (playerReady) { setTimeout(positionUI, 50); setTimeout(updateScheme, 80); }
+  });
+  window.addEventListener('resize', function() {
+    if (playerReady) { positionUI(); updateScheme(); }
+  });
+  window.addEventListener('scroll', function() {
+    if (playerReady) {
+      updateScheme();
+      // 导航栏从隐藏→显示时有渐变动画，300ms 后再确认一次
+      clearTimeout(window._nmSchemeTimer);
+      window._nmSchemeTimer = setTimeout(updateScheme, 300);
+    }
+  }, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusic);
+  } else {
+    initMusic();
+  }
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var fontMinus = document.getElementById('font-minus');
+  if (!fontMinus) return;
+  var btn = document.createElement('button');
+  btn.id = 'font-reset';
+  btn.className = fontMinus.className;
+  btn.title = '恢复默认字号';
+  btn.innerHTML = '<i class="fas fa-undo-alt"></i>';
+  fontMinus.insertAdjacentElement('afterend', btn);
+  btn.addEventListener('click', function () {
+    document.documentElement.style.setProperty('--global-font-size', '14px');
+    try { localStorage.removeItem('global-font-size'); } catch(e) {}
+  });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://cdn.jsdelivr.net/npm/oh-my-live2d@0.19.3/dist/index.min.js"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,primaryColor:"#f6b37f",tips:{welcomeTips: {"duration":6000,"priority":3,"message":{"daybreak":"露西亚...001号...zzz","morning":"露西亚百科全书001号，很不高兴为您服务。","noon":"（叹气）就不能等本小姐吃完午饭吗……","afternoon":"午后阳光正好，想吃草莓慕斯蜜桃千层巧克力班戟……","dusk":"（叹气）本小姐今天什么时候才能吃晚饭啊……","night":"露西亚百科全书001号，很不高兴为您服务。","lateNight":"（哈欠）001号已下班，不想打招呼。","weeHours":"喂，已经凌晨了啊笨蛋，还不睡吗……好困。"}},idleTips:{interval:15000,message:["今天的运势？让本小姐占卜一下——嗯，大吉，也许吧。","本小姐可是全世界最无敌可爱的大图书馆的魔女（的眷属）哦~","（叉腰）怕了吧，还不快把甜品通通给本小姐供上来！","什么？Bug？（心虚）不管不管，这个肯定是特性啦！"]},style: {"width":240,"height":100,"top":"125px","left":"calc(50% + 210px)"}},menus:{disable:true},models:[{"path":"/live2d_models/seethrough/seethrough_00001.model3.json","scale":0.3,"position":[-50,0],"stageStyle":{"width":350,"height":300}}]});</script><!-- hexo injector body_end end --></body></html>

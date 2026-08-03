@@ -1,0 +1,1215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Web程序设计 | Zweiwings</title><meta name="keywords" content="Web程序设计"><meta name="author" content="Zweiwings"><meta name="copyright" content="Zweiwings"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="相关软件安装使用及Web开发基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web程序设计">
+<meta property="og:url" content="https://zwei-wings.github.io/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Zweiwings">
+<meta property="og:description" content="相关软件安装使用及Web开发基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zwei-wings.github.io/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp">
+<meta property="article:published_time" content="2022-03-03T13:27:08.000Z">
+<meta property="article:modified_time" content="2026-08-03T08:10:48.094Z">
+<meta property="article:author" content="Zweiwings">
+<meta property="article:tag" content="Web程序设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zwei-wings.github.io/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp"><link rel="shortcut icon" href="/img/favicon1.png"><link rel="canonical" href="https://zwei-wings.github.io/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-03 16:10:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/add2.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" ><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/add2.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><style>
+/* ===== 文章标题自定义装饰 ===== */
+
+/* 去掉 h3-h6 默认前缀图标 */
+#article-container h3::before,
+#article-container h4::before,
+#article-container h5::before,
+#article-container h6::before {
+  content: none !important;
+}
+
+/* 无序列表圆点标记 → 主题色 */
+#article-container ul > li::marker {
+  color: #ff9a5c;
+}
+
+/* h1：居中 + 底部渐变线 + 菱形 */
+#article-container h1 {
+  text-align: center;
+  padding-left: 0 !important;
+  padding-bottom: 20px;
+  margin: 1.5em 0 1.2em;
+  position: relative;
+}
+#article-container h1::before {
+  content: '' !important;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  border: 3px solid #ffba88;
+  background: #fff;
+  z-index: 2;
+}
+#article-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,186,136,.15), #ffba88, rgba(255,186,136,.15));
+}
+#article-container h1:hover {
+  padding-left: 0 !important;
+}
+
+/* h2：居左 + 左侧双竖线（长粗 + 短细） */
+#article-container h2 {
+  padding-left: 20px !important;
+  position: relative;
+}
+#article-container h2::before {
+  content: '' !important;
+  position: absolute;
+  left: 0;
+  top: .3em;
+  width: 3px;
+  height: calc(100% - .6em);
+  border-radius: 2px;
+  background: #ff9a5c;
+}
+#article-container h2::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: .45em;
+  width: 2px;
+  height: calc(100% - .9em);
+  border-radius: 1px;
+  background: #ffba88;
+}
+
+/* ===== 导航栏居中音乐控件（默认白色，亮底切换暗色） ===== */
+#nav-music-ui {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  min-width: 300px;
+  font-size: 13px;
+  border: 1px solid var(--nm-border);
+  border-radius: 8px;
+  padding: 0 14px;
+  transition: border-color 0.3s, opacity 0.3s;
+  /* 默认白色方案（匹配首页 Hero 暗底导航栏） */
+  --nm-border: rgba(255,255,255,0.4);
+  --nm-text: rgba(255,255,255,0.9);
+  --nm-play: rgba(255,255,255,0.85);
+  --nm-play-bg: transparent;
+  --nm-play-bd: rgba(255,255,255,0.5);
+  --nm-btn: rgba(255,255,255,0.55);
+  --nm-accent: #fff;
+}
+/* 导航栏亮底时：暗色主题点缀方案 */
+#nav-music-ui.nm-dark {
+  --nm-border: #ddd;
+  --nm-text: #555;
+  --nm-play: #fff;
+  --nm-play-bg: #ff9a5c;
+  --nm-play-bd: #ff9a5c;
+  --nm-btn: #ffba88;
+  --nm-accent: #ff9a5c;
+}
+#nav-music-ui .nm-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 13px;
+  color: var(--nm-play);
+  background: var(--nm-play-bg);
+  border: 1px solid var(--nm-play-bd);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+#nav-music-ui .nm-play:hover { color: var(--nm-accent); border-color: var(--nm-accent); }
+#nav-music-ui .nm-btns {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+#nav-music-ui .nm-title {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--nm-text);
+  font-size: 14px;
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-title:hover { color: var(--nm-accent); }
+#nav-music-ui .nm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 12px;
+  color: var(--nm-btn);
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-btn:hover { color: var(--nm-accent); }
+@media (max-width: 900px) {
+  #nav-music-ui .nm-title { display: none; }
+  #nav-music-ui { min-width: auto; padding: 0 4px; }
+}
+</style>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Zweiwings" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="onerror=null;src='/img/cover2.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Top_img-%E8%B8%A9%E5%9D%91.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zweiwings</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Web程序设计</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-03T13:27:08.000Z" title="发表于 2022-03-03 21:27:08">2022-03-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-03T08:10:48.094Z" title="更新于 2026-08-03 16:10:48">2026-08-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/">专业课程</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">Web程序设计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>34分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Web程序设计"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/#post-comment"><span class="gitalk-comment-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h3><ul>
+<li>配置：（在使用管理员打开cmd的前提下）</li>
+<li><ul>
+<li>net start mysql：启动MySQL服务</li>
+<li>net stop mysql：关闭MySQL服务</li>
+</ul>
+</li>
+<li>登录：mysql -uroot -p＞回车＞输入密码（该方式可隐藏密码）</li>
+<li>远程登录：mysql  -h主机IP地址 -uroot -p连接目标的密码</li>
+<li>退出：exit/quit</li>
+</ul>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li>安装目录：<ul>
+<li>bin：可执行二进制文件目录</li>
+<li>data：用户数据目录</li>
+<li>include：c#头文件目录</li>
+<li>lib：运行所需要的库文件</li>
+<li>share：mysql的一些错误信息</li>
+<li>my.ini：mysql的配置文件</li>
+</ul>
+</li>
+<li>数据目录：<ul>
+<li>数据库——文件夹</li>
+<li>表——文件</li>
+<li>数据——具体数据</li>
+</ul>
+</li>
+</ul>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/1.png" alt="1"></p>
+<h3 id="关于安装数据库时出现的一些问题："><a href="#关于安装数据库时出现的一些问题：" class="headerlink" title="关于安装数据库时出现的一些问题："></a>关于安装数据库时出现的一些问题：</h3><p>在执行mysqld命令初始化数据库时，一开始出现了输入初始化命令后换行没有任何反应，就提示输入下一个命令，也试着去装了那个缺少的dll文件，不过好像不是缺这个的问题</p>
+<p>最初的时候觉得是已经装过MySQL5的原因，就去把MySQL5卸载了，结果还是一样。</p>
+<p>（这个时候在文档里复制命令的时候还一不小心复制成了安装MySQL8的命令，发现居然能运行的时候还惊喜了一下，结果后来发现不对劲的时候已经有点麻烦了）</p>
+<p>后来想到是不是新的安装路径有中文的问题，就把整个MySQL8的文件夹全部移到了D盘根目录，试着重新安装了，但还是没用。</p>
+<p>考虑到MySQL5卸载是不是没卸干净，在网上查了一下相关的问题，最后在以前装MySQL5做的笔记里找到了MySQL5的数据目录（默认在C:\ProgramData\MySQL\MySQL Server 5\data），把整个文件夹（C:\ProgramData\MySQL）删除之后初始化命令就能够成功执行了</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/2.png" alt="2"></p>
+<p>等到继续安装的时候，执行命令后提示如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The service already exists!</span><br><span class="line">The current server installed: (后面是原来包含中文的那个路径)</span><br></pre></td></tr></table></figure>
+<p>于是又去翻关于这个报错的帖子，想办法把之前这个中文路径的卸载掉，但是控制面板的程序面板是没有这个程序的（多半是因为莫名其妙的只装了一半，而且如果试图运行这个装了一半的MySQL也会报错），最后参照<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Kathrine/p/12811129.html">某个帖子</a>的说法，删除了几个注册表，删完之后报错的第二行消失了。</p>
+<p>最后在cmd执行了“sc delete MYSQL8”这一命令之后成功的卸掉了，之后也能够成功安装并运行正常的MySQL8.</p>
+<h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><h3 id="目录结构-1"><a href="#目录结构-1" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li>bin：可执行文件</li>
+<li>conf：设置，配置文件</li>
+<li>lib：运行库</li>
+<li>webapps：默认主目录<br><strong>webapps目录下的root是根项目，不需要带文件夹名即可访问</strong><br><strong>而root文件夹下的index.jsp或index.html为默认主页</strong></li>
+</ul>
+<h2 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h2><h3 id="项目生成与配置"><a href="#项目生成与配置" class="headerlink" title="项目生成与配置"></a>项目生成与配置</h3><ol>
+<li><p><strong>新建-&gt;项目-&gt;Java项目</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/4.png" alt="4"></p>
+<p>如图，当项目名称与模块名称不同时，会自动将模块位置放在项目的下一级目录中，便于进行多模块项目开发</p>
+</li>
+<li><p><strong>打开模块的右键菜单-&gt;添加框架支持-&gt;勾选Web应用程序-&gt;确定</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/5.png" alt="5"></p>
+<p>选中web框架时，右侧会默认勾上创建web.xml，作为这个框架的配置文件</p>
+</li>
+<li><p><strong>文件-&gt;项目结构-&gt;库-&gt;添加java项目库</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/6.png" alt="6"></p>
+<p>为了后期能够使用一些常用的类，比如说servlet类，需要添加之前安装的Tomcat安装路径下，lib文件夹中的两个jar包（名称如图）</p>
+</li>
+<li><p><strong>添加配置-&gt;点击加号-&gt;选择Tomcat服务器-&gt;本地</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/7.png" alt="7"></p>
+</li>
+<li><p><strong>IDEA有时候自动识别Tomcat的安装路径，如果没有自动显示的话，需要去手动选择Tomcat的安装路径配置应用程序服务器</strong><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/8.png" alt="8"><strong>完成后，下方会有警告提示，此时需要点击部署选项卡，并添加一个工件</strong><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/9.png" alt="9"><strong>同时，应用程序上下文默认会在模块的名称后面加上-war-explored，在需要手动输入地址访问时很麻烦，可以只保留模块名。</strong></p>
+<p><strong>以上就成功创建了一个新的Web项目并且配置好了相应的库与Tomcat服务器。</strong></p>
+</li>
+<li><p><strong>除此之外，在文件-&gt;项目结构-&gt;工件中，可修改部署到服务器的方式</strong><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-1/10.png" alt="10"><strong>上面一种（图中的part1:war)为归档式，部署时会将文件压缩成一个包，上传后再解压，部署时间会比较长；</strong></p>
+<p><strong>下面一种（图中的part1:war exploded)为展开型，部署时直接将文件上传，部署时间相较更短一些，默认部署时也是选择这种。</strong></p>
+</li>
+</ol>
+<h3 id="目录结构-2"><a href="#目录结构-2" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li><p>src：创建项目时默认的源文件夹，也可通过”文件-&gt;项目结构-&gt;模块”，添加新的源文件夹</p>
+</li>
+<li><p>web：存放各类jsp与html文件，部署到服务器后，该文件夹下的网页等可以被浏览器端访问</p>
+<p><strong>但其中还包括一个名为web_inf的文件夹，该文件夹下是不允许浏览器端直接访问的</strong></p>
+</li>
+</ul>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>即超文本传输协议，互联网上应用最为广泛的一种网络协议，用于定义客户端浏览器和服务器之间交换数据的过程。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ol>
+<li>使浏览器和服务器之间更高效的传输数据</li>
+<li>保证计算机正确快速的传输超文本文档</li>
+<li>确定传输文档中的哪一部分</li>
+<li>确定哪一部分内容先显示</li>
+</ol>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>基于请求-响应模型，先有请求后有响应</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><h3 id="HTTP请求协议"><a href="#HTTP请求协议" class="headerlink" title="HTTP请求协议"></a>HTTP请求协议</h3><p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-2/1.png" alt="1"></p>
+<p>（打开浏览器开发者工具【F12】可以监控到网页间请求信息如上）</p>
+<ul>
+<li>客户端连上服务器后，向服务器请求某个web资源，称之为客户端向服务器发送了一个HTTP请求</li>
+<li>包括请求行，请求头，请求体，请求头和请求体内容之间要用空行隔开</li>
+<li><ul>
+<li>请求行：<br>依次包含请求类型，请求地址，HTTP协议版本</li>
+<li>请求头：<br>用于描述客户端请求哪台主机，以及客户端的一些环境信息等，以键值对形式传递数据</li>
+<li>请求体：<br>代表浏览器在POST请求中传递给服务器的参数，每个数据都是使用键值对形式，多个值用&amp;连接，服务器接受到请求体后需要单独解析</li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h3><p>请求行中的POST值为请求方式，常见的请求方式有：POST、GET、DELETE、PUT</p>
+<ul>
+<li><p>GET请求：</p>
+</li>
+<li><ul>
+<li><p>向服务器特定资源发出查询请求，一般用于查询数据和资源</p>
+</li>
+<li><p>请求查询的参数可以在浏览器地址栏显示</p>
+</li>
+<li><p>GET请求没有请求体</p>
+</li>
+<li><p>请求的数据会附加在URL之后，以?分割URL和传输数据，多个参数用＆连接，也因此，传输数据会受到URL长度限制</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET xxx.html?name&#x3D;xxx&amp;password&#x3D;123456 HTTP&#x2F;1.1</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>POST请求：</p>
+</li>
+<li><ul>
+<li>向服务器提交数据，一般用在客户端将本地数据过资源提交给服务器，例如注册用户，将用户信息提交给服务器</li>
+<li>POST请求会将请求的数据放置在HTTP请求体中，请求参数在地址栏中不显示</li>
+<li>多个参数同样用&amp;连接，但参数不用和URL进行拼接</li>
+</ul>
+</li>
+</ul>
+<p><strong>相较而言，因为保密性不高和传输长度受限，在完成数据提交操作时，一般用POST请求进行；而查询操作为了简便，则会使用GET请求进行</strong></p>
+<h3 id="HTTP响应协议"><a href="#HTTP响应协议" class="headerlink" title="HTTP响应协议"></a>HTTP响应协议</h3><ul>
+<li>代表服务器给客户端回送的数据，包括一个响应行、若干响应头以及响应体，响应头和响应体内容之间用空行隔开</li>
+<li>包括响应行，响应头，响应体</li>
+<li><ul>
+<li>响应行：<ul>
+<li>包含HTTP协议版本，用于描述服务器对请求的处理结果</li>
+<li>格式为：协议/版本 状态码 状态码描述</li>
+<li>状态码：服务器和浏览器用于确定状态的固定数字码<ul>
+<li>200：请求成功</li>
+<li>302：请求重定向</li>
+<li>404：请求资源不存在，通常是访问路径写错或服务器删除了资源</li>
+<li>500：服务器内部错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>响应头：<br>用于描述服务器的基本信息，以及数据的描述，服务器通过这些数据的描述信息，可以通知客户端如何处理它所回送的数据</li>
+<li>响应体：<br>服务器向客户端浏览器回送的正文，一般就是之前客户端所请求的资源</li>
+</ul>
+</li>
+</ul>
+<h1 id="Servlet技术"><a href="#Servlet技术" class="headerlink" title="Servlet技术"></a>Servlet技术</h1><p>Servlet是JavaWeb的核心程序，JavaWeb三大组件之一（Servlet，Filter，Listener），能够交互式的浏览和生成数据，实现动态web内容，获取网页的请求和响应都较为方便<br>在HTTP请求过程中，会把请求的参数存放在请求行的URL中，或者是请求体中，这个参数需要服务器来接收解析并处理，Servlet就是用来处理这个过程的</p>
+<p><strong>当无法快速创建Servlet时，可以在文件-&gt;项目结构-&gt;Facet-&gt;Web-&gt;源根</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-2/3.png" alt="3"></p>
+<p><strong>勾上工程路径下的src文件夹（如图中的E:\workspace\web1\src）</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/-2/4.png" alt="4"></p>
+<h2 id="Requset获取请求内容"><a href="#Requset获取请求内容" class="headerlink" title="Requset获取请求内容"></a>Requset获取请求内容</h2><table>
+<thead>
+<tr>
+<th>常用方法</th>
+<th>实现功能</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>request.setAttribute(name,value)</td>
+<td>设置name对应的属性值为value</td>
+<td>–</td>
+</tr>
+<tr>
+<td>request.getAttribute(name)</td>
+<td>获取name对应的属性</td>
+<td>Object，使用时可强制转换为之前设置的值所对应的类型</td>
+</tr>
+<tr>
+<td>request.removeAttribute(name)</td>
+<td>移除name对应的属性</td>
+<td>–</td>
+</tr>
+<tr>
+<td>request.getParameter(name)</td>
+<td>获取name对应的表单项的值</td>
+<td>String，即表单项提交上来的值</td>
+</tr>
+<tr>
+<td>request.getParameterMap()</td>
+<td>获取所有表单项的值</td>
+<td>Map&lt;String,String[]&gt;，即所有表单项与其提交值组成的Map</td>
+</tr>
+<tr>
+<td>request.setCharacterEncoding()</td>
+<td>设置字符编码</td>
+<td>–</td>
+</tr>
+<tr>
+<td>request.getMethod()</td>
+<td>获取请求方式</td>
+<td>String，返回get，post等请求方式</td>
+</tr>
+<tr>
+<td>request.getContextPath()</td>
+<td>获取项目路径</td>
+<td>String</td>
+</tr>
+</tbody></table>
+<h2 id="Response获取响应内容"><a href="#Response获取响应内容" class="headerlink" title="Response获取响应内容"></a>Response获取响应内容</h2><table>
+<thead>
+<tr>
+<th>常用方法</th>
+<th>实现功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>response.setContentType()</td>
+<td>告知浏览器数据类型</td>
+</tr>
+<tr>
+<td>response.setCharacterEncoding()</td>
+<td>设置Response的编码方式</td>
+</tr>
+<tr>
+<td>response.setHeader()</td>
+<td>设置消息头</td>
+</tr>
+<tr>
+<td>response.setStatus()</td>
+<td>设置状态</td>
+</tr>
+<tr>
+<td>response.addCookie()</td>
+<td>添加Cookie</td>
+</tr>
+<tr>
+<td>response.getOutputStream()</td>
+<td>获取通向浏览器的字节流</td>
+</tr>
+<tr>
+<td>response.getWriter()</td>
+<td>获取通向浏览器的字符流</td>
+</tr>
+</tbody></table>
+<p><strong>注：同一次请求处理中,字节流和字符流不能同时存在</strong></p>
+<h2 id="页面跳转的实现"><a href="#页面跳转的实现" class="headerlink" title="页面跳转的实现"></a>页面跳转的实现</h2><h3 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h3><p>请求转发是一种在服务器内部的资源跳转方式（不能跳到服务器之外的资源），有以下两个步骤：</p>
+<ol>
+<li><p>通过request对象获取请求转发器对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">RequestDispatcher rd = request.getRequestDispatcher(<span class="string">&quot;要转发的页面路径&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>使用RequestDispatcher对象来进行转发：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rd.forward(request,response);</span><br></pre></td></tr></table></figure>
+<p>但由于java可以连续调用，就省略了中间引入局部变量RequestDispatcher的过程，直接简写为：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">requset.getRequestDispatcher(<span class="string">&quot;要转发的页面路径&quot;</span>).forward(request,response);</span><br></pre></td></tr></table></figure>
+<p><strong>在进行请求转发时，浏览器地址栏中的URL是不会改变的，所以，当要跳转的页面和现在的处理程序比较独立的时候，用请求重定向更合适</strong>——比如，checklogin完成了登录动作，要自动跳转到首页时，登录动作和首页是独立的两个内容，如果跳转到首页之后，地址栏还写着login.jsp就会很出戏</p>
+<h3 id="请求重定向"><a href="#请求重定向" class="headerlink" title="请求重定向"></a>请求重定向</h3><p>请求重定向类似于打电话时的呼叫转移，跳转操作是在浏览器，服务器之间发生，往往是两次请求：</p>
+<ol>
+<li>客户端请求访问了某个程序，但由于某些原因，服务器需要客户端去访问一个新程序，此时会返回一个重定向的响应</li>
+<li>客户端接收到重定向响应，按照这个重定向响应给的地址，去访问新程序，请求成功后又会返回一个响应</li>
+</ol>
+<p>写作：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">response.sendRedirect(<span class="string">&quot;跳转路径&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>综上所述，请求重定向的特点如下：</strong></p>
+<ol>
+<li><strong>请求重定向的过程是会改变浏览器地址栏中的URL的</strong></li>
+<li><strong>因为第二次请求依旧是客户端发给服务器，而不是服务器内部的处理，所以仍旧不能访问WEB-INF下文件</strong></li>
+<li><strong>由于有第二次请求，所以不能共享request，属性值的传递需要用session实现</strong></li>
+</ol>
+<h2 id="具体使用技巧"><a href="#具体使用技巧" class="headerlink" title="具体使用技巧"></a>具体使用技巧</h2><p>在利用IDEA新建的servlet中，会默认生成这样一行注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(name = &quot;newServlet&quot;, value = &quot;/newServlet&quot;)</span></span><br></pre></td></tr></table></figure>
+<p>规定了这个Servlet的名称为”newServlet”，以及访问这个Servlet的路径是 “/newServlet”</p>
+<p>而为了对用户的操作进行不同的处理，最常需要重写的方法就是servlet的doGet和doPost方法，两者分别对应了接受到Get请求和Post请求的情况下，servlet该完成的操作</p>
+<p><strong>在MVC架构中，常常会将servlet的访问路径，如 “/newServlet”，写成”/new.jsp”，使用户在输入URL访问new.jsp时，不会直接获取到这个网页，而是会先执行这个servlet重写的doGet方法，或者有时候还会完成一些数据处理，再转发至用户无法直接访问的web-inf文件夹下的view/new.jsp</strong></p>
+<p>而同样值得特别注意的是，<strong>servlet只是一个对数据进行处理的程序，在处理结束之后它并不会将数据的变动直接显示在网页上，所以在完成数据处理之后，一定要进行页面跳转</strong>，即使希望客户端仍旧留在当前页面，只是显示的数据改变，也必须要将请求和响应转发回来，否则客户端会一直停留在空页，等待响应</p>
+<h1 id="JDBC应用"><a href="#JDBC应用" class="headerlink" title="JDBC应用"></a>JDBC应用</h1><p>JDBC就是Java的数据库连接，即用Java语言向数据库发送SQL语句</p>
+<p>其原理就是，SUN提供一套访问数据库的规范（就是一组接口)，称作JDBC，并提供连接数据库的协议标准，然后各个数据库厂商会遵循SUN的规范提供一套访问自己公司的数据库服务器的API，而各个厂商提供的，遵循了JDBC规范的，可以访问自己数据库的API被称之为驱动</p>
+<h3 id="JDBC连接数据库"><a href="#JDBC连接数据库" class="headerlink" title="JDBC连接数据库"></a>JDBC连接数据库</h3><p>Mysql8以上版本，jdbc连接字符串与低版本不同，需要注意：</p>
+<p>1.mysql8以上，项目引入jdbc的jar包后，项目会自动加载驱动类，如果需要手动加载类，需要注意类名与低版本不同</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);  <span class="comment">//低版本jdbc加载类</span></span><br><span class="line">Class.forName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);  <span class="comment">//mysql8以上jdbc加载类</span></span><br></pre></td></tr></table></figure>
+<p>2.mysql8以上数据库，连接字符串需要加入useSSL和serverTimezone属性，否则报错,示例如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String url = <span class="string">&quot;jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf8&amp; useSSL=false&amp; serverTimezone=UTC&quot;</span></span><br><span class="line">Connection conn = DriverManager.getConnection(url);</span><br></pre></td></tr></table></figure>
+<p>由于需要连接数据库进行的操作很多，所以还可以将JDBC的连接操作封装成一个工具，例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String url=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String user=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String password=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String driver=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream(<span class="string">&quot;db.properties&quot;</span>);</span><br><span class="line">        <span class="comment">//这样可以将启动数据库所需的内容统一写入db文件中，如果要进行修改比较方便</span></span><br><span class="line">        Properties prop=<span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            prop.load(is);</span><br><span class="line">            url=prop.getProperty(<span class="string">&quot;db.url&quot;</span>);</span><br><span class="line">            user=prop.getProperty(<span class="string">&quot;db.user&quot;</span>);</span><br><span class="line">            password=prop.getProperty(<span class="string">&quot;db.password&quot;</span>);</span><br><span class="line">            driver=prop.getProperty(<span class="string">&quot;db.driver&quot;</span>);</span><br><span class="line">            Class.forName(driver);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*需要执行数据库连接操作的时候就调用这个函数</span></span><br><span class="line"><span class="comment">        异常也在函数内进行了处理，这样会让代码更加清晰明了</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">          Connection conn=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            conn=DriverManager.getConnection(url,user,password);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> conn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection conn, Statement statement, ResultSet rs)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//需要关闭数据库连接的时候就调用这个函数，也不用在servlet代码中反复写这些分支条件</span></span><br><span class="line">        <span class="keyword">if</span> (rs!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (statement!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(conn!=<span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SQL语句执行"><a href="#SQL语句执行" class="headerlink" title="SQL语句执行"></a>SQL语句执行</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection conn = JDBCUtils.getConnection();</span><br><span class="line">PreparedStatement pstm = conn.prepareStatement(<span class="string">&quot;select * from t_login where login_name=?&quot;</span>);</span><br><span class="line">pstm.setString(<span class="number">1</span>,loginName);</span><br><span class="line">ResultSet rs = pstm.executeQuery();</span><br></pre></td></tr></table></figure>
+<p>参照案例，可总结为以下步骤：</p>
+<ul>
+<li>连接数据库，用prepareStatement()方法创建一个SQL模板pstm</li>
+<li>写这个SQL模板时，可以用“？”作为参数，替代一些可能会变化的值，或者是需要外部传入的值</li>
+<li>得到PreparedStatement对象后，只要调用它的setXXX()方法为“?”赋值（xxx为数据类型）</li>
+<li>调用PreparedStatement对象的executeQuery()方法获取ResultSet对象</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>PreparedStatement对象独有的executeQuery()方法是没有参数的，而Statement的executeQuery()是需要参数（SQL语句）的。因为在创建PreparedStatement对象时已经让它与一条SQL模板绑定在一起了，所以在调用它的executeQuery()和executeUpdate()方法时就不要参数了。</li>
+<li>如果需要执行的SQL语句是会修改数据库内容的，比如UPDATE,DELETE,INSERT等，那么执行时所用的函数应该是execute()</li>
+</ol>
+<p><strong>PreparedStatement最大的好处就是在于重复使用同一模板，给予其不同的参数来重复的使用，这才是真正提高效率的原因。</strong></p>
+<h1 id="Cookie与Session会话技术"><a href="#Cookie与Session会话技术" class="headerlink" title="Cookie与Session会话技术"></a>Cookie与Session会话技术</h1><h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie是以小的文本文件形式（即纯文本），由服务端生成的，发送给客户端，某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据，设计用来在服务端和客户端进行信息传递</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="名称和值"><a href="#名称和值" class="headerlink" title="名称和值"></a>名称和值</h4><p>Cookie 的名称（Name） 和值（Value）是最重要的两个属性，创建Cookie时必须填写，其他属性可以使用默认值</p>
+<p>名称或值如果包含非英文字母，则写入时需要使用encodeURIComponent()编码，读取时使用decodeURIComponent()解码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">document.cookie = `$&#123;encodeURIComponent(<span class="string">&#x27;用户名&#x27;</span>)&#125;=$&#123;encodeURIComponent(<span class="string">&#x27;张三&#x27;</span>)&#125;`</span><br></pre></td></tr></table></figure>
+<p>一般名称使用英文字母，不要用中文，值可以用中文，但是要编码</p>
+<h4 id="失效（到期）时间"><a href="#失效（到期）时间" class="headerlink" title="失效（到期）时间"></a>失效（到期）时间</h4><p>对于失效的Cookie，会被浏览器清除，而没有设置失效时间的cookie称为会话cookie，浏览器关闭该cookie就会消失</p>
+<p>想让cookie长时间存在，需要设置Expires或Max-Age</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Expires</span></span><br><span class="line">document.cookie = `username=alex; expires=$&#123;<span class="keyword">new</span> Date(<span class="string">&#x27;2100-1-01 00:00:00&#x27;</span>)&#125;`</span><br><span class="line"></span><br><span class="line"><span class="comment">//Max-Age</span></span><br><span class="line"><span class="comment">//值为数字，表示当前时间+多少秒后过期，单位是秒</span></span><br><span class="line"><span class="comment">//表示5s后过期</span></span><br><span class="line">document.cookie = `username=alex; max-age=<span class="number">5</span>&#125;`</span><br><span class="line">document.cookie = `username=alex; max-age=$&#123;<span class="number">24</span>*<span class="number">3000</span>&#125;&#125;`</span><br><span class="line"><span class="comment">//0或负数，则会删除Cookie</span></span><br><span class="line">document.cookie = `username=alex; max-age=<span class="number">0</span>&#125;`</span><br></pre></td></tr></table></figure>
+<h4 id="Domain域"><a href="#Domain域" class="headerlink" title="Domain域"></a>Domain域</h4><p>访问cookie的域名限制，只能访问在这个域名下cookie（不同域名）</p>
+<h4 id="Path路径"><a href="#Path路径" class="headerlink" title="Path路径"></a>Path路径</h4><ul>
+<li>Path限定了Cookie访问范围（在同一域名，特定路径下）</li>
+<li>在目录下只能读写当前或上层路径的Cookie，不能读写下级路径的Cookie</li>
+</ul>
+<h4 id="HttpOnly"><a href="#HttpOnly" class="headerlink" title="HttpOnly"></a>HttpOnly</h4><p>设置了HttpOnly属性的Cookie不能通过JS去访问</p>
+<h4 id="Secure安全标志"><a href="#Secure安全标志" class="headerlink" title="Secure安全标志"></a>Secure安全标志</h4><p>Secure限定了只有在使用了https而不是http的情况下才可以发送给服务器</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>只有当Name、Domain、Path这3个字段都相同的时候，才是同一个Cookie</strong></li>
+<li><strong>Domain\Path\Secure都要满足条件，还不能过期的Cookie才能随着请求发送到服务器端</strong></li>
+</ul>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><h4 id="创建Cookie"><a href="#创建Cookie" class="headerlink" title="创建Cookie"></a>创建Cookie</h4><p>当用户第一次浏览某个使用Cookie的网站时，该网站的服务器就进行了如下工作：</p>
+<ol>
+<li>该用户生成一个唯一的识别码（Cookie id）,创建一个Cookie对象</li>
+<li>默认情况下它是一个会话级别的Cookie，存储在浏览器的内存中，用户退出浏览器之后被删除。如果网站希望浏览器将该Cookie存储在磁盘上，则需要设置最大时效（maxAge），并给出一个以秒为单位的时间（将最大时效设为0则是命令浏览器删除该Cookie）；</li>
+<li>将Cookie放入到HTTP响应报头，将Cookie插入到一个Set-Cookie HTTP请求报头中</li>
+<li>发送该HTTP响应报头</li>
+</ol>
+<h4 id="设置存储Cookie"><a href="#设置存储Cookie" class="headerlink" title="设置存储Cookie"></a>设置存储Cookie</h4><p>浏览器收到该响应报文之后，根据报文头里的Set-Cookied特殊的指示，生成响应的Cookie，保存在客户端。该Cookie里面记录着用户当前的信息</p>
+<h4 id="发送Cookie"><a href="#发送Cookie" class="headerlink" title="发送Cookie"></a>发送Cookie</h4><p>当用户再次访问该网站时，浏览器首先检查所有存储的Cookies，如果某个存在该网站的Cookie（即该Cookie所声明的作用范围大于等于将要请求的资源），则把该Cookie附在请求资源的HTTP请求头上发送给服务器。</p>
+<h4 id="读取Cookie"><a href="#读取Cookie" class="headerlink" title="读取Cookie"></a>读取Cookie</h4><p>服务器接收到用户的HTTP请求报文之后，从报文头获取到该用户的Cookie，从里面找到所需要的东西。</p>
+<h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>根本作用就是在客户端存储用户访问网站的一些信息，典型的应用有：</p>
+<ul>
+<li>记住密码，下次自动登录</li>
+<li>购物车功能</li>
+<li>记录用户浏览数据，进行商品推荐</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li><p>每个特定域名下的Cookie数量有限，当超过单个域名限制之后，再设置cookie，浏览器就会清除以前设置的cookie</p>
+</li>
+<li><p>存储量太小，只有4kb</p>
+</li>
+<li><p>Cookie会被附加在每个HTTP请求中，所以无形中增加了流量</p>
+</li>
+<li><p>需要自己封装获取、设置、删除Cookie的方法</p>
+</li>
+<li><p>由于HTTP请求中Cookie是明文传递的，所以安全性成问题（除非用HTTPS）</p>
+</li>
+</ul>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><ul>
+<li>Session代表服务器与浏览器的一次会话过程，这个过程是连续的，也可以时断时续的</li>
+<li>是一种 服务器端 的机制，Session对象用来存储特定用户会话所需的信息</li>
+<li>由服务端生成，保存在服务器的内存、缓存、硬盘或数据库中</li>
+</ul>
+<h3 id="工作原理-1"><a href="#工作原理-1" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
+<li>用户访问服务器</li>
+<li>服务器启用Session</li>
+<li>服务器为该用户创建一个SESSION</li>
+<li>创建 之前检查用户发来的请求里是否包含一个SESSION ID</li>
+<li>有，则说明之前该用户已经登录过并为此用户创建过SESSION，那么服务器就按这个ID把这个SESSION在服务器的内存中查找出来<br>没有，则为该客户端创建一个SESSION并生成一个与此SESSION相关的SESSION ID。这个SESSION ID是唯一的、不重复的、不容易找到规律的字符串</li>
+<li>SESSION ID将被在本次响应中返回到客户端保存，而保存这个SESSION ID的正是COOKIE</li>
+</ol>
+<h3 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h3><p>Session的根本作用就是在服务端存储用户和服务器会话的一些信息，典型的应用有：</p>
+<ul>
+<li>判断用户是否登录</li>
+<li>购物车功能</li>
+</ul>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>cookie</th>
+<th>session</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存放位置</td>
+<td>客户端</td>
+<td>服务端</td>
+</tr>
+<tr>
+<td>存取方式</td>
+<td>只能保管ASCII字符串，其他数据类型需要先进行编码</td>
+<td>能够存取任何类型的数据，包括而不限于String\Integer\List\Map等。Session中也能直接保管Java Bean乃至任何Java类，对象等，运用起来十分便当</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>存储在客户端，对客户端是可见的，客户端的一些程序可能会窥探、复制以至修正Cookie中的内容；敏感信息如账号密码尽量不要写到Cookie中，最好进行Cookie信息加密，提交到服务器后再进行解密</td>
+<td>存储在服务器上，对客户端是透明的，不存在敏感信息泄露的风险</td>
+</tr>
+<tr>
+<td>有效期</td>
+<td>只需要设置Cookie的过期时间属性为一个很大很大的数字，Cookie就可以在浏览器保存很长时间</td>
+<td>由于Session依赖于名为JSESSIONID的Cookie，而Cookie JSESSIONID的过期时间默许为-1，只需关闭了浏览器（一次会话结束），该Session就会失效</td>
+</tr>
+<tr>
+<td>对服务器造成的压力</td>
+<td>保管在客户端，不占用服务器资源，假如并发阅读的用户十分多，Cookie是很好的选择。</td>
+<td>保管在服务器端，每个用户都会产生一个Session，假如并发访问的用户十分多，会产生十分多的Session，耗费大量的内存</td>
+</tr>
+<tr>
+<td>跨域支持上</td>
+<td>支持跨域名访问</td>
+<td>不支持跨域名访问</td>
+</tr>
+</tbody></table>
+<h1 id="JSP深入"><a href="#JSP深入" class="headerlink" title="JSP深入"></a>JSP深入</h1><p>JSP的工作模式是请求/相应模式，客户端首先发出HTTP请求，jsp程序收到请求后会进行处理并返回处理结果，在一个jsp文件第一次被请求时，JSP引擎（容器）把该jsp文件转换成一个Servlet，而这个引擎本身也是一个Servlet</p>
+<h2 id="工作原理-2"><a href="#工作原理-2" class="headerlink" title="工作原理"></a>工作原理</h2><ol>
+<li><p>客户端通过浏览器向服务器发出请求，在该请求中包含了请求的资源的路径，这样当服务器接收到该请求后就可以知道被请求的内容</p>
+</li>
+<li><p>服务器根据接收到的客户端的请求来加载相应的JSP文件</p>
+</li>
+<li><p>Web服务器中的JSP引擎会将被加载的JSP文件转化为Servlet文件(.java)</p>
+</li>
+<li><p>JSP引擎将生成的Servlet代码编译成Class文件</p>
+</li>
+<li><p>服务器执行这个Class文件</p>
+</li>
+<li><p>最后服务器将执行结果发送给浏览器进行显示</p>
+</li>
+</ol>
+<h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><ol>
+<li><p>客户端发送请求，请求访问jsp文件</p>
+</li>
+<li><p>jsp容器先将jsp文件转化成一个java源文件（Java Servlet源程序），在转换过程中，如果发现jsp文件中存在任何语法错误，则中断转换过程，并向服务端和客户端返回出错信息</p>
+</li>
+<li><p>如果转换成功，则jsp容器将生成的java源文件编译成相应的字节码文件*.class。该class文件就是一个Servlet，Servlet容器会像处理其他Servlet一样来处理它</p>
+</li>
+<li><p>由Servlet容器加载转换后的Servlet类（.class文件）创建一个该Servlet（jsp页面的转换结果）实例，并执行Servlet的jspInit()方法jspInit()方法在Servlet的整个生命周期中只会执行一次</p>
+</li>
+<li><p>执行jspService()方法来处理客户端的请求，对于每个请求，jsp容器都会创建一个新的线程来处理它</p>
+<p>如果多个客户端同时请求该jsp文件，则jsp容器也会创建多个线程，使得每一个客户端请求都对应一个线程</p>
+<p>jsp运行过程中采用这种多线程的执行方式可以极大地降低对系统资源的需求，提高系统的并发量并缩短相应时间</p>
+<p>需要注意的是，由于第4步生成的Servlet是常驻内存的，所以响应的速度非常快</p>
+</li>
+<li><p>如果jsp文件被修改了，则服务器将根据设置来决定是否对该文件重新编译。如果需要重新编译，则使用重新编译后的结果取代内存中常驻的Servlet，并继续上述处理过程</p>
+</li>
+<li><p>虽然jsp效率很高，但在第一次调用的时候往往由于需要转换和编译，所以会产生一些轻微的延迟</p>
+<p>此外，由于系统资源不足等原因，jsp容器可能会以某种不确定的方式将Servlet从内存中移除，发生这种情况时，首先会调用jspDestroy()方法，然后Servlet实例会被加入“垃圾收集”处理</p>
+</li>
+<li><p>当请求处理完成后，响应对象由jsp容器接受，并将html格式的响应信息发送回客户端</p>
+</li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>可以在jspInit()方法中进行一些初始化工作（建立数据库的连接、建立网络连接、从配置文件中获取一些参数等）</p>
+</li>
+<li><p>可以在jspDestroy()方法中释放相应的资源等</p>
+</li>
+<li><p>如果项目发布在Tomcat的webapps目录中，源文件和.class文件可以在“Tomcat安装目录/work/Catalina/localhost/应用名/”下找到</p>
+</li>
+</ul>
+<h2 id="脚本和注释"><a href="#脚本和注释" class="headerlink" title="脚本和注释"></a>脚本和注释</h2><h3 id="表达式脚本（常用）"><a href="#表达式脚本（常用）" class="headerlink" title="表达式脚本（常用）"></a>表达式脚本（常用）</h3><p>格式：&lt;%=表达式%&gt;</p>
+<p>作用：在jsp 页面上输出数据</p>
+<p>特点：</p>
+<ul>
+<li>所有的表达式脚本都会被翻译到 _jspService() 方法中</li>
+<li>表达式脚本都会被翻译成为out.print()输出到页面上</li>
+<li>由于表达式脚本翻译的内容都在 _jspService() 方法，所以 _jspService()方法中的对象都可以直接使用</li>
+<li>表达式脚本中的表达式不能以分号结束</li>
+</ul>
+<h3 id="代码脚本"><a href="#代码脚本" class="headerlink" title="代码脚本"></a>代码脚本</h3><p>格式： &lt;% java 语句 %&gt;<br>作用：可以在 jsp 页面中，编写我们自己需要的功能（写的是 java 语句）<br>特点：</p>
+<ul>
+<li>代码脚本翻译之后都在 _jspService 方法中</li>
+<li>代码脚本由于翻译到 _jspService()方法中，所以在 _jspService()方法中的现有对象都可以直接使用</li>
+<li>还可以由多个代码脚本块组合完成一个完整的 java 语句</li>
+<li>代码脚本还可以和表达式脚本一起组合使用，在 jsp 页面上输出数据</li>
+</ul>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
+<li>html 注释：会被翻译到 java 源代码中，在_jspService 方法里，以 out.writer 输出到客户端</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;!-- 这是 html 注释 --&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>java 注释：会被翻译到 java 源代码中</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;% </span><br><span class="line">	<span class="comment">// 单行 java 注释 </span></span><br><span class="line">	<span class="comment">/* 多行 java 注释 */</span> </span><br><span class="line">%&gt; </span><br></pre></td></tr></table></figure>
+<ul>
+<li>jsp 注释：可以注掉jsp 页面中所有代码</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%-- 这是 jsp 注释 --%&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="九大内置对象"><a href="#九大内置对象" class="headerlink" title="九大内置对象"></a>九大内置对象</h2><ol>
+<li><p>request对象<br>该对象代表了客户端的请求信息，主要用于接受通过HTTP协议传送到服务器的数据。（包括头信息、系统信息、请求方式以及请求参数等），request对象的作用域为一次请求</p>
+</li>
+<li><p>response对象<br>代表的是对客户端的响应，主要是将JSP容器处理过的对象传回到客户端，response对象也具有作用域，它只在JSP页面内有效</p>
+</li>
+<li><p>session对象</p>
+<p>是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个session对象，用于保存该用户的信息，跟踪用户的操作状态。session对象内部使用Map类来保存数据，因此保存数据的格式为 “Key/value”。 session对象的value可以使复杂的对象类型，而不仅仅局限于字符串类型</p>
+</li>
+<li><p>application对象</p>
+<p>可将信息保存在服务器中，直到服务器关闭，否则application对象中保存的信息会在整个应用中都有效。与session对象相比，application对象生命周期更长，类似于系统的“全局变量”</p>
+</li>
+<li><p>out对象</p>
+<p>用于在Web浏览器内输出信息，并且管理应用服务器上的输出缓冲区。在使用 out 对象输出数据时，可以对数据缓冲区进行操作，及时清除缓冲区中的残余数据，为其他的输出让出缓冲空间。待数据输出完毕后，要及时关闭输出流</p>
+</li>
+<li><p>pageContext 对象</p>
+<p>是取得任何范围的参数，通过它可以获取 JSP页面的out、request、reponse、session、application 等对象。其创建和初始化都是由容器来完成的，在JSP页面中可以直接使用 pageContext对象</p>
+</li>
+<li><p>config 对象</p>
+<p>主要作用是取得服务器的配置信息。通过 pageConext对象的 getServletConfig() 方法可以获取一个config对象。当一个Servlet 初始化时，容器把某些信息通过 config对象传递给这个 Servlet。 开发者可以在web.xml 文件中为应用程序环境中的Servlet程序和JSP页面提供初始化参数</p>
+</li>
+<li><p>page 对象</p>
+<p>代表JSP本身，只有在JSP页面内才是合法的。 page隐含对象本质上包含当前 Servlet接口引用的变量，类似于Java编程中的 this 指针</p>
+</li>
+<li><p>exception 对象</p>
+<p>处理jsp中出现的异常</p>
+</li>
+</ol>
+<h1 id="JSTL标签库"><a href="#JSTL标签库" class="headerlink" title="JSTL标签库"></a>JSTL标签库</h1><p>JSTL 是 apache 对 EL 表达式的扩展（也就是说 JSTL 依赖 EL），虽然EL表达式方便了在JSP页面中的取值，但是遇到判断、循环的操作，只有EL表达式是远远不够的</p>
+<p>故此，用来提升在 JSP 页面的逻辑代码的编码效率，使用标签来替换逻辑代码的直接书写</p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><p>导入jar包：jstl-1.2.jar</p>
+<p>引入标签库：</p>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%<span class="meta">@taglib</span> prefix=<span class="string">&quot;c&quot;</span> uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h2><h4 id="out标签"><a href="#out标签" class="headerlink" title="out标签"></a>out标签</h4><p>结合EL表达式将数据响应给浏览器，如果EL表达式没有取到数据则可以使用default属性声明默认值</p>
+<h4 id="set标签"><a href="#set标签" class="headerlink" title="set标签"></a>set标签</h4><p>将数据存储到指定的作用域中，默认是pageContext作用域</p>
+<h4 id="remove标签"><a href="#remove标签" class="headerlink" title="remove标签"></a>remove标签</h4><p>删除作用域中的数据，默认是删除四个作用域中的符合要求的数据，可以通过scope属性指明要删除的作用域数据</p>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;c:remove <span class="keyword">var</span>=<span class="string">&quot;要删除数据的键名&quot;</span> scope=<span class="string">&quot;作用域名&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ol>
+<li><p>使用pageContext.removeAttriute(“键名”)， 此方法会将四个作用域中的符合要求的数据全部删除</p>
+</li>
+<li><p>使用pageContext.removeAttriute(String name,int scope)</p>
+</li>
+<li><p>指明要删除的作用域中的数据 scope的值1为 pageContext，2为request ，3为 session，4为 application</p>
+</li>
+<li><p>使用request.removeAttibute(“键名”) 删除当前作用域符合要求的数据</p>
+</li>
+<li><p>使用session.removeAttibute(“键名”) 删除当前作用域符合要求的数据</p>
+</li>
+<li><p>使用application.removeAttibute(“键名”) 删除当前作用域符合要求的数据</p>
+</li>
+</ol>
+<h4 id="单分支判断标签"><a href="#单分支判断标签" class="headerlink" title="单分支判断标签"></a>单分支判断标签</h4><p>可以根据EL表达式进行一定程度的单分支逻辑判断</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;c:if test=&quot;$&#123;表达式&#125;&quot;&gt;数据&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>test属性中书写的是EL表达式，或者说是EL表达式的逻辑表达式</p>
+</li>
+<li><p>该标签只能进行EL表达式相关的逻辑判断。不能进行EL表达式不能获取的数据的逻辑处理</p>
+</li>
+</ul>
+<h4 id="多分支判断标签"><a href="#多分支判断标签" class="headerlink" title="多分支判断标签"></a>多分支判断标签</h4><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;c:choose&gt;</span><br><span class="line">&lt;c:when test=&quot;$&#123;表达式&#125;&quot;&gt;&lt;/c:when&gt;</span><br><span class="line">&lt;c:when test=&quot;$&#123;表达式&#125;&quot;&gt;&lt;/c:when&gt;</span><br><span class="line">..</span><br><span class="line">&lt;c:otherwise&gt;&lt;/c:otherwise&gt;</span><br><span class="line">&lt;/c:choose&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：符合条件后只会执行一个分支，其他分支不会执行</strong></p>
+<h4 id="循环标签"><a href="#循环标签" class="headerlink" title="循环标签"></a>循环标签</h4><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;c:foreach&gt;</span><br><span class="line">循环体</span><br><span class="line">&lt;/c:foreach&gt;</span><br></pre></td></tr></table></figure>
+<p>属性:</p>
+<ul>
+<li><p>begin:声明循环的开始位置</p>
+</li>
+<li><p>end:声明循环的结束位置</p>
+</li>
+<li><p>step:声明循环的步长</p>
+</li>
+<li><p>varStatus:声明变量记录循环状态 ,例如变量名:i</p>
+</li>
+<li><p>${i.index} 获取当次循环的下标</p>
+</li>
+<li><p>${i.count} 获取当次循环的次数</p>
+</li>
+<li><p>${i.first} 判断是否是第一次循环</p>
+</li>
+<li><p>${i.last} 判断是否是最后一次循环</p>
+</li>
+<li><p>items:声明要遍历的数据，可以是集合和数组等</p>
+</li>
+<li><p>var:声明变量记录每次遍历的结果。可以做循环体中使用使用EL表达式获取遍历出来的数据</p>
+</li>
+</ul>
+<p><strong>注意：记录的数据存储到了作用域中可以直接使用El表达式进行获取</strong></p>
+<h1 id="过滤器Filter"><a href="#过滤器Filter" class="headerlink" title="过滤器Filter"></a>过滤器Filter</h1><p>过滤器Filter技术，能够实现对所有Web资源的管理，如实现权限访问控制、过滤敏感词汇、压缩响应信息等一些高级功能</p>
+<h2 id="filter的配置"><a href="#filter的配置" class="headerlink" title="filter的配置"></a>filter的配置</h2><p>filter由filter和filter-mapping两组标签组成，如果Servlet版本大于3.0，也可以使用注解的方式来配置filter</p>
+<p>web.xml可以配置的filter属性都可以通过@WebServlet的方式进行配置，但如果存在多个过滤器，使用web.xml配置filter可以控制过滤器的执行顺序</p>
+<h2 id="filter的接口方法"><a href="#filter的接口方法" class="headerlink" title="filter的接口方法"></a>filter的接口方法</h2><h3 id="init-接口"><a href="#init-接口" class="headerlink" title="init()接口"></a>init()接口</h3><p>与Servlet中的init()方法类似，filter中的init()方法用于初始化过滤器。开发者可以在init()方法中完成与构造方法类似的初始化功能。如果初始化代码中要用到FilterConfig对象，则这些初始化代码只能在filter的init()方法中编写，而不能在构造方法中编写。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig fConfig)</span> <span class="keyword">throws</span> ServletException</span>&#123;</span><br><span class="line">	<span class="comment">//此处内容为开发者定义的初始化代码...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="doFilter-接口"><a href="#doFilter-接口" class="headerlink" title="doFilter()接口"></a>doFilter()接口</h3><p>doFilter方法类似于Servlet接口的service()方法。当客户端请求目标资源时，容器会筛选出符合<filter-mapping>标签中<url-pattern>的filter，并按照声明<filter-mapping>的顺序依次调用这些filter的doFilter()方法。<br>doFilter()方法有多个参数，其中参数request和response为Web服务器或filter链中的上一个filter传递过来的请求和响应对象<br>参数chain代表当前filter链的对象，只有当前filter对象中的doFilter()方法内部需要调用FilterChain对象的doFilter方法时，才能把请求交付给filter链中的下一个filter或目标程序处理</filter-mapping></url-pattern></filter-mapping></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException</span>&#123;</span><br><span class="line">	<span class="comment">//此处内容为开发者定义的初始化代码</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment">//传递filter链</span></span><br><span class="line">	chain.doFilter(request, response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="destroy-接口"><a href="#destroy-接口" class="headerlink" title="destroy()接口"></a>destroy()接口</h3><p>filter中的destroy()方法Servlet中的destroy()作用类似，在Web服务器卸载filter对象之前被调用，用于释放被filter对象打开的资源。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//此处内容为开发者进行终止操作的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="filter的生命周期"><a href="#filter的生命周期" class="headerlink" title="filter的生命周期"></a>filter的生命周期</h3><p>当Web容器启动时，会根据web.xml中声明的filter顺序依次实例化这些filter。然后在Web应用程序加载时调用init()方法，随机客户端有请求时调用doFilter()方法，并且根据实际情况的不同，doFilter()方法可能被调用多次。最后Web应用程序卸载时调用destroy()方法。</p>
+<h1 id="监听器Listener"><a href="#监听器Listener" class="headerlink" title="监听器Listener"></a>监听器Listener</h1><p>作用：监听某个事件的发生，状态的改变</p>
+<p>实现监听：</p>
+<p>创建类实现监听器接口</p>
+<p>web.xml文件中配置(注册）监听器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span> <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>url<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span><span class="tag">&lt;/<span class="name">listener</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<h2 id="Listener监听三个域对象创建与销毁"><a href="#Listener监听三个域对象创建与销毁" class="headerlink" title="Listener监听三个域对象创建与销毁"></a>Listener监听三个域对象创建与销毁</h2><h3 id="ServletContext域"><a href="#ServletContext域" class="headerlink" title="ServletContext域"></a>ServletContext域</h3><p>监听ServletContext域对象的创建与销毁：实现ServletContextListener接口</p>
+<p>ServletContext域对象的生命周期</p>
+<ul>
+<li><p>创建：启动服务器时创建</p>
+</li>
+<li><p>销毁：关闭服务器或者从服务器移除项目</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebListener</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServletContextListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent arg0)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;初始化&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent arg0)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;销毁了&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>作用： 利用ServletContextListener监听器在创建ServletContext域对象时完成一些想要初始化的工作或者执行自定义任务调度</p>
+<h3 id="ServletRequest域"><a href="#ServletRequest域" class="headerlink" title="ServletRequest域"></a>ServletRequest域</h3><p>监听ServletRequest域对象的创建与销毁：实现ServletRequestListener接口</p>
+<p>ServletRequest域对象的生命周期</p>
+<p>创建：访问服务器任何资源都会发送请求(ServletRequest)出现,访问.html和.jsp和.servlet都会创建请求</p>
+<p>销毁：服务器已经对该次请求做出了响应</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebListener</span></span><br><span class="line">		<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServletRequestListener</span> <span class="keyword">implements</span> <span class="title">ServletRequestListener</span></span>&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestDestroyed</span><span class="params">(ServletRequestEvent arg0)</span> </span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;ServletRequest销毁了&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestInitialized</span><span class="params">(ServletRequestEvent arg0)</span> </span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;ServletRequest创建了&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="HttpSession域"><a href="#HttpSession域" class="headerlink" title="HttpSession域"></a>HttpSession域</h3><p>监听HttpSession域对象的创建与销毁：实现HttpSessionListener接口</p>
+<p>HttpSession域对象的生命周期</p>
+<p>创建：只要调用了getSession()方法就会创建,一次会话只会创建一次</p>
+<p>销毁：</p>
+<ol>
+<li><p>超时(默认为30分钟)</p>
+</li>
+<li><p>非正常关闭，销毁</p>
+</li>
+<li><p>正常关闭服务器(序列化)</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@WebListener</span><br><span class="line">public class MyHttpSessionListener implements HttpSessionListener&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void sessionCreated(HttpSessionEvent arg0) &#123;</span><br><span class="line">		System.out.println(&quot;HttpSession创建了&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void sessionDestroyed(HttpSessionEvent arg0) &#123;</span><br><span class="line">		System.out.println(&quot;HTTPSession销毁了&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>作用：每位用户登录网站时都会创建一个HTTPSession对象，利用这个统计在线人数</p>
+<h2 id="Listener监听三个域对象属性状态的改变"><a href="#Listener监听三个域对象属性状态的改变" class="headerlink" title="Listener监听三个域对象属性状态的改变"></a>Listener监听三个域对象属性状态的改变</h2><ul>
+<li>监听HttpSession属性的改变：实现HttpSessionAttributeListener接口</li>
+<li>监听ServletContext属性的改变：实现ServletContextAttribute接口</li>
+<li>监听ServletRequest属性的改变：实现ServletRequestAttribute接口</li>
+</ul>
+<p>Listener监听HttpSession域对象存值的状态变更，这两种监听器不用注册</p>
+<p>监听对象与session绑定和解除绑定的动作，让JavaBean实现HttpSessionBindingListener接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHttpSessionBindingListener</span> <span class="keyword">implements</span> <span class="title">HttpSessionBindingListener</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">valueBound</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;绑定了&quot;</span>);</span><br><span class="line">	&#125;		</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">valueUnbound</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">&quot;解绑了&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用于监听现在session的值是钝化(序列化)，还是活化(反序列化)的动作，JavaBean实现HttpSessionActivationListener接口和Serializable接口。</p>
+<ul>
+<li>钝化(序列化):把内存中的数据存储到硬盘中</li>
+<li>活化(反序列化):把硬盘中的数据读取到内存中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bean</span> <span class="keyword">implements</span> <span class="title">HttpSessionActivationListener</span> ,<span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionDidActivate</span><span class="params">(HttpSessionEvent arg0)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;活化了&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionWillPassivate</span><span class="params">(HttpSessionEvent arg0)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;钝化了&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>session的钝化活化的用意：</p>
+<p>session中的值可能会很多，并且有很长一段时间不会去使用这个内存中的值，那么可以考虑把session中的值存储到硬盘上(钝化)，等下一次要使用的时候，从硬盘上提取到内存中(活化）。</p>
+<p>设置session在一定时间内钝化：</p>
+<ul>
+<li><p>在Tomcat里面 conf/context.xml中配置：</p>
+<p>配置后对所有运行在该服务器中的项目生效。</p>
+</li>
+<li><p>在Tomcat里面conf/Catalina/localhost/context.xml中配置(没有就创建一个context.xml文件)：</p>
+<p>对localhost生效，如localhost:8080/</p>
+</li>
+<li><p>在自己的web工程项目中的META-INF/context.xml中配置：</p>
+<p>只对当前的工程项目生效。</p>
+</li>
+</ul>
+<p>配置内容：</p>
+<ul>
+<li><p>maxIdleSwap：</p>
+<p>设置经过该时间就钝化。</p>
+</li>
+<li><p>directory：</p>
+<p>设置钝化后存放的目录，没有就自动创建。</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;Context&gt;</span><br><span class="line">	&lt;Manager className=<span class="string">&quot;org.apache.catalina.session.PersistentManager&quot;</span> maxIdleSwap=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">		&lt;Store className=<span class="string">&quot;org.apache.catalina.session.FileStore&quot;</span> directory=<span class="string">&quot;lrving&quot;</span>/&gt;</span><br><span class="line">	&lt;/Manager&gt;</span><br><span class="line">&lt;/Context&gt;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:zweiwings@foxmail.com">Zweiwings</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zwei-wings.github.io/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">https://zwei-wings.github.io/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zwei-wings.github.io" target="_blank">Zweiwings</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">Web程序设计</a></div><div class="post_share"><div class="social-share" data-image="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/"><img class="prev-cover" data-lazy-src="/img/%E8%99%9A%E5%B9%BBcover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">UE4-Quest Manager插件速通</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/21/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Java%E5%AD%A6%E4%B9%A0-5/"><img class="next-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java学习-5</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="this.onerror=null;this.src='/img/cover2.jpg'" alt="avatar"/><div class="author-info__name">Zweiwings</div><div class="author-info__description">人间失宠的笨蛋咕咕们</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" href="https://zwei-wings.github.io/about/"><i class="fas fa-chess"></i><span>关于咕咕</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本博客主要用于记录一些学习笔记，可能也包含一些同人文、OC和世界观的分享与展示。（PS：搞OC的人是这样的，请多担待。）</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL"><span class="toc-number">1.1.</span> <span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">常规操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.3.</span> <span class="toc-text">关于安装数据库时出现的一些问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tomcat"><span class="toc-number">1.2.</span> <span class="toc-text">Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">目录结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDEA"><span class="toc-number">1.3.</span> <span class="toc-text">IDEA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">项目生成与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">目录结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.</span> <span class="toc-text">HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E6%88%90"><span class="toc-number">2.3.</span> <span class="toc-text">组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.1.</span> <span class="toc-text">HTTP请求协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">HTTP请求方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E5%93%8D%E5%BA%94%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.3.</span> <span class="toc-text">HTTP响应协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">Servlet技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Requset%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%86%85%E5%AE%B9"><span class="toc-number">3.1.</span> <span class="toc-text">Requset获取请求内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Response%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E5%86%85%E5%AE%B9"><span class="toc-number">3.2.</span> <span class="toc-text">Response获取响应内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.3.</span> <span class="toc-text">页面跳转的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91"><span class="toc-number">3.3.1.</span> <span class="toc-text">请求转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">3.3.2.</span> <span class="toc-text">请求重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-number">3.4.</span> <span class="toc-text">具体使用技巧</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JDBC%E5%BA%94%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JDBC应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.0.1.</span> <span class="toc-text">JDBC连接数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.2.</span> <span class="toc-text">SQL语句执行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cookie%E4%B8%8ESession%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF"><span class="toc-number">5.</span> <span class="toc-text">Cookie与Session会话技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie"><span class="toc-number">5.1.</span> <span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">5.1.1.</span> <span class="toc-text">属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E7%A7%B0%E5%92%8C%E5%80%BC"><span class="toc-number">5.1.1.1.</span> <span class="toc-text">名称和值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E6%95%88%EF%BC%88%E5%88%B0%E6%9C%9F%EF%BC%89%E6%97%B6%E9%97%B4"><span class="toc-number">5.1.1.2.</span> <span class="toc-text">失效（到期）时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Domain%E5%9F%9F"><span class="toc-number">5.1.1.3.</span> <span class="toc-text">Domain域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Path%E8%B7%AF%E5%BE%84"><span class="toc-number">5.1.1.4.</span> <span class="toc-text">Path路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HttpOnly"><span class="toc-number">5.1.1.5.</span> <span class="toc-text">HttpOnly</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Secure%E5%AE%89%E5%85%A8%E6%A0%87%E5%BF%97"><span class="toc-number">5.1.1.6.</span> <span class="toc-text">Secure安全标志</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">5.1.2.</span> <span class="toc-text">工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BACookie"><span class="toc-number">5.1.2.1.</span> <span class="toc-text">创建Cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%98%E5%82%A8Cookie"><span class="toc-number">5.1.2.2.</span> <span class="toc-text">设置存储Cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81Cookie"><span class="toc-number">5.1.2.3.</span> <span class="toc-text">发送Cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96Cookie"><span class="toc-number">5.1.2.4.</span> <span class="toc-text">读取Cookie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8-1"><span class="toc-number">5.1.3.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">5.1.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-number">5.2.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8-2"><span class="toc-number">5.2.2.</span> <span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">5.3.</span> <span class="toc-text">区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP%E6%B7%B1%E5%85%A5"><span class="toc-number">6.</span> <span class="toc-text">JSP深入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-2"><span class="toc-number">6.1.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">6.2.</span> <span class="toc-text">运行过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E5%92%8C%E6%B3%A8%E9%87%8A"><span class="toc-number">6.3.</span> <span class="toc-text">脚本和注释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%84%9A%E6%9C%AC%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">6.3.1.</span> <span class="toc-text">表达式脚本（常用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%84%9A%E6%9C%AC"><span class="toc-number">6.3.2.</span> <span class="toc-text">代码脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">6.3.3.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E5%A4%A7%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.4.</span> <span class="toc-text">九大内置对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSTL%E6%A0%87%E7%AD%BE%E5%BA%93"><span class="toc-number">7.</span> <span class="toc-text">JSTL标签库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">7.1.</span> <span class="toc-text">使用流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.</span> <span class="toc-text">常用标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#out%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.0.1.</span> <span class="toc-text">out标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.0.2.</span> <span class="toc-text">set标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#remove%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.0.3.</span> <span class="toc-text">remove标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%88%86%E6%94%AF%E5%88%A4%E6%96%AD%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.0.4.</span> <span class="toc-text">单分支判断标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E6%94%AF%E5%88%A4%E6%96%AD%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.0.5.</span> <span class="toc-text">多分支判断标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E6%A0%87%E7%AD%BE"><span class="toc-number">7.2.0.6.</span> <span class="toc-text">循环标签</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8Filter"><span class="toc-number">8.</span> <span class="toc-text">过滤器Filter</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#filter%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">8.1.</span> <span class="toc-text">filter的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#filter%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="toc-number">8.2.</span> <span class="toc-text">filter的接口方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#init-%E6%8E%A5%E5%8F%A3"><span class="toc-number">8.2.1.</span> <span class="toc-text">init()接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#doFilter-%E6%8E%A5%E5%8F%A3"><span class="toc-number">8.2.2.</span> <span class="toc-text">doFilter()接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#destroy-%E6%8E%A5%E5%8F%A3"><span class="toc-number">8.2.3.</span> <span class="toc-text">destroy()接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filter%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">8.2.4.</span> <span class="toc-text">filter的生命周期</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E5%99%A8Listener"><span class="toc-number">9.</span> <span class="toc-text">监听器Listener</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Listener%E7%9B%91%E5%90%AC%E4%B8%89%E4%B8%AA%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E4%B8%8E%E9%94%80%E6%AF%81"><span class="toc-number">9.1.</span> <span class="toc-text">Listener监听三个域对象创建与销毁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ServletContext%E5%9F%9F"><span class="toc-number">9.1.1.</span> <span class="toc-text">ServletContext域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ServletRequest%E5%9F%9F"><span class="toc-number">9.1.2.</span> <span class="toc-text">ServletRequest域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpSession%E5%9F%9F"><span class="toc-number">9.1.3.</span> <span class="toc-text">HttpSession域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Listener%E7%9B%91%E5%90%AC%E4%B8%89%E4%B8%AA%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%8A%B6%E6%80%81%E7%9A%84%E6%94%B9%E5%8F%98"><span class="toc-number">9.2.</span> <span class="toc-text">Listener监听三个域对象属性状态的改变</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）"><img data-lazy-src="/img/%E5%90%8D%E6%9F%AFcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第 3 章 伊戈尔暗杀事件（下）"/></a><div class="content"><a class="title" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）">第 3 章 伊戈尔暗杀事件（下）</a><time datetime="2026-08-03T16:06:55.257Z" title="更新于 2026-08-04 00:06:55">2026-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1"><img data-lazy-src="/img/%E6%9C%AA%E5%88%86%E7%B1%BBcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客更新日志-1"/></a><div class="content"><a class="title" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1">博客更新日志-1</a><time datetime="2026-08-03T15:02:39.597Z" title="更新于 2026-08-03 23:02:39">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试"><img data-lazy-src="/img/Top_img-%E9%BB%98%E8%AE%A4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试"/></a><div class="content"><a class="title" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试">测试</a><time datetime="2026-08-03T10:23:10.428Z" title="更新于 2026-08-03 18:23:10">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计"><img data-lazy-src="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Web程序设计"/></a><div class="content"><a class="title" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计">Web程序设计</a><time datetime="2026-08-03T08:10:48.094Z" title="更新于 2026-08-03 16:10:48">2026-08-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Zweiwings</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我知世间来往步履匆匆，知一切烈火将熄于凉薄，知世间人皆将归于赴死，知我人间失宠无比落魄，却从不知何谓退缩。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7ab654b08de6e920553a',
+      clientSecret: 'e674cd1fcfc534caa60f1ff36274a58b594989e9',
+      repo: 'Zwei-wings.github.io',
+      owner: 'Zwei-wings',
+      admin: ['Zwei-wings'],
+      id: '23440f171522be7a26b24c5806d1313a',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="/js/title.js"></script><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div id="nav-music-engine" class="aplayer no-destroy" data-server="tencent" data-type="playlist" data-id="7993423839" data-fixed="true" data-theme="#ffcb8e" data-loop="all" data-order="random" data-preload="auto" data-volume="0.7" data-listFolded="true" data-listMaxHeight="250px"></div><span id="nav-music-ui"><span class="nm-title">未播放</span><span class="nm-btns"><span class="nm-btn nm-prev">◀</span><span class="nm-btn nm-play">▶</span><span class="nm-btn nm-next">▶</span></span></span><script>
+(function() {
+  var initDone = false, playerReady = false;
+  var navAp = null, uiEl = null, titleEl = null, playEl = null;
+
+  function updateUI() {
+    if (!navAp || !playEl || !titleEl) return;
+    var playing = !navAp.audio.paused;
+    playEl.innerHTML = playing ? '\u23F8' : '\u25B6';
+    if (navAp.list && navAp.list.audios && navAp.list.audios[navAp.list.index]) {
+      titleEl.textContent = navAp.list.audios[navAp.list.index].title;
+    }
+  }
+
+  function initMusic() {
+    if (initDone) return;
+    if (typeof loadMeting !== 'function') return;
+    loadMeting();
+    initDone = true;
+
+    // 劫持 loadMeting：每次调用后恢复保护
+    var origLoadMeting = window.loadMeting;
+    window.loadMeting = function() {
+      origLoadMeting();
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && navAp) {
+        engine.classList.add('no-reload');
+        if (window.aplayers.indexOf(navAp) === -1) {
+          window.aplayers.unshift(navAp);
+        }
+      }
+    };
+
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && engine.classList.contains('aplayer-fixed') && window.aplayers && window.aplayers.length > 0) {
+        clearInterval(timer);
+        playerReady = true;
+
+        // 找到 APlayer 实例
+        for (var i = 0; i < window.aplayers.length; i++) {
+          if (window.aplayers[i].container.id === 'nav-music-engine') {
+            navAp = window.aplayers[i];
+            break;
+          }
+        }
+        engine.classList.add('no-reload');
+        // 隐藏 APlayer 原生 UI
+        engine.style.display = 'none';
+
+        // 获取自定义 UI 元素
+        uiEl = document.getElementById('nav-music-ui');
+        if (uiEl) {
+          playEl = uiEl.querySelector('.nm-play');
+          titleEl = uiEl.querySelector('.nm-title');
+          var prevEl = uiEl.querySelector('.nm-prev');
+          var nextEl = uiEl.querySelector('.nm-next');
+
+          // 事件绑定
+          if (playEl) playEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.toggle(); });
+          if (prevEl) prevEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipBack(); });
+          if (nextEl) nextEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipForward(); });
+          if (titleEl) {
+            titleEl.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+              if (mi) location.href = mi.href;
+            });
+          }
+
+          // 监听 APlayer 事件
+          navAp.on('play', updateUI);
+          navAp.on('pause', updateUI);
+          updateUI();
+          positionUI();
+        }
+      }
+      if (attempts > 30) clearInterval(timer);
+    }, 200);
+  }
+
+  function positionUI() {
+    if (!uiEl) return;
+    var mr = (function() {
+      var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+      return mi ? mi.getBoundingClientRect() : null;
+    })();
+    if (!mr) return;
+    uiEl.style.top = mr.top + 'px';
+    uiEl.style.left = '50%';
+    uiEl.style.transform = 'translateX(-50%)';
+    uiEl.style.right = 'auto';
+    uiEl.style.bottom = 'auto';
+  }
+
+  // 检测导航栏底色 + 折叠状态，同步播放器
+  function updateScheme() {
+    if (!uiEl) return;
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+
+    // 折叠跟随：导航栏滚出屏幕时隐藏播放器
+    var navRect = nav.getBoundingClientRect();
+    if (navRect.bottom < 5) {
+      uiEl.style.opacity = '0';
+      uiEl.style.pointerEvents = 'none';
+      return;
+    }
+    uiEl.style.opacity = '1';
+    uiEl.style.pointerEvents = 'auto';
+
+    // 明暗切换：透明/半透明 → 白色方案；不透明白底 → 暗色方案
+    var bg = getComputedStyle(nav).backgroundColor;
+    var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!m) return;
+    var r = parseInt(m[1]), g = parseInt(m[2]), b = parseInt(m[3]);
+    var a = m[4] !== undefined ? parseFloat(m[4]) : 1;
+    // 半透明（Hero 模式）→ 白色方案
+    if (a < 0.5) {
+      uiEl.classList.remove('nm-dark');
+      return;
+    }
+    // 不透明白底 → 暗色主题点缀方案
+    var bright = (r*299 + g*587 + b*114) / 1000;
+    if (bright > 150) {
+      uiEl.classList.add('nm-dark');
+    } else {
+      uiEl.classList.remove('nm-dark');
+    }
+  }
+
+  document.addEventListener('pjax:complete', function() {
+    if (playerReady) { setTimeout(positionUI, 50); setTimeout(updateScheme, 80); }
+  });
+  window.addEventListener('resize', function() {
+    if (playerReady) { positionUI(); updateScheme(); }
+  });
+  window.addEventListener('scroll', function() {
+    if (playerReady) {
+      updateScheme();
+      // 导航栏从隐藏→显示时有渐变动画，300ms 后再确认一次
+      clearTimeout(window._nmSchemeTimer);
+      window._nmSchemeTimer = setTimeout(updateScheme, 300);
+    }
+  }, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusic);
+  } else {
+    initMusic();
+  }
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var fontMinus = document.getElementById('font-minus');
+  if (!fontMinus) return;
+  var btn = document.createElement('button');
+  btn.id = 'font-reset';
+  btn.className = fontMinus.className;
+  btn.title = '恢复默认字号';
+  btn.innerHTML = '<i class="fas fa-undo-alt"></i>';
+  fontMinus.insertAdjacentElement('afterend', btn);
+  btn.addEventListener('click', function () {
+    document.documentElement.style.setProperty('--global-font-size', '14px');
+    try { localStorage.removeItem('global-font-size'); } catch(e) {}
+  });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://cdn.jsdelivr.net/npm/oh-my-live2d@0.19.3/dist/index.min.js"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,primaryColor:"#f6b37f",tips:{welcomeTips: {"duration":6000,"priority":3,"message":{"daybreak":"露西亚...001号...zzz","morning":"露西亚百科全书001号，很不高兴为您服务。","noon":"（叹气）就不能等本小姐吃完午饭吗……","afternoon":"午后阳光正好，想吃草莓慕斯蜜桃千层巧克力班戟……","dusk":"（叹气）本小姐今天什么时候才能吃晚饭啊……","night":"露西亚百科全书001号，很不高兴为您服务。","lateNight":"（哈欠）001号已下班，不想打招呼。","weeHours":"喂，已经凌晨了啊笨蛋，还不睡吗……好困。"}},idleTips:{interval:15000,message:["今天的运势？让本小姐占卜一下——嗯，大吉，也许吧。","本小姐可是全世界最无敌可爱的大图书馆的魔女（的眷属）哦~","（叉腰）怕了吧，还不快把甜品通通给本小姐供上来！","什么？Bug？（心虚）不管不管，这个肯定是特性啦！"]},style: {"width":240,"height":100,"top":"125px","left":"calc(50% + 210px)"}},menus:{disable:true},models:[{"path":"/live2d_models/seethrough/seethrough_00001.model3.json","scale":0.3,"position":[-50,0],"stageStyle":{"width":350,"height":300}}]});</script><!-- hexo injector body_end end --></body></html>

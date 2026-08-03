@@ -1,0 +1,922 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>c++拓展-5:序列式容器STL vector | Zweiwings</title><meta name="keywords" content="C++,STL库"><meta name="author" content="Zweiwings"><meta name="copyright" content="Zweiwings"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="关于序列式容器中STL vector和其用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++拓展-5:序列式容器STL vector">
+<meta property="og:url" content="https://zwei-wings.github.io/2021/05/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-8/index.html">
+<meta property="og:site_name" content="Zweiwings">
+<meta property="og:description" content="关于序列式容器中STL vector和其用法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zwei-wings.github.io/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp">
+<meta property="article:published_time" content="2021-05-16T14:06:41.000Z">
+<meta property="article:modified_time" content="2026-08-01T18:41:11.170Z">
+<meta property="article:author" content="Zweiwings">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="STL库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zwei-wings.github.io/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp"><link rel="shortcut icon" href="/img/favicon1.png"><link rel="canonical" href="https://zwei-wings.github.io/2021/05/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-02 02:41:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/add2.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" ><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/add2.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><style>
+/* ===== 文章标题自定义装饰 ===== */
+
+/* 去掉 h3-h6 默认前缀图标 */
+#article-container h3::before,
+#article-container h4::before,
+#article-container h5::before,
+#article-container h6::before {
+  content: none !important;
+}
+
+/* 无序列表圆点标记 → 主题色 */
+#article-container ul > li::marker {
+  color: #ff9a5c;
+}
+
+/* h1：居中 + 底部渐变线 + 菱形 */
+#article-container h1 {
+  text-align: center;
+  padding-left: 0 !important;
+  padding-bottom: 20px;
+  margin: 1.5em 0 1.2em;
+  position: relative;
+}
+#article-container h1::before {
+  content: '' !important;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  border: 3px solid #ffba88;
+  background: #fff;
+  z-index: 2;
+}
+#article-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,186,136,.15), #ffba88, rgba(255,186,136,.15));
+}
+#article-container h1:hover {
+  padding-left: 0 !important;
+}
+
+/* h2：居左 + 左侧双竖线（长粗 + 短细） */
+#article-container h2 {
+  padding-left: 20px !important;
+  position: relative;
+}
+#article-container h2::before {
+  content: '' !important;
+  position: absolute;
+  left: 0;
+  top: .3em;
+  width: 3px;
+  height: calc(100% - .6em);
+  border-radius: 2px;
+  background: #ff9a5c;
+}
+#article-container h2::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: .45em;
+  width: 2px;
+  height: calc(100% - .9em);
+  border-radius: 1px;
+  background: #ffba88;
+}
+
+/* ===== 导航栏居中音乐控件（默认白色，亮底切换暗色） ===== */
+#nav-music-ui {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  min-width: 300px;
+  font-size: 13px;
+  border: 1px solid var(--nm-border);
+  border-radius: 8px;
+  padding: 0 14px;
+  transition: border-color 0.3s, opacity 0.3s;
+  /* 默认白色方案（匹配首页 Hero 暗底导航栏） */
+  --nm-border: rgba(255,255,255,0.4);
+  --nm-text: rgba(255,255,255,0.9);
+  --nm-play: rgba(255,255,255,0.85);
+  --nm-play-bg: transparent;
+  --nm-play-bd: rgba(255,255,255,0.5);
+  --nm-btn: rgba(255,255,255,0.55);
+  --nm-accent: #fff;
+}
+/* 导航栏亮底时：暗色主题点缀方案 */
+#nav-music-ui.nm-dark {
+  --nm-border: #ddd;
+  --nm-text: #555;
+  --nm-play: #fff;
+  --nm-play-bg: #ff9a5c;
+  --nm-play-bd: #ff9a5c;
+  --nm-btn: #ffba88;
+  --nm-accent: #ff9a5c;
+}
+#nav-music-ui .nm-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 13px;
+  color: var(--nm-play);
+  background: var(--nm-play-bg);
+  border: 1px solid var(--nm-play-bd);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+#nav-music-ui .nm-play:hover { color: var(--nm-accent); border-color: var(--nm-accent); }
+#nav-music-ui .nm-btns {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+#nav-music-ui .nm-title {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--nm-text);
+  font-size: 14px;
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-title:hover { color: var(--nm-accent); }
+#nav-music-ui .nm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 12px;
+  color: var(--nm-btn);
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-btn:hover { color: var(--nm-accent); }
+@media (max-width: 900px) {
+  #nav-music-ui .nm-title { display: none; }
+  #nav-music-ui { min-width: auto; padding: 0 4px; }
+}
+</style>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Zweiwings" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="onerror=null;src='/img/cover2.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Top_img-%E7%90%86%E8%AE%BA.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zweiwings</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">c++拓展-5:序列式容器STL vector</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-16T14:06:41.000Z" title="发表于 2021-05-16 22:06:41">2021-05-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-01T18:41:11.170Z" title="更新于 2026-08-02 02:41:11">2026-08-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/">专业课程</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B/C/%E6%8B%93%E5%B1%95/">拓展</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="c++拓展-5:序列式容器STL vector"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2021/05/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-8/#post-comment"><span class="gitalk-comment-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Vector容器"><a href="#Vector容器" class="headerlink" title="Vector容器"></a>Vector容器</h1><h2 id="简要说明及其定义"><a href="#简要说明及其定义" class="headerlink" title="简要说明及其定义"></a>简要说明及其定义</h2><p>vector是stl中最常用的容器之一，和array非常相似，但vector实现的是可以插入删除的动态数组，且会自动调整所占用的内存空间，而array只是静态的，容量固定的数组</p>
+<p>vector被称为向量容器，在尾部插入和删除元素效率很高，而下头部或中部插入删除的话效率稍低，定义时需要引用头文件&lt; vector &gt;，如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; values;</span><br></pre></td></tr></table></figure>
+<p>以上生成了一个空的vector容器，因为没有元素，所以也并没有分配空间，当添加第一个元素时，vector会自动分配内存</p>
+<p>同样也可以在创建的同时指定初始值以及元素个数，比如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; value&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>如上，创建了一个有5个元素的vector容器</p>
+<p>或者是直接指定元素个数，所有默认初始值都为0,也可以自行赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; <span class="title">values</span><span class="params">(<span class="number">20</span>,<span class="number">1.0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>如上创建了一个含20个double类型的数据的vector容器，并且设定的初始值都为1.0</p>
+<p>另外，圆括号中的两个参数都可以用变量代替，而且存储元素类型相同的vector容器也可以用于创建新的vector容器（复制的方式）：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> num=<span class="number">20</span>;</span><br><span class="line"><span class="keyword">double</span> value =<span class="number">1.0</span>;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; <span class="title">values</span><span class="params">(num, value)</span></span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;value1(<span class="number">5</span>, <span class="string">&#x27;c&#x27;</span>);</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;value2(value1);</span><br></pre></td></tr></table></figure>
+<p>在此基础上，如果不想复制其他容器中所有的内容，可以用指针或迭代器来指定初始值的范围：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;values(<span class="built_in">array</span>, <span class="built_in">array</span>+<span class="number">2</span>);	<span class="comment">//values 将保存&#123;1,2&#125;</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;value1&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;value2(<span class="built_in">std</span>::begin(value1),<span class="built_in">std</span>::begin(value1)+<span class="number">3</span>);	<span class="comment">//新创建的value2包含&#123;1,2,3&#125;这3个元素</span></span><br></pre></td></tr></table></figure>
+<div class="tip warning"><p>
+
+</p><p>由于vector的类模板也位于命名空间std，所以当默认空间为std时，前面表示作用域的std::可以省略（上述已经省略）</p>
+<p></p></div>
+
+<br>
+
+<h2 id="容器提供的成员函数"><a href="#容器提供的成员函数" class="headerlink" title="容器提供的成员函数"></a>容器提供的成员函数</h2><p>头文件&lt; vector &gt;中也封装并提供了可供使用的成员函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数成员</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>size()</td>
+<td>返回实际元素个数</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回元素个数的最大值。这通常是一个很大的值，一般是 2^32-1，所以我们很少会用到这个函数</td>
+</tr>
+<tr>
+<td>resize()</td>
+<td>改变实际元素的个数</td>
+</tr>
+<tr>
+<td>capacity()</td>
+<td>返回当前容量</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>判断容器中是否有元素，若无元素，则返回 true；反之，返回 false</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>增加容器的容量</td>
+</tr>
+<tr>
+<td>shrink _to_fit()</td>
+<td>将内存减少到等于当前元素实际所使用的大小</td>
+</tr>
+<tr>
+<td>operator[ ]</td>
+<td>重载了 [ ] 运算符，可以向访问数组中元素那样，通过下标即可访问甚至修改 vector 容器中的元素</td>
+</tr>
+<tr>
+<td>at()</td>
+<td>使用经过边界检查的索引访问元素</td>
+</tr>
+<tr>
+<td>front()</td>
+<td>返回第一个元素的引用</td>
+</tr>
+<tr>
+<td>back()</td>
+<td>返回最后一个元素的引用</td>
+</tr>
+<tr>
+<td>data()</td>
+<td>返回指向容器中第一个元素的指针</td>
+</tr>
+<tr>
+<td>assign()</td>
+<td>用新元素替换原有内容</td>
+</tr>
+<tr>
+<td>push_back()</td>
+<td>在序列的尾部添加一个元素</td>
+</tr>
+<tr>
+<td>pop_back()</td>
+<td>移出序列尾部的元素</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>在指定的位置插入一个或多个元素</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>移出一个元素或一段元素</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>移出所有的元素，容器大小变为 0</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换两个容器的所有元素</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>在指定的位置直接生成一个元素</td>
+</tr>
+<tr>
+<td>emplace_back()</td>
+<td>在序列尾部生成一个元素</td>
+</tr>
+</tbody></table>
+<h2 id="vector容器迭代器"><a href="#vector容器迭代器" class="headerlink" title="vector容器迭代器"></a>vector容器迭代器</h2><p>vector容器的迭代器也是随机访问迭代器，并且vector模板类提供的操作迭代器的成员函数也和array一样</p>
+<table>
+<thead>
+<tr>
+<th>成员函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>begin()</td>
+<td>返回指向容器中首元素的正向迭代器</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器”尾元素+1“的正向迭代器，此函数通常和 begin() 搭配使用。</td>
+</tr>
+<tr>
+<td>rbegin()</td>
+<td>返回指向尾元素的反向迭代器</td>
+</tr>
+<tr>
+<td>rend()</td>
+<td>返回指向“首元素-1”的反向迭代器，通常和 rbegin() 搭配使用。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能类似，返回的迭代器类型为常量正向迭代器，不能用于修改元素</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，返回的迭代器类型为常量正向迭代器，不能用于修改元素</td>
+</tr>
+<tr>
+<td>crbegin()</td>
+<td>和 rbegin() 功能相同，返回的迭代器类型为常量反向迭代器，不能用于修改元素</td>
+</tr>
+<tr>
+<td>crend()</td>
+<td>和 rend() 功能相同，返回的迭代器类型为常量反向迭代器，不能用于修改元素</td>
+</tr>
+</tbody></table>
+<p>此外，c++11新增的begin（）和end（）全局函数也同样适用，和表中的两个同名成员函数作用相同</p>
+<h3 id="vector迭代器的特点"><a href="#vector迭代器的特点" class="headerlink" title="vector迭代器的特点"></a>vector迭代器的特点</h3><p>vector容器可以随存储元素的增加，自行申请更多的存储空间，故而创建一个空的vector容器并不会影响该容器后续的使用</p>
+<p>但<strong>在初始化空的vector时，不能使用迭代器</strong>（没有存储数据的容器是没有分配存储空间的，也就没有指向这个空间的指针），因为对于空的vector容器来说，begin（）和end（）成员函数返回的迭代器是相同的，可以看做指针指向同一个位置</p>
+<div class="note danger flat"><p>故而，因为创建的vector容器values为空，没有分配存储空间，使用迭代器初始化不成功，如下代码将没有输出</p>
+</div>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;values;</span><br><span class="line">    <span class="keyword">int</span> val = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> first = values.begin(); first &lt; values.end(); ++first, val++) &#123;</span><br><span class="line">        *first = val;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *first;	<span class="comment">//初始化的同时输出值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note success flat"><p>对于空的vector容器来说，可以通过调用push_back()或者借助resize()成员函数实现初始化容器的目的</p>
+</div>
+
+<p><strong>此外，vector容器在申请更多内存时，容器中的所有元素可能会被复制或移动到新的内存地址，会导致之前创建的迭代器失效</strong></p>
+<div class="note danger flat"><p>如下，values 容器在增加容量之后，元素的存储地址发生了改变，此时再使用先前创建的迭代器，显然是错误的</p>
+</div>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;values 容器首个元素的地址：&quot;</span> &lt;&lt; values.data() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">auto</span> first = values.begin();</span><br><span class="line">    <span class="keyword">auto</span> end = values.end();</span><br><span class="line">    values.reserve(<span class="number">20</span>);	<span class="comment">//增加 values 的容量</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;values 容器首个元素的地址：&quot;</span> &lt;&lt; values.data() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">while</span> (first != end) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *first;</span><br><span class="line">        ++first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序将在输出以下结果后崩溃：</p>
+<div class="snote paperclip light"><p>
+values 容器首个元素的地址：0096DFE8
+
+</p><p>values 容器首个元素的地址：00965560</p>
+<p></p></div>
+
+<div class="note success flat"><p>为了保险起见，每当 vector 容器的容量发生变化时，我们都要对之前创建的迭代器重新初始化一遍，修改的部分代码如下：</p>
+</div>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;values 容器首个元素的地址：&quot;</span> &lt;&lt; values.data() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">first = values.begin();</span><br><span class="line">end = values.end();</span><br><span class="line"><span class="keyword">while</span> (first != end) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *first ;</span><br><span class="line">    ++first;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<div class="snote paperclip light"><p>
+values 容器首个元素的地址：0164DBE8
+
+</p><p>values 容器首个元素的地址：01645560</p>
+<p>123</p>
+<p></p></div>
+
+
+
+<h2 id="访问vector容器"><a href="#访问vector容器" class="headerlink" title="访问vector容器"></a>访问vector容器</h2><h3 id="单个元素"><a href="#单个元素" class="headerlink" title="单个元素"></a>单个元素</h3><p>vector容器同样可以使用容器名[i]【因为有[]运算符重载，但该重载为了提高效率，同样没有设置边界检查操作】和at（）成员函数的方式获取容器中的元素的值，亦或是data（）成员函数【用于返回指向首个元素的指针】</p>
+<p>除此之外，vector容器还提供两个成员函数，front（）可以返回第一个元素的引用，back（）返回最后一个元素的引用</p>
+<h3 id="多个元素"><a href="#多个元素" class="headerlink" title="多个元素"></a>多个元素</h3><p>vector依旧有提供size（）成员函数作为循环结束的条件帮助完成容器遍历</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="comment">//从下标 0 一直遍历到 size()-1 处</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; values.size(); i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; values[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="tip warning"><p>
+
+</p><p>注：size（）成员函数返回的是实际存储元素的个数，而capacity（）成员函数返回的是vector容器的总容积，两者有所差别</p>
+<p></p></div>
+
+<p>或者使用for(auto &amp;c:s)完成基于范围的循环，配合begin（）成员函数和end（）成员函数成对使用也可以完成用vector迭代器对vector容器的遍历：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp;&amp; value : values)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; value &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> first=values.begin(); first&lt;values.end(); ++first) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *first &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="增加容器中的元素"><a href="#增加容器中的元素" class="headerlink" title="增加容器中的元素"></a>增加容器中的元素</h2><h3 id="从容器尾部添加"><a href="#从容器尾部添加" class="headerlink" title="从容器尾部添加"></a>从容器尾部添加</h3><p>能够用于给容器添加元素的函数，在vector容器提供的成员函数中有两个，分别是push_back()和emplace_back()函数</p>
+<p>push_back()和emplace_back()函数都是在vector容器尾部添加一个元素，用法如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; values&#123;&#125;;</span><br><span class="line">    values.push_back(<span class="number">1</span>);</span><br><span class="line">    values.emplace_back(<span class="number">2</span>);		<span class="comment">//上下两行代码实现的效果相同</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; values.size(); i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; values[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上，push_back()和emplace_back()函数的使用方法完全一样，看上去就像是直接替代而已</p>
+<div class="tip warning"><p>
+
+</p><p>两者的区别在于底层实现的机制不同，push_back()会先随便创建一个元素m，然后将元素的值拷贝或移动到容器的元素n中，会多一个将元素m复制给n，然后析构m的过程，而emplace_back()则是直接在容器尾部创建元素n，故而后者的效率比前者高，但考虑到兼顾c++11标准以前的版本，前者也依然保留使用</p>
+<p></p></div>
+
+<h3 id="从容器中间插入"><a href="#从容器中间插入" class="headerlink" title="从容器中间插入"></a>从容器中间插入</h3><p>在vector容器中的指定位置插入元素可以调用成员函数insert()和emplace()</p>
+<p>insert()有四种语法格式：</p>
+<table>
+<thead>
+<tr>
+<th>语法格式</th>
+<th>用法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>insert（pos，elem）</td>
+<td>在迭代器pos指定的位置之前插入一个新元素elem，返回表示新元素插入位置的迭代器</td>
+</tr>
+<tr>
+<td>insert（pos，n，elem）</td>
+<td>在迭代器pos指定的位置之前插入n个元素elem，并返回表示第一个新元素插入位置的迭代器</td>
+</tr>
+<tr>
+<td>insert（pos，first，last）</td>
+<td>在迭代器pos指定的位置之前，插入其他容器（不限于vector中位于[first，last）区域的所有元素，并返回第一个新元素插入位置的迭代器</td>
+</tr>
+<tr>
+<td>insert（pos，initlist）</td>
+<td>在迭代器pos指定的位置之前，插入初始化列表中的所有元素，并返回表示第一个新插入元素位置的迭代器</td>
+</tr>
+</tbody></table>
+<p>相较insert（），emplace（）是c++11标准新增加的成员函数，用于在vector中指定位置之前插入<strong>一个</strong>新的元素，函数声明如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">emplace</span><span class="params">(const_iterator pos,args……)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>pos为指定插入位置的迭代器，args对应新插入元素构造函数的多个参数，返回值为新插入元素位置的迭代器</p>
+<p>同push_back()和emplace_back()函数的关系一样，insert()和emplace()函数插入单个元素时效果是一样的，但emplace()是直接在指定位置构造元素，而不需要移动，所以效率比insert()高，但无法兼顾c++11标准前的编译器</p>
+<h2 id="删除容器中的元素"><a href="#删除容器中的元素" class="headerlink" title="删除容器中的元素"></a>删除容器中的元素</h2><p>对于访问、添加、插入元素来说，都只能借助vector模板类提供的成员函数，但删除vector容器元素还可以借助一些全局函数</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pop_back()</td>
+<td>删除 vector 容器中<strong>最后一个元素</strong>，该容器的size减1，capacity不变</td>
+</tr>
+<tr>
+<td>erase(pos)</td>
+<td>删除 vector 容器中 pos 迭代器指定位置处的元素，并返回指向被删除元素下一个位置元素的迭代器【<strong>会将删除位置后续的元素陆续前移</strong>】，该容器的size减1，capacity不变</td>
+</tr>
+<tr>
+<td>swap(begin)、pop_back()</td>
+<td>先调用 swap()函数【需要引入头文件algorithm或者utility】交换要删除的目标元素和容器最后一个元素的位置，然后使用 pop_back() 删除该目标元素，<strong>容器中元素顺序会被打乱</strong></td>
+</tr>
+<tr>
+<td>erase(begin,end)</td>
+<td><strong>删除</strong> vector 容器中位于<strong>迭代器 [begin,end)指定区域内的所有元素</strong>，并返回指向被删除的下一个位置元素的迭代器【<strong>会将删除位置后续的元素陆续前移</strong>】，该容器的size减1，capacity不变</td>
+</tr>
+<tr>
+<td>remove()</td>
+<td><strong>删除容器中所有和指定元素值相等</strong>的元素【需要引用头文件algorithm】，并返回指向最后一个元素下一个位置的迭代器，由于该容器的size和capacity均不变，所以遍历需要借助remove()返回的迭代器，否则可能溢出</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td><strong>删除 vector 容器中所有的元素</strong>，使其变成空的 vector 容器。该容器的size减为0，capacity不变</td>
+</tr>
+</tbody></table>
+<p>remove()函数删除掉容器中多个指定元素后，容器大小和容量都没有改变，其剩余位置还保留了之前存储的元素，这些无用的元素可以用erase()删除，故此，remove()用于删除容器中指定元素时，常和 erase() 成员函数搭配使用,如下:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;demo&#123; <span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">auto</span> iter = <span class="built_in">std</span>::remove(demo.begin(), demo.end(), <span class="number">3</span>);	<span class="comment">//交换要删除元素和最后一个元素的位置</span></span><br><span class="line">    demo.erase(iter, demo.end());</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;size is :&quot;</span> &lt;&lt; demo.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;capacity is :&quot;</span> &lt;&lt; demo.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; demo.size();i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; demo[i] &lt;&lt; <span class="string">&quot; &quot;</span>;	<span class="comment">//输出剩余的元素</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<div class="snote paperclip light"><p>
+
+</p><p>size is :3<br>capacity is :6<br>1 4 5</p>
+<p></p></div>
+
+
+
+<h2 id="容器扩容问题"><a href="#容器扩容问题" class="headerlink" title="容器扩容问题"></a>容器扩容问题</h2><p>vector容器本身是动态存储的，而多数stl版本中vector容器的自动扩容后容量都会提高到原来的两倍，然后将存储的所有元素按序复制到新的存储空间中，并析构以前存储的元素，释放旧的存储空间，由此可知，整个过程是十分耗时的</p>
+<p>故而，虽然vector容器在增添新元素且容量不足时会自动扩容，但考虑到程序效率，还是应该在创建后用reverse()函数设定元素容量为足够大，尽可能避免在原有存储空间已满的情况下还添加新元素，以免vector容器进行不必要的扩容</p>
+<h2 id="vector-lt-bool-gt"><a href="#vector-lt-bool-gt" class="headerlink" title="vector&lt; bool &gt;"></a>vector&lt; bool &gt;</h2><p>vector&lt; bool &gt;并不是存储bool类型的vector容器，和普通vector&lt; T &gt;模板的底层实现是不一样的，被特殊处理过，存储单位是bit而不是常用的byte</p>
+<p>由于其特殊性，vector&lt; bool &gt;不能支持一些容器该有的基本操作，一般来说尽可能避免使用vector&lt; bool &gt;，取而代之的是，<strong>可以使用deque&lt; bool &gt;来取代，两者功能基本相同</strong></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><div class="tabs" id="vector"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#vector-1">定义方式</button></li><li class="tab"><button type="button" data-href="#vector-2">迭代器函数</button></li><li class="tab"><button type="button" data-href="#vector-3">迭代器特点</button></li><li class="tab"><button type="button" data-href="#vector-4">访问元素</button></li><li class="tab"><button type="button" data-href="#vector-5">添删元素</button></li><li class="tab"><button type="button" data-href="#vector-6">其他注意</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="vector-1"><ul>
+<li>vector&lt;数据类型&gt; 容器名{每个元素的值}；</li>
+<li>vector&lt;数据类型&gt; 容器名(数据个数，初始值)；【参数可省】</li>
+<li>vector&lt;数据类型&gt; 容器名(另一个vector容器)；</li>
+<li>vector&lt;数据类型&gt; 容器名(首地址，尾地址)；</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="vector-2"><ul>
+<li><p>begin（）/end（）：返回“开头/结尾+1”处的元素的正向迭代器</p>
+</li>
+<li><p>前加r：返回“开头-1/结尾”的反向迭代器——rbegin（）/rend（）</p>
+</li>
+<li><p>前加c：返回const类型的元素迭代器——cbegin()/cend(),crbegin()/crend()</p>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="vector-3"><ul>
+<li>初始化空的vector时，不可以使用迭代器</li>
+<li>在申请更多内存时，容器中元素存储地址可能被更新，造成之前创建的迭代器失效</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="vector-4"><p>对于单个元素：</p>
+<ul>
+<li>用容器名[i]的方式——直接访问，性能最高</li>
+<li>使用at()函数——可避免越界</li>
+<li>使用front()和back()函数——返回第一个/最后一个元素的引用</li>
+<li>使用data()函数获得指向第一个元素的指针——用*（a+i）读取第i个元素</li>
+</ul>
+<p>对于多个元素：</p>
+<ul>
+<li>使用size（）函数作为条件循环获取</li>
+<li>使用for（auto &amp;c:s）这一特殊格式的for循环完成遍历赋值，只读时不加“&amp;”引用符</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="vector-5"><ul>
+<li>增添元素：insert()、push_front()、push_back</li>
+<li>对应的emplace系列：emplace()、emplace_front()、emplace_back()</li>
+<li>删除元素：</li>
+<li><ul>
+<li>pop_back()【删除最后一个元素】</li>
+<li>erase()【删除一部分，后续前移】</li>
+<li>clear()【清空容器】</li>
+<li>remove()【删除和指定值相等的元素】</li>
+</ul>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="vector-6"><ul>
+<li>vector容器虽然能够自动扩容，但耗时较多，应该用reverse（）函数修改容量而避免不必要的自动扩容</li>
+<li>vector&lt; bool &gt;不是存储bool类型的vector容器，不支持基本操作，可以使用deque&lt; bool &gt;替代</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+
+
+
+<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;value;	<span class="comment">//初始化一个空vector容量</span></span><br><span class="line">    value.push_back(<span class="string">&#x27;S&#x27;</span>);</span><br><span class="line">    value.push_back(<span class="string">&#x27;T&#x27;</span>);</span><br><span class="line">    value.push_back(<span class="string">&#x27;L&#x27;</span>);	<span class="comment">//向value容器中的尾部依次添加 S、T、L 字符</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;元素个数为：%d\n&quot;</span>, value.size());<span class="comment">//调用 size() 成员函数容器中的元素个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i = value.begin(); i &lt; value.end(); i++) 	<span class="comment">//使用迭代器遍历容器</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;	</span><br><span class="line">    value.insert(value.begin(), <span class="string">&#x27;C&#x27;</span>);	<span class="comment">//向容器开头插入字符</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;首个元素为：&quot;</span> &lt;&lt; value.at(<span class="number">0</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<div class="snote paperclip light"><p>
+元素个数为：3
+
+</p><p>S T L</p>
+<p>首个元素为：C</p>
+<p></p></div>
+
+
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">auto</span> first = values.begin();</span><br><span class="line">    <span class="keyword">auto</span> end = values.end();</span><br><span class="line">    <span class="keyword">while</span> (first != end)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *first &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        ++first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<div class="snote paperclip light"><p>
+1 2 3 4 5
+
+</p></div>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:zweiwings@foxmail.com">Zweiwings</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zwei-wings.github.io/2021/05/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-8/">https://zwei-wings.github.io/2021/05/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zwei-wings.github.io" target="_blank">Zweiwings</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/STL%E5%BA%93/">STL库</a></div><div class="post_share"><div class="social-share" data-image="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/05/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-9/"><img class="prev-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">c++拓展-6:序列式容器STL deque</div></div></a></div><div class="next-post pull-right"><a href="/2021/05/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c++%E5%AD%A6%E4%B9%A0-7/"><img class="next-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">c++拓展-4:序列式容器STL array</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/19/学习笔记/c++学习-9/" title="c++拓展-6:序列式容器STL deque"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">c++拓展-6:序列式容器STL deque</div></div></a></div><div><a href="/2021/05/14/学习笔记/c++学习-7/" title="c++拓展-4:序列式容器STL array"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">c++拓展-4:序列式容器STL array</div></div></a></div><div><a href="/2021/05/13/学习笔记/c++学习-6/" title="c++拓展-3：STL库基础"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">c++拓展-3：STL库基础</div></div></a></div><div><a href="/2021/06/04/学习笔记/c++学习-14/" title="c++拓展-10:关联式容器STL set"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">c++拓展-10:关联式容器STL set</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="this.onerror=null;this.src='/img/cover2.jpg'" alt="avatar"/><div class="author-info__name">Zweiwings</div><div class="author-info__description">人间失宠的笨蛋咕咕们</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" href="https://zwei-wings.github.io/about/"><i class="fas fa-chess"></i><span>关于咕咕</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本博客主要用于记录一些学习笔记，可能也包含一些同人文、OC和世界观的分享与展示。（PS：搞OC的人是这样的，请多担待。）</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vector%E5%AE%B9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">Vector容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E8%AF%B4%E6%98%8E%E5%8F%8A%E5%85%B6%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">简要说明及其定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%8F%90%E4%BE%9B%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">容器提供的成员函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector%E5%AE%B9%E5%99%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">vector容器迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vector%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.1.</span> <span class="toc-text">vector迭代器的特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AEvector%E5%AE%B9%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">访问vector容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.4.1.</span> <span class="toc-text">单个元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.4.2.</span> <span class="toc-text">多个元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0"><span class="toc-number">1.5.</span> <span class="toc-text">增加容器中的元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AE%B9%E5%99%A8%E5%B0%BE%E9%83%A8%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.5.1.</span> <span class="toc-text">从容器尾部添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AE%B9%E5%99%A8%E4%B8%AD%E9%97%B4%E6%8F%92%E5%85%A5"><span class="toc-number">1.5.2.</span> <span class="toc-text">从容器中间插入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.</span> <span class="toc-text">删除容器中的元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%89%A9%E5%AE%B9%E9%97%AE%E9%A2%98"><span class="toc-number">1.7.</span> <span class="toc-text">容器扩容问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-lt-bool-gt"><span class="toc-number">1.8.</span> <span class="toc-text">vector&lt; bool &gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.9.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.10.</span> <span class="toc-text">代码实例</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）"><img data-lazy-src="/img/%E5%90%8D%E6%9F%AFcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第 3 章 伊戈尔暗杀事件（下）"/></a><div class="content"><a class="title" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）">第 3 章 伊戈尔暗杀事件（下）</a><time datetime="2026-08-03T16:06:55.257Z" title="更新于 2026-08-04 00:06:55">2026-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1"><img data-lazy-src="/img/%E6%9C%AA%E5%88%86%E7%B1%BBcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客更新日志-1"/></a><div class="content"><a class="title" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1">博客更新日志-1</a><time datetime="2026-08-03T15:02:39.597Z" title="更新于 2026-08-03 23:02:39">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试"><img data-lazy-src="/img/Top_img-%E9%BB%98%E8%AE%A4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试"/></a><div class="content"><a class="title" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试">测试</a><time datetime="2026-08-03T10:23:10.428Z" title="更新于 2026-08-03 18:23:10">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计"><img data-lazy-src="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Web程序设计"/></a><div class="content"><a class="title" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计">Web程序设计</a><time datetime="2026-08-03T08:10:48.094Z" title="更新于 2026-08-03 16:10:48">2026-08-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Zweiwings</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我知世间来往步履匆匆，知一切烈火将熄于凉薄，知世间人皆将归于赴死，知我人间失宠无比落魄，却从不知何谓退缩。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7ab654b08de6e920553a',
+      clientSecret: 'e674cd1fcfc534caa60f1ff36274a58b594989e9',
+      repo: 'Zwei-wings.github.io',
+      owner: 'Zwei-wings',
+      admin: ['Zwei-wings'],
+      id: 'e9acf27442db712f81250766d0aa59ef',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="/js/title.js"></script><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div id="nav-music-engine" class="aplayer no-destroy" data-server="tencent" data-type="playlist" data-id="7993423839" data-fixed="true" data-theme="#ffcb8e" data-loop="all" data-order="random" data-preload="auto" data-volume="0.7" data-listFolded="true" data-listMaxHeight="250px"></div><span id="nav-music-ui"><span class="nm-title">未播放</span><span class="nm-btns"><span class="nm-btn nm-prev">◀</span><span class="nm-btn nm-play">▶</span><span class="nm-btn nm-next">▶</span></span></span><script>
+(function() {
+  var initDone = false, playerReady = false;
+  var navAp = null, uiEl = null, titleEl = null, playEl = null;
+
+  function updateUI() {
+    if (!navAp || !playEl || !titleEl) return;
+    var playing = !navAp.audio.paused;
+    playEl.innerHTML = playing ? '\u23F8' : '\u25B6';
+    if (navAp.list && navAp.list.audios && navAp.list.audios[navAp.list.index]) {
+      titleEl.textContent = navAp.list.audios[navAp.list.index].title;
+    }
+  }
+
+  function initMusic() {
+    if (initDone) return;
+    if (typeof loadMeting !== 'function') return;
+    loadMeting();
+    initDone = true;
+
+    // 劫持 loadMeting：每次调用后恢复保护
+    var origLoadMeting = window.loadMeting;
+    window.loadMeting = function() {
+      origLoadMeting();
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && navAp) {
+        engine.classList.add('no-reload');
+        if (window.aplayers.indexOf(navAp) === -1) {
+          window.aplayers.unshift(navAp);
+        }
+      }
+    };
+
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && engine.classList.contains('aplayer-fixed') && window.aplayers && window.aplayers.length > 0) {
+        clearInterval(timer);
+        playerReady = true;
+
+        // 找到 APlayer 实例
+        for (var i = 0; i < window.aplayers.length; i++) {
+          if (window.aplayers[i].container.id === 'nav-music-engine') {
+            navAp = window.aplayers[i];
+            break;
+          }
+        }
+        engine.classList.add('no-reload');
+        // 隐藏 APlayer 原生 UI
+        engine.style.display = 'none';
+
+        // 获取自定义 UI 元素
+        uiEl = document.getElementById('nav-music-ui');
+        if (uiEl) {
+          playEl = uiEl.querySelector('.nm-play');
+          titleEl = uiEl.querySelector('.nm-title');
+          var prevEl = uiEl.querySelector('.nm-prev');
+          var nextEl = uiEl.querySelector('.nm-next');
+
+          // 事件绑定
+          if (playEl) playEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.toggle(); });
+          if (prevEl) prevEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipBack(); });
+          if (nextEl) nextEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipForward(); });
+          if (titleEl) {
+            titleEl.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+              if (mi) location.href = mi.href;
+            });
+          }
+
+          // 监听 APlayer 事件
+          navAp.on('play', updateUI);
+          navAp.on('pause', updateUI);
+          updateUI();
+          positionUI();
+        }
+      }
+      if (attempts > 30) clearInterval(timer);
+    }, 200);
+  }
+
+  function positionUI() {
+    if (!uiEl) return;
+    var mr = (function() {
+      var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+      return mi ? mi.getBoundingClientRect() : null;
+    })();
+    if (!mr) return;
+    uiEl.style.top = mr.top + 'px';
+    uiEl.style.left = '50%';
+    uiEl.style.transform = 'translateX(-50%)';
+    uiEl.style.right = 'auto';
+    uiEl.style.bottom = 'auto';
+  }
+
+  // 检测导航栏底色 + 折叠状态，同步播放器
+  function updateScheme() {
+    if (!uiEl) return;
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+
+    // 折叠跟随：导航栏滚出屏幕时隐藏播放器
+    var navRect = nav.getBoundingClientRect();
+    if (navRect.bottom < 5) {
+      uiEl.style.opacity = '0';
+      uiEl.style.pointerEvents = 'none';
+      return;
+    }
+    uiEl.style.opacity = '1';
+    uiEl.style.pointerEvents = 'auto';
+
+    // 明暗切换：透明/半透明 → 白色方案；不透明白底 → 暗色方案
+    var bg = getComputedStyle(nav).backgroundColor;
+    var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!m) return;
+    var r = parseInt(m[1]), g = parseInt(m[2]), b = parseInt(m[3]);
+    var a = m[4] !== undefined ? parseFloat(m[4]) : 1;
+    // 半透明（Hero 模式）→ 白色方案
+    if (a < 0.5) {
+      uiEl.classList.remove('nm-dark');
+      return;
+    }
+    // 不透明白底 → 暗色主题点缀方案
+    var bright = (r*299 + g*587 + b*114) / 1000;
+    if (bright > 150) {
+      uiEl.classList.add('nm-dark');
+    } else {
+      uiEl.classList.remove('nm-dark');
+    }
+  }
+
+  document.addEventListener('pjax:complete', function() {
+    if (playerReady) { setTimeout(positionUI, 50); setTimeout(updateScheme, 80); }
+  });
+  window.addEventListener('resize', function() {
+    if (playerReady) { positionUI(); updateScheme(); }
+  });
+  window.addEventListener('scroll', function() {
+    if (playerReady) {
+      updateScheme();
+      // 导航栏从隐藏→显示时有渐变动画，300ms 后再确认一次
+      clearTimeout(window._nmSchemeTimer);
+      window._nmSchemeTimer = setTimeout(updateScheme, 300);
+    }
+  }, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusic);
+  } else {
+    initMusic();
+  }
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var fontMinus = document.getElementById('font-minus');
+  if (!fontMinus) return;
+  var btn = document.createElement('button');
+  btn.id = 'font-reset';
+  btn.className = fontMinus.className;
+  btn.title = '恢复默认字号';
+  btn.innerHTML = '<i class="fas fa-undo-alt"></i>';
+  fontMinus.insertAdjacentElement('afterend', btn);
+  btn.addEventListener('click', function () {
+    document.documentElement.style.setProperty('--global-font-size', '14px');
+    try { localStorage.removeItem('global-font-size'); } catch(e) {}
+  });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://cdn.jsdelivr.net/npm/oh-my-live2d@0.19.3/dist/index.min.js"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,primaryColor:"#f6b37f",tips:{welcomeTips: {"duration":6000,"priority":3,"message":{"daybreak":"露西亚...001号...zzz","morning":"露西亚百科全书001号，很不高兴为您服务。","noon":"（叹气）就不能等本小姐吃完午饭吗……","afternoon":"午后阳光正好，想吃草莓慕斯蜜桃千层巧克力班戟……","dusk":"（叹气）本小姐今天什么时候才能吃晚饭啊……","night":"露西亚百科全书001号，很不高兴为您服务。","lateNight":"（哈欠）001号已下班，不想打招呼。","weeHours":"喂，已经凌晨了啊笨蛋，还不睡吗……好困。"}},idleTips:{interval:15000,message:["今天的运势？让本小姐占卜一下——嗯，大吉，也许吧。","本小姐可是全世界最无敌可爱的大图书馆的魔女（的眷属）哦~","（叉腰）怕了吧，还不快把甜品通通给本小姐供上来！","什么？Bug？（心虚）不管不管，这个肯定是特性啦！"]},style: {"width":240,"height":100,"top":"125px","left":"calc(50% + 210px)"}},menus:{disable:true},models:[{"path":"/live2d_models/seethrough/seethrough_00001.model3.json","scale":0.3,"position":[-50,0],"stageStyle":{"width":350,"height":300}}]});</script><!-- hexo injector body_end end --></body></html>

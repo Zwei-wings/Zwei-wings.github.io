@@ -1,0 +1,664 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux-4 | Zweiwings</title><meta name="keywords" content="Linux"><meta name="author" content="Zweiwings"><meta name="copyright" content="Zweiwings"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="常用命令大全：日常使用命令开关机命令1、shutdown –h now：立刻进行关机 2、shutdown –r now：现在重新启动计算机 3、reboot：现在重新启动计算机 4、su -：切换用户；passwd：修改用户密码 5、logout：用户注销 常用快捷命令1、tab &#x3D; 补全 2、ctrl + l -：清屏，类似clear命令 3、ctrl + r -：查找历史命令（history">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-4">
+<meta property="og:url" content="https://zwei-wings.github.io/2021/02/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-4/index.html">
+<meta property="og:site_name" content="Zweiwings">
+<meta property="og:description" content="常用命令大全：日常使用命令开关机命令1、shutdown –h now：立刻进行关机 2、shutdown –r now：现在重新启动计算机 3、reboot：现在重新启动计算机 4、su -：切换用户；passwd：修改用户密码 5、logout：用户注销 常用快捷命令1、tab &#x3D; 补全 2、ctrl + l -：清屏，类似clear命令 3、ctrl + r -：查找历史命令（history">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zwei-wings.github.io/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp">
+<meta property="article:published_time" content="2021-02-19T11:33:01.000Z">
+<meta property="article:modified_time" content="2026-08-01T20:08:23.830Z">
+<meta property="article:author" content="Zweiwings">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zwei-wings.github.io/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp"><link rel="shortcut icon" href="/img/favicon1.png"><link rel="canonical" href="https://zwei-wings.github.io/2021/02/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-02 04:08:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/add2.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" ><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/add2.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><style>
+/* ===== 文章标题自定义装饰 ===== */
+
+/* 去掉 h3-h6 默认前缀图标 */
+#article-container h3::before,
+#article-container h4::before,
+#article-container h5::before,
+#article-container h6::before {
+  content: none !important;
+}
+
+/* 无序列表圆点标记 → 主题色 */
+#article-container ul > li::marker {
+  color: #ff9a5c;
+}
+
+/* h1：居中 + 底部渐变线 + 菱形 */
+#article-container h1 {
+  text-align: center;
+  padding-left: 0 !important;
+  padding-bottom: 20px;
+  margin: 1.5em 0 1.2em;
+  position: relative;
+}
+#article-container h1::before {
+  content: '' !important;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  border: 3px solid #ffba88;
+  background: #fff;
+  z-index: 2;
+}
+#article-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,186,136,.15), #ffba88, rgba(255,186,136,.15));
+}
+#article-container h1:hover {
+  padding-left: 0 !important;
+}
+
+/* h2：居左 + 左侧双竖线（长粗 + 短细） */
+#article-container h2 {
+  padding-left: 20px !important;
+  position: relative;
+}
+#article-container h2::before {
+  content: '' !important;
+  position: absolute;
+  left: 0;
+  top: .3em;
+  width: 3px;
+  height: calc(100% - .6em);
+  border-radius: 2px;
+  background: #ff9a5c;
+}
+#article-container h2::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: .45em;
+  width: 2px;
+  height: calc(100% - .9em);
+  border-radius: 1px;
+  background: #ffba88;
+}
+
+/* ===== 导航栏居中音乐控件（默认白色，亮底切换暗色） ===== */
+#nav-music-ui {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  min-width: 300px;
+  font-size: 13px;
+  border: 1px solid var(--nm-border);
+  border-radius: 8px;
+  padding: 0 14px;
+  transition: border-color 0.3s, opacity 0.3s;
+  /* 默认白色方案（匹配首页 Hero 暗底导航栏） */
+  --nm-border: rgba(255,255,255,0.4);
+  --nm-text: rgba(255,255,255,0.9);
+  --nm-play: rgba(255,255,255,0.85);
+  --nm-play-bg: transparent;
+  --nm-play-bd: rgba(255,255,255,0.5);
+  --nm-btn: rgba(255,255,255,0.55);
+  --nm-accent: #fff;
+}
+/* 导航栏亮底时：暗色主题点缀方案 */
+#nav-music-ui.nm-dark {
+  --nm-border: #ddd;
+  --nm-text: #555;
+  --nm-play: #fff;
+  --nm-play-bg: #ff9a5c;
+  --nm-play-bd: #ff9a5c;
+  --nm-btn: #ffba88;
+  --nm-accent: #ff9a5c;
+}
+#nav-music-ui .nm-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 13px;
+  color: var(--nm-play);
+  background: var(--nm-play-bg);
+  border: 1px solid var(--nm-play-bd);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+#nav-music-ui .nm-play:hover { color: var(--nm-accent); border-color: var(--nm-accent); }
+#nav-music-ui .nm-btns {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+#nav-music-ui .nm-title {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--nm-text);
+  font-size: 14px;
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-title:hover { color: var(--nm-accent); }
+#nav-music-ui .nm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 12px;
+  color: var(--nm-btn);
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-btn:hover { color: var(--nm-accent); }
+@media (max-width: 900px) {
+  #nav-music-ui .nm-title { display: none; }
+  #nav-music-ui { min-width: auto; padding: 0 4px; }
+}
+</style>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Zweiwings" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="onerror=null;src='/img/cover2.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Top_img-%E7%90%86%E8%AE%BA.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zweiwings</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux-4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-02-19T11:33:01.000Z" title="发表于 2021-02-19 19:33:01">2021-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-01T20:08:23.830Z" title="更新于 2026-08-02 04:08:23">2026-08-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/">课外拓展</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux-4"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2021/02/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-4/#post-comment"><span class="gitalk-comment-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="常用命令大全："><a href="#常用命令大全：" class="headerlink" title="常用命令大全："></a>常用命令大全：</h1><h2 id="日常使用命令"><a href="#日常使用命令" class="headerlink" title="日常使用命令"></a>日常使用命令</h2><p>开关机命令<br>1、shutdown –h now：立刻进行关机</p>
+<p>2、shutdown –r now：现在重新启动计算机</p>
+<p>3、reboot：现在重新启动计算机</p>
+<p>4、su -：切换用户；passwd：修改用户密码</p>
+<p>5、logout：用户注销</p>
+<h2 id="常用快捷命令"><a href="#常用快捷命令" class="headerlink" title="常用快捷命令"></a>常用快捷命令</h2><p>1、tab = 补全</p>
+<p>2、ctrl + l -：清屏，类似clear命令</p>
+<p>3、ctrl + r -：查找历史命令（history）；ctrl+c = 终止</p>
+<p>4、ctrl+k = 删除此处至末尾所有内容</p>
+<p>5、ctrl+u = 删除此处至开始所有内容</p>
+<p>6、linux中的帮助命令：man、info、–help【[root@localhost ~]# man ls；[root@localhost ~]# info ls；[root@localhost ~]# ls –help】。退出帮助的话，按快捷键q</p>
+<h2 id="日常操作命令"><a href="#日常操作命令" class="headerlink" title="日常操作命令"></a>日常操作命令</h2><p>1、ls</p>
+<p>ls命令是列出目录内容的意思（List Directtory Contents）。运行它就是列出文件夹的内容，可能是文件也可能是文件夹。</p>
+<p>  ls -l命令以详情模式(long listing fashion)列出文件夹的内容。</p>
+<p>  ls -a命令会列出文件夹里的所有内容，包括以”.”开头的隐藏文件。</p>
+<p>  注意：在Linux中，文件以“.”开头就是隐藏文件，并且每个文件，文件夹，设备或者命令都是以文件对待。</p>
+<p>  2、lsblk</p>
+<p>  lsblk就是列出块设备。除了RAM外，以标准的树状输出格式，整齐地显示块设备。</p>
+<p>  lsblk -l命令以列表格式显示块设备(而不是树状格式)。</p>
+<p>  注意：lsblk是最有用和最简单的方式来了解新插入的USB设备的名字，特别是当你在终端上处理磁盘/块设备时。</p>
+<p>  3、uname</p>
+<p>  “uname”命令就是Unix Name的简写。显示机器名，操作系统和内核的详细信息。</p>
+<p>  注意：uname显示内核类别，uname -a显示详细信息。</p>
+<p>  4、history</p>
+<p>  “history”命令就是历史记录。它显示了在终端中所执行过的所有命令的历史。</p>
+<p>  5、sudo</p>
+<p>  “sudo”(super userdo)命令允许授权用户执行超级用户或者其它用户的命令。通过在sudoers列表的安全策略来指定。</p>
+<p>  注意：sudo允许用户借用超级用户的权限，然而”su”命令实际上是允许用户以超级用户登录。所以sudo比su更安全。</p>
+<p>  并不建议使用sudo或者su来处理日常用途，因为它可能导致严重的错误如果你意外的做错了事。</p>
+<p>  6、chmod</p>
+<p>  “chmod”命令就是改变文件的模式位。chmod会根据要求的模式来改变每个所给的文件，文件夹，脚本等等的文件模式（权限）。</p>
+<p>  7、chown</p>
+<p>  “chown”命令就是改变文件拥有者和所在用户组。每个文件都属于一个用户组和一个用户。在你的目录下，使用”ls -l”,你就会看到像这样的东西。</p>
+<p>  8、apt</p>
+<p>  Debian系列以“apt”命令为基础，“apt”代表了Advanced Package Tool。APT是一个为Debian系列系统（Ubuntu，Kubuntu等等）开发的高级包管理器，在Gnu/Linux系统上，它会为包自动地，智能地搜索，安装，升级以及解决依赖。例如：apt-get install mplayer</p>
+<p>  9、cal</p>
+<p>  “cal”（Calender），它用来显示当前月份或者未来或者过去任何年份中的月份。</p>
+<p>  10、date</p>
+<p>  “date”命令使用标准的输出打印当前的日期和时间，也可以深入设置。</p>
+<h3 id="系统常用操作命令"><a href="#系统常用操作命令" class="headerlink" title="系统常用操作命令"></a>系统常用操作命令</h3><h4 id="1、指定运行级别"><a href="#1、指定运行级别" class="headerlink" title="1、指定运行级别"></a>1、指定运行级别</h4><p>命令：init[0123456]</p>
+<p>运行级别：（0：关机；1：单用户；2：多用户状态没有网络服务；3：多用户状态有网络服务；4：系统未使用保留给用户；5：图形界面；6：系统重启）。</p>
+<p> 常用运行级别是3和5，要修改默认的运行级别可修改文件/etc/inittab的id:5:inittab：这一行的数字。</p>
+<p> 在启动引导界面的时候按e进入编辑，在进入grub引界面时，请输入e再选中第二个选项按e，再最后输入1[单用户级别]，然后按b进入单用户模式。</p>
+<p> *：可通过此方法进行linux用户密码的修改。</p>
+<h4 id="2、文件显示命令"><a href="#2、文件显示命令" class="headerlink" title="2、文件显示命令"></a>2、文件显示命令</h4><p>more：显示文件内容，带分页；</p>
+<p>less：显示文件内容带分页；</p>
+<p> grep：在文件中查询内容，grep –n “查找内容” 文件名；</p>
+<p> | [管道命令]：在linux和unix系统中 | 就是管道命令，把上一个命令的结果交给 | 的后面的命令进行处理。</p>
+<p> 例：grep –n “查找内容” 文件名 | more</p>
+<p> cat：把文件串连接后输出到屏幕或加 &gt; fileName 到另一个档案。</p>
+<p> head：格式：head [-n|c num]fileName，说明：显示文件头部内容。没有参数时，显示最前10行。</p>
+<p> tail：格式：tail [-n|c num]fileName，说明：显示文件尾部内容。没有参数时，显示最后10行。</p>
+<p> cut：格式：cut -cnum1-num2 filename，说明：显示每行从开头算起第 num1 到 num2 的字符。</p>
+<h4 id="3、文件搜索命令find"><a href="#3、文件搜索命令find" class="headerlink" title="3、文件搜索命令find"></a>3、文件搜索命令find</h4><p>find：搜索文件及目录</p>
+<p>在linux中，因为文件系统是以级别式的结构来组成的，所以要在整个系统中找到特定的文件和目录并不是件容易的事。而find命令可以解决上述问题。</p>
+<p>  1、在特定的目录下搜索并显示指定名称的文件和目录。</p>
+<p>  find / -name man：意思是说从根目录开始搜索名称为man的文件或目录。</p>
+<p>  2、搜索一段时间内被存取/变更的文件或目录</p>
+<p>  find / home–amin -10：十分钟内存取的文件或目录</p>
+<p>  find / home–atime -10：十小时内存取的文件或目录</p>
+<p>  find / home–cmin -10：十分钟内更改过的文件或目录</p>
+<p>  find / home–ctime -10：十小时内更改过的文件或目录</p>
+<p>  3、搜索指定大小的文件</p>
+<p>  find / home–size +10k：意思是说查找/home目录下大小为10K的文件。</p>
+<h4 id="4、重定向命令"><a href="#4、重定向命令" class="headerlink" title="4、重定向命令"></a>4、重定向命令</h4><p>重定向命令：管道定向命令“&gt;”为覆盖，“&gt;&gt;”追加写在原文件内容后面。</p>
+<p>ls –l &gt;a.txt 列表的内容写入文件a.txt中（覆盖写）。</p>
+<p>  ls –al&gt;&gt; aa.txt 列表的内容追加到文件aa.txt的末尾。</p>
+<h4 id="5、其他命令"><a href="#5、其他命令" class="headerlink" title="5、其他命令"></a>5、其他命令</h4><p>who：格式：who - [husfV] [user]。说明：显示有哪些用户登录到系统中，显示的信息包含用户ID，使用的终端，上线时间，呆滞时间，CPU使用量，动作等等。相关命令 : who am i：显示当前用户是谁。</p>
+<p>sleep：格式：sleep [–help] [–version] number[smhd]。说明 : sleep 可以用来将当前动作延迟一段时间。</p>
+<p>  kill：格式：kill [ -s signal ] pid … 或 kill -l [ signal ]。说明：kill送出一个特定的信号 (signal) 给进程号为 pid 的进程。根据该信号而做特定的动作，若没有指定，默认是送出终止(TERM)信号。</p>
+<p>  ps：格式：ps [options] [–help]。说明：显示进程的名称、占用资源、状态等。</p>
+<p>  top：说明：显示CPU的使用率、内存大小、内存使用率、进程状态等。</p>
+<h3 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h3><p>arch 显示机器的处理器架构(1)<br>uname -m 显示机器的处理器架构(2)<br>uname -r 显示正在使用的内核版本<br>dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)<br>hdparm -i /dev/hda 罗列一个磁盘的架构特性<br>hdparm -tT /dev/sda 在磁盘上执行测试性读取操作<br>cat /proc/cpuinfo 显示CPU info的信息<br>cat /proc/interrupts 显示中断<br>cat /proc/meminfo 校验内存使用<br>cat /proc/swaps 显示哪些swap被使用<br>cat /proc/version 显示内核的版本<br>cat /proc/net/dev 显示网络适配器及统计<br>cat /proc/mounts 显示已加载的文件系统<br>lspci -tv 罗列 PCI 设备<br>lsusb -tv 显示 USB 设备<br>date 显示系统日期<br>cal 2007 显示2007年的日历表<br>date 041217002007.00 设置日期和时间 - 月日时分年.秒<br>clock -w 将时间修改保存到 BIOS</p>
+<h3 id="关机-系统的关机、重启以及登出"><a href="#关机-系统的关机、重启以及登出" class="headerlink" title="关机 (系统的关机、重启以及登出 )"></a>关机 (系统的关机、重启以及登出 )</h3><p>shutdown -h now 关闭系统(1)<br>init 0 关闭系统(2)<br>telinit 0 关闭系统(3)<br>shutdown -h hours:minutes &amp; 按预定时间关闭系统<br>shutdown -c 取消按预定时间关闭系统<br>shutdown -r now 重启(1)<br>reboot 重启(2)<br>logout 注销</p>
+<h3 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h3><p>cd /home 进入 ‘/ home’ 目录’<br>cd … 返回上一级目录<br>cd …/… 返回上两级目录<br>cd 进入个人的主目录<br>cd ~user1 进入个人的主目录<br>cd - 返回上次所在的目录<br>pwd 显示工作路径<br>ls 查看目录中的文件<br>ls -F 查看目录中的文件<br>ls -l 显示文件和目录的详细资料<br>ls -a 显示隐藏文件<br>ls <em>[0-9]</em> 显示包含数字的文件名和目录名<br>tree 显示文件和目录由根目录开始的树形结构(1)<br>lstree 显示文件和目录由根目录开始的树形结构(2)<br>mkdir dir1 创建一个叫做 ‘dir1’ 的目录’<br>mkdir dir1 dir2 同时创建两个目录<br>mkdir -p /tmp/dir1/dir2 创建一个目录树<br>rm -f file1 删除一个叫做 ‘file1’ 的文件’<br>rmdir dir1 删除一个叫做 ‘dir1’ 的目录’<br>rm -rf dir1 删除一个叫做 ‘dir1’ 的目录并同时删除其内容<br>rm -rf dir1 dir2 同时删除两个目录及它们的内容<br>mv dir1 new_dir 重命名/移动 一个目录<br>cp file1 file2 复制一个文件<br>cp dir/* . 复制一个目录下的所有文件到当前工作目录<br>cp -a /tmp/dir1 . 复制一个目录到当前工作目录<br>cp -a dir1 dir2 复制一个目录<br>ln -s file1 lnk1 创建一个指向文件或目录的软链接<br>ln file1 lnk1 创建一个指向文件或目录的物理链接<br>touch -t 0712250000 file1 修改一个文件或目录的时间戳 - (YYMMDDhhmm)<br>file file1 outputs the mime type of the file as text<br>iconv -l 列出已知的编码<br>iconv -f fromEncoding -t toEncoding inputFile &gt; outputFile creates a new from the given input file by assuming it is encoded in fromEncoding and converting it to toEncoding.<br>find . -maxdepth 1 -name *.jpg -print -exec convert “{}” -resize 80x60 “thumbs/{}” ; batch resize files in the current directory and send them to a thumbnails directory (requires convert from Imagemagick)</p>
+<h3 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h3><p>find / -name file1 从 ‘/‘ 开始进入根文件系统搜索文件和目录<br>find / -user user1 搜索属于用户 ‘user1’ 的文件和目录<br>find /home/user1 -name *.bin 在目录 ‘/ home/user1’ 中搜索带有’.bin’ 结尾的文件<br>find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件<br>find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件<br>find / -name *.rpm -exec chmod 755 ‘{}’ ; 搜索以 ‘.rpm’ 结尾的文件并定义其权限<br>find / -xdev -name *.rpm 搜索以 ‘.rpm’ 结尾的文件，忽略光驱、捷盘等可移动设备<br>locate *.ps 寻找以 ‘.ps’ 结尾的文件 - 先运行 ‘updatedb’ 命令<br>whereis halt 显示一个二进制文件、源码或man的位置<br>which halt 显示一个二进制文件或可执行文件的完整路径</p>
+<h3 id="挂载一个文件系统"><a href="#挂载一个文件系统" class="headerlink" title="挂载一个文件系统"></a>挂载一个文件系统</h3><p>mount /dev/hda2 /mnt/hda2 挂载一个叫做hda2的盘 - 确定目录 ‘/ mnt/hda2’ 已经存在<br>umount /dev/hda2 卸载一个叫做hda2的盘 - 先从挂载点 ‘/ mnt/hda2’ 退出<br>fuser -km /mnt/hda2 当设备繁忙时强制卸载<br>umount -n /mnt/hda2 运行卸载操作而不写入 /etc/mtab 文件- 当文件为只读或当磁盘写满时非常有用<br>mount /dev/fd0 /mnt/floppy 挂载一个软盘<br>mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom<br>mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom<br>mount /dev/hdb /mnt/cdrecorder 挂载一个cdrw或dvdrom<br>mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件<br>mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统<br>mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备<br>mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享</p>
+<h3 id="磁盘空间"><a href="#磁盘空间" class="headerlink" title="磁盘空间"></a>磁盘空间</h3><p>df -h 显示已经挂载的分区列表<br>ls -lSr |more 以尺寸大小排列文件和目录<br>du -sh dir1 估算目录 ‘dir1’ 已经使用的磁盘空间’<br>du -sk * | sort -rn 以容量大小为依据依次显示文件和目录的大小<br>rpm -q -a –qf ‘%10{SIZE}t%{NAME}n’ | sort -k1,1n 以大小为依据依次显示已安装的rpm包所使用的空间 (fedora, redhat类系统)<br>dpkg-query -W -f=’ I n s t a l l e d − S i z e ; 10 t {Installed-Size;10}t Installed−Size;10t{Package}n’ | sort -k1,1n 以大小为依据显示已安装的deb包所使用的空间 (ubuntu, debian类系统)</p>
+<h3 id="用户和群组"><a href="#用户和群组" class="headerlink" title="用户和群组"></a>用户和群组</h3><p>groupadd group_name 创建一个新用户组<br>groupdel group_name 删除一个用户组<br>groupmod -n new_group_name old_group_name 重命名一个用户组<br>useradd -c “Name Surname “ -g admin -d /home/user1 -s /bin/bash user1 创建一个属于 “admin” 用户组的用户<br>useradd user1 创建一个新用户<br>userdel -r user1 删除一个用户 ( ‘-r’ 排除主目录)<br>usermod -c “User FTP” -g system -d /ftp/user1 -s /bin/nologin user1 修改用户属性<br>passwd 修改口令<br>passwd user1 修改一个用户的口令 (只允许root执行)<br>chage -E 2005-12-31 user1 设置用户口令的失效期限<br>pwck 检查 ‘/etc/passwd’ 的文件格式和语法修正以及存在的用户<br>grpck 检查 ‘/etc/passwd’ 的文件格式和语法修正以及存在的群组<br>newgrp group_name 登陆进一个新的群组以改变新创建文件的预设群组</p>
+<h3 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h3><p><strong>使用 “+” 设置权限，使用 “-” 用于取消</strong></p>
+<p>ls -lh 显示权限<br>ls /tmp | pr -T5 -W$COLUMNS 将终端划分成5栏显示<br>chmod ugo+rwx directory1 设置目录的所有人(u)、群组(g)以及其他人(o)以读（r ）、写(w)和执行(x)的权限<br>chmod go-rwx directory1 删除群组(g)与其他人(o)对目录的读写执行权限<br>chown user1 file1 改变一个文件的所有人属性<br>chown -R user1 directory1 改变一个目录的所有人属性并同时改变改目录下所有文件的属性<br>chgrp group1 file1 改变文件的群组<br>chown user1:group1 file1 改变一个文件的所有人和群组属性<br>find / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件<br>chmod u+s /bin/file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限<br>chmod u-s /bin/file1 禁用一个二进制文件的 SUID位<br>chmod g+s /home/public 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的<br>chmod g-s /home/public 禁用一个目录的 SGID 位<br>chmod o+t /home/public 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件<br>chmod o-t /home/public 禁用一个目录的 STIKY 位</p>
+<p>文件的特殊属性 - 使用 “+” 设置权限，使用 “-” 用于取消<br>chattr +a file1 只允许以追加方式读写文件<br>chattr +c file1 允许这个文件能被内核自动压缩/解压<br>chattr +d file1 在进行文件系统备份时，dump程序将忽略这个文件<br>chattr +i file1 设置成不可变的文件，不能被删除、修改、重命名或者链接<br>chattr +s file1 允许一个文件被安全地删除<br>chattr +S file1 一旦应用程序对这个文件执行了写操作，使系统立刻把修改的结果写到磁盘<br>chattr +u file1 若文件被删除，系统会允许你在以后恢复这个被删除的文件<br>lsattr 显示特殊的属性</p>
+<h3 id="打包和压缩文件"><a href="#打包和压缩文件" class="headerlink" title="打包和压缩文件"></a>打包和压缩文件</h3><p>bunzip2 file1.bz2 解压一个叫做 ‘file1.bz2’的文件<br>bzip2 file1 压缩一个叫做 ‘file1’ 的文件<br>gunzip file1.gz 解压一个叫做 ‘file1.gz’的文件<br>gzip file1 压缩一个叫做 ‘file1’的文件<br>gzip -9 file1 最大程度压缩<br>rar a file1.rar test_file 创建一个叫做 ‘file1.rar’ 的包<br>rar a file1.rar file1 file2 dir1 同时压缩 ‘file1’, ‘file2’ 以及目录 ‘dir1’<br>rar x file1.rar 解压rar包<br>unrar x file1.rar 解压rar包<br>tar -cvf archive.tar file1 创建一个非压缩的 tarball<br>tar -cvf archive.tar file1 file2 dir1 创建一个包含了 ‘file1’, ‘file2’ 以及 ‘dir1’的档案文件<br>tar -tf archive.tar 显示一个包中的内容<br>tar -xvf archive.tar 释放一个包<br>tar -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下<br>tar -cvfj archive.tar.bz2 dir1 创建一个bzip2格式的压缩包<br>tar -xvfj archive.tar.bz2 解压一个bzip2格式的压缩包<br>tar -cvfz archive.tar.gz dir1 创建一个gzip格式的压缩包<br>tar -xvfz archive.tar.gz 解压一个gzip格式的压缩包<br>zip file1.zip file1 创建一个zip格式的压缩包<br>zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包<br>unzip file1.zip 解压一个zip格式压缩包</p>
+<h3 id="RPM-包-（Fedora-Redhat及类似系统）"><a href="#RPM-包-（Fedora-Redhat及类似系统）" class="headerlink" title="RPM 包 - （Fedora, Redhat及类似系统）"></a>RPM 包 - （Fedora, Redhat及类似系统）</h3><p>rpm -ivh package.rpm 安装一个rpm包<br>rpm -ivh –nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告<br>rpm -U package.rpm 更新一个rpm包但不改变其配置文件<br>rpm -F package.rpm 更新一个确定已经安装的rpm包<br>rpm -e package_name.rpm 删除一个rpm包<br>rpm -qa 显示系统中所有已经安装的rpm包<br>rpm -qa | grep httpd 显示所有名称中包含 “httpd” 字样的rpm包<br>rpm -qi package_name 获取一个已安装包的特殊信息<br>rpm -qg “System Environment/Daemons” 显示一个组件的rpm包<br>rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表<br>rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表<br>rpm -q package_name –whatrequires 显示与一个rpm包存在依赖关系的列表<br>rpm -q package_name –whatprovides 显示一个rpm包所占的体积<br>rpm -q package_name –scripts 显示在安装/删除期间所执行的脚本l<br>rpm -q package_name –changelog 显示一个rpm包的修改历史<br>rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供<br>rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表<br>rpm –import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书<br>rpm –checksig package.rpm 确认一个rpm包的完整性<br>rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性<br>rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间<br>rpm -Va 检查系统中所有已安装的rpm包- 小心使用<br>rpm -Vp package.rpm 确认一个rpm包还未安装<br>rpm2cpio package.rpm | cpio –extract –make-directories <em>bin</em> 从一个rpm包运行可执行文件<br>rpm -ivh /usr/src/redhat/RPMS/<code>arch</code>/package.rpm 从一个rpm源码安装一个构建好的包<br>rpmbuild –rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包</p>
+<h3 id="YUM-软件包升级器-（Fedora-RedHat及类似系统）"><a href="#YUM-软件包升级器-（Fedora-RedHat及类似系统）" class="headerlink" title="YUM 软件包升级器 - （Fedora, RedHat及类似系统）"></a>YUM 软件包升级器 - （Fedora, RedHat及类似系统）</h3><p>yum install package_name 下载并安装一个rpm包<br>yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系<br>yum update package_name.rpm 更新当前系统中所有安装的rpm包<br>yum update package_name 更新一个rpm包<br>yum remove package_name 删除一个rpm包<br>yum list 列出当前系统中安装的所有包<br>yum search package_name 在rpm仓库中搜寻软件包<br>yum clean packages 清理rpm缓存删除下载的包<br>yum clean headers 删除所有头文件<br>yum clean all 删除所有缓存的包和头文件</p>
+<h3 id="DEB-包-Debian-Ubuntu-以及类似系统"><a href="#DEB-包-Debian-Ubuntu-以及类似系统" class="headerlink" title="DEB 包 (Debian, Ubuntu 以及类似系统)"></a>DEB 包 (Debian, Ubuntu 以及类似系统)</h3><p>dpkg -i package.deb 安装/更新一个 deb 包<br>dpkg -r package_name 从系统删除一个 deb 包<br>dpkg -l 显示系统中所有已经安装的 deb 包<br>dpkg -l | grep httpd 显示所有名称中包含 “httpd” 字样的deb包<br>dpkg -s package_name 获得已经安装在系统中一个特殊包的信息<br>dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表<br>dpkg –contents package.deb 显示尚未安装的一个包所提供的文件列表<br>dpkg -S /bin/ping 确认所给的文件由哪个deb包提供</p>
+<h3 id="APT-软件工具-Debian-Ubuntu-以及类似系统"><a href="#APT-软件工具-Debian-Ubuntu-以及类似系统" class="headerlink" title="APT 软件工具 (Debian, Ubuntu 以及类似系统)"></a>APT 软件工具 (Debian, Ubuntu 以及类似系统)</h3><p>apt-get install package_name 安装/更新一个 deb 包<br>apt-cdrom install package_name 从光盘安装/更新一个 deb 包<br>apt-get update 升级列表中的软件包<br>apt-get upgrade 升级所有已安装的软件<br>apt-get remove package_name 从系统删除一个deb包<br>apt-get check 确认依赖的软件仓库正确<br>apt-get clean 从下载的软件包中清理缓存<br>apt-cache search searched-package 返回包含所要搜索字符串的软件包名称</p>
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><p>cat file1 从第一个字节开始正向查看文件的内容<br>tac file1 从最后一行开始反向查看一个文件的内容<br>more file1 查看一个长文件的内容<br>less file1 类似于 ‘more’ 命令，但是它允许在文件中和正向操作一样的反向操作<br>head -2 file1 查看一个文件的前两行<br>tail -2 file1 查看一个文件的最后两行<br>tail -f /var/log/messages 实时查看被添加到一个文件中的内容</p>
+<h3 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h3><p>cat file1 file2 … | command &lt;&gt; file1_in.txt_or_file1_out.txt general syntax for text manipulation using PIPE, STDIN and STDOUT<br>cat file1 | command( sed, grep, awk, grep, etc…) &gt; result.txt 合并一个文件的详细说明文本，并将简介写入一个新文件中<br>cat file1 | command( sed, grep, awk, grep, etc…) &gt;&gt; result.txt 合并一个文件的详细说明文本，并将简介写入一个已有的文件中<br>grep Aug /var/log/messages 在文件 ‘/var/log/messages’中查找关键词”Aug”<br>grep ^Aug /var/log/messages 在文件 ‘/var/log/messages’中查找以”Aug”开始的词汇<br>grep [0-9] /var/log/messages 选择 ‘/var/log/messages’ 文件中所有包含数字的行<br>grep Aug -R /var/log/* 在目录 ‘/var/log’ 及随后的目录中搜索字符串”Aug”<br>sed ‘s/stringa1/stringa2/g’ example.txt 将example.txt文件中的 “string1” 替换成 “string2”<br>sed ‘/^KaTeX parse error: Expected ‘EOF’, got ‘#’ at position 49: …所有空白行 sed ‘/ *#̲/d; /^/d’ example.txt 从example.txt文件中删除所有注释和空白行<br>echo ‘esempio’ | tr ‘[:lower:]’ ‘[:upper:]’ 合并上下单元格内容<br>sed -e ‘1d’ result.txt 从文件example.txt 中排除第一行<br>sed -n ‘/stringa1/p’ 查看只包含词汇 “string1”的行<br>sed -e ‘s/ <em>$//‘ example.txt 删除每一行最后的空白字符<br>sed -e ‘s/stringa1//g’ example.txt 从文档中只删除词汇 “string1” 并保留剩余全部<br>sed -n ‘1,5p;5q’ example.txt 查看从第一行到第5行内容<br>sed -n ‘5p;5q’ example.txt 查看第5行<br>sed -e ‘s/00</em>/0/g’ example.txt 用单个零替换多个零<br>cat -n file1 标示文件的行数<br>cat example.txt | awk ‘NR%2==1’ 删除example.txt文件中的所有偶数行<br>echo a b c | awk ‘{print $1}’ 查看一行第一栏<br>echo a b c | awk ‘{print $1,$3}’ 查看一行的第一和第三栏<br>paste file1 file2 合并两个文件或两栏的内容<br>paste -d ‘+’ file1 file2 合并两个文件或两栏的内容，中间用”+”区分<br>sort file1 file2 排序两个文件的内容<br>sort file1 file2 | uniq 取出两个文件的并集(重复的行只保留一份)<br>sort file1 file2 | uniq -u 删除交集，留下其他的行<br>sort file1 file2 | uniq -d 取出两个文件的交集(只留下同时存在于两个文件中的文件)<br>comm -1 file1 file2 比较两个文件的内容只删除 ‘file1’ 所包含的内容<br>comm -2 file1 file2 比较两个文件的内容只删除 ‘file2’ 所包含的内容<br>comm -3 file1 file2 比较两个文件的内容只删除两个文件共有的部分</p>
+<h3 id="字符设置和文件格式转换"><a href="#字符设置和文件格式转换" class="headerlink" title="字符设置和文件格式转换"></a>字符设置和文件格式转换</h3><p>dos2unix filedos.txt fileunix.txt 将一个文本文件的格式从MSDOS转换成UNIX<br>unix2dos fileunix.txt filedos.txt 将一个文本文件的格式从UNIX转换成MSDOS<br>recode …HTML &lt; page.txt &gt; page.html 将一个文本文件转换成html<br>recode -l | more 显示所有允许的转换格式</p>
+<h3 id="文件系统分析"><a href="#文件系统分析" class="headerlink" title="文件系统分析"></a>文件系统分析</h3><p>badblocks -v /dev/hda1 检查磁盘hda1上的坏磁块<br>fsck /dev/hda1 修复/检查hda1磁盘上linux文件系统的完整性<br>fsck.ext2 /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性<br>e2fsck /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性<br>e2fsck -j /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性<br>fsck.ext3 /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性<br>fsck.vfat /dev/hda1 修复/检查hda1磁盘上fat文件系统的完整性<br>fsck.msdos /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性<br>dosfsck /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性</p>
+<h3 id="初始化一个文件系统"><a href="#初始化一个文件系统" class="headerlink" title="初始化一个文件系统"></a>初始化一个文件系统</h3><p>mkfs /dev/hda1 在hda1分区创建一个文件系统<br>mke2fs /dev/hda1 在hda1分区创建一个linux ext2的文件系统<br>mke2fs -j /dev/hda1 在hda1分区创建一个linux ext3(日志型)的文件系统<br>mkfs -t vfat 32 -F /dev/hda1 创建一个 FAT32 文件系统<br>fdformat -n /dev/fd0 格式化一个软盘<br>mkswap /dev/hda3 创建一个swap文件系统</p>
+<h3 id="SWAP文件系统"><a href="#SWAP文件系统" class="headerlink" title="SWAP文件系统"></a>SWAP文件系统</h3><p>mkswap /dev/hda3 创建一个swap文件系统<br>swapon /dev/hda3 启用一个新的swap文件系统<br>swapon /dev/hda2 /dev/hdb3 启用两个swap分区</p>
+<h3 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h3><p>dump -0aj -f /tmp/home0.bak /home 制作一个 ‘/home’ 目录的完整备份<br>dump -1aj -f /tmp/home0.bak /home 制作一个 ‘/home’ 目录的交互式备份<br>restore -if /tmp/home0.bak 还原一个交互式备份<br>rsync -rogpav –delete /home /tmp 同步两边的目录<br>rsync -rogpav -e ssh –delete /home ip_address:/tmp 通过SSH通道rsync<br>rsync -az -e ssh –delete ip_addr:/home/public /home/local 通过ssh和压缩将一个远程目录同步到本地目录<br>rsync -az -e ssh –delete /home/local ip_addr:/home/public 通过ssh和压缩将本地目录同步到远程目录<br>dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr ‘dd of=hda.gz’ 通过ssh在远程主机上执行一次备份本地磁盘的操作<br>dd if=/dev/sda of=/tmp/file1 备份磁盘内容到一个文件<br>tar -Puf backup.tar /home/user 执行一次对 ‘/home/user’ 目录的交互式备份操作<br>( cd /tmp/local/ &amp;&amp; tar c . ) | ssh -C user@ip_addr ‘cd /home/share/ &amp;&amp; tar x -p’ 通过ssh在远程目录中复制一个目录内容<br>( tar c /home ) | ssh -C user@ip_addr ‘cd /home/backup-home &amp;&amp; tar x -p’ 通过ssh在远程目录中复制一个本地目录<br>tar cf - . | (cd /tmp/backup ; tar xf - ) 本地将一个目录复制到另一个地方，保留原有权限及链接<br>find /home/user1 -name ‘*.txt’ | xargs cp -av –target-directory=/home/backup/ –parents 从一个目录查找并复制所有以 ‘.txt’ 结尾的文件到另一个目录<br>find /var/log -name ‘*.log’ | tar cv –files-from=- | bzip2 &gt; log.tar.bz2 查找所有以 ‘.log’ 结尾的文件并做成一个bzip包<br>dd if=/dev/hda of=/dev/fd0 bs=512 count=1 做一个将 MBR (Master Boot Record)内容复制到软盘的动作<br>dd if=/dev/fd0 of=/dev/hda bs=512 count=1 从已经保存到软盘的备份中恢复MBR内容</p>
+<h3 id="光盘"><a href="#光盘" class="headerlink" title="光盘"></a>光盘</h3><p>cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force 清空一个可复写的光盘内容<br>mkisofs /dev/cdrom &gt; cd.iso 在磁盘上创建一个光盘的iso镜像文件<br>mkisofs /dev/cdrom | gzip &gt; cd_iso.gz 在磁盘上创建一个压缩了的光盘iso镜像文件<br>mkisofs -J -allow-leading-dots -R -V “Label CD” -iso-level 4 -o ./cd.iso data_cd 创建一个目录的iso镜像文件<br>cdrecord -v dev=/dev/cdrom cd.iso 刻录一个ISO镜像文件<br>gzip -dc cd_iso.gz | cdrecord dev=/dev/cdrom - 刻录一个压缩了的ISO镜像文件<br>mount -o loop cd.iso /mnt/iso 挂载一个ISO镜像文件<br>cd-paranoia -B 从一个CD光盘转录音轨到 wav 文件中<br>cd-paranoia – “-3” 从一个CD光盘转录音轨到 wav 文件中（参数-3）<br>cdrecord –scanbus 扫描总线以识别scsi通道<br>dd if=/dev/hdc | md5sum 校验一个设备的md5sum编码，例如一张 CD</p>
+<h3 id="网络-（以太网和WIFI无线）"><a href="#网络-（以太网和WIFI无线）" class="headerlink" title="网络 - （以太网和WIFI无线）"></a>网络 - （以太网和WIFI无线）</h3><p>ifconfig eth0 显示一个以太网卡的配置<br>ifup eth0 启用一个 ‘eth0’ 网络设备<br>ifdown eth0 禁用一个 ‘eth0’ 网络设备<br>ifconfig eth0 192.168.1.1 netmask 255.255.255.0 控制IP地址<br>ifconfig eth0 promisc 设置 ‘eth0’ 成混杂模式以嗅探数据包 (sniffing)<br>dhclient eth0 以dhcp模式启用 ‘eth0’</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:zweiwings@foxmail.com">Zweiwings</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zwei-wings.github.io/2021/02/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-4/">https://zwei-wings.github.io/2021/02/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zwei-wings.github.io" target="_blank">Zweiwings</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1-1/"><img class="prev-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">网页设计-1</div></div></a></div><div class="next-post pull-right"><a href="/2021/02/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-3/"><img class="next-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux-3</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/02/09/学习笔记/Linux学习-2/" title="Linux-2"><img class="cover" data-lazy-src="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-03</div><div class="title">Linux-2</div></div></a></div><div><a href="/2021/02/10/学习笔记/Linux学习-3/" title="Linux-3"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">Linux-3</div></div></a></div><div><a href="/2021/01/26/学习笔记/Linux学习-1/" title="Linux-1"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">Linux-1</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="this.onerror=null;this.src='/img/cover2.jpg'" alt="avatar"/><div class="author-info__name">Zweiwings</div><div class="author-info__description">人间失宠的笨蛋咕咕们</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" href="https://zwei-wings.github.io/about/"><i class="fas fa-chess"></i><span>关于咕咕</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本博客主要用于记录一些学习笔记，可能也包含一些同人文、OC和世界观的分享与展示。（PS：搞OC的人是这样的，请多担待。）</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">常用命令大全：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">日常使用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">常用快捷命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">日常操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.1.</span> <span class="toc-text">系统常用操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1、指定运行级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%96%87%E4%BB%B6%E6%98%BE%E7%A4%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">2、文件显示命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4find"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3、文件搜索命令find</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">4、重定向命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">5、其他命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">1.3.2.</span> <span class="toc-text">系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E6%9C%BA-%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%85%B3%E6%9C%BA%E3%80%81%E9%87%8D%E5%90%AF%E4%BB%A5%E5%8F%8A%E7%99%BB%E5%87%BA"><span class="toc-number">1.3.3.</span> <span class="toc-text">关机 (系统的关机、重启以及登出 )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-number">1.3.4.</span> <span class="toc-text">文件和目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="toc-number">1.3.5.</span> <span class="toc-text">文件搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.6.</span> <span class="toc-text">挂载一个文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.7.</span> <span class="toc-text">磁盘空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E7%BE%A4%E7%BB%84"><span class="toc-number">1.3.8.</span> <span class="toc-text">用户和群组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-number">1.3.9.</span> <span class="toc-text">文件的权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%92%8C%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.10.</span> <span class="toc-text">打包和压缩文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RPM-%E5%8C%85-%EF%BC%88Fedora-Redhat%E5%8F%8A%E7%B1%BB%E4%BC%BC%E7%B3%BB%E7%BB%9F%EF%BC%89"><span class="toc-number">1.3.11.</span> <span class="toc-text">RPM 包 - （Fedora, Redhat及类似系统）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YUM-%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%8D%87%E7%BA%A7%E5%99%A8-%EF%BC%88Fedora-RedHat%E5%8F%8A%E7%B1%BB%E4%BC%BC%E7%B3%BB%E7%BB%9F%EF%BC%89"><span class="toc-number">1.3.12.</span> <span class="toc-text">YUM 软件包升级器 - （Fedora, RedHat及类似系统）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DEB-%E5%8C%85-Debian-Ubuntu-%E4%BB%A5%E5%8F%8A%E7%B1%BB%E4%BC%BC%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.13.</span> <span class="toc-text">DEB 包 (Debian, Ubuntu 以及类似系统)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#APT-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7-Debian-Ubuntu-%E4%BB%A5%E5%8F%8A%E7%B1%BB%E4%BC%BC%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.14.</span> <span class="toc-text">APT 软件工具 (Debian, Ubuntu 以及类似系统)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-number">1.3.15.</span> <span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="toc-number">1.3.16.</span> <span class="toc-text">文本处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E8%AE%BE%E7%BD%AE%E5%92%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.3.17.</span> <span class="toc-text">字符设置和文件格式转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90"><span class="toc-number">1.3.18.</span> <span class="toc-text">文件系统分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.19.</span> <span class="toc-text">初始化一个文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SWAP%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.20.</span> <span class="toc-text">SWAP文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD"><span class="toc-number">1.3.21.</span> <span class="toc-text">备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E7%9B%98"><span class="toc-number">1.3.22.</span> <span class="toc-text">光盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C-%EF%BC%88%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%92%8CWIFI%E6%97%A0%E7%BA%BF%EF%BC%89"><span class="toc-number">1.3.23.</span> <span class="toc-text">网络 - （以太网和WIFI无线）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）"><img data-lazy-src="/img/%E5%90%8D%E6%9F%AFcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第 3 章 伊戈尔暗杀事件（下）"/></a><div class="content"><a class="title" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）">第 3 章 伊戈尔暗杀事件（下）</a><time datetime="2026-08-03T16:06:55.257Z" title="更新于 2026-08-04 00:06:55">2026-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1"><img data-lazy-src="/img/%E6%9C%AA%E5%88%86%E7%B1%BBcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客更新日志-1"/></a><div class="content"><a class="title" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1">博客更新日志-1</a><time datetime="2026-08-03T15:02:39.597Z" title="更新于 2026-08-03 23:02:39">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试"><img data-lazy-src="/img/Top_img-%E9%BB%98%E8%AE%A4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试"/></a><div class="content"><a class="title" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试">测试</a><time datetime="2026-08-03T10:23:10.428Z" title="更新于 2026-08-03 18:23:10">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计"><img data-lazy-src="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Web程序设计"/></a><div class="content"><a class="title" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计">Web程序设计</a><time datetime="2026-08-03T08:10:48.094Z" title="更新于 2026-08-03 16:10:48">2026-08-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Zweiwings</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我知世间来往步履匆匆，知一切烈火将熄于凉薄，知世间人皆将归于赴死，知我人间失宠无比落魄，却从不知何谓退缩。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7ab654b08de6e920553a',
+      clientSecret: 'e674cd1fcfc534caa60f1ff36274a58b594989e9',
+      repo: 'Zwei-wings.github.io',
+      owner: 'Zwei-wings',
+      admin: ['Zwei-wings'],
+      id: 'fbe38f901936e7c286cf8a90520d52a4',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="/js/title.js"></script><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div id="nav-music-engine" class="aplayer no-destroy" data-server="tencent" data-type="playlist" data-id="7993423839" data-fixed="true" data-theme="#ffcb8e" data-loop="all" data-order="random" data-preload="auto" data-volume="0.7" data-listFolded="true" data-listMaxHeight="250px"></div><span id="nav-music-ui"><span class="nm-title">未播放</span><span class="nm-btns"><span class="nm-btn nm-prev">◀</span><span class="nm-btn nm-play">▶</span><span class="nm-btn nm-next">▶</span></span></span><script>
+(function() {
+  var initDone = false, playerReady = false;
+  var navAp = null, uiEl = null, titleEl = null, playEl = null;
+
+  function updateUI() {
+    if (!navAp || !playEl || !titleEl) return;
+    var playing = !navAp.audio.paused;
+    playEl.innerHTML = playing ? '\u23F8' : '\u25B6';
+    if (navAp.list && navAp.list.audios && navAp.list.audios[navAp.list.index]) {
+      titleEl.textContent = navAp.list.audios[navAp.list.index].title;
+    }
+  }
+
+  function initMusic() {
+    if (initDone) return;
+    if (typeof loadMeting !== 'function') return;
+    loadMeting();
+    initDone = true;
+
+    // 劫持 loadMeting：每次调用后恢复保护
+    var origLoadMeting = window.loadMeting;
+    window.loadMeting = function() {
+      origLoadMeting();
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && navAp) {
+        engine.classList.add('no-reload');
+        if (window.aplayers.indexOf(navAp) === -1) {
+          window.aplayers.unshift(navAp);
+        }
+      }
+    };
+
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && engine.classList.contains('aplayer-fixed') && window.aplayers && window.aplayers.length > 0) {
+        clearInterval(timer);
+        playerReady = true;
+
+        // 找到 APlayer 实例
+        for (var i = 0; i < window.aplayers.length; i++) {
+          if (window.aplayers[i].container.id === 'nav-music-engine') {
+            navAp = window.aplayers[i];
+            break;
+          }
+        }
+        engine.classList.add('no-reload');
+        // 隐藏 APlayer 原生 UI
+        engine.style.display = 'none';
+
+        // 获取自定义 UI 元素
+        uiEl = document.getElementById('nav-music-ui');
+        if (uiEl) {
+          playEl = uiEl.querySelector('.nm-play');
+          titleEl = uiEl.querySelector('.nm-title');
+          var prevEl = uiEl.querySelector('.nm-prev');
+          var nextEl = uiEl.querySelector('.nm-next');
+
+          // 事件绑定
+          if (playEl) playEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.toggle(); });
+          if (prevEl) prevEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipBack(); });
+          if (nextEl) nextEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipForward(); });
+          if (titleEl) {
+            titleEl.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+              if (mi) location.href = mi.href;
+            });
+          }
+
+          // 监听 APlayer 事件
+          navAp.on('play', updateUI);
+          navAp.on('pause', updateUI);
+          updateUI();
+          positionUI();
+        }
+      }
+      if (attempts > 30) clearInterval(timer);
+    }, 200);
+  }
+
+  function positionUI() {
+    if (!uiEl) return;
+    var mr = (function() {
+      var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+      return mi ? mi.getBoundingClientRect() : null;
+    })();
+    if (!mr) return;
+    uiEl.style.top = mr.top + 'px';
+    uiEl.style.left = '50%';
+    uiEl.style.transform = 'translateX(-50%)';
+    uiEl.style.right = 'auto';
+    uiEl.style.bottom = 'auto';
+  }
+
+  // 检测导航栏底色 + 折叠状态，同步播放器
+  function updateScheme() {
+    if (!uiEl) return;
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+
+    // 折叠跟随：导航栏滚出屏幕时隐藏播放器
+    var navRect = nav.getBoundingClientRect();
+    if (navRect.bottom < 5) {
+      uiEl.style.opacity = '0';
+      uiEl.style.pointerEvents = 'none';
+      return;
+    }
+    uiEl.style.opacity = '1';
+    uiEl.style.pointerEvents = 'auto';
+
+    // 明暗切换：透明/半透明 → 白色方案；不透明白底 → 暗色方案
+    var bg = getComputedStyle(nav).backgroundColor;
+    var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!m) return;
+    var r = parseInt(m[1]), g = parseInt(m[2]), b = parseInt(m[3]);
+    var a = m[4] !== undefined ? parseFloat(m[4]) : 1;
+    // 半透明（Hero 模式）→ 白色方案
+    if (a < 0.5) {
+      uiEl.classList.remove('nm-dark');
+      return;
+    }
+    // 不透明白底 → 暗色主题点缀方案
+    var bright = (r*299 + g*587 + b*114) / 1000;
+    if (bright > 150) {
+      uiEl.classList.add('nm-dark');
+    } else {
+      uiEl.classList.remove('nm-dark');
+    }
+  }
+
+  document.addEventListener('pjax:complete', function() {
+    if (playerReady) { setTimeout(positionUI, 50); setTimeout(updateScheme, 80); }
+  });
+  window.addEventListener('resize', function() {
+    if (playerReady) { positionUI(); updateScheme(); }
+  });
+  window.addEventListener('scroll', function() {
+    if (playerReady) {
+      updateScheme();
+      // 导航栏从隐藏→显示时有渐变动画，300ms 后再确认一次
+      clearTimeout(window._nmSchemeTimer);
+      window._nmSchemeTimer = setTimeout(updateScheme, 300);
+    }
+  }, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusic);
+  } else {
+    initMusic();
+  }
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var fontMinus = document.getElementById('font-minus');
+  if (!fontMinus) return;
+  var btn = document.createElement('button');
+  btn.id = 'font-reset';
+  btn.className = fontMinus.className;
+  btn.title = '恢复默认字号';
+  btn.innerHTML = '<i class="fas fa-undo-alt"></i>';
+  fontMinus.insertAdjacentElement('afterend', btn);
+  btn.addEventListener('click', function () {
+    document.documentElement.style.setProperty('--global-font-size', '14px');
+    try { localStorage.removeItem('global-font-size'); } catch(e) {}
+  });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://cdn.jsdelivr.net/npm/oh-my-live2d@0.19.3/dist/index.min.js"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,primaryColor:"#f6b37f",tips:{welcomeTips: {"duration":6000,"priority":3,"message":{"daybreak":"露西亚...001号...zzz","morning":"露西亚百科全书001号，很不高兴为您服务。","noon":"（叹气）就不能等本小姐吃完午饭吗……","afternoon":"午后阳光正好，想吃草莓慕斯蜜桃千层巧克力班戟……","dusk":"（叹气）本小姐今天什么时候才能吃晚饭啊……","night":"露西亚百科全书001号，很不高兴为您服务。","lateNight":"（哈欠）001号已下班，不想打招呼。","weeHours":"喂，已经凌晨了啊笨蛋，还不睡吗……好困。"}},idleTips:{interval:15000,message:["今天的运势？让本小姐占卜一下——嗯，大吉，也许吧。","本小姐可是全世界最无敌可爱的大图书馆的魔女（的眷属）哦~","（叉腰）怕了吧，还不快把甜品通通给本小姐供上来！","什么？Bug？（心虚）不管不管，这个肯定是特性啦！"]},style: {"width":240,"height":100,"top":"125px","left":"calc(50% + 210px)"}},menus:{disable:true},models:[{"path":"/live2d_models/seethrough/seethrough_00001.model3.json","scale":0.3,"position":[-50,0],"stageStyle":{"width":350,"height":300}}]});</script><!-- hexo injector body_end end --></body></html>

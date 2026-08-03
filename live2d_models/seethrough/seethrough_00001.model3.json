@@ -1,0 +1,1 @@
+{"Version":3,"FileReferences":{"Moc":"seethrough_00001.moc3","Textures":["seethrough_00001.1024/texture_00.png"],"Physics":"seethrough_00001.physics3.json","DisplayInfo":"seethrough_00001.cdi3.json"},"Groups":[{"Target":"Parameter","Name":"EyeBlink","Ids":[]},{"Target":"Parameter","Name":"LipSync","Ids":[]}]}

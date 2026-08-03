@@ -1,0 +1,985 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux-2 | Zweiwings</title><meta name="keywords" content="Linux"><meta name="author" content="Zweiwings"><meta name="copyright" content="Zweiwings"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Linux 远程登录Linux 一般作为服务器使用，而服务器一般放在机房，你不可能在机房操作你的 Linux 服务器。 这时我们就需要远程登录到Linux服务器来管理维护系统。 Linux 系统中是通过 ssh 服务实现的远程登录功能，默认 ssh 服务端口号为 22。 Window 系统上 Linux 远程登录客户端有 SecureCRT, Putty, SSH Secure Shell 等 使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-2">
+<meta property="og:url" content="https://zwei-wings.github.io/2021/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-2/index.html">
+<meta property="og:site_name" content="Zweiwings">
+<meta property="og:description" content="Linux 远程登录Linux 一般作为服务器使用，而服务器一般放在机房，你不可能在机房操作你的 Linux 服务器。 这时我们就需要远程登录到Linux服务器来管理维护系统。 Linux 系统中是通过 ssh 服务实现的远程登录功能，默认 ssh 服务端口号为 22。 Window 系统上 Linux 远程登录客户端有 SecureCRT, Putty, SSH Secure Shell 等 使">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zwei-wings.github.io/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp">
+<meta property="article:published_time" content="2021-02-09T11:29:59.000Z">
+<meta property="article:modified_time" content="2026-08-03T08:10:22.863Z">
+<meta property="article:author" content="Zweiwings">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zwei-wings.github.io/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp"><link rel="shortcut icon" href="/img/favicon1.png"><link rel="canonical" href="https://zwei-wings.github.io/2021/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-03 16:10:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/add2.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" ><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/css/add2.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><style>
+/* ===== 文章标题自定义装饰 ===== */
+
+/* 去掉 h3-h6 默认前缀图标 */
+#article-container h3::before,
+#article-container h4::before,
+#article-container h5::before,
+#article-container h6::before {
+  content: none !important;
+}
+
+/* 无序列表圆点标记 → 主题色 */
+#article-container ul > li::marker {
+  color: #ff9a5c;
+}
+
+/* h1：居中 + 底部渐变线 + 菱形 */
+#article-container h1 {
+  text-align: center;
+  padding-left: 0 !important;
+  padding-bottom: 20px;
+  margin: 1.5em 0 1.2em;
+  position: relative;
+}
+#article-container h1::before {
+  content: '' !important;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  border: 3px solid #ffba88;
+  background: #fff;
+  z-index: 2;
+}
+#article-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,186,136,.15), #ffba88, rgba(255,186,136,.15));
+}
+#article-container h1:hover {
+  padding-left: 0 !important;
+}
+
+/* h2：居左 + 左侧双竖线（长粗 + 短细） */
+#article-container h2 {
+  padding-left: 20px !important;
+  position: relative;
+}
+#article-container h2::before {
+  content: '' !important;
+  position: absolute;
+  left: 0;
+  top: .3em;
+  width: 3px;
+  height: calc(100% - .6em);
+  border-radius: 2px;
+  background: #ff9a5c;
+}
+#article-container h2::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: .45em;
+  width: 2px;
+  height: calc(100% - .9em);
+  border-radius: 1px;
+  background: #ffba88;
+}
+
+/* ===== 导航栏居中音乐控件（默认白色，亮底切换暗色） ===== */
+#nav-music-ui {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  min-width: 300px;
+  font-size: 13px;
+  border: 1px solid var(--nm-border);
+  border-radius: 8px;
+  padding: 0 14px;
+  transition: border-color 0.3s, opacity 0.3s;
+  /* 默认白色方案（匹配首页 Hero 暗底导航栏） */
+  --nm-border: rgba(255,255,255,0.4);
+  --nm-text: rgba(255,255,255,0.9);
+  --nm-play: rgba(255,255,255,0.85);
+  --nm-play-bg: transparent;
+  --nm-play-bd: rgba(255,255,255,0.5);
+  --nm-btn: rgba(255,255,255,0.55);
+  --nm-accent: #fff;
+}
+/* 导航栏亮底时：暗色主题点缀方案 */
+#nav-music-ui.nm-dark {
+  --nm-border: #ddd;
+  --nm-text: #555;
+  --nm-play: #fff;
+  --nm-play-bg: #ff9a5c;
+  --nm-play-bd: #ff9a5c;
+  --nm-btn: #ffba88;
+  --nm-accent: #ff9a5c;
+}
+#nav-music-ui .nm-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 13px;
+  color: var(--nm-play);
+  background: var(--nm-play-bg);
+  border: 1px solid var(--nm-play-bd);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+#nav-music-ui .nm-play:hover { color: var(--nm-accent); border-color: var(--nm-accent); }
+#nav-music-ui .nm-btns {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+#nav-music-ui .nm-title {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--nm-text);
+  font-size: 14px;
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-title:hover { color: var(--nm-accent); }
+#nav-music-ui .nm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 12px;
+  color: var(--nm-btn);
+  transition: color 0.3s;
+}
+#nav-music-ui .nm-btn:hover { color: var(--nm-accent); }
+@media (max-width: 900px) {
+  #nav-music-ui .nm-title { display: none; }
+  #nav-music-ui { min-width: auto; padding: 0 4px; }
+}
+</style>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Zweiwings" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="onerror=null;src='/img/cover2.jpg'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Top_img-%E8%B8%A9%E5%9D%91.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zweiwings</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签总览</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-chess"></i><span> 关于咕咕</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux-2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-02-09T11:29:59.000Z" title="发表于 2021-02-09 19:29:59">2021-02-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-03T08:10:22.863Z" title="更新于 2026-08-03 16:10:22">2026-08-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/">课外拓展</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux-2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2021/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-2/#post-comment"><span class="gitalk-comment-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Linux-远程登录"><a href="#Linux-远程登录" class="headerlink" title="Linux 远程登录"></a>Linux 远程登录</h1><p>Linux 一般作为服务器使用，而服务器一般放在机房，你不可能在机房操作你的 Linux 服务器。</p>
+<p>这时我们就需要远程登录到Linux服务器来管理维护系统。</p>
+<p>Linux 系统中是通过 ssh 服务实现的远程登录功能，默认 ssh 服务端口号为 22。</p>
+<p>Window 系统上 Linux 远程登录客户端有 SecureCRT, Putty, SSH Secure Shell 等</p>
+<h2 id="使用密钥认证机制远程登录linux"><a href="#使用密钥认证机制远程登录linux" class="headerlink" title="使用密钥认证机制远程登录linux"></a>使用密钥认证机制远程登录linux</h2><p>SSH 为 Secure Shell 的缩写，由 IETF 的网络工作小组（Network Working Group）所制定。</p>
+<p>SSH 为建立在应用层和传输层基础上的安全协议。</p>
+<p>该工具可以生成三种格式的key ：SSH-1(RSA) SSH-2(RSA) SSH-2(DSA) ，我们采用默认的格式即 SSH-2(RSA)。Number of bits in a generated key 这个是指生成的key的大小，这个数值越大，生成的key就越复杂，安全性就越高。</p>
+<h3 id="1）创建目录-root-ssh-并设置权限"><a href="#1）创建目录-root-ssh-并设置权限" class="headerlink" title="1）创建目录 /root/.ssh 并设置权限"></a>1）创建目录 /root/.ssh 并设置权限</h3><p>[root@localhost ~]# mkdir /root/.ssh mkdir 命令用来创建目录，以后会详细介绍，暂时只了解即可。</p>
+<p>[root@localhost ~]# chmod 700 /root/.ssh chmod 命令是用来修改文件属性权限的，以后会详细介绍。</p>
+<h3 id="2）创建文件-root-ssh-authorized-keys"><a href="#2）创建文件-root-ssh-authorized-keys" class="headerlink" title="2）创建文件 / root/.ssh/authorized_keys"></a>2）创建文件 / root/.ssh/authorized_keys</h3><p>[root@localhost ~]# vim /root/.ssh/authorized_keys vim 命令是编辑一个文本文件的命令，同样在后续章节详细介绍。</p>
+<h3 id="3）打开刚才生成的public-key-文件"><a href="#3）打开刚才生成的public-key-文件" class="headerlink" title="3）打开刚才生成的public key 文件"></a>3）打开刚才生成的public key 文件</h3><p>建议使用写字板打开，这样看着舒服一些，复制从AAAA开头至 “—- END SSH2 PUBLIC KEY —-“ 该行上的所有内容，粘贴到/root/.ssh/authorized_keys 文件中，要保证所有字符在一行。（可以先把复制的内容拷贝至记事本，然后编辑成一行载粘贴到该文件中）。</p>
+<p>在这里要简单介绍一下，如何粘贴，用vim打开那个文件后，该文件不存在，所以vim会自动创建。按一下字母”i”然后同时按shift + Insert 进行粘贴（或者单击鼠标右键即可），前提是已经复制到剪切板中了。粘贴好后，然后把光标移动到该行最前面输入 <strong>ssh-rsa</strong> </p>
+<h3 id="4）再设置putty选项，点窗口左侧的SSh-–-gt-Auth"><a href="#4）再设置putty选项，点窗口左侧的SSh-–-gt-Auth" class="headerlink" title="4）再设置putty选项，点窗口左侧的SSh –&gt; Auth"></a>4）再设置putty选项，点窗口左侧的SSh –&gt; Auth</h3><p>单击窗口右侧的Browse… 选择刚刚生成的私钥， 再点Open ，此时输入root，就不用输入密码就能登录了。</p>
+<p>如果在前面你设置了Key Passphrase ，那么此时就会提示你输入密码的。为了更加安全建议大家要设置一个Key Passphrase。</p>
+<h2 id="终端利用ssh登录远程服务器"><a href="#终端利用ssh登录远程服务器" class="headerlink" title="终端利用ssh登录远程服务器"></a><strong>终端利用ssh登录远程服务器</strong></h2><p>安装ssh：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install ssh</span><br></pre></td></tr></table></figure>
+<p>启动ssh：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service sshd start</span><br></pre></td></tr></table></figure>
+<p>登录远程服务器：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -p 50022 my@127.0.0.1</span><br><span class="line">输入密码：</span><br><span class="line">my@127.0.0.1:</span><br></pre></td></tr></table></figure>
+<p><strong>-p</strong> 后面是端口</p>
+<p><strong>my</strong> 是服务器用户名</p>
+<p><strong>127.0.0.1</strong> 是服务器 ip</p>
+<p>回车输入密码即可登录</p>
+<h1 id="Linux-文件基本属性"><a href="#Linux-文件基本属性" class="headerlink" title="Linux 文件基本属性"></a>Linux 文件基本属性</h1><p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
+<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
+<ul>
+<li>chown (change ownerp) ： 修改所属用户与组。</li>
+<li>chmod (change mode) ： 修改用户的权限。</li>
+</ul>
+<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@www &#x2F;]# ls -l</span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
+<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<ul>
+<li>当为 <strong>d</strong> 则是目录</li>
+<li>当为 <strong>-</strong> 则是文件；</li>
+<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
+<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-2/pic-2.png" alt="pic-2"></p>
+<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
+<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
+<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
+<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
+<h1 id="Linux文件属主和属组"><a href="#Linux文件属主和属组" class="headerlink" title="Linux文件属主和属组"></a>Linux文件属主和属组</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@www &#x2F;]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
+<h2 id="更改文件属性"><a href="#更改文件属性" class="headerlink" title="更改文件属性"></a>更改文件属性</h2><h3 id="1、chgrp：更改文件属组"><a href="#1、chgrp：更改文件属组" class="headerlink" title="1、chgrp：更改文件属组"></a>1、chgrp：更改文件属组</h3><p>Linux chgrp（英文全拼：change group）命令用于变更文件或目录的所属群组。</p>
+<p>与 chown的掌控以拥有者及所属群组来管理。您可以使用 chgrp 指令去变更文件与目录的所属群组，设置方式采用群组名称或群组识别码皆可。</p>
+<p>在 UNIX 系统家族里，文件或目录权限的掌控以拥有者及所属群组来管理。您可以使用 chgrp 指令去变更文件与目录的所属群组，设置方式采用群组名称或群组识别码皆可。</p>
+<h4 id="语法1："><a href="#语法1：" class="headerlink" title="语法1："></a>语法1：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+<h4 id="参数选项："><a href="#参数选项：" class="headerlink" title="参数选项："></a>参数选项：</h4><ul>
+<li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
+</ul>
+<h4 id="语法2："><a href="#语法2：" class="headerlink" title="语法2："></a>语法2：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chgrp [-cfhRv][--help][--version][所属群组][文件或目录...] 或 chgrp [-cfhRv][--help][--reference&#x3D;&lt;参考文件或目录&gt;][--version][文件或目录...]</span><br></pre></td></tr></table></figure>
+<h4 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h4><p>　　-c或–changes 效果类似”-v”参数，但仅回报更改的部分。</p>
+<p>　　-f或–quiet或–silent 　不显示错误信息。</p>
+<p>　　-h或–no-dereference 　只对符号连接的文件作修改，而不更动其他任何相关文件。</p>
+<p>　　-R或–recursive 　递归处理，将指定目录下的所有文件及子目录一并处理。</p>
+<p>　　-v或–verbose 　显示指令执行过程。</p>
+<p>　　–help 　在线帮助。</p>
+<p>　　–reference=&lt;参考文件或目录&gt; 　把指定文件或目录的所属群组全部设成和参考文件或目录的所属群组相同。</p>
+<p>　　–version 　显示版本信息。</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h5 id="实例1：改变文件的群组属性："><a href="#实例1：改变文件的群组属性：" class="headerlink" title="实例1：改变文件的群组属性："></a>实例1：改变文件的群组属性：</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chgrp -v bin log2012.log</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost test]# ll</span><br><span class="line">---xrw-r-- 1 root root 302108 11-13 06:03 log2012.log</span><br><span class="line">[root@localhost test]# chgrp -v bin log2012.log</span><br></pre></td></tr></table></figure>
+<p>“log2012.log” 的所属组已更改为 bin</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost test]# ll</span><br><span class="line">---xrw-r-- 1 root bin  302108 11-13 06:03 log2012.log</span><br></pre></td></tr></table></figure>
+<p>说明： 将log2012.log文件由root群组改为bin群组</p>
+<h5 id="实例2：根据指定文件改变文件的群组属性"><a href="#实例2：根据指定文件改变文件的群组属性" class="headerlink" title="实例2：根据指定文件改变文件的群组属性"></a>实例2：根据指定文件改变文件的群组属性</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chgrp --reference&#x3D;log2012.log log2013.log</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@localhost test]# ll</span><br><span class="line">---xrw-r-- 1 root bin  302108 11-13 06:03 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root     61 11-13 06:03 log2013.log</span><br><span class="line">[root@localhost test]#  chgrp --reference&#x3D;log2012.log log2013.log </span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">---xrw-r-- 1 root bin  302108 11-13 06:03 log2012.log</span><br><span class="line">-rw-r--r-- 1 root bin      61 11-13 06:03 log2013.log</span><br></pre></td></tr></table></figure>
+<p>说明： 改变文件log2013.log 的群组属性，使得文件log2013.log的群组属性和参考文件log2012.log的群组属性相同</p>
+<h3 id="2、chown：更改文件属主，也可以同时更改文件属组"><a href="#2、chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="2、chown：更改文件属主，也可以同时更改文件属组"></a>2、chown：更改文件属主，也可以同时更改文件属组</h3><p>Linux chown（英文全拼：<strong>change owner</strong>）命令用于设置文件所有者和文件关联组的命令。</p>
+<p>Linux/Unix 是多人多工操作系统，所有的文件皆有拥有者。利用 chown 将指定文件的拥有者改为指定的用户或组，用户可以是用户名或者用户 ID，组可以是组名或者组 ID，文件是以空格分开的要改变权限的文件列表，支持通配符。 </p>
+<p>只有超级用户和属于组的文件所有者才能变更文件关联组。非超级用户如需要设置关联组可能需要使用 chgrp 命令。</p>
+<h4 id="语法1：-1"><a href="#语法1：-1" class="headerlink" title="语法1："></a>语法1：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+<h4 id="语法2：-1"><a href="#语法2：-1" class="headerlink" title="语法2："></a>语法2：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown [-cfhvR] [--help] [--version] user[:group] file...</span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数 :"></a><strong>参数</strong> :</h4><ul>
+<li>user : 新的文件拥有者的使用者 ID</li>
+<li>group : 新的文件拥有者的使用者组(group)</li>
+<li>-c : 显示更改的部分的信息</li>
+<li>-f : 忽略错误信息</li>
+<li>-h :修复符号链接</li>
+<li>-v : 显示详细的处理信息</li>
+<li>-R : 处理指定目录以及其子目录下的所有文件</li>
+<li>–help : 显示辅助说明</li>
+<li>–version : 显示版本</li>
+</ul>
+<h4 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h4><p>把 /var/run/httpd.pid 的所有者设置 root：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown root &#x2F;var&#x2F;run&#x2F;httpd.pid</span><br></pre></td></tr></table></figure>
+<p>将文件 file1.txt 的拥有者设为 runoob，群体的使用者 runoobgroup :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown runoob:runoobgroup file1.txt</span><br></pre></td></tr></table></figure>
+<p>将当前前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown -R runoob:runoobgroup *</span><br></pre></td></tr></table></figure>
+<p>把 /home/runoob 的关联组设置为 512 （关联组ID），不改变所有者：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown :512 &#x2F;home&#x2F;runoob</span><br></pre></td></tr></table></figure>
+<p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@www ~] cd ~</span><br><span class="line">[root@www ~]# chown bin install.log</span><br><span class="line">[root@www ~]# ls -l</span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+<p>将install.log的拥有者与群组改回为root：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@www ~]# chown root:root install.log</span><br><span class="line">[root@www ~]# ls -l</span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3、chmod：更改文件9个属性"><a href="#3、chmod：更改文件9个属性" class="headerlink" title="3、chmod：更改文件9个属性"></a>3、chmod：更改文件9个属性</h3><h4 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod [-cfvR] [--help] [--version] mode file...</span><br></pre></td></tr></table></figure>
+<h4 id="参数说明：-1"><a href="#参数说明：-1" class="headerlink" title="参数说明："></a>参数说明：</h4><p>mode : 权限设定字串，格式如下 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[ugoa...][[+-&#x3D;][rwxX]...][,...]</span><br></pre></td></tr></table></figure>
+<h4 id="其中："><a href="#其中：" class="headerlink" title="其中："></a>其中：</h4><ul>
+<li>u 表示该文件的拥有者，g 表示与该文件的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。</li>
+<li>+ 表示增加权限、- 表示取消权限、= 表示唯一设定权限。</li>
+<li>r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行。</li>
+</ul>
+<h4 id="其他参数说明："><a href="#其他参数说明：" class="headerlink" title="其他参数说明："></a>其他参数说明：</h4><ul>
+<li>-c : 若该文件权限确实已经更改，才显示其更改动作</li>
+<li>-f : 若该文件权限无法被更改也不要显示错误讯息</li>
+<li>-v : 显示权限变更的详细资料</li>
+<li>-R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递归的方式逐个变更)</li>
+<li>–help : 显示辅助说明</li>
+<li>–version : 显示版本</li>
+</ul>
+<h4 id="符号模式"><a href="#符号模式" class="headerlink" title="符号模式"></a>符号模式</h4><p>使用符号模式可以设置多个项目：who（用户类型），operator（操作符）和 permission（权限），每个项目的设置可以用逗号隔开。 命令 chmod 将修改 who 指定的用户类型对文件的访问权限，用户类型由一个或者多个字母在 who 的位置来说明，如 who 的符号模式表所示:</p>
+<table>
+<thead>
+<tr>
+<th align="left">who</th>
+<th align="left">用户类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>u</code></td>
+<td align="left">user</td>
+<td align="left">文件所有者</td>
+</tr>
+<tr>
+<td align="left"><code>g</code></td>
+<td align="left">group</td>
+<td align="left">文件所有者所在组</td>
+</tr>
+<tr>
+<td align="left"><code>o</code></td>
+<td align="left">others</td>
+<td align="left">所有其他用户</td>
+</tr>
+<tr>
+<td align="left"><code>a</code></td>
+<td align="left">all</td>
+<td align="left">所用用户, 相当于 <em>ugo</em></td>
+</tr>
+</tbody></table>
+<h5 id="operator-的符号模式表"><a href="#operator-的符号模式表" class="headerlink" title="operator 的符号模式表:"></a>operator 的符号模式表:</h5><table>
+<thead>
+<tr>
+<th align="left">Operator</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>+</code></td>
+<td align="left">为指定的用户类型增加权限</td>
+</tr>
+<tr>
+<td align="left"><code>-</code></td>
+<td align="left">去除指定用户类型的权限</td>
+</tr>
+<tr>
+<td align="left"><code>=</code></td>
+<td align="left">设置指定用户权限的设置，即将用户类型的所有权限重新设置</td>
+</tr>
+</tbody></table>
+<h5 id="permission-的符号模式表"><a href="#permission-的符号模式表" class="headerlink" title="permission 的符号模式表:"></a>permission 的符号模式表:</h5><table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">名字</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>r</code></td>
+<td align="left">读</td>
+<td align="left">设置为可读权限</td>
+</tr>
+<tr>
+<td align="left"><code>w</code></td>
+<td align="left">写</td>
+<td align="left">设置为可写权限</td>
+</tr>
+<tr>
+<td align="left"><code>x</code></td>
+<td align="left">执行权限</td>
+<td align="left">设置为可执行权限</td>
+</tr>
+<tr>
+<td align="left"><code>X</code></td>
+<td align="left">特殊执行权限</td>
+<td align="left">只有当文件为目录文件，或者其他类型的用户有可执行权限时，才将文件权限设置可执行</td>
+</tr>
+<tr>
+<td align="left"><code>s</code></td>
+<td align="left">setuid/gid</td>
+<td align="left">当文件被执行时，根据who参数指定的用户类型设置文件的setuid或者setgid权限</td>
+</tr>
+<tr>
+<td align="left"><code>t</code></td>
+<td align="left">粘贴位</td>
+<td align="left">设置粘贴位，只有超级用户可以设置该位，只有文件所有者u可以使用该位</td>
+</tr>
+</tbody></table>
+<h4 id="八进制语法"><a href="#八进制语法" class="headerlink" title="八进制语法"></a>八进制语法</h4><p>chmod命令可以使用八进制数来指定权限。文件或目录的权限位是由9个权限位来控制，每三位为一组，它们分别是文件所有者（User）的读、写、执行，用户组（Group）的读、写、执行以及其它用户（Other）的读、写、执行。历史上，文件权限被放在一个比特掩码中，掩码中指定的比特位设为1，用来说明一个类具有相应的优先级。</p>
+<table>
+<thead>
+<tr>
+<th align="left">#</th>
+<th align="left">权限</th>
+<th align="left">rwx</th>
+<th align="left">二进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">7</td>
+<td align="left">读 + 写 + 执行</td>
+<td align="left">rwx</td>
+<td align="left">111</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">读 + 写</td>
+<td align="left">rw-</td>
+<td align="left">110</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">读 + 执行</td>
+<td align="left">r-x</td>
+<td align="left">101</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">只读</td>
+<td align="left">r–</td>
+<td align="left">100</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">写 + 执行</td>
+<td align="left">-wx</td>
+<td align="left">011</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">只写</td>
+<td align="left">-w-</td>
+<td align="left">010</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">只执行</td>
+<td align="left">–x</td>
+<td align="left">001</td>
+</tr>
+<tr>
+<td align="left">0</td>
+<td align="left">无</td>
+<td align="left">—</td>
+<td align="left">000</td>
+</tr>
+</tbody></table>
+<p>例如， 765 将这样解释：</p>
+<ul>
+<li>所有者的权限用数字表达：属主的那三个权限位的数字加起来的总和。如 rwx ，也就是 4+2+1 ，应该是 7。</li>
+<li>用户组的权限用数字表达：属组的那个权限位数字的相加的总和。如 rw- ，也就是 4+2+0 ，应该是 6。</li>
+<li>其它用户的权限数字表达：其它用户权限位的数字相加的总和。如 r-x ，也就是 4+0+1 ，应该是 5。</li>
+</ul>
+<h4 id="实例：-1"><a href="#实例：-1" class="headerlink" title="实例："></a>实例：</h4><p>将文件 file1.txt 设为所有人皆可读取 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod ugo+r file1.txt</span><br></pre></td></tr></table></figure>
+<p>将文件 file1.txt 设为所有人皆可读取 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod a+r file1.txt</span><br></pre></td></tr></table></figure>
+<p>将文件 file1.txt 与 file2.txt 设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod ug+w,o-w file1.txt file2.txt</span><br></pre></td></tr></table></figure>
+<p>将 ex1.py 设定为只有该文件拥有者可以执行 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod u+x ex1.py</span><br></pre></td></tr></table></figure>
+<p>将目前目录下的所有文件与子目录皆设为任何人可读取 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod -R a+r *</span><br></pre></td></tr></table></figure>
+<p>此外chmod也可以用数字来表示权限如 :</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod 777 file</span><br></pre></td></tr></table></figure>
+<p>语法为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod abc file</span><br></pre></td></tr></table></figure>
+<p>其中a,b,c各为一个数字，分别表示User、Group、及Other的权限。</p>
+<p>r=4，w=2，x=1</p>
+<ul>
+<li>若要 rwx 属性则 4+2+1=7；</li>
+<li>若要 rw- 属性则 4+2=6；</li>
+<li>若要 r-x 属性则 4+1=5。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod a&#x3D;rwx file</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod 777 file</span><br></pre></td></tr></table></figure>
+<p>效果相同</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod ug&#x3D;rwx,o&#x3D;x file</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod 771 file</span><br></pre></td></tr></table></figure>
+<p>效果相同</p>
+<p>若用 <strong>chmod 4755 filename</strong> 可使此程序具有 root 的权限。</p>
+<h4 id="更多说明"><a href="#更多说明" class="headerlink" title="更多说明"></a>更多说明</h4><table>
+<thead>
+<tr>
+<th align="left"><code>命令</code></th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>chmod a+r *file*</code></td>
+<td align="left">给file的所有用户增加读权限</td>
+</tr>
+<tr>
+<td align="left"><code>chmod a-x *file*</code></td>
+<td align="left">删除file的所有用户的执行权限</td>
+</tr>
+<tr>
+<td align="left"><code>chmod a+rw *file*</code></td>
+<td align="left">给file的所有用户增加读写权限</td>
+</tr>
+<tr>
+<td align="left"><code>chmod +rwx *file*</code></td>
+<td align="left">给file的所有用户增加读写执行权限</td>
+</tr>
+<tr>
+<td align="left"><code>chmod u=rw,go= *file*</code></td>
+<td align="left">对file的所有者设置读写权限，清空该用户组和其他用户对file的所有权限（空格代表无权限）</td>
+</tr>
+<tr>
+<td align="left"><code>chmod -R u+r,go-r *docs*</code></td>
+<td align="left">对目录docs和其子目录层次结构中的所有文件给用户增加读权限，而对用户组和其他用户删除读权限</td>
+</tr>
+<tr>
+<td align="left"><code>chmod 664 *file*</code></td>
+<td align="left">对file的所有者和用户组设置读写权限, 为其其他用户设置读权限</td>
+</tr>
+<tr>
+<td align="left"><code>chmod 0755 *file*</code></td>
+<td align="left">相当于<code>u=rwx (4+2+1),go=rx (4+1 &amp; 4+1)</code>。<code>0</code> 没有特殊模式。</td>
+</tr>
+<tr>
+<td align="left"><code>chmod 4755 *file*</code></td>
+<td align="left"><code>4</code>设置了设置<a target="_blank" rel="noopener" href="https://www.runoob.com/wiki/%E7%94%A8%E6%88%B7ID">用户ID</a>位，剩下的相当于 u=rwx (4+2+1),go=rx (4+1 &amp; 4+1)。</td>
+</tr>
+<tr>
+<td align="left"><code>find path/ -type d -exec chmod a-x &#123;&#125; \;</code></td>
+<td align="left">删除可执行权限对path/以及其所有的目录（不包括文件）的所有用户，使用’-type f’匹配文件</td>
+</tr>
+<tr>
+<td align="left"><code>find path/ -type d -exec chmod a+x &#123;&#125; \;</code></td>
+<td align="left">允许所有用户浏览或通过目录path/</td>
+</tr>
+</tbody></table>
+<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<ul>
+<li>r:4</li>
+<li>w:2</li>
+<li>x:1</li>
+</ul>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为： <strong>-rwxrwx—</strong> 分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others= — = 0+0+0 = 0</li>
+</ul>
+<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</li>
+<li>-R : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
+</ul>
+<p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@www ~]# ls -al .bashrc</span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]# chmod 777 .bashrc</span><br><span class="line">[root@www ~]# ls -al .bashrc</span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
+<p>那如果要将权限变成 <em>-rwxr-xr–</em> 呢？那么权限的分数就成为 [4+2+1][4+0+1][4+0+0]=754。</p>
+<h4 id="符号类型改变文件权限"><a href="#符号类型改变文件权限" class="headerlink" title="符号类型改变文件权限"></a>符号类型改变文件权限</h4><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
+<ul>
+<li>user：用户</li>
+<li>group：组</li>
+<li>others：其他</li>
+</ul>
+<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
+<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
+<table>
+<thead>
+<tr>
+<th>chmod</th>
+<th>u g o a</th>
+<th>+(加入) -(除去) =(设定)</th>
+<th>r w x</th>
+<th>文件或目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr–</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#  touch test1    &#x2F;&#x2F; 创建 test1 文件</span><br><span class="line"># ls -al test1    &#x2F;&#x2F; 查看 test1 默认权限</span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"># chmod u&#x3D;rwx,g&#x3D;rx,o&#x3D;r  test1    &#x2F;&#x2F; 修改 test1 权限</span><br><span class="line"># ls -al test1</span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#  chmod  a-x test1</span><br><span class="line"># ls -al test1</span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:zweiwings@foxmail.com">Zweiwings</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zwei-wings.github.io/2021/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-2/">https://zwei-wings.github.io/2021/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zwei-wings.github.io" target="_blank">Zweiwings</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/02/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-3/"><img class="prev-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux-3</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/26/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Linux%E5%AD%A6%E4%B9%A0-1/"><img class="next-cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux-1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/02/19/学习笔记/Linux学习-4/" title="Linux-4"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">Linux-4</div></div></a></div><div><a href="/2021/02/10/学习笔记/Linux学习-3/" title="Linux-3"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">Linux-3</div></div></a></div><div><a href="/2021/01/26/学习笔记/Linux学习-1/" title="Linux-1"><img class="cover" data-lazy-src="/img/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2026-08-02</div><div class="title">Linux-1</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/favicon1.png" onerror="this.onerror=null;this.src='/img/cover2.jpg'" alt="avatar"/><div class="author-info__name">Zweiwings</div><div class="author-info__description">人间失宠的笨蛋咕咕们</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" href="https://zwei-wings.github.io/about/"><i class="fas fa-chess"></i><span>关于咕咕</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本博客主要用于记录一些学习笔记，可能也包含一些同人文、OC和世界观的分享与展示。（PS：搞OC的人是这样的，请多担待。）</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux-%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">Linux 远程登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95linux"><span class="toc-number">1.1.</span> <span class="toc-text">使用密钥认证机制远程登录linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95-root-ssh-%E5%B9%B6%E8%AE%BE%E7%BD%AE%E6%9D%83%E9%99%90"><span class="toc-number">1.1.1.</span> <span class="toc-text">1）创建目录 &#x2F;root&#x2F;.ssh 并设置权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6-root-ssh-authorized-keys"><span class="toc-number">1.1.2.</span> <span class="toc-text">2）创建文件 &#x2F; root&#x2F;.ssh&#x2F;authorized_keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E6%89%93%E5%BC%80%E5%88%9A%E6%89%8D%E7%94%9F%E6%88%90%E7%9A%84public-key-%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.3.</span> <span class="toc-text">3）打开刚才生成的public key 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%89%E5%86%8D%E8%AE%BE%E7%BD%AEputty%E9%80%89%E9%A1%B9%EF%BC%8C%E7%82%B9%E7%AA%97%E5%8F%A3%E5%B7%A6%E4%BE%A7%E7%9A%84SSh-%E2%80%93-gt-Auth"><span class="toc-number">1.1.4.</span> <span class="toc-text">4）再设置putty选项，点窗口左侧的SSh –&gt; Auth</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E5%88%A9%E7%94%A8ssh%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">终端利用ssh登录远程服务器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux-%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">Linux 文件基本属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E6%96%87%E4%BB%B6%E5%B1%9E%E4%B8%BB%E5%92%8C%E5%B1%9E%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">Linux文件属主和属组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="toc-number">3.1.</span> <span class="toc-text">更改文件属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81chgrp%EF%BC%9A%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%B1%9E%E7%BB%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">1、chgrp：更改文件属组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%951%EF%BC%9A"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">语法1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%80%89%E9%A1%B9%EF%BC%9A"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">参数选项：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%952%EF%BC%9A"><span class="toc-number">3.1.1.3.</span> <span class="toc-text">语法2：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">3.1.1.4.</span> <span class="toc-text">参数说明：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-number">3.1.1.5.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B1%EF%BC%9A%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E7%9A%84%E7%BE%A4%E7%BB%84%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="toc-number">3.1.1.5.1.</span> <span class="toc-text">实例1：改变文件的群组属性：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B2%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E7%9A%84%E7%BE%A4%E7%BB%84%E5%B1%9E%E6%80%A7"><span class="toc-number">3.1.1.5.2.</span> <span class="toc-text">实例2：根据指定文件改变文件的群组属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81chown%EF%BC%9A%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%B1%9E%E4%B8%BB%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%B1%9E%E7%BB%84"><span class="toc-number">3.1.2.</span> <span class="toc-text">2、chown：更改文件属主，也可以同时更改文件属组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%951%EF%BC%9A-1"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">语法1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%952%EF%BC%9A-1"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">语法2：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-number">3.1.2.3.</span> <span class="toc-text">参数 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="toc-number">3.1.2.4.</span> <span class="toc-text">实例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81chmod%EF%BC%9A%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B69%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="toc-number">3.1.3.</span> <span class="toc-text">3、chmod：更改文件9个属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">语法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A-1"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">参数说明：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%B8%AD%EF%BC%9A"><span class="toc-number">3.1.3.3.</span> <span class="toc-text">其中：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">3.1.3.4.</span> <span class="toc-text">其他参数说明：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.1.3.5.</span> <span class="toc-text">符号模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#operator-%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%A8%A1%E5%BC%8F%E8%A1%A8"><span class="toc-number">3.1.3.5.1.</span> <span class="toc-text">operator 的符号模式表:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#permission-%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%A8%A1%E5%BC%8F%E8%A1%A8"><span class="toc-number">3.1.3.5.2.</span> <span class="toc-text">permission 的符号模式表:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB%E8%BF%9B%E5%88%B6%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.3.6.</span> <span class="toc-text">八进制语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A-1"><span class="toc-number">3.1.3.7.</span> <span class="toc-text">实例：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E8%AF%B4%E6%98%8E"><span class="toc-number">3.1.3.8.</span> <span class="toc-text">更多说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-number">3.1.3.9.</span> <span class="toc-text">符号类型改变文件权限</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）"><img data-lazy-src="/img/%E5%90%8D%E6%9F%AFcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第 3 章 伊戈尔暗杀事件（下）"/></a><div class="content"><a class="title" href="/2026/08/04/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%203%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第 3 章 伊戈尔暗杀事件（下）">第 3 章 伊戈尔暗杀事件（下）</a><time datetime="2026-08-03T16:06:55.257Z" title="更新于 2026-08-04 00:06:55">2026-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1"><img data-lazy-src="/img/%E6%9C%AA%E5%88%86%E7%B1%BBcover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客更新日志-1"/></a><div class="content"><a class="title" href="/2026/08/03/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-03/" title="博客更新日志-1">博客更新日志-1</a><time datetime="2026-08-03T15:02:39.597Z" title="更新于 2026-08-03 23:02:39">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试"><img data-lazy-src="/img/Top_img-%E9%BB%98%E8%AE%A4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试"/></a><div class="content"><a class="title" href="/2026/08/02/%E6%B5%8B%E8%AF%95/" title="测试">测试</a><time datetime="2026-08-03T10:23:10.428Z" title="更新于 2026-08-03 18:23:10">2026-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计"><img data-lazy-src="/img/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95cover.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Web程序设计"/></a><div class="content"><a class="title" href="/2022/03/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Web%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="Web程序设计">Web程序设计</a><time datetime="2026-08-03T08:10:48.094Z" title="更新于 2026-08-03 16:10:48">2026-08-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Zweiwings</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">我知世间来往步履匆匆，知一切烈火将熄于凉薄，知世间人皆将归于赴死，知我人间失宠无比落魄，却从不知何谓退缩。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7ab654b08de6e920553a',
+      clientSecret: 'e674cd1fcfc534caa60f1ff36274a58b594989e9',
+      repo: 'Zwei-wings.github.io',
+      owner: 'Zwei-wings',
+      admin: ['Zwei-wings'],
+      id: '865fbb3c4c2f627e5b4eafecf8b4502d',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="/js/title.js"></script><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div id="nav-music-engine" class="aplayer no-destroy" data-server="tencent" data-type="playlist" data-id="7993423839" data-fixed="true" data-theme="#ffcb8e" data-loop="all" data-order="random" data-preload="auto" data-volume="0.7" data-listFolded="true" data-listMaxHeight="250px"></div><span id="nav-music-ui"><span class="nm-title">未播放</span><span class="nm-btns"><span class="nm-btn nm-prev">◀</span><span class="nm-btn nm-play">▶</span><span class="nm-btn nm-next">▶</span></span></span><script>
+(function() {
+  var initDone = false, playerReady = false;
+  var navAp = null, uiEl = null, titleEl = null, playEl = null;
+
+  function updateUI() {
+    if (!navAp || !playEl || !titleEl) return;
+    var playing = !navAp.audio.paused;
+    playEl.innerHTML = playing ? '\u23F8' : '\u25B6';
+    if (navAp.list && navAp.list.audios && navAp.list.audios[navAp.list.index]) {
+      titleEl.textContent = navAp.list.audios[navAp.list.index].title;
+    }
+  }
+
+  function initMusic() {
+    if (initDone) return;
+    if (typeof loadMeting !== 'function') return;
+    loadMeting();
+    initDone = true;
+
+    // 劫持 loadMeting：每次调用后恢复保护
+    var origLoadMeting = window.loadMeting;
+    window.loadMeting = function() {
+      origLoadMeting();
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && navAp) {
+        engine.classList.add('no-reload');
+        if (window.aplayers.indexOf(navAp) === -1) {
+          window.aplayers.unshift(navAp);
+        }
+      }
+    };
+
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      var engine = document.getElementById('nav-music-engine');
+      if (engine && engine.classList.contains('aplayer-fixed') && window.aplayers && window.aplayers.length > 0) {
+        clearInterval(timer);
+        playerReady = true;
+
+        // 找到 APlayer 实例
+        for (var i = 0; i < window.aplayers.length; i++) {
+          if (window.aplayers[i].container.id === 'nav-music-engine') {
+            navAp = window.aplayers[i];
+            break;
+          }
+        }
+        engine.classList.add('no-reload');
+        // 隐藏 APlayer 原生 UI
+        engine.style.display = 'none';
+
+        // 获取自定义 UI 元素
+        uiEl = document.getElementById('nav-music-ui');
+        if (uiEl) {
+          playEl = uiEl.querySelector('.nm-play');
+          titleEl = uiEl.querySelector('.nm-title');
+          var prevEl = uiEl.querySelector('.nm-prev');
+          var nextEl = uiEl.querySelector('.nm-next');
+
+          // 事件绑定
+          if (playEl) playEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.toggle(); });
+          if (prevEl) prevEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipBack(); });
+          if (nextEl) nextEl.addEventListener('click', function(e) { e.stopPropagation(); if (navAp) navAp.skipForward(); });
+          if (titleEl) {
+            titleEl.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+              if (mi) location.href = mi.href;
+            });
+          }
+
+          // 监听 APlayer 事件
+          navAp.on('play', updateUI);
+          navAp.on('pause', updateUI);
+          updateUI();
+          positionUI();
+        }
+      }
+      if (attempts > 30) clearInterval(timer);
+    }, 200);
+  }
+
+  function positionUI() {
+    if (!uiEl) return;
+    var mr = (function() {
+      var mi = document.querySelector('#nav #menus a[href*="/music/"]');
+      return mi ? mi.getBoundingClientRect() : null;
+    })();
+    if (!mr) return;
+    uiEl.style.top = mr.top + 'px';
+    uiEl.style.left = '50%';
+    uiEl.style.transform = 'translateX(-50%)';
+    uiEl.style.right = 'auto';
+    uiEl.style.bottom = 'auto';
+  }
+
+  // 检测导航栏底色 + 折叠状态，同步播放器
+  function updateScheme() {
+    if (!uiEl) return;
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+
+    // 折叠跟随：导航栏滚出屏幕时隐藏播放器
+    var navRect = nav.getBoundingClientRect();
+    if (navRect.bottom < 5) {
+      uiEl.style.opacity = '0';
+      uiEl.style.pointerEvents = 'none';
+      return;
+    }
+    uiEl.style.opacity = '1';
+    uiEl.style.pointerEvents = 'auto';
+
+    // 明暗切换：透明/半透明 → 白色方案；不透明白底 → 暗色方案
+    var bg = getComputedStyle(nav).backgroundColor;
+    var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!m) return;
+    var r = parseInt(m[1]), g = parseInt(m[2]), b = parseInt(m[3]);
+    var a = m[4] !== undefined ? parseFloat(m[4]) : 1;
+    // 半透明（Hero 模式）→ 白色方案
+    if (a < 0.5) {
+      uiEl.classList.remove('nm-dark');
+      return;
+    }
+    // 不透明白底 → 暗色主题点缀方案
+    var bright = (r*299 + g*587 + b*114) / 1000;
+    if (bright > 150) {
+      uiEl.classList.add('nm-dark');
+    } else {
+      uiEl.classList.remove('nm-dark');
+    }
+  }
+
+  document.addEventListener('pjax:complete', function() {
+    if (playerReady) { setTimeout(positionUI, 50); setTimeout(updateScheme, 80); }
+  });
+  window.addEventListener('resize', function() {
+    if (playerReady) { positionUI(); updateScheme(); }
+  });
+  window.addEventListener('scroll', function() {
+    if (playerReady) {
+      updateScheme();
+      // 导航栏从隐藏→显示时有渐变动画，300ms 后再确认一次
+      clearTimeout(window._nmSchemeTimer);
+      window._nmSchemeTimer = setTimeout(updateScheme, 300);
+    }
+  }, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusic);
+  } else {
+    initMusic();
+  }
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var fontMinus = document.getElementById('font-minus');
+  if (!fontMinus) return;
+  var btn = document.createElement('button');
+  btn.id = 'font-reset';
+  btn.className = fontMinus.className;
+  btn.title = '恢复默认字号';
+  btn.innerHTML = '<i class="fas fa-undo-alt"></i>';
+  fontMinus.insertAdjacentElement('afterend', btn);
+  btn.addEventListener('click', function () {
+    document.documentElement.style.setProperty('--global-font-size', '14px');
+    try { localStorage.removeItem('global-font-size'); } catch(e) {}
+  });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://cdn.jsdelivr.net/npm/oh-my-live2d@0.19.3/dist/index.min.js"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,primaryColor:"#f6b37f",tips:{welcomeTips: {"duration":6000,"priority":3,"message":{"daybreak":"露西亚...001号...zzz","morning":"露西亚百科全书001号，很不高兴为您服务。","noon":"（叹气）就不能等本小姐吃完午饭吗……","afternoon":"午后阳光正好，想吃草莓慕斯蜜桃千层巧克力班戟……","dusk":"（叹气）本小姐今天什么时候才能吃晚饭啊……","night":"露西亚百科全书001号，很不高兴为您服务。","lateNight":"（哈欠）001号已下班，不想打招呼。","weeHours":"喂，已经凌晨了啊笨蛋，还不睡吗……好困。"}},idleTips:{interval:15000,message:["今天的运势？让本小姐占卜一下——嗯，大吉，也许吧。","本小姐可是全世界最无敌可爱的大图书馆的魔女（的眷属）哦~","（叉腰）怕了吧，还不快把甜品通通给本小姐供上来！","什么？Bug？（心虚）不管不管，这个肯定是特性啦！"]},style: {"width":240,"height":100,"top":"125px","left":"calc(50% + 210px)"}},menus:{disable:true},models:[{"path":"/live2d_models/seethrough/seethrough_00001.model3.json","scale":0.3,"position":[-50,0],"stageStyle":{"width":350,"height":300}}]});</script><!-- hexo injector body_end end --></body></html>
