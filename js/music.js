@@ -14,7 +14,8 @@
     songListEl = null,
     initDone = false,
     playerReady = false,
-    panelVisible = false;
+    panelVisible = false,
+    currentLoopIdx = 0; // 0=all 1=one 2=none，自维护，不依赖 APlayer 内部
 
   var LOOP_MODES = ['all', 'one', 'none'];
   var LOOP_LABELS = ['列表循环', '单曲循环', '顺序播放'];
@@ -152,10 +153,8 @@
   }
 
   function updateLoopDisplay() {
-    if (!loopBtn || !navAp || !navAp.option) return;
-    var idx = LOOP_MODES.indexOf(navAp.option.loop);
-    if (idx === -1) idx = 0;
-    loopBtn.textContent = LOOP_LABELS[idx];
+    if (!loopBtn) return;
+    loopBtn.textContent = LOOP_LABELS[currentLoopIdx];
   }
 
   // ===== 面板：打开/关闭 =====
@@ -235,12 +234,10 @@
     // 循环模式
     loopBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      if (!navAp || !navAp.option) return;
-      var curIdx = LOOP_MODES.indexOf(navAp.option.loop);
-      if (curIdx === -1) curIdx = 0;
-      curIdx = (curIdx + 1) % LOOP_MODES.length;
-      navAp.option.loop = LOOP_MODES[curIdx];
-      loopBtn.textContent = LOOP_LABELS[curIdx];
+      currentLoopIdx = (currentLoopIdx + 1) % 3;
+      if (navAp && navAp.option) navAp.option.loop = LOOP_MODES[currentLoopIdx];
+      if (navAp && navAp.audio) navAp.audio.loop = (currentLoopIdx === 1);
+      loopBtn.textContent = LOOP_LABELS[currentLoopIdx];
     });
 
     // 歌单点击（委托）
