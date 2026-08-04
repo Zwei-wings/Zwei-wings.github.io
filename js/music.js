@@ -377,7 +377,9 @@
             if (panelVisible) renderSongList();
           });
           updateUI();
-          positionUI();
+          // 延迟定位：等导航栏动画/布局稳定后再执行
+          setTimeout(positionUI, 150);
+          setTimeout(positionUI, 600);
         }
       }
       if (attempts > 30) clearInterval(timer);
@@ -437,8 +439,9 @@
   document.addEventListener('pjax:complete', function () {
     closePanel();
     if (playerReady) {
-      setTimeout(positionUI, 50);
-      setTimeout(updateScheme, 80);
+      setTimeout(positionUI, 100);
+      setTimeout(positionUI, 400);
+      setTimeout(updateScheme, 120);
       // 重新绑定如果控件被替换
       uiEl = document.getElementById('nav-music-ui');
       if (uiEl && !playEl) {
