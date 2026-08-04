@@ -145,14 +145,14 @@
   }
 
   function updateVolumeDisplay() {
-    if (!volumeSlider || !navAp) return;
+    if (!volumeSlider || !navAp || !navAp.audio) return;
     volumeSlider.value = Math.round(navAp.audio.volume * 100);
     var label = document.querySelector('#nm-panel .nm-vol-label');
     if (label) label.textContent = volumeSlider.value;
   }
 
   function updateLoopDisplay() {
-    if (!loopBtn || !navAp) return;
+    if (!loopBtn || !navAp || !navAp.option) return;
     var idx = LOOP_MODES.indexOf(navAp.option.loop);
     if (idx === -1) idx = 0;
     loopBtn.textContent = LOOP_LABELS[idx];
@@ -161,6 +161,7 @@
   // ===== 面板：打开/关闭 =====
   function openPanel() {
     if (panelVisible) return;
+    if (!navAp) return;
     panelVisible = true;
     if (!panelEl) createPanel();
     updateVolumeDisplay();
@@ -213,7 +214,7 @@
 
     // 音量
     volumeSlider.addEventListener('input', function () {
-      if (!navAp) return;
+      if (!navAp || !navAp.audio) return;
       var v = parseInt(volumeSlider.value, 10) / 100;
       navAp.audio.volume = v;
       if (v > 0 && navAp.audio.muted) {
@@ -234,7 +235,7 @@
     // 循环模式
     loopBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      if (!navAp) return;
+      if (!navAp || !navAp.option) return;
       var curIdx = LOOP_MODES.indexOf(navAp.option.loop);
       if (curIdx === -1) curIdx = 0;
       curIdx = (curIdx + 1) % LOOP_MODES.length;
