@@ -392,7 +392,8 @@
     var nav = document.getElementById('nav');
     if (!nav) return;
     var navRect = nav.getBoundingClientRect();
-    uiEl.style.top = '14px';
+    // 以导航栏垂直中心为基准，确保不被遮挡
+    uiEl.style.top = Math.max(0, navRect.top + navRect.height / 2 - 17) + 'px';
     uiEl.style.left = (navRect.left + navRect.width / 2) + 'px';
     uiEl.style.transform = 'translateX(-50%)';
     uiEl.style.right = 'auto';
