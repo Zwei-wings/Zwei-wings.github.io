@@ -6,7 +6,7 @@
   <link href="https://zwei-wings.github.io/atom.xml" rel="self"/>
   
   <link href="https://zwei-wings.github.io/"/>
-  <updated>2026-08-03T16:06:55.257Z</updated>
+  <updated>2026-08-04T14:10:24.012Z</updated>
   <id>https://zwei-wings.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客更新日志-2</title>
+    <link href="https://zwei-wings.github.io/2026/08/04/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-04/"/>
+    <id>https://zwei-wings.github.io/2026/08/04/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-04/</id>
+    <published>2026-08-04T14:10:00.000Z</published>
+    <updated>2026-08-04T14:10:24.012Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年8月4日"><a href="#博客更新日志-—-2026年8月4日" class="headerlink" title="博客更新日志 — 2026年8月4日"></a>博客更新日志 — 2026年8月4日</h1><p>昨天加班加到灵魂出窍，本想着今天摸鱼划水……结果一屁股坐下来就是整整一天。评论系统从 Gitalk 换到 Waline 又换回来，还从零撸了个签到日历。你们以为折腾到这里就结束了？天真。部署还悄咪咪罢工了好几天，直到今天才发现——但这段太技术向，不展开讲了，想听的自己翻 git log 去。</p><hr><h2 id="💬-评论系统：一场说走就走的”旅行”"><a href="#💬-评论系统：一场说走就走的”旅行”" class="headerlink" title="💬 评论系统：一场说走就走的”旅行”"></a>💬 评论系统：一场说走就走的”旅行”</h2><p>本小姐今天在评论系统这件事上，完整地演绎了什么叫”兜兜转转回到原点”。</p><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>Gitalk 用了几天，发现两个致命问题：一是国内加载 github.com 的脚本慢得令人发指；二是留言必须登录 GitHub——你让一个普通读者上哪儿找 GitHub 账号去？这门槛高得离谱。</p><p>于是，本小姐决定换。</p><h3 id="Waline-之旅（又名：连环踩坑实录）"><a href="#Waline-之旅（又名：连环踩坑实录）" class="headerlink" title="Waline 之旅（又名：连环踩坑实录）"></a>Waline 之旅（又名：连环踩坑实录）</h3><p>首选 <strong>Waline</strong>——开源、轻量、支持多种登录方式。听起来很美好对吧？来，看看本小姐踩了多少坑：</p><table><thead><tr><th>步骤</th><th>发生了什么</th></tr></thead><tbody><tr><td>选数据库</td><td>Twikoo 需要 MongoDB Atlas，验证死活不过，毙了</td></tr><tr><td>换方案</td><td>Waline + Vercel + Neon PostgreSQL，部署上去发现 Neon 自动注入的环境变量格式 Waline 不认，得手动加 <code>DATABASE_URL</code></td></tr><tr><td>接入 Butterfly</td><td>主题的 Waline 模板用 v2 API（<code>new Waline()</code>），最新版是 v3（<code>init()</code>），完全不兼容，得自己写脚本接管初始化</td></tr><tr><td>测速</td><td>Vercel 在国内的加载速度……怎么说呢，比 Gitalk 还慢</td></tr><tr><td>最后一搏</td><td>想着切腾讯云 CloudBase 会快点，结果 CloudBase 的 Waline 模板早就停止维护了，部署都部署不了</td></tr></tbody></table><p>折腾了快两个小时，结论：<strong>Waline 在国内的体验并没有比 Gitalk 好到哪里去。</strong></p><h3 id="回来了，都回来了"><a href="#回来了，都回来了" class="headerlink" title="回来了，都回来了"></a>回来了，都回来了</h3><p>认清现实之后，本小姐老老实实把 Gitalk 装了回去。但这一装，又发现新问题——评论框出来了，却提示”未找到相关 Issues，请联系……”</p><p>排查下来，罪魁祸首有两个：</p><ol><li><p>**<code>createIssueManually</code> 设成了 <code>true</code>**：这玩意儿的意思是”不给文章自动创建 Issue，等管理员手动创建”。第一次访问的文章当然不会有 Issue，自然就报错了。改成 <code>false</code>，首次加载自动创建。</p></li><li><p><strong>仓库名拼错了</strong>：<code>owner</code> 和 <code>repo</code> 里把 <code>Zwei-wings</code> 写成了 <code>Zwiewings</code>——少了一个连字符 <code>-</code>。GitHub 仓库名区分大小写，差一个字符就是完全不同的仓库，OAuth 回调自然对不上号。修了三处，终于消停了。</p></li></ol><p>所以结论是：<strong>暂时就用 Gitalk 了。</strong> 虽然需要 GitHub 登录不算完美，但至少稳定、可控、不用折腾第三方服务。至于速度问题……反正博客本身就是半私博，能看就看吧，本小姐尽力了。</p><hr><h2 id="📅-新增：签到日历"><a href="#📅-新增：签到日历" class="headerlink" title="📅 新增：签到日历"></a>📅 新增：签到日历</h2><p>这是今天正儿八经的新功能。本小姐想要一个能追踪博客动态的迷你日历——哪天更了文、哪天有人细读了文章，一眼就能看到。</p><h3 id="功能概览"><a href="#功能概览" class="headerlink" title="功能概览"></a>功能概览</h3><table><thead><tr><th>标记类型</th><th>颜色</th><th>来源</th><th>说明</th></tr></thead><tbody><tr><td>📝 更文</td><td>暖珊瑚 <code>#FF8A65</code></td><td>自动提取 post.date</td><td>哪天发了文章自动标上</td></tr><tr><td>📖 细读</td><td>紫灰 <code>#B39DDB</code></td><td>手动 YAML 记录</td><td>哪天认真读了某篇文章</td></tr><tr><td>👣 来过</td><td>—</td><td>自动推导</td><td>有上述任意标记就算”来过”</td></tr></tbody></table><p>配色选了<strong>暖灰撞色</strong>方案——白底配橙红主题，暖珊瑚搭紫灰，跟博客的整体色调搭得上。别问为什么不用绿色，不搭就是不搭，本小姐审美很严格的。</p><h3 id="两个入口"><a href="#两个入口" class="headerlink" title="两个入口"></a>两个入口</h3><ul><li><strong>侧边栏卡片</strong>：首页右侧，一个巴掌大的迷你月历。自动注入在公告栏和置顶文章之间，不用手动配置。</li><li><strong>独立签到页</strong>：<code>/checkin/</code> 路径，整页展开——当月大月历 + 年度热力图 + 统计卡片（本月更文 N 篇 / 细读 N 天 / 来过 N 天）。</li></ul><h3 id="技术花絮"><a href="#技术花絮" class="headerlink" title="技术花絮"></a>技术花絮</h3><p>这个功能看着简单，背后踩的坑可不少：</p><ul><li><strong>js-yaml 把日期解析成了 Date 对象</strong>：YAML 里的 <code>2026-08-04</code> 会被自动转成 JS 的 <code>Date</code>，得在代码里用 <code>instanceof Date</code> 判断再转回 <code>YYYY-MM-DD</code> 字符串。</li><li><strong>Hexo tag 里的 <code>this</code> 不是 hexo 实例</strong>：Nunjucks 模板回调里 <code>this</code> 指向的是渲染上下文，不是 hexo 对象。想拿到站点配置和文章列表？老老实实用闭包捕获 <code>hexo</code> 引用。</li><li><strong>Filter 注入位置要精确</strong>：侧边栏卡片必须在 <code>card-announcement</code> 和 <code>sticky_layout</code> 之间插入，偏一点布局就崩。用 <code>after_render:html</code> filter 做字符串替换才搞定。</li></ul><p>这些细节文档和配置备忘都塞进源码注释里了，反正你们也不会去看，但本小姐还是要写（叉腰）。</p><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>以后想记录”细读”日期的话，编辑 <code>source/_data/checkin.yml</code>，在 <code>read_dates</code> 下加一行日期就行。<code>hexo g</code> 重新构建，日历自动更新。</p><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> <code>hexo clean &amp;&amp; hexo g</code> 零报错</li><li><input checked disabled type="checkbox"> Gitalk 评论框正常显示，自动创建 Issue 功能 OK</li><li><input checked disabled type="checkbox"> 侧边栏签到卡片渲染正常</li><li><input checked disabled type="checkbox"> <code>/checkin/</code> 独立页面完整（月历 + 热力图 + 统计）</li><li><input checked disabled type="checkbox"> 配色与博客主题协调，暖灰撞色方案落地</li></ul><hr><p><em>——折腾一整天、差点把评论系统搞没了的露西亚 001 号，于又一个深夜愤笔疾书</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年8月4日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年8月4日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年8月4日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年8月4日&lt;/h1&gt;&lt;p&gt;昨天加班加到</summary>
+      
+    
+    
+    
+    <category term="其他内容" scheme="https://zwei-wings.github.io/categories/%E5%85%B6%E4%BB%96%E5%86%85%E5%AE%B9/"/>
+    
+    
+    <category term="hexo使用" scheme="https://zwei-wings.github.io/tags/hexo%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>第 3 章 伊戈尔暗杀事件（下）</title>
@@ -480,33 +504,6 @@
     
     
     <summary type="html">尝试将Vroid模型绑定到ALS</summary>
-    
-    
-    
-    <category term="课外拓展" scheme="https://zwei-wings.github.io/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/"/>
-    
-    <category term="虚幻引擎" scheme="https://zwei-wings.github.io/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/"/>
-    
-    <category term="UE4" scheme="https://zwei-wings.github.io/categories/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/UE4/"/>
-    
-    
-    <category term="虚幻引擎" scheme="https://zwei-wings.github.io/tags/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/"/>
-    
-    <category term="UE4" scheme="https://zwei-wings.github.io/tags/UE4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UE4-溶解特效</title>
-    <link href="https://zwei-wings.github.io/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/"/>
-    <id>https://zwei-wings.github.io/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/</id>
-    <published>2021-05-20T11:24:16.000Z</published>
-    <updated>2026-08-01T18:41:11.244Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="溶解特效制作"><a href="#溶解特效制作" class="headerlink" title="溶解特效制作"></a>溶解特效制作</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文中可以学到4个之前暂时跳过的全新知识点</p><ul><li>材质参数集资产<img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/1.png" alt="1"></li><li>材质中的”已遮罩”混合模式<img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/2.png" alt="2"></li><li>材质中的if节点以及过场动画中的”材质参数轨道”<img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/3.png" alt="3"> </li></ul><p>总之都是干货啦，开始吧~</p><h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><p>首先，先准备好溶解特效的蒙版贴图</p><div class="snote download yellow"><a href="https://docs.unrealengine.com/Images/AnimatingObjects/Sequencer/HowTo/TracksMaterialParameter/T_Dissolve.png">点此获取样例蒙版贴图</a></div><p>将贴图导入后，新建一个材质参数集资产并起名为”溶解参数集”</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/4.png" alt="4"></p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/5.png" alt="5"></p><p>打开参数集，添加一个标量参数，起名为“Alpha”，意为不透明度，1为正常，0为完全溶解消失。<img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/6.png" alt="6"></p><div class="tip warning"><p></p><p>材质参数集的作用就是可以在游戏运行时改变材质中的一些数值，可以产生材质的动态变化。</p><p></p></div><p>随后打开要被做成溶解特效的材质，以金币材质为例,</p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/7.png" alt="7" style="zoom:50%;"><p>看上去相当复杂，但不用管，只需稍加改造即可。</p><p>首先去细节面板，将混合模式改为“已遮罩”</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/8.png" alt="8"></p><table><thead><tr><th align="center">混合模式</th><th align="center">用途</th></tr></thead><tbody><tr><td align="center">不透明</td><td align="center">普通不透明的材质</td></tr><tr><td align="center">已遮罩</td><td align="center">相当于材质只覆盖了表面的一层，可以修改局部的不透明度</td></tr><tr><td align="center">半透明</td><td align="center">常用于玻璃水面等材质，可以有折射特效，但只能对整体进行不透明度的修改</td></tr></tbody></table><p>然后将“溶解参数集”拖入，参数名选择Alpha</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/10.png" alt="10"></p><p>将贴图拖入，并建一个if节点，按如下摆放并与“不透明蒙版”相连</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/9.png" alt="9"></p><div class="tip warning"><p></p><p>解释：贴图是一张黑白图，黑白图的RGB为同一个数，而不透明蒙版中输入0为全透明，1为完全不透明，因此可在运行时调整Alpha（从0到1），使贴图蒙版中红色（因是黑白图，所以取哪个都是一样，因为要浮点与浮点才能比较，所以只能取其中一个值，而不能取RGB，因为RGB是向量Vector类型的变量）大于等于那个值的部分显示（蒙版输入1）小于那个值的部分消失（蒙版输入0）。TexCoord之前有提过，按T加左键，用于缩放贴图的密度，UV数字越大密度越高，案例中将U和V都设置成了4。</p><p></p></div><p>if节点的作用：</p><table><thead><tr><th align="center">输入</th><th align="center">说明</th></tr></thead><tbody><tr><td align="center">A</td><td align="center">输入一个浮点值</td></tr><tr><td align="center">B</td><td align="center">输入一个浮点值</td></tr><tr><td align="center">A&gt;B</td><td align="center">A&gt;B时输出的内容（不一定只能是浮点，可为任意类型）</td></tr><tr><td align="center">A==B</td><td align="center">A=B时输出的内容（不一定只能是浮点，可为任意类型）</td></tr><tr><td align="center">A&lt;B</td><td align="center">A&lt;B时输出的内容（不一定只能是浮点，可为任意类型）</td></tr></tbody></table><p>到此就建立完毕了，所有套用了这个材质或者所有以这个材质为父类建立的材质实例的物体都会应用溶解的效果</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="过场动画中的使用"><a href="#过场动画中的使用" class="headerlink" title="过场动画中的使用"></a>过场动画中的使用</h3><p>建立一个过场动画，添加一条材质参数集轨道，选择之前建立的“溶解参数集”</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/11.png" alt="11"></p><p>随后添加一个Alpha轨道</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/12.png" alt="12"></p><p>添加一些关键帧（如图分别为0，1，0）</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/13.png" alt="13"></p><p>拖动时间轴可以看到物体溶解然后复原</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/14.png" alt="14"></p><h3 id="蓝图中的使用"><a href="#蓝图中的使用" class="headerlink" title="蓝图中的使用"></a>蓝图中的使用</h3><p>在蓝图中调用这个节点“设置标量参数值”，Collection输入创建的参数集，Parameter Name输入要改变的参数，Parameter Value输入值</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/05/20/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-%E6%BA%B6%E8%A7%A3%E7%89%B9%E6%95%88/15.png" alt="15"></p>]]></content>
-    
-    
-    <summary type="html">通过溶解特效的制作学习有关材质参数集资产以及其他相关知识点</summary>
     
     
     
