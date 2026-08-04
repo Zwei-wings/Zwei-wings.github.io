@@ -40,6 +40,8 @@
     '.checkin-month-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 14px; }',
     '.cm-nav-btn-page { background: var(--card-bg, #f6f8fa); border: 1px solid var(--border-color, #eaecef); border-radius: 6px; padding: 5px 16px; font-size: 13px; cursor: pointer; color: var(--font-color, #4c4948); transition: all 0.2s; }',
     '.cm-nav-btn-page:hover { background: var(--checkin-accent, #ff9a5c); color: #fff; border-color: var(--checkin-accent, #ff9a5c); }',
+    '.cm-nav-btn-today { font-size: 12px; padding: 4px 12px; opacity: 0.7; }',
+    '.cm-nav-btn-today:hover { opacity: 1; }',
     '#cm-title-page { font-size: 15px; font-weight: 500; color: var(--font-color, #4c4948); min-width: 100px; text-align: center; }',
 
     '/* 月历表格 */',
@@ -242,6 +244,7 @@
     el.innerHTML =
       '<button class="cm-nav-btn-page" id="cm-prev-btn">&lsaquo; 上月</button>' +
       '<span id="cm-title-page">' + pageYear + '年' + MONTH_NAMES[pageMonth] + '</span>' +
+      '<button class="cm-nav-btn-page cm-nav-btn-today" id="cm-today-btn">今天</button>' +
       '<button class="cm-nav-btn-page" id="cm-next-btn">下月 &rsaquo;</button>';
   }
 
@@ -429,6 +432,24 @@
     updateHeatmapTitle();
   }
 
+  function navToToday() {
+    // 重置为"今天"对应的年月
+    var parts = DATA.today ? DATA.today.split('-') : null;
+    if (parts) {
+      pageYear = parseInt(parts[0], 10);
+      pageMonth = parseInt(parts[1], 10) - 1;
+    } else {
+      var now = new Date();
+      pageYear = now.getFullYear();
+      pageMonth = now.getMonth();
+    }
+    renderStats();
+    renderMonthTable();
+    renderHeatmap();
+    updateNavTitle();
+    updateHeatmapTitle();
+  }
+
   // ===== 事件绑定（委托） =====
   function bindEvents() {
     document.addEventListener('click', function(e) {
@@ -453,6 +474,11 @@
         if (t.closest('#cm-next-btn')) {
           e.preventDefault();
           navPage(1);
+          return;
+        }
+        if (t.closest('#cm-today-btn')) {
+          e.preventDefault();
+          navToToday();
           return;
         }
       }
