@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客更新日志-3</title>
+    <url>/2026/08/05/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-05/</url>
+    <content><![CDATA[<h1 id="博客更新日志-—-2026年8月5日"><a href="#博客更新日志-—-2026年8月5日" class="headerlink" title="博客更新日志 — 2026年8月5日"></a>博客更新日志 — 2026年8月5日</h1><p>累死了。真的。本小姐今天把两个核心功能从里到外重构了一遍——签到日历和音乐播放器——加起来写了快上千行 JS，中间踩的坑多到可以出一本《Hexo 奇技淫巧避雷指南》。但结果嘛……咳咳，确实比之前好用多了。才不是因为昨晚看到反馈睡不着才连夜改的呢，只是顺手，顺手而已！</p>
+<hr>
+<h2 id="📅-签到日历-2-0：终于能翻月了"><a href="#📅-签到日历-2-0：终于能翻月了" class="headerlink" title="📅 签到日历 2.0：终于能翻月了"></a>📅 签到日历 2.0：终于能翻月了</h2><h3 id="之前的问题"><a href="#之前的问题" class="headerlink" title="之前的问题"></a>之前的问题</h3><p>有人跟本小姐反映：月历只能看当月，想看历史记录？没门。而且同一天既更了文又细读了文章的话，正文页居然只显示一个标记——另一个被 CSS 活活截断了。更离谱的是，侧边栏和正文页对”今天有没有更文”的判断偶尔还不一致。</p>
+<p>本小姐当时就想掀桌。同一个数据源，同一个构建过程，你俩是怎么得出不同结论的？！</p>
+<h3 id="重写方案"><a href="#重写方案" class="headerlink" title="重写方案"></a>重写方案</h3><p>诊断了一圈，根因其实很明确：旧的签到日历是<strong>纯服务端渲染</strong>——<code>hexo g</code> 的时候把 HTML 算好写死，没有任何客户端 JS。翻月？想多了，数据都是静态的。双标记截断？格子高度没留够。数据不一致？tag 回调和 filter 回调里拿到的 hexo 实例虽然逻辑上是同一个，但渲染时序有微妙差异，极少数情况下 <code>locals.get(&#39;posts&#39;)</code> 返回的状态不同。</p>
+<p>于是本小姐直接把架构掀了重来——</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>旧方案</th>
+<th>新方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务端</td>
+<td>渲染完整 HTML</td>
+<td>只产出 JSON 数据 + 空容器壳子</td>
+</tr>
+<tr>
+<td>客户端</td>
+<td>无</td>
+<td>读 JSON → JS 动态渲染日历、热力图、统计</td>
+</tr>
+</tbody></table>
+<p>这样一来，所有页面的日历都从<strong>同一份 JSON</strong> 里读数据——刚才那个”不一致”的问题直接从根源上消失了。</p>
+<h3 id="现在的功能"><a href="#现在的功能" class="headerlink" title="现在的功能"></a>现在的功能</h3><ul>
+<li><strong>← → 翻月</strong>：侧边栏迷你月历和正文页都能左右切换，想翻到哪年哪月翻到哪年哪月</li>
+<li><strong>双标记不截断</strong>：正文页格子加高到 <code>72px</code>，overflow 显式设 visible，更文和细读两个徽章乖乖排排站</li>
+<li><strong>“回到今天”按钮</strong>：翻远了点一下就弹回来，适合本小姐这种随便翻翻就忘了自己在看哪个月的人</li>
+<li><strong>统计联动</strong>：切到哪个月，统计卡片就显示哪个月的数据，不是傻傻钉死在当前月份了</li>
+</ul>
+<hr>
+<h2 id="🎵-音乐播放器-2-0：砍掉独立页，改下拉面板"><a href="#🎵-音乐播放器-2-0：砍掉独立页，改下拉面板" class="headerlink" title="🎵 音乐播放器 2.0：砍掉独立页，改下拉面板"></a>🎵 音乐播放器 2.0：砍掉独立页，改下拉面板</h2><h3 id="之前的问题-1"><a href="#之前的问题-1" class="headerlink" title="之前的问题"></a>之前的问题</h3><p>说出来你们可能不信——旧播放器有三个完全不想干的 bug：</p>
+<ol>
+<li><strong>没法调音量</strong>。自定义 UI 只有上一曲/播放/下一曲三个按钮，音量？原生 APlayer 被 <code>display: none</code> 藏得死死的，连音量条一起活埋了。</li>
+<li><strong>翻个页就消失</strong>。PJAX 一切换页面，播放器随机隐退——有时是滚动隐藏逻辑误判初始状态，有时是 <code>loadMeting()</code> 重新扫描 DOM 时把 nav 播放器的绑定冲掉了。</li>
+<li><strong>两套播放器各播各的</strong>。导航栏播放器和 <code>/music/</code> 页面的播放器是<strong>两个独立的 APlayer 实例</strong>，同一个歌单，互不知道对方在干嘛。你在导航栏放歌，点进音乐页——诶？空的，从头来过。</li>
+</ol>
+<h3 id="解决方案：砍了"><a href="#解决方案：砍了" class="headerlink" title="解决方案：砍了"></a>解决方案：砍了</h3><p>对，本小姐直接把 <code>/music/</code> 页面删了。</p>
+<p>然后做了个下拉面板——点导航栏的歌名，面板弹出：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">┌─ ♪ ──[══════════]── 70──┐</span><br><span class="line">│         [列表循环]        │</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│ ▶ 01  歌名A - 歌手A     │</span><br><span class="line">│   02  歌名B - 歌手B     │</span><br><span class="line">│   03  歌名C - 歌手C     │</span><br><span class="line">│     ...                 │</span><br><span class="line">└──────────────────────────┘</span><br></pre></td></tr></table></figure>
+<p>面板顶部有音量滑块 + 静音按钮 + 循环模式切换，下面就是完整的歌曲列表。当前播放项橙色高亮，点一下切歌。全局只有一个 APlayer 实例，放在 <code>#body-wrap</code> 外面——PJAX 翻页根本碰不到它。</p>
+<p>循环模式切换是自己写了一套状态机，不靠 APlayer 内部的不靠谱属性读取。单曲循环直接操控 <code>&lt;audio&gt;</code> 元素的 <code>loop</code> 属性，简单粗暴有效。</p>
+<h3 id="那些让人血压升高的细节"><a href="#那些让人血压升高的细节" class="headerlink" title="那些让人血压升高的细节"></a>那些让人血压升高的细节</h3><ul>
+<li>定位问题修了好几轮。导航栏有渐变动画，<code>getBoundingClientRect()</code> 在动画过程中读到的是中间态——所以播放器一会儿贴顶、一会儿贴底。最后用了 150ms + 600ms 的双延迟定位，等导航栏彻底老实了再算位置。</li>
+<li>面板第一次打开报 <code>Cannot read properties of undefined (reading &#39;loop&#39;)</code>——因为 <code>loadMeting()</code> 是异步的，DOM 就绪了但 APlayer 实例的 <code>option</code> 属性还在路上。给所有访问 navAp 子属性的地方加了完整的存在性检查链，从 <code>navAp</code> → <code>navAp.option</code> → <code>navAp.audio</code> 层层防弹。</li>
+<li>PJAX 之后控件虽然没消失，但点击没反应——因为事件绑定还挂在旧的 DOM 引用上。现在 <code>pjax:complete</code> 的时候重新绑定，外加 100ms + 400ms 的定位保险。</li>
+</ul>
+<hr>
+<h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
+<li><input checked disabled type="checkbox"> <code>hexo clean &amp;&amp; hexo g</code> 零报错</li>
+<li><input checked disabled type="checkbox"> 签到日历侧边栏和正文页数据一致，翻月正常</li>
+<li><input checked disabled type="checkbox"> 正文页双标记（更文 + 细读）完整可见</li>
+<li><input checked disabled type="checkbox"> 音乐播放器点歌名弹出面板，音量和切歌正常</li>
+<li><input checked disabled type="checkbox"> 循环模式三态切换（列表循环 → 单曲循环 → 顺序播放）</li>
+<li><input checked disabled type="checkbox"> PJAX 翻页播放器不消失</li>
+<li><input checked disabled type="checkbox"> 导航栏菜单移除”音乐”入口，导航栏胶囊为唯一入口</li>
+</ul>
+<hr>
+<p><em>——又双叒叕修到半夜、差点把 APplayer 源码翻烂了的露西亚 001 号，于又一个深夜写完了才想起自己还没吃饭</em></p>
+]]></content>
+      <categories>
+        <category>博客相关</category>
+        <category>更新日志</category>
+      </categories>
+      <tags>
+        <tag>更新日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>测试</title>
     <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>这只是一个小小的测试页.</p>
