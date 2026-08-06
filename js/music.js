@@ -236,9 +236,9 @@
     loopBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       currentLoopIdx = (currentLoopIdx + 1) % 4;
-      if (navAp && navAp.option) {
-        navAp.option.loop = LOOP_MODES[currentLoopIdx];
-        navAp.option.order = LOOP_ORDERS[currentLoopIdx];
+      if (navAp && navAp.options) {
+        navAp.options.loop = LOOP_MODES[currentLoopIdx];
+        navAp.options.order = LOOP_ORDERS[currentLoopIdx];
       }
       if (navAp && navAp.audio) navAp.audio.loop = (currentLoopIdx === 1);
       loopBtn.textContent = LOOP_LABELS[currentLoopIdx];
@@ -340,12 +340,12 @@
         engine.classList.add('no-reload');
 
         // 根据 APlayer 实际初始状态同步 currentLoopIdx
-        if (navAp.option) {
-          if (navAp.option.order === 'random') {
+        if (navAp.options) {
+          if (navAp.options.order === 'random') {
             currentLoopIdx = 2; // 随机播放
-          } else if (navAp.option.loop === 'one') {
+          } else if (navAp.options.loop === 'one') {
             currentLoopIdx = 1; // 单曲循环
-          } else if (navAp.option.loop === 'none') {
+          } else if (navAp.options.loop === 'none') {
             currentLoopIdx = 3; // 顺序播放
           } else {
             currentLoopIdx = 0; // 列表循环（默认）
