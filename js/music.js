@@ -15,10 +15,11 @@
     initDone = false,
     playerReady = false,
     panelVisible = false,
-    currentLoopIdx = 0; // 0=all 1=one 2=none，自维护，不依赖 APlayer 内部
+    currentLoopIdx = 0; // 0=列表循环 1=单曲循环 2=随机播放 3=顺序播放，自维护
 
-  var LOOP_MODES = ['all', 'one', 'none'];
-  var LOOP_LABELS = ['列表循环', '单曲循环', '顺序播放'];
+  var LOOP_MODES = ['all', 'one', 'all', 'none'];
+  var LOOP_ORDERS = ['list', 'list', 'random', 'list'];
+  var LOOP_LABELS = ['列表循环', '单曲循环', '随机播放', '顺序播放'];
 
   // ===== CSS =====
   var css = [
@@ -234,8 +235,11 @@
     // 循环模式
     loopBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      currentLoopIdx = (currentLoopIdx + 1) % 3;
-      if (navAp && navAp.option) navAp.option.loop = LOOP_MODES[currentLoopIdx];
+      currentLoopIdx = (currentLoopIdx + 1) % 4;
+      if (navAp && navAp.option) {
+        navAp.option.loop = LOOP_MODES[currentLoopIdx];
+        navAp.option.order = LOOP_ORDERS[currentLoopIdx];
+      }
       if (navAp && navAp.audio) navAp.audio.loop = (currentLoopIdx === 1);
       loopBtn.textContent = LOOP_LABELS[currentLoopIdx];
     });
@@ -334,6 +338,21 @@
 
         window.__navAp = navAp;
         engine.classList.add('no-reload');
+
+        // 根据 APlayer 实际初始状态同步 currentLoopIdx
+        if (navAp.option) {
+          if (navAp.option.order === 'random') {
+            currentLoopIdx = 2; // 随机播放
+          } else if (navAp.option.loop === 'one') {
+            currentLoopIdx = 1; // 单曲循环
+          } else if (navAp.option.loop === 'none') {
+            currentLoopIdx = 3; // 顺序播放
+          } else {
+            currentLoopIdx = 0; // 列表循环（默认）
+          }
+          updateLoopDisplay();
+        }
+
         engine.style.display = 'none';
 
         uiEl = document.getElementById('nav-music-ui');
