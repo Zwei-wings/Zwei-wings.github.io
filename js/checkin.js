@@ -24,7 +24,7 @@
     '.cw-dot-r { background: #B39DDB; }',
 
     /* ---- 侧边栏 - 迷你进度条 ---- */
-    '.cw-divider { border: none; border-top: 0.5px solid var(--border-color, #eaecef); margin: 8px 0 8px; }',
+    '.cw-divider { border: none; border-top: 0.5px solid var(--border-color, #eaecef); margin: 16px 0 14px; }',
     '.cw-section-label { font-size: 11px; font-weight: 500; margin-bottom: 6px; color: var(--font-color, #4c4948); display: flex; justify-content: space-between; align-items: center; }',
     '.cw-week-range { font-size: 9px; opacity: 0.5; font-weight: 400; }',
     '.cw-track { margin-bottom: 6px; }',
@@ -79,7 +79,7 @@
     '.tp-tick-active .tp-tick-dot, .tp-tick-pass.tp-tick-active .tp-tick-dot { display: block; }',
     '.tp-tick-label { position: absolute; top: -16px; font-size: 9px; transform: translateX(-50%); white-space: nowrap; opacity: 0; transition: opacity 0.3s; }',
     '.tp-tick-active ~ .tp-tick-label, .tp-tick-pass.tp-tick-active ~ .tp-tick-label { opacity: 0.7; color: #D84315; }',
-    '.tp-tick-max.tp-tick-active ~ .tp-tick-label { opacity: 0.7; color: #FFB74D; }',
+    '.tp-tick-max.tp-tick-active ~ .tp-tick-label { opacity: 0.8; color: #E65100; }',
     '.tp-tier-tag { font-size: 11px; padding: 3px 12px; border-radius: 12px; display: inline-block; margin-top: 8px; }',
     '.tp-tier-below { background: var(--card-bg, #f6f8fa); color: var(--font-color, #4c4948); opacity: 0.55; }',
     '.tp-tier-pass { background: #EDE7F6; color: #5E35B1; }',
@@ -91,23 +91,24 @@
     '.tp-overflow-bar { height: 8px; border-radius: 4px; background: var(--card-bg, #ebedf0); overflow: hidden; }',
     '.tp-overflow-fill { height: 100%; border-radius: 4px; background: #BF360C; transition: width 0.5s ease; }',
 
-    /* ---- 正文页 - 连续打卡 ---- */
-    '.ci-streak-row { display: flex; gap: 12px; margin-bottom: 18px; }',
-    '.ci-streak-card { flex: 1; background: var(--card-bg, #f6f8fa); border-radius: 10px; padding: 14px 16px; text-align: center; }',
-    '.ci-streak-num { font-size: 26px; font-weight: 500; color: var(--checkin-accent, #ff9a5c); }',
-    '.ci-streak-label { font-size: 11px; opacity: 0.55; margin-top: 2px; color: var(--font-color, #4c4948); }',
-    '.ci-streak-stars { font-size: 10px; margin-top: 2px; opacity: 0.4; }',
+    /* ---- 正文页 - 连续追踪（进度条延伸） ---- */
+    '.ci-section { margin-bottom: 16px; border: 0.5px solid var(--border-color, #eaecef); border-radius: 12px; padding: 14px 16px 10px; }',
+    '.ci-section-title { font-size: 11px; font-weight: 500; color: var(--font-color, #4c4948); margin-bottom: 10px; opacity: 0.5; }',
+    '.ci-streak-row { display: flex; gap: 8px; }',
+    '.ci-streak-card { flex: 1; border-radius: 8px; padding: 10px 10px 10px; text-align: center; }',
+    '.ci-streak-card.ci-st-p { background: rgba(255, 138, 101, 0.06); }',
+    '.ci-streak-card.ci-st-r { background: rgba(179, 157, 219, 0.06); }',
+    '.ci-st-num { font-size: 20px; font-weight: 500; }',
+    '.ci-st-num-p { color: #D84315; }',
+    '.ci-st-num-r { color: #5E35B1; }',
+    '.ci-st-label { font-size: 10px; opacity: 0.55; margin-top: 2px; color: var(--font-color, #4c4948); }',
 
-    /* ---- 正文页 - 统计 ---- */
-    '.checkin-legend { display: flex; gap: 18px; margin-bottom: 16px; font-size: 13px; color: var(--font-color, #4c4948); }',
-    '.checkin-legend span { display: inline-flex; align-items: center; gap: 5px; }',
-    '.cm-dot-leg { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }',
-    '.cm-dot-leg-p { background: #FF8A65; }',
-    '.cm-dot-leg-r { background: #B39DDB; }',
-    '.cp-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }',
-    '.cp-stat { background: var(--card-bg, #f6f8fa); border-radius: 10px; padding: 14px 18px; min-width: 100px; text-align: center; }',
-    '.cp-stat .cp-stat-num { font-size: 26px; font-weight: 500; color: var(--checkin-accent, #ff9a5c); }',
-    '.cp-stat .cp-stat-label { font-size: 12px; opacity: 0.65; margin-top: 4px; color: var(--font-color, #4c4948); }',
+    /* ---- 正文页 - 数量统计 ---- */
+    '.cs-section { margin-bottom: 16px; border: 0.5px solid var(--border-color, #eaecef); border-radius: 12px; padding: 14px 16px 10px; }',
+    '.cs-stat-row { display: flex; gap: 10px; }',
+    '.cs-stat-card { flex: 1; background: var(--card-bg, #f6f8fa); border-radius: 10px; padding: 14px 10px; text-align: center; min-width: 0; }',
+    '.cs-stat-num { font-size: 22px; font-weight: 500; color: var(--checkin-accent, #ff9a5c); }',
+    '.cs-stat-label { font-size: 10px; opacity: 0.55; margin-top: 3px; color: var(--font-color, #4c4948); }',
 
     /* ---- 月历 ---- */
     '.checkin-month-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 14px; }',
@@ -148,13 +149,11 @@
     /* ---- 响应式 ---- */
     '@media (max-width: 768px) {',
     '  .tp-track-row { flex-direction: column; gap: 10px; }',
-    '  .cp-stats { gap: 8px; }',
-    '  .cp-stat { min-width: 70px; padding: 10px 12px; }',
-    '  .cp-stat .cp-stat-num { font-size: 22px; }',
+    '  .cs-stat-row { flex-wrap: wrap; gap: 8px; }',
+    '  .cs-stat-card { min-width: calc(50% - 4px); flex: none; }',
+    '  .ci-streak-row { flex-wrap: wrap; }',
+    '  .ci-streak-card { min-width: calc(50% - 4px); flex: none; }',
     '  .cm-day { min-height: 52px; font-size: 12px; }',
-    '  .ci-streak-row { gap: 8px; }',
-    '  .ci-streak-card { padding: 10px 12px; }',
-    '  .ci-streak-num { font-size: 22px; }',
     '}'
   ].join('\n');
 
@@ -387,35 +386,33 @@
     return html;
   }
 
-  // ===== 正文页：连续打卡 =====
+  // ===== 正文页：连续追踪 =====
   function renderStreak() {
     var el = document.getElementById('checkin-streak-info');
     if (!el || !DATA || !DATA.streak) return;
 
-    var s = DATA.streak;
-    var starsCurrent = '';
-    var starsLongest = '';
-
-    if (s.current >= 7) starsCurrent = '连续一周！';
-    else if (s.current >= 3) starsCurrent = '渐入佳境';
-    else if (s.current >= 1) starsCurrent = '好的开始';
-
-    if (s.longest >= 30) starsLongest = '月更传说';
-    else if (s.longest >= 14) starsLongest = '两周战神';
-    else if (s.longest >= 7) starsLongest = '一周全勤';
-    else if (s.longest >= 3) starsLongest = '初露锋芒';
+    var sp = DATA.streak.posted;
+    var sr = DATA.streak.read;
 
     el.innerHTML =
+      '<div class="ci-section">' +
       '<div class="ci-streak-row">' +
-      '<div class="ci-streak-card">' +
-      '<div class="ci-streak-num">' + s.current + '</div>' +
-      '<div class="ci-streak-label">当前连续活跃（天）</div>' +
-      (starsCurrent ? '<div class="ci-streak-stars">' + starsCurrent + '</div>' : '') +
+      '<div class="ci-streak-card ci-st-p">' +
+      '<div class="ci-st-num ci-st-num-p">' + sp.current + '<span style="font-size:11px;font-weight:400;"> 天</span></div>' +
+      '<div class="ci-st-label">更文连续活跃</div>' +
       '</div>' +
-      '<div class="ci-streak-card">' +
-      '<div class="ci-streak-num">' + s.longest + '</div>' +
-      '<div class="ci-streak-label">历史最长连续</div>' +
-      (starsLongest ? '<div class="ci-streak-stars">' + starsLongest + '</div>' : '') +
+      '<div class="ci-streak-card ci-st-p">' +
+      '<div class="ci-st-num ci-st-num-p">' + sp.longest + '<span style="font-size:11px;font-weight:400;"> 天</span></div>' +
+      '<div class="ci-st-label">更文历史最长</div>' +
+      '</div>' +
+      '<div class="ci-streak-card ci-st-r">' +
+      '<div class="ci-st-num ci-st-num-r">' + sr.current + '<span style="font-size:11px;font-weight:400;"> 天</span></div>' +
+      '<div class="ci-st-label">细读连续活跃</div>' +
+      '</div>' +
+      '<div class="ci-streak-card ci-st-r">' +
+      '<div class="ci-st-num ci-st-num-r">' + sr.longest + '<span style="font-size:11px;font-weight:400;"> 天</span></div>' +
+      '<div class="ci-st-label">细读历史最长</div>' +
+      '</div>' +
       '</div>' +
       '</div>';
   }
@@ -438,10 +435,10 @@
       if (k.substring(0, 7) === m) monthKeys.push(k);
     }
 
-    function count(ks, key) {
+    function countRead(ks) {
       var n = 0;
       for (var i = 0; i < ks.length; i++) {
-        if (dates[ks[i]][key]) n++;
+        if (dates[ks[i]].read) n++;
       }
       return n;
     }
@@ -455,10 +452,14 @@
     }
 
     el.innerHTML =
-      '<div class="cp-stat"><div class="cp-stat-num">' + yearKeys.length + '</div><div class="cp-stat-label">年内活跃天</div></div>' +
-      '<div class="cp-stat"><div class="cp-stat-num">' + countPosted(yearKeys) + '</div><div class="cp-stat-label">更新文章</div></div>' +
-      '<div class="cp-stat"><div class="cp-stat-num">' + count(yearKeys, 'read') + '</div><div class="cp-stat-label">认真细读</div></div>' +
-      '<div class="cp-stat"><div class="cp-stat-num">' + monthKeys.length + '</div><div class="cp-stat-label">本月活跃天</div></div>';
+      '<div class="cs-section">' +
+      '<div class="cs-stat-row">' +
+      '<div class="cs-stat-card"><div class="cs-stat-num">' + countPosted(yearKeys) + '<span style="font-size:12px;font-weight:400;"> 篇</span></div><div class="cs-stat-label">更新文章</div></div>' +
+      '<div class="cs-stat-card"><div class="cs-stat-num">' + countRead(yearKeys) + '<span style="font-size:12px;font-weight:400;"> 天</span></div><div class="cs-stat-label">认真细读</div></div>' +
+      '<div class="cs-stat-card"><div class="cs-stat-num">' + yearKeys.length + '</div><div class="cs-stat-label">年内活跃天</div></div>' +
+      '<div class="cs-stat-card"><div class="cs-stat-num">' + monthKeys.length + '</div><div class="cs-stat-label">本月活跃天</div></div>' +
+      '</div>' +
+      '</div>';
   }
 
   // ===== 正文页：月历翻页 =====
