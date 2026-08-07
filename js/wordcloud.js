@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  // === 词云密度：每个标签重复次数（标签少时增加以填充形状）===
+  var REPEAT_FACTOR = 3;
+
   // === 暖色系调色板 ===
   var warmPalette = [
     '#E5734A','#F28B66','#FF9A5C','#FFB088','#D8434E','#E56B6F',
@@ -29,7 +32,9 @@
       var m = style.match(/font-size:\s*([\d.]+)em/);
       var weight = m ? parseFloat(m[1]) * 10 : 10;
       _tagLinks.push({ text: text, href: href });
-      result.push([text, weight]);
+      for (var r = 0; r < REPEAT_FACTOR; r++) {
+        result.push([text, weight]);
+      }
     });
     return result;
   }
@@ -68,24 +73,61 @@
 
     // 确保 WordCloud 已加载
     function doRender() {
-      WordCloud(c, {
+      var ctx = c.getContext('2d');
+
+      // 先把 canvas 填成白色（作为 mask 的"自由区"基准色）
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      var opts = {
         list: wordList,
         gridSize: 9,
-        weightFactor: 8,
+        weightFactor: 2,
         fontFamily: '"PingFang SC","Microsoft YaHei",sans-serif',
         color: getColor,
-        backgroundColor: 'transparent',
-        shape: 'cardioid',
+        backgroundColor: '#ffffff',
+        clearCanvas: false,   // 不清理，保留手动绘制的 mask
         rotateRatio: 0.25,
         rotationSteps: 2,
         minSize: 10,
-        shrinkToFit: true,
+        shrinkToFit: false,
         drawOutOfBound: false,
+        ellipticity: 1,
         click: function(item) {
           var t = findByText(item[0]);
           if (t && t.href) window.location.href = t.href;
         }
-      });
+      };
+
+      // 加载心形 PNG 并绘制到 canvas 上
+      // PNG 是白心浅灰底 → 白像素匹配 bg=自由区，浅灰不匹配=禁区
+      var mask = new Image();
+      mask.src = '/img/wordcloud-heart.png';
+      mask.onload = function() {
+        ctx.drawImage(mask, 0, 0, c.width, c.height);
+
+        // 渲染完成后，把浅灰底色擦除为透明
+        c.addEventListener('wordcloudstop', function cleanup() {
+          c.removeEventListener('wordcloudstop', cleanup);
+          var imgData = ctx.getImageData(0, 0, c.width, c.height);
+          var d = imgData.data;
+          for (var i = 0; i < d.length; i += 4) {
+            // R、G、B 都 ≥ 240 的像素 → 判为 mask 底色 → 抹掉
+            if (d[i] >= 240 && d[i+1] >= 240 && d[i+2] >= 240) {
+              d[i+3] = 0;
+            }
+          }
+          ctx.clearRect(0, 0, c.width, c.height);
+          ctx.putImageData(imgData, 0, 0);
+        });
+
+        WordCloud(c, opts);
+      };
+      mask.onerror = function() {
+        opts.clearCanvas = true;
+        opts.shape = 'cardioid';
+        WordCloud(c, opts);
+      };
     }
 
     if (typeof WordCloud !== 'undefined') {

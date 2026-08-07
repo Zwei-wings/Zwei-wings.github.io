@@ -54,7 +54,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2026-08-07 21:12:51'
+  postUpdate: '2026-08-07 23:02:12'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -277,6 +277,167 @@
   #nav-music-ui .nm-title { display: none; }
   #nav-music-ui { min-width: auto; padding: 0 4px; }
 }
+
+/* ===== 标签总览 & 分类总览页标题：沿用 h1 底部装饰 ===== */
+.tag-cloud-title,
+.category-title {
+  padding-bottom: 20px;
+  margin-bottom: 1.2em;
+  position: relative;
+}
+.tag-cloud-title::before,
+.category-title::before {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  border: 3px solid #ffba88;
+  background: #fff;
+  z-index: 2;
+}
+.tag-cloud-title::after,
+.category-title::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,186,136,.15), #ffba88, rgba(255,186,136,.15));
+}
+
+/* ===== 分类总览页美化：顶层杂志目录 + 子分类书架卡片 ===== */
+
+.category-lists .category-list { list-style: none; padding: 0; }
+
+/* 顶层行 */
+.category-lists .category-list > .category-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  padding: 12px 8px;
+  border-bottom: 0.5px solid #e8e8e0;
+  cursor: pointer;
+  transition: background .15s;
+}
+.category-lists .category-list > .category-list-item:hover { background: #faf8f5; }
+.category-lists .category-list > .category-list-item::before { content: none !important; }
+
+/* 顶层大数字 */
+.category-lists .category-list > .category-list-item > .category-list-count {
+  order: -1;
+  font-size: 26px;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  margin-left: 0;
+}
+.category-lists .category-list > .category-list-item > .category-list-count::before,
+.category-lists .category-list > .category-list-item > .category-list-count::after { content: none !important; }
+
+/* 顶层分类名 */
+.category-lists .category-list > .category-list-item > .category-list-link {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  padding-left: 14px;
+  display: flex;
+  align-items: center;
+}
+/* 竖线装饰 */
+.category-lists .category-list > .category-list-item > .category-list-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 1em;
+  border-radius: 2px;
+}
+.category-lists .category-list > .category-list-item > .category-list-link:hover { color: #ff9a5c; }
+
+/* 子分类容器：2 列卡片网格 */
+.category-list-child {
+  width: 100%;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px 0 12px 20px !important;
+  list-style: none;
+}
+
+/* 子分类卡片 */
+.category-list-child > .category-list-item {
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: box-shadow .15s;
+  margin: 0 !important;
+}
+.category-list-child > .category-list-item::before { content: none !important; }
+.category-list-child > .category-list-item:hover { box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+
+/* 子分类名 */
+.category-list-child .category-list-link {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.category-list-child .category-list-link:hover { text-decoration: none; }
+
+/* 子分类计数 */
+.category-list-child .category-list-count {
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 0 !important;
+}
+.category-list-child .category-list-count::before,
+.category-list-child .category-list-count::after { content: none !important; }
+
+/* ===== nth-child 分组配色 ===== */
+.category-lists .category-list > .category-list-item:nth-child(1) > .category-list-count { color: #D85A30; }
+.category-lists .category-list > .category-list-item:nth-child(1) > .category-list-link { color: #712B13 !important; }
+.category-lists .category-list > .category-list-item:nth-child(1) > .category-list-link::before { background: #D85A30; }
+.category-lists .category-list > .category-list-item:nth-child(1) .category-list-child > .category-list-item {
+  background: #FAECE7; border: 0.5px solid #F5C4B3;
+}
+.category-lists .category-list > .category-list-item:nth-child(1) .category-list-child .category-list-link { color: #712B13; }
+.category-lists .category-list > .category-list-item:nth-child(1) .category-list-child .category-list-count { color: #993C1D; }
+
+.category-lists .category-list > .category-list-item:nth-child(2) > .category-list-count { color: #1D9E75; }
+.category-lists .category-list > .category-list-item:nth-child(2) > .category-list-link { color: #085041 !important; }
+.category-lists .category-list > .category-list-item:nth-child(2) > .category-list-link::before { background: #1D9E75; }
+.category-lists .category-list > .category-list-item:nth-child(2) .category-list-child > .category-list-item {
+  background: #E1F5EE; border: 0.5px solid #9FE1CB;
+}
+.category-lists .category-list > .category-list-item:nth-child(2) .category-list-child .category-list-link { color: #085041; }
+.category-lists .category-list > .category-list-item:nth-child(2) .category-list-child .category-list-count { color: #0F6E56; }
+
+.category-lists .category-list > .category-list-item:nth-child(3) > .category-list-count { color: #D4537E; }
+.category-lists .category-list > .category-list-item:nth-child(3) > .category-list-link { color: #72243E !important; }
+.category-lists .category-list > .category-list-item:nth-child(3) > .category-list-link::before { background: #D4537E; }
+.category-lists .category-list > .category-list-item:nth-child(3) .category-list-child > .category-list-item {
+  background: #FBEAF0; border: 0.5px solid #F4C0D1;
+}
+.category-lists .category-list > .category-list-item:nth-child(3) .category-list-child .category-list-link { color: #72243E; }
+.category-lists .category-list > .category-list-item:nth-child(3) .category-list-child .category-list-count { color: #993556; }
+
+/* 第4+分类兜底 */
+.category-lists .category-list > .category-list-item:nth-child(n+4) > .category-list-count { color: #378ADD; }
+.category-lists .category-list > .category-list-item:nth-child(n+4) > .category-list-link { color: #0C447C !important; }
+.category-lists .category-list > .category-list-item:nth-child(n+4) > .category-list-link::before { background: #378ADD; }
+.category-lists .category-list > .category-list-item:nth-child(n+4) .category-list-child > .category-list-item {
+  background: #E6F1FB; border: 0.5px solid #B5D4F4;
+}
+.category-lists .category-list > .category-list-item:nth-child(n+4) .category-list-child .category-list-link { color: #0C447C; }
+.category-lists .category-list > .category-list-item:nth-child(n+4) .category-list-child .category-list-count { color: #185FA5; }
 </style>
 <meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Zweiwings" type="application/atom+xml">
 </head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="error-wrap"><div class="error-content" style="background-image: url('/img/404.webp')"><a class="button--animated" href="/"><i class="fas fa-rocket"></i>回到主页</a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
@@ -305,6 +466,18 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.removeItem('global-font-size'); } catch(e) {}
   });
 });
+</script>
+<script>
+(function(){
+  var p=['#E5734A','#F28B66','#FF9A5C','#FFB088','#D8434E','#E56B6F','#C77B50','#D4995C','#B89B7A','#A8886B','#D47E3A','#BF6A30','#9C5D42','#C4885C','#8B5A3C','#6D4230','#E8A87C','#D49A6A'];
+  function r(){
+    document.querySelectorAll('.card-tag-cloud a').forEach(function(a){
+      a.style.setProperty('color', p[Math.floor(Math.random()*p.length)], 'important');
+    });
+  }
+  r();
+  document.addEventListener('pjax:complete', function(){ setTimeout(r, 80); });
+})();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
 POWERMODE.shake = false;
