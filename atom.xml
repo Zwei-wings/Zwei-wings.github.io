@@ -6,7 +6,7 @@
   <link href="https://zwei-wings.github.io/atom.xml" rel="self"/>
   
   <link href="https://zwei-wings.github.io/"/>
-  <updated>2026-08-10T20:17:43.545Z</updated>
+  <updated>2026-08-11T20:12:07.057Z</updated>
   <id>https://zwei-wings.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客更新日志-6</title>
+    <link href="https://zwei-wings.github.io/2026/08/12/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-12/"/>
+    <id>https://zwei-wings.github.io/2026/08/12/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-08-12/</id>
+    <published>2026-08-12T12:11:00.000Z</published>
+    <updated>2026-08-11T20:12:07.057Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年8月12日"><a href="#博客更新日志-—-2026年8月12日" class="headerlink" title="博客更新日志 — 2026年8月12日"></a>博客更新日志 — 2026年8月12日</h1><p>今天主打一个”修修补补又一天”——修了三个反馈的bug，顺便把词云从里到外调教了一番。改完后本小姐对着标签页看了好久，嗯，是真的好看了。</p><hr><h2 id="🐛-三个-bug-修复"><a href="#🐛-三个-bug-修复" class="headerlink" title="🐛 三个 bug 修复"></a>🐛 三个 bug 修复</h2><h3 id="1-分类页鼠标悬停之谜"><a href="#1-分类页鼠标悬停之谜" class="headerlink" title="1. 分类页鼠标悬停之谜"></a>1. 分类页鼠标悬停之谜</h3><p><strong>现象</strong>：分类总览页鼠标悬停在列表上时，光标变成了点击手型，但点下去什么也没发生——仿佛在逗你玩。</p><p><strong>原因</strong>：自定义样式里给 <code>.category-list-item</code>（<code>&lt;li&gt;</code> 元素）加了 <code>cursor: pointer</code>。问题是 <code>&lt;li&gt;</code> 本身不是链接，它只是链接的容器。光标在手型与无能之间反复横跳，全看鼠标落在 <code>&lt;a&gt;</code> 标签上还是 <code>&lt;li&gt;</code> 的 padding 上。</p><p><strong>修复</strong>：删除 <code>&lt;li&gt;</code> 上的 <code>cursor: pointer</code>，让 <code>&lt;a&gt;</code> 标签自然掌管光标。多一行都是多余的。</p><h3 id="2-签到日历の消失事件"><a href="#2-签到日历の消失事件" class="headerlink" title="2. 签到日历の消失事件"></a>2. 签到日历の消失事件</h3><p><strong>现象</strong>：只有「更新日志-4」这篇文章里，侧边栏签到日历不显示。其他页面一切正常。</p><p><strong>原因</strong>：本小姐自己的锅。签到日历的 Filter 用 <code>str.includes(&#39;checkin-page-root&#39;)</code> 判断页面是否已经是签到独立页。而更新日志-4 的正文里恰好引用了一句”如果页面已经有 <code>checkin-page-root</code> 就跳过数据注入”——这段文字被 Hexo 渲染后，Filter 看到页面里有 <code>checkin-page-root</code> 这个字符串，以为这是签到独立页，于是跳过了 JSON 数据注入。侧边栏的卡片壳子还在，但数据没了，客户端 JS 两手空空。</p><p><strong>修复</strong>：改为 <code>str.includes(&#39;id=&quot;checkin-page-root&quot;&#39;)</code>，精确匹配 HTML 属性而非任意文本。一个小小的引号之差，debug 了两分钟。优雅吗？还行吧。</p><h3 id="3-签到日历跨天不更新"><a href="#3-签到日历跨天不更新" class="headerlink" title="3. 签到日历跨天不更新"></a>3. 签到日历跨天不更新</h3><p><strong>现象</strong>：过了午夜 12 点，签到日历的”今天”标记还停在昨天，侧边栏也不切换到新的一周。要到第二天早上重新部署后才正常。</p><p><strong>原因</strong>：<code>today</code> 的值是在 <code>hexo g</code> 构建时用 <code>moment()</code> 算的，写死在静态 JSON 里。静态网站嘛，构建完了就是一块石头，时间再也推不动它。</p><p><strong>修复</strong>：客户端 JS 自己算真实日期。改动还挺多的：</p><ul><li>新增 <code>REAL_TODAY</code> 变量，在页面加载时用 <code>new Date()</code> 计算</li><li><code>isToday()</code> 不再依赖静态度 <code>DATA.today</code></li><li>侧边栏周历和月历的”今天”高亮全部改用 <code>REAL_TODAY</code></li><li>如果真实日期已超出服务端生成的周范围，自动从历史数据重算本周的周历和进度条</li><li><code>navToToday()</code> 跳转按钮也改为用客户端实时日期</li></ul><p>这样无论什么时候打开页面，日历都反映真实的”今天”。</p><hr><h2 id="☁️-词云-2-0：从”一堆词”到”有层次”"><a href="#☁️-词云-2-0：从”一堆词”到”有层次”" class="headerlink" title="☁️ 词云 2.0：从”一堆词”到”有层次”"></a>☁️ 词云 2.0：从”一堆词”到”有层次”</h2><p>今天的重头戏。之前词云虽然能用，但总感觉差了点什么——所有词一样大、一样重要、一样随机散布，像个没感情的标签打印机。</p><h3 id="配置化"><a href="#配置化" class="headerlink" title="配置化"></a>配置化</h3><p>首先把三个硬编码参数搬到了 <code>_config.butterfly.yml</code>：</p><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">wordcloud:</span></span><br><span class="line">  <span class="attr">repeat:</span> <span class="number">5</span>          <span class="comment"># 标签出现总次数（含本体 1 次）</span></span><br><span class="line">  <span class="attr">repeat_scale:</span> <span class="number">0.4</span>  <span class="comment"># 替身权重比例（越小填充词越淡）</span></span><br><span class="line">  <span class="attr">min_size:</span> <span class="number">5</span>        <span class="comment"># 最小字号 (px)</span></span><br><span class="line">  <span class="attr">max_size:</span> <span class="number">60</span>       <span class="comment"># 最大字号 (px)</span></span><br></pre></td></tr></table></figure><p>新增 <code>scripts/wordcloud-config.js</code> 负责注入配置（还踩了个坑：<code>hexo.theme.config</code> 不认非原生键，得直接 <code>js-yaml</code> 解析文件）。</p><h3 id="本体-vs-替身"><a href="#本体-vs-替身" class="headerlink" title="本体 vs 替身"></a>本体 vs 替身</h3><p>之前的 <code>repeat</code> 只是简单地把同一个词塞 N 遍——本体和替身一样大，导致词云里到处是同样大小的重复标签，看着像出了 bug。</p><p>改成分层：<strong>本体用原权重（大字、显眼），替身按 <code>repeat_scale</code> 缩放（0.4 → 小字、低调）</strong>。效果就是：一眼看去是清晰的大标签，仔细看才发现周围还有模糊的小字在悄悄填形状。</p><h3 id="中心聚集-权重排序"><a href="#中心聚集-权重排序" class="headerlink" title="中心聚集 + 权重排序"></a>中心聚集 + 权重排序</h3><p>WordCloud2 的放置算法是从形状中心开始螺旋往外找空位——谁排在列表前面，谁先占位。所以就做了两层优化：</p><ol><li><strong>本体全部排在替身前面</strong> → 本体先抢中心好位置，替身只能去边缘找缝</li><li><strong>本体按权重降序排序</strong> → 文章最多的标签排在第一个，直接占领心形正中央</li></ol><p>最终效果：热门的「博客相关」「Hexo」之类的标签汇聚在心脏位置，冷门标签环绕周边，小小的替身们填满剩下的空隙。终于像一朵有核心有边缘的”词云”，而不是一盆洒了的豆子。</p><h3 id="关于字号的那条流水线"><a href="#关于字号的那条流水线" class="headerlink" title="关于字号的那条流水线"></a>关于字号的那条流水线</h3><p>写代码的时候顺便把权重链路梳理清楚了——如果你也想调，知道该改哪里：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">① Hexo cloudTags 助手（tags.pug）</span><br><span class="line">   标签文章数 → font-size: 1.2em ~ 2.1em</span><br><span class="line">         ↓</span><br><span class="line">② wordcloud.js buildWordList()</span><br><span class="line">   font-size × 10 → 权重 12~21</span><br><span class="line">         ↓</span><br><span class="line">③ 本体权重不变 &#x2F; 替身权重 × repeat_scale</span><br><span class="line">         ↓</span><br><span class="line">④ WordCloud2 渲染</span><br><span class="line">   权重 × weightFactor(2) → 实际像素 24~42px</span><br></pre></td></tr></table></figure><p>想调字号范围，改 <code>tags.pug</code> 里的 <code>minfontsize</code>/<code>maxfontsize</code> 比调 <code>min_size</code>/<code>max_size</code> 更直接——后者只是兜底和上限，前者才是源头。</p><hr><h2 id="📋-改动清单"><a href="#📋-改动清单" class="headerlink" title="📋 改动清单"></a>📋 改动清单</h2><table><thead><tr><th>文件</th><th>改动</th></tr></thead><tbody><tr><td><code>_config.butterfly.yml</code></td><td>删除两行 <code>cursor: pointer</code>；新增 <code>wordcloud</code> 配置块</td></tr><tr><td><code>scripts/checkin.js</code></td><td>Filter 检测从 <code>checkin-page-root</code> 改为 <code>id=&quot;checkin-page-root&quot;</code></td></tr><tr><td><code>source/js/checkin.js</code></td><td>客户端实时日期 + 跨周自动重算 + <code>navToToday</code> 修复</td></tr><tr><td><code>scripts/wordcloud-config.js</code></td><td><strong>新建</strong> — 注入 <code>window.__wordcloudConfig</code></td></tr><tr><td><code>source/js/wordcloud.js</code></td><td>配置化读取 + maxSize 缩放 + 本体/替身分层 + 中心聚集排序</td></tr></tbody></table><hr><p><em>——修了三个 bug、把词云调教成了想要的样子、然后发现自己盯着心形标签云看了五分钟的露西亚 001 号，于又一个”本来只想修个小问题”的夜晚</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年8月12日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年8月12日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年8月12日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年8月12日&lt;/h1&gt;&lt;p&gt;今天</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第 12 章 占卜师罗莎遇刺事件（中）</title>
+    <link href="https://zwei-wings.github.io/2026/08/12/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%2012%20%E7%AB%A0%20%E5%8D%A0%E5%8D%9C%E5%B8%88%E7%BD%97%E8%8E%8E%E9%81%87%E5%88%BA%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%AD%EF%BC%89/"/>
+    <id>https://zwei-wings.github.io/2026/08/12/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%2012%20%E7%AB%A0%20%E5%8D%A0%E5%8D%9C%E5%B8%88%E7%BD%97%E8%8E%8E%E9%81%87%E5%88%BA%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%AD%EF%BC%89/</id>
+    <published>2026-08-12T00:00:00.000Z</published>
+    <updated>2026-08-11T20:14:42.332Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第-12-章-占卜师罗莎遇刺事件（中）"><a href="#第-12-章-占卜师罗莎遇刺事件（中）" class="headerlink" title="第 12 章 占卜师罗莎遇刺事件（中）"></a>第 12 章 占卜师罗莎遇刺事件（中）</h1><p>就在这时，一阵略显突兀的、混杂着浓郁香料和某种炖煮食物气息的味道，顺着走廊飘进了候客室。紧接着是沉重的脚步声由远及近，伴随着金属器皿轻微碰撞的叮当声，最终停在了候客室门外不远处。<br>“阿尔伯特！”一个粗犷、带着明显不满和浓重鼻音的男声随后响起，对方的音量不算小，以至于待客室里的两人都能听得清清楚楚。<br>“你还在磨蹭什么？水都快要烧干了！还有那该死的草药，贝娜新采回来的根本不对味！我都说了多少次，这种天气摘的叶片水分太重……”<br>安室透悄然看向门外，就见一个魁梧的身影正站在老管家阿尔伯特面前。<br>对方看上去五十岁上下，身材壮硕，几乎把门框塞满，身上穿着一件沾着油渍的白围裙，挽到胳膊肘的袖口下露出一截布满浓密汗毛、筋肉结实的小臂，看上去是这座宅邸的厨师。<br>老管家阿尔伯特的眉头几不可察地皱了一下，似乎对这份粗鲁的打扰颇为不满。<br>“维克托，跟你说过多少遍，夫人不喜欢吵闹。”他转身面向门口，声音似是带上几分斥责，“而且今天有客人登门，收起你那副咋咋呼呼的做派，别给夫人丢脸。”<br>“客人？最近怎么总有些摸不清底细的人上门……”<br>维克托嘴里似是嘟嘟囔囔着，那双灰蓝色的眼睛毫不客气地扫过候客室内的两人，目光在薄羽凉考究的西装和安室透身上停留片刻，带着一种审视又毫不掩饰的怀疑。<br>“注意你的言辞，维克托。”阿尔伯特管家脸上的肌肉似乎抽搐了一下，他深吸一口气，尽量保持着镇定，“我这就去准备夫人要的安神茶。”<br>维克托重重哼了一声，这才转身离开，沉重的脚步声伴随着餐具在围裙口袋里碰撞的声响，再次消失在走廊深处，留下那股油腻的油烟味和尴尬的沉默在候客室中弥漫开来。<br>随着时间一分一秒的流逝，墙上的古董钟表指针已经悄然滑过了下午一点十分，约定的时间早已超过。<br>薄羽凉脸上的优雅笑容开始掺入一丝恰到好处的、属于富家少爷等待过久的不耐和困惑。<br>他放下几乎没动过的茶杯，状似无意的开口。<br>“阿尔伯特先生，夫人的准备工作……通常需要这么久吗？”<br>低头看了一眼怀表，阿尔伯特那浑浊的眼珠里似乎也掠过一丝极其罕见的疑虑，沟壑纵横的脸上显出一种与平日刻板麻木不同的凝重。<br>“夫人……”他喃喃了一句，声音沙哑，“夫人的仪式有时确实会……超出预期。但今天……”他停顿了一下，似乎也觉得今天占卜仪式的准备时间有些太长了。<br>最终，他做出了决定。<br>“请随我来吧。”<br>三人沿着走廊向深处走去，气氛似比来时更加凝重压抑。<br>而就在安室透与薄羽凉跟随着老管家阿尔伯特前往二楼的占卜室，即将踏上第一级盘旋而上的木质楼梯时——<br>“砰！”<br>一声尖锐至极、撕裂死寂的枪响猛地炸开！ 声音的来源就在这栋宅邸之内，异常清晰、突兀，伴随着像是玻璃破碎的炸裂声。<br>这声枪响顿时惊动了整间宅邸，没来得及多想，三人立刻朝枪响传来的方向赶去，随即就见宅邸里的另外两人都在门前，大抵也是听到枪响赶来的。<br>其中厨师维克托正高举着一把沉重的斧子，双眼赤红，作势就要朝门锁劈去！斧刃在昏暗的灯光下闪着寒光，带着一股不顾一切的蛮力。<br>“住手！维克托！”管家阿尔伯特几乎是咆哮着冲了过去，一把抓住维克托的手臂，力道之大让厨师踉跄后退了几步。阿尔伯特的脸上罕见地失去了往日的沉稳，取而代之的是一种近乎恐慌的焦虑。<br>“你疯了吗？这门可是 18 世纪的古董！夫人要是知道了，绝对会暴怒的！”他的声音尖锐，但眼神却闪烁不定，仿佛“夫人暴怒”只是个借口。<br>“可是枪声是从这里传出的！”维克托喘着粗气，斧子悬在了半空，“万一里面有人受伤或死了怎么办？！”<br>阿尔伯特深吸一口气，恢复了一丝镇定，却带着可疑的果断——他迅速从西装内袋掏出一把手枪，枪身泛着冷冽的金属光泽。<br>“用枪破坏门锁，动静小些，破坏程度也更可控。”他边说边扳动击锤，将枪口对准了门锁，动作熟练得简直不像一个普通管家，“虽然不太保险，但总比你的斧子毁了整扇门强。”<br>一旁的贝娜见此，赶紧挤到了前面，她用力拍打着坚实的门板，用她那无人能懂的母语，用一种近乎尖叫的、带着哭腔的语调，急促地朝门内喊了两声，似是在确认门内是否有人，但没有任何人回应。<br>“看！没人回应！里面肯定没人，或者……” 阿尔伯特急促地解释，或者更是在说服众人，他的手指已经扣在了扳机上，“必须立刻确认夫人安全！退后！”<br>“砰！”<br>枪口喷出火光和硝烟，第二声枪响在封闭的走廊里显得更加震耳欲聋。金属门锁应声碎裂，碎片四溅。阿尔伯特几乎是枪响的同时就一脚踹开了房门，动作迅猛得令人咋舌。<br>眼前的景象瞬间攫住了所有人的呼吸——<br>房间中央，罗莎·贝拉尔特夫人歪倒在她的轮椅上。<br>她的左眼处赫然已是一个血洞，暗红色的血液正汩汩流出，染红了她腿上的毛毯和银白的发丝。<br>巨大的枪声带来的耳鸣尚未消散，门内凄厉的景象已如重锤般砸在每个人的视网膜上。<br>时间仿佛凝固了几秒。<br>维克托手里的斧子“哐当”一声掉落在昂贵的地毯上，粗壮的身体也似乎晃了晃，下意识地后退了半步，撞在门框上发出沉闷的响声。<br>他喉咙里发出一声短促的呜咽，目光死死盯着夫人的尸体，嘴唇哆嗦着，却一个字也说不出来，先前那种蛮横和急躁消失得无影无踪，只剩下巨大的、难以置信的惊骇。<br>贝娜脸上的表情同样一片空白。她捂住嘴，发出一声短促而惊恐的抽气，那双带着异域风情的眼睛瞪得溜圆，里面充满了纯粹的恐惧和难以置信，似乎没有想到刚刚还在与她对话的夫人就这样死去了。<br>阿尔伯特身体僵直地站在门口，仿佛被施了定身咒。他脸上的血色褪尽，只剩下一种近乎死灰的惨白。他浑浊的眼珠剧烈地颤动，里面最后一丝强装的镇定彻底粉碎，取而代之的是灭顶的绝望和深不见底的恐惧。<br>“夫人——！”他发出一声撕裂般的、痛苦至极的低吼，身体像被抽走了所有骨头，踉跄着就要扑向那具轮椅，却被薄羽凉及时拦住。<br>“请立刻离开门边，不要触碰任何东西！”<br>安室透的声音不高，却带着一种穿透力，让沉浸在巨大悲痛中的阿尔伯特浑身一震。<br>“听着！夫人不是在安静中逝去的！那声玻璃破碎说明了一切——这是谋杀！”他的语气斩钉截铁，目光炯炯地逼视着众人，“而且凶手可能就在附近，甚至……可能还在这宅邸里！”<br>“从现在开始，任何人不得进入这个房间，不得触碰现场任何物品！”<br>他紧接着转向管家，声音带着一丝不容抗拒的命令口吻，但仍保持着最基本的尊重，“我们需要尽快弄清楚真相，阿尔伯特先生，我知道夫人遇害的事实令您很难过，但现在悲痛解决不了任何问题。”<br>“谁是真凶，我们有办法找出来。”安室透放缓了声音，“但前提是，你们必须完全配合我。”<br>“配、配合你？”阿尔伯特似是一愣，随即不由得用有些怀疑的眼神看向他，“这种时候不应该报警吗？”<br>“报警？”安室透挑了挑眉，像是听到了什么好笑的话，“然后告诉警察，你在一个封闭房间里发现了被枪杀的主人，而你自己正好有一把非法持有的手枪，并且刚刚用它轰开了这间房门的门锁吗？”<br>“阿尔伯特先生，你觉得警察会怎么看你？第一个嫌疑犯是谁？”说着，安室透话音一转，“还是说，你们想让警察把夫人那些不愿为外人道的‘安神茶’和特殊草药传出去？”<br>“如果我没猜错，为访客们提供的茶水里被放入了含有致幻效果的香料吧？”<br>他压低声线，似是在三人耳边低语。<br>“你们难道想看见明天莫斯科的新闻头版上写着「著名占卜师罗莎·贝拉尔特女士伙同三名佣人，使用致幻药物制造虚假异象，诈骗他人钱财」的报道吗？”<br>安室透的话语如同冰冷的毒针，精准地刺入三人紧绷的神经。<br>阿尔伯特的身体猛地僵住，那双被泪水模糊的眼睛瞬间瞪大，难以置信地看着安室透，仿佛第一次真正认识眼前这个人的本质。而贝娜和维克托则像是被无形的寒气冻住，连呼吸都停滞了一瞬，正在颤抖的贝娜更是泪眼中闪过几分惊惶。<br>屋内一时间死寂得可怕，只有窗外呼啸的风声和远处隐约的雷鸣在提醒着时间的流逝。夫人罗莎·贝拉尔特静坐在阴影笼罩的轮椅中，无声的控诉弥漫在空气中。<br>“你……你到底是什么人？”阿尔伯特的声音干涩嘶哑，带着极度的惊骇。<br>眼前这个人不仅洞悉了宅邸的秘密，更准确地捏住了他们所有人的命脉。那份从容不迫下做出的威胁，比任何武器都更令人胆寒。<br>而安室透没有回答阿尔伯特的问题，仿佛那根本不值一提。<br>他收回逼视的目光，姿态看似随意地向前踱了两步，皮鞋踏在地毯上发出轻微的声响，却像鼓点敲在每个人的心上。<br>那锐利的目光扫过三人惊惧的面孔，最终停留在了老管家阿尔伯特身上。<br>“我是谁不重要，阿尔伯特先生。”他的声音恢复了平稳，却比刚才的命令更带着一种不容置疑的权威，也如同冰冷的丝线般缠绕住猎物，“重要的是，警察介入只会带来混乱、耻辱，以及……不必要的殉葬者。”<br>他刻意停顿，让“殉葬者”三个字在死寂的空气中落下。维克托下意识地后退了半步，撞到了门框。而贝娜紧抿着嘴唇，半颗泪珠似是还挂在眼角。<br>“而夫人的死需要一个‘真相’，一个符合在场所有人‘利益’的真相，不是吗？”</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;第-12-章-占卜师罗莎遇刺事件（中）&quot;&gt;&lt;a href=&quot;#第-12-章-占卜师罗莎遇刺事件（中）&quot; class=&quot;headerlink&quot; title=&quot;第 12 章 占卜师罗莎遇刺事件（中）&quot;&gt;&lt;/a&gt;第 12 章 占卜师罗莎遇刺事件（中）&lt;/h1&gt;&lt;p&gt;就在</summary>
+      
+    
+    
+    
+    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="触手君与柑橘酱" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/"/>
+    
+    
+    <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
+    
+    <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>第 11 章 占卜师罗莎遇刺事件（上）</title>
@@ -494,59 +548,6 @@
     <category term="网页设计" scheme="https://zwei-wings.github.io/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/"/>
     
     <category term="javascript" scheme="https://zwei-wings.github.io/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第 1 章 伊戈尔暗杀事件（上）</title>
-    <link href="https://zwei-wings.github.io/2026/08/01/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%201%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
-    <id>https://zwei-wings.github.io/2026/08/01/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/%E7%AC%AC%201%20%E7%AB%A0%20%E4%BC%8A%E6%88%88%E5%B0%94%E6%9A%97%E6%9D%80%E4%BA%8B%E4%BB%B6%EF%BC%88%E4%B8%8A%EF%BC%89/</id>
-    <published>2026-08-01T00:00:00.000Z</published>
-    <updated>2026-08-08T20:53:40.197Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第-1-章-伊戈尔暗杀事件（上）"><a href="#第-1-章-伊戈尔暗杀事件（上）" class="headerlink" title="第 1 章 伊戈尔暗杀事件（上）"></a>第 1 章 伊戈尔暗杀事件（上）</h1><p>暮色漫过天际时，花瓶中成束的玫瑰正于最后一线日光中舒展身姿，奶油色的花瓣边缘此刻还盛着些许水珠，犹如浸透蜜糖的琥珀般洇染着夕阳余晖。<br>屋内，嵌在绒面沙发里的少年蜷成了一团。<br>淡金的碎发下，一张稚嫩的童颜看上去恬静无害，像是只正在假寐的大型猫科动物。他背脊中漫出的黑色触手正懒洋洋地占据着客厅，直到玄关大门忽然传来钥匙卡激活时的电子音，才又乖乖钻回衬衫下摆，消失得无影无踪。<br>凛冽的风雪在开门的瞬间便席卷着屋内的柑橘香薰四散开来，细碎的霜花悄然落在柜顶，又在数分钟后随室温升高而化为缥缈的水汽。<br>来人是名样貌平平的中年男子，一身大众品牌的西服，肩下夹着最普通的公文包，看上去就像是刚刚通勤结束的上班族，站在这间公寓里倒是显得有几分格格不入。而仰躺在沙发上的少年却头也没抬的唤道——<br>“欢迎回来，贝尔～”<br>被一眼看穿的千面魔女倒也没怎么感到意外，只是有些无奈的撕开了易容，露出那张属于大明星莎朗·温亚德的脸，一头灿金的长卷发也顿时披散了下来。<br>“又在午休？那我是不是该晚些再来？”说归这么说，贝尔摩德倒是在沙发上坐了下来，半分没有要走的意思，“真好奇你晚上的时间都用来做些什么了，偏要在阳光正好的下午睡上一觉。”<br>“哎～因为晚上睡不着嘛。”仰躺在沙发上的少年薄羽凉一边应声，一边漫不经心的打了个哈欠，碧绿色的眼瞳还泛着水光，似乎是刚刚睡醒，“都怪以前在东京的时候，Gin 酱总是凌晨两三点才打电话让人从暖呼呼的被子里爬起来做任务，可讨厌了。”<br>“还不如下午睡更安稳，而且顺便晒太阳也很舒服……”<br>“歪理倒是一套一套的。”贝尔摩德的语气听不出是褒奖还是讽刺，她随意地将一个薄薄的牛皮纸袋滑过茶几，又摸出一罐未开封的橘子糖。<br>“喏，威士忌安排的新任务，还有你要的橘子糖。”<br>“贝尔你最好了～”薄羽凉像是撒娇般拖长着尾音，顺势将头搭在了她肩膀上。<br>“你啊，”她略带调侃的笑道，“都吃了十多年的橘子糖，还不觉得腻味吗？”<br>但调侃归调侃，比起这个有橘子糖就万事大吉的家伙，贝尔摩德明显更在乎组织任务。<br>“这次的目标是伊戈尔·彼得罗夫，一个据说最近在跟组织抢生意的家伙。”她伸出指尖在文件袋上轻点了点，嗓音里带着惯有的慵懒。<br>“又是彼得罗夫家的？”薄羽凉似是挑了挑眉，才终于懒洋洋的拉伸了一下筋骨，坐起来翻看那份任务资料，纸袋里不出意外是几张目标的照片，还有一张拍卖会的邀请函与现场的建筑结构图。<br>“没办法，谁让我们的威士忌大人对彼得罗夫家族总是紧咬不放。”贝尔摩德嘴角勾起一个玩味的弧度，语气中带着几分不易察觉的讥诮，“连这么一条早已远离权力中心的老狗都不放过，真不知道他到底和结了彼得罗夫家什么仇什么怨。”<br>“而且，要找理由的话至少用心一点啊。”看完那些照片的薄羽凉也撇了撇嘴，忍不住吐槽了起来，“一个差点被主家赶到西伯利亚去种土豆的颓废大叔能有资格带头跟组织抢生意？威士忌怕不是老年痴呆犯了。”<br>“不过他能这么爽快的交代，倒是为我们省了不少事。”贝尔摩德话音一转，指尖亲昵的滑过薄羽凉颈间的项圈，最后捏住那块无字的银色吊牌，“想来「Boss 的番犬」很快就会咬住他的命脉，将他撕个粉碎了，对吗？”<br>听此，薄羽凉似是几不可闻的轻笑了一声。<br>“当然。”他抬手牵住贝尔摩德的指尖，在对方手背上落下一吻，“既然是那位大人的命令的话。”<br>而贝尔摩德只是意味深长的垂眸看了他一眼，便不着痕迹的抽回了手，随即转身走向自己的房间，去取早已准备好的易容道具。<br>香槟的任务向来不需要任何人接应。<br>所以只要再提前给这只“番犬”换张脸，属于她的工作就完成了。至于剩下在任务中遇到的麻烦也好，突发状况也好，任务失败的责任也好，通通可以扔给香槟自行解决，这也是贝尔摩德喜欢和香槟搭档的原因之一。<br>只可惜……她昨天已经接到了前往纽约的调令。<br>想到这样悠闲的时光即将一去不复返，即便是贝尔摩德也忍不住叹了口气。<br>待她拿着特制的易容化妆包返回客厅时，薄羽凉正哼着不成调的小曲，在窗边摆弄着花瓶里的玫瑰，几支不知何时出现的白玫瑰穿插在奶油色的花瓣中，显得多了几分层次感。<br>“呵，”贝尔摩德饶有兴致的看着他的动作，“这倒是令人意外……在执行任务前还有这份侍弄花草的闲情逸致？”<br>“一点小小的仪式感罢了。”薄羽凉看似随意地将插好的花瓶放在窗台正中，便转身朝贝尔摩德走来，“这种拙劣的插花手法，我们的大明星应该不介意吧？”<br>贝尔摩德不置可否的耸了耸肩，“随你高兴。”<br>“毕竟，等交接完这边的事，我就得动身了。”她的语气听不出什么特别的情绪，仿佛在谈论天气，“也许是朗姆说了些什么，也许是其他什么原因，Boss 似乎觉得美国的舞台更需要一些‘千变万化’的魅力。”<br>“原来如此，既然是 Boss 的命令就没办法啦～”薄羽凉若有所思地拖长了尾音，任由贝尔摩德手中特制的易容材料在她手中服帖地覆盖上他原本的轮廓，才又继续开口，“真遗憾，能独占大明星的时间总是这么短暂。”<br>“我也会想念你的，香槟。”贝尔摩德状似专注地调整着易容面具的边缘，指尖却顺势轻抚过他的脸颊。“至于你的下一个情报后援……过些时日，大抵又会指派新的搭档吧。”<br>“而且，”她忽然顿了顿，“听说总部最近多了几个能力很不错的新人，Boss 已经打算给他们代号了。”<br>“新人？”薄羽凉终于有些意外的睁开了眼睛，原本浑圆的瞳孔微微收缩而拉成一条非人的竖线，似是对这个话题很感兴趣。<br>“虽然只是我的猜测……”贝尔摩德轻笑着俯身，在薄羽凉耳侧低语道，“Boss 说不定会把那批新人里唯一的情报专家送给你。”<br>“因为据说对方，恰好是你最喜欢的金发。”<br>说完，贝尔摩德像是没看见薄羽凉惊讶的表情般，悄然退后了一步。在仔细端详过自己的作品后，她满意地点了点头，“很好，去看看你现在的模样吧。”<br>镜子里映出的，是一张与薄羽凉本人毫不相干的、属于陌生男子的脸。<br>皮肤显得粗糙了点，颧骨偏高，鼻梁不够挺直，眉毛杂乱地耷拉着，唯有那双眼睛……虽然被特殊材质的隐形镜片覆盖而改变了虹膜颜色，呈现出一种浑浊的灰褐色，但那种属于猛兽的眼神依旧骇人，令人一眼看上去时总有种诡异的撕裂感。<br>只是那种危险感并没有持续多久，便随着薄羽凉调整站姿的动作而烟消云散。他甚至轻咳了两声，再开口时，声音里便已带上这张脸的主人该有的粗粝沙哑。<br>“你的易容还是一如既往的精致。”<br>“精致……啊。”贝尔摩德抱着双臂，倚坐在沙发扶手上，似是对于他的评价颇有些无奈，但又不得不承认，“的确，若是什么时候能够做出骗得过你的面具，才能称得上完美吧。”<br>薄羽凉听此，却轻笑着摇了摇头。<br>“那是不可能的哦，贝尔。”他微微侧身看向她，似是意味深长的说道，“毕竟，世界上没有完美的易容术。”<br>贝尔摩德似是顿了顿，最后还是没有反驳。<br>“午夜零点，”她重复着关键信息，语气变得公式化，“目标伊戈尔·彼得罗夫习惯在拍卖会中场休息时，溜到顶楼露台抽雪茄。那里视野开阔，但监控死角也足够大，是他享受片刻‘孤独’的固定地点。”她顿了顿，“邀请函和身份卡都在袋子里，你的任务是确保他今晚的雪茄成为他生命中的最后一支。”<br>“明白。”薄羽凉拿起桌上的牛皮纸袋，将那枚属于服务生的员工磁卡和一张拍卖会入场券抽出来，随意地塞进廉价的制服外套内袋。动作漫不经心，仿佛只是整理一下即将上工的行头。<br>他走到玄关，拿起衣架上同样廉价、带着些许陈旧气味的大衣穿上。<br>贝尔摩德的目光落在他略显单薄的新背影上。少年的骨架隐藏在平庸的伪装下，那份属于顶级掠食者的气息被完美地收敛起来。<br>“那么，我出门啦～”薄羽凉的手搭上了冰冷的门把。<br>“香槟。”贝尔摩德的声音在他身后响起，带着一种前所未有的郑重。<br>“嗯？什～么～”薄羽凉歪着头看她。<br>却见贝尔摩德走近一步，高跟鞋敲击地面的声音在寂静的房间里格外清晰。<br>“祝你好运，”她微微俯身，红唇贴近他的耳廓，气息温热，声音压得极低，如同情人间的密语，却带着一种奇异的神圣感，清晰地吐出那个称呼，“我亲爱的堕天使。”<br>薄羽凉的脊背瞬间绷紧了一瞬，那双碧绿色的竖瞳在伪装之下骤然收缩成一条极细的线，如同被惊扰的蛇。<br>空气仿佛凝固了一秒。<br>而贝尔摩德的手指没有停留，轻轻滑下，拍了拍他的肩膀，语气恢复了惯有的慵懒玩味，仿佛刚才那一声呼唤只是错觉。<br>“也祝你今晚……能玩得‘开心’点。”<br>薄羽凉缓缓地、极其轻微地吸了一口气，那瞬间的紧绷如同潮水般退去，最后化作一声微不可闻的轻笑。<br>他没有回应那个称呼，只是转动了门把。<br>“咔嚓。”<br>凛冽的风雪和莫斯科冬夜刺骨的寒气瞬间涌入温暖的玄关，卷走了屋内最后一丝柑橘香薰的气息。<br>门在他身后合拢，隔绝了外面的风雪，也隔绝了屋内的一切。<br>而贝尔摩德走到窗边，目光落在窗台上那只花瓶。<br>瓶中奶油色的玫瑰与纯白色的玫瑰在温暖的室内静静相依，只可惜她无法成为那朵白玫瑰。<br>不是不够聪明，而是不够疯狂、不够决绝。<br>于是她伸出了涂着蔻丹的食指，轻轻拂过其中一支奶油色玫瑰的花瓣，令指尖沾染上些许冰凉的水珠。<br>“「Boss 的番犬」啊……”<br>她低声自语，又没了下文，只剩某种难以诉之言语的叹息。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;第-1-章-伊戈尔暗杀事件（上）&quot;&gt;&lt;a href=&quot;#第-1-章-伊戈尔暗杀事件（上）&quot; class=&quot;headerlink&quot; title=&quot;第 1 章 伊戈尔暗杀事件（上）&quot;&gt;&lt;/a&gt;第 1 章 伊戈尔暗杀事件（上）&lt;/h1&gt;&lt;p&gt;暮色漫过天际时，花瓶中成束的</summary>
-      
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="触手君与柑橘酱" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/"/>
-    
-    
-    <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
-    
-    <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UE4-Quest Manager插件速通</title>
-    <link href="https://zwei-wings.github.io/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/"/>
-    <id>https://zwei-wings.github.io/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/</id>
-    <published>2022-07-03T06:24:16.000Z</published>
-    <updated>2026-08-04T22:52:16.901Z</updated>
-    
-    <content type="html"><![CDATA[<p>1.把所有之前做的操作全清干净，一点都不要剩，包括测试地图里的NPC之类的蓝图也全删掉，还原成完全没导入过这个包时的样子</p><p>2.重新导入这个包</p><p>3.新建一个游戏模式</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/1.png" alt="1"></p><p>4.玩家状态设置成那个包里的状态，pawn设置成主角</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/2.png" alt="2"></p><p>5.将默认游戏模式设置成这个</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/3.png" alt="3"></p><p>6.复制数据库，并将新数据库里的东西全部删干净</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/4.png" alt="4"></p><p>7.新建一条条目，只起名</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/5.png" alt="5"></p><p>8.打开这个蓝图</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/6.png" alt="6"></p><p>9.将QuestList变量默认值设置成自己建的数据表，并将行命名设置成新建的那条（行命名就是自己想要第一个执行的任务）</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/7.png" alt="7"></p><p>10.新建或修改已有的NPC蓝图，设置父类为BP_QuestGiver</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/8.png" alt="8"></p><p>11.将Tatget Name设置成自己要的名字</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/9.png" alt="9"></p><p>12.同样道理再做一个2号</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/10.png" alt="10"></p><p>13.将这两个NPC拖到场景里</p><p>14.编辑任务数据库（注：Objectives里的Objective tag默认有4种任务类型，Collect，Kill，Reach，和Interaction）</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/11.png" alt="11"></p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/12.png" alt="12"></p><p>15.将一个BP_QuestManager拖入场景</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/13.png" alt="13"></p><p>16.将任务面板和交互按键添加到角色蓝图</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/14.png" alt="14"></p><p>17.在人物蓝图里新增一个tag，叫QuestManager</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/15.png" alt="15"></p><p>18.针对开放世界，需要将这里的BeginPlay函数转为事件，并连上Delay 0.2秒。</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/18.png" alt="18"></p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/19.png" alt="19"></p><p>19.一切完全正常</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/16.png" alt="16"></p><p>20.如果完全按照这个做的话，现在应该又是会自动存档的了，对付存档有两种方法，一是和之前一样把所有和保存相关的节点删了，还有一种，搜索EUW_RemoveSavedGame，右键运行，点一下按钮，即可删除存档</p><p><img src= "/img/loading.gif" data-lazy-src="/2022/07/03/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E-QuestManager%E9%80%9F%E9%80%9A/17.png" alt="17"></p>]]></content>
-    
-    
-    <summary type="html">通过溶解特效的制作学习有关材质参数集资产以及其他相关知识点</summary>
-    
-    
-    
-    <category term="学习笔记" scheme="https://zwei-wings.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    <category term="课外拓展" scheme="https://zwei-wings.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/"/>
-    
-    
-    <category term="虚幻引擎" scheme="https://zwei-wings.github.io/tags/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/"/>
-    
-    <category term="UE4" scheme="https://zwei-wings.github.io/tags/UE4/"/>
     
   </entry>
   
