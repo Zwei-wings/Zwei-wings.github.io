@@ -169,12 +169,13 @@
   // ===== 全局状态 =====
   var DATA = null;
   var pageYear, pageMonth;
+  var REAL_TODAY = '';
 
   // ===== 工具函数 =====
   function pad2(n) { return n < 10 ? '0' + n : '' + n; }
   function fmtDate(y, m, d) { return y + '-' + pad2(m + 1) + '-' + pad2(d); }
   function getMarks(dateStr) { return DATA && DATA.dates && DATA.dates[dateStr]; }
-  function isToday(dateStr) { return DATA && dateStr === DATA.today; }
+  function isToday(dateStr) { return dateStr === REAL_TODAY; }
   function isoWeekStart(date) {
     var d = new Date(date);
     var day = d.getDay();
@@ -190,6 +191,64 @@
     d.setDate(d.getDate() + diff);
     d.setHours(23, 59, 59, 999);
     return d;
+  }
+
+  // 客户端重新计算本周数据（用于跨周后自动刷新）
+  function clientCalcWeek(dates, today, oldWeekly) {
+    var d = new Date(today + 'T00:00:00');
+    var isoDay = d.getDay() || 7;
+    var monday = new Date(d);
+    monday.setDate(d.getDate() - isoDay + 1);
+    monday.setHours(0, 0, 0, 0);
+    var sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+
+    var days = [];
+    var postedTotal = 0, readDays = 0;
+    for (var i = 0; i < 7; i++) {
+      var cd = new Date(monday);
+      cd.setDate(cd.getDate() + i);
+      var ds = fmtDate(cd.getFullYear(), cd.getMonth(), cd.getDate());
+      var entry = dates[ds];
+      var dayData = {
+        date: ds,
+        weekday: i + 1,
+        day: cd.getDate(),
+        month: cd.getMonth() + 1,
+        posted: (entry && entry.posted) || 0,
+        read: !!(entry && entry.read)
+      };
+      days.push(dayData);
+      postedTotal += dayData.posted;
+      if (dayData.read) readDays++;
+    }
+
+    function getTier(current, goal, max) {
+      if (current > max) return 'overflow';
+      if (current >= max) return 'perfect';
+      if (current >= max - 1) return 'close';
+      if (current >= goal) return 'pass';
+      return 'below';
+    }
+
+    var pGoal = (oldWeekly && oldWeekly.posted && oldWeekly.posted.goal) || 5;
+    var pMax  = (oldWeekly && oldWeekly.posted && oldWeekly.posted.max)  || 7;
+    var rGoal = (oldWeekly && oldWeekly.read && oldWeekly.read.goal) || 5;
+    var rMax  = (oldWeekly && oldWeekly.read && oldWeekly.read.max)  || 7;
+
+    return {
+      week: {
+        start: days[0].date,
+        end: days[6].date,
+        startLabel: (monday.getMonth() + 1) + '/' + monday.getDate(),
+        endLabel: (sunday.getMonth() + 1) + '/' + sunday.getDate(),
+        days: days
+      },
+      weekly: {
+        posted: { current: postedTotal, goal: pGoal, max: pMax, tier: getTier(postedTotal, pGoal, pMax) },
+        read:   { current: readDays,    goal: rGoal, max: rMax, tier: getTier(readDays, rGoal, rMax) }
+      }
+    };
   }
 
   // ===== 数据加载 =====
@@ -217,7 +276,7 @@
     var html = '';
     for (var i = 0; i < days.length; i++) {
       var day = days[i];
-      var cls = 'cw-day' + (day.date === DATA.today ? ' cw-today' : '');
+      var cls = 'cw-day' + (day.date === REAL_TODAY ? ' cw-today' : '');
 
       html += '<div class="' + cls + '">';
       html += '<div class="cw-day-name">' + WEEKDAY_FULL[i][1] + '</div>';
@@ -621,15 +680,9 @@
   }
 
   function navToToday() {
-    var parts = DATA.today ? DATA.today.split('-') : null;
-    if (parts) {
-      pageYear = parseInt(parts[0], 10);
-      pageMonth = parseInt(parts[1], 10) - 1;
-    } else {
-      var now = new Date();
-      pageYear = now.getFullYear();
-      pageMonth = now.getMonth();
-    }
+    var now = new Date();
+    pageYear = now.getFullYear();
+    pageMonth = now.getMonth();
     renderStats();
     renderMonthTable();
     renderHeatmap();
@@ -654,14 +707,19 @@
     DATA = loadData();
     if (!DATA) return;
 
-    var parts = DATA.today ? DATA.today.split('-') : null;
-    if (parts) {
-      pageYear = parseInt(parts[0], 10);
-      pageMonth = parseInt(parts[1], 10) - 1;
-    } else {
-      var now = new Date();
-      pageYear = now.getFullYear();
-      pageMonth = now.getMonth();
+    // 用客户端真实时间代替服务端构建时间
+    var now = new Date();
+    REAL_TODAY = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate());
+    pageYear = now.getFullYear();
+    pageMonth = now.getMonth();
+
+    // 如果真实日期已超出服务端生成的周范围，重新计算本周数据
+    if (DATA.week && (REAL_TODAY < DATA.week.start || REAL_TODAY > DATA.week.end)) {
+      var newData = clientCalcWeek(DATA.dates, REAL_TODAY, DATA.weekly);
+      if (newData) {
+        DATA.week = newData.week;
+        DATA.weekly = newData.weekly;
+      }
     }
 
     // 侧边栏
@@ -687,6 +745,19 @@
   function pjaxReload() {
     DATA = loadData();
     if (!DATA) return;
+
+    // 同步真实时间
+    var now = new Date();
+    REAL_TODAY = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate());
+
+    // 如果真实日期已超出周范围，重新计算
+    if (DATA.week && (REAL_TODAY < DATA.week.start || REAL_TODAY > DATA.week.end)) {
+      var newData = clientCalcWeek(DATA.dates, REAL_TODAY, DATA.weekly);
+      if (newData) {
+        DATA.week = newData.week;
+        DATA.weekly = newData.weekly;
+      }
+    }
 
     if (document.getElementById('checkin-week-strip')) {
       renderSidebar();
