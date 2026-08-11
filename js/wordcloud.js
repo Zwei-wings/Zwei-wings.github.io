@@ -1,8 +1,10 @@
 (function() {
   'use strict';
 
-  // === 词云密度：每个标签重复次数（标签少时增加以填充形状）===
-  var REPEAT_FACTOR = 3;
+  // === 读取配置（由 scripts/wordcloud-config.js 注入） ===
+  var CFG = (typeof window.__wordcloudConfig !== 'undefined')
+    ? window.__wordcloudConfig
+    : { repeat: 3, minSize: 10, maxSize: 60 };
 
   // === 暖色系调色板 ===
   var warmPalette = [
@@ -32,7 +34,7 @@
       var m = style.match(/font-size:\s*([\d.]+)em/);
       var weight = m ? parseFloat(m[1]) * 10 : 10;
       _tagLinks.push({ text: text, href: href });
-      for (var r = 0; r < REPEAT_FACTOR; r++) {
+      for (var r = 0; r < CFG.repeat; r++) {
         result.push([text, weight]);
       }
     });
@@ -89,7 +91,7 @@
         clearCanvas: false,   // 不清理，保留手动绘制的 mask
         rotateRatio: 0.25,
         rotationSteps: 2,
-        minSize: 10,
+        minSize: CFG.minSize,
         shrinkToFit: false,
         drawOutOfBound: false,
         ellipticity: 1,
@@ -98,6 +100,20 @@
           if (t && t.href) window.location.href = t.href;
         }
       };
+
+      // maxSize 等比缩放：如果最大字号超限，整体缩放所有权重
+      (function() {
+        var maxW = 0;
+        for (var i = 0; i < wordList.length; i++) {
+          if (wordList[i][1] > maxW) maxW = wordList[i][1];
+        }
+        if (maxW * opts.weightFactor > CFG.maxSize) {
+          var scale = (CFG.maxSize / opts.weightFactor) / maxW;
+          for (var j = 0; j < wordList.length; j++) {
+            wordList[j][1] = Math.round(wordList[j][1] * scale);
+          }
+        }
+      })();
 
       // 加载心形 PNG 并绘制到 canvas 上
       // PNG 是白心浅灰底 → 白像素匹配 bg=自由区，浅灰不匹配=禁区
