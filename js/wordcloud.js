@@ -4,7 +4,7 @@
   // === 读取配置（由 scripts/wordcloud-config.js 注入） ===
   var CFG = (typeof window.__wordcloudConfig !== 'undefined')
     ? window.__wordcloudConfig
-    : { repeat: 3, minSize: 10, maxSize: 60 };
+    : { repeat: 3, repeat_scale: 0.4, minSize: 10, maxSize: 60 };
 
   // === 暖色系调色板 ===
   var warmPalette = [
@@ -25,7 +25,8 @@
     if (!anchors.length) return null;
 
     _tagLinks = [];
-    var result = [];
+    var originals = [];
+    var copies = [];
     anchors.forEach(function(a) {
       var text = a.textContent.trim();
       var href = a.getAttribute('href');
@@ -34,11 +35,18 @@
       var m = style.match(/font-size:\s*([\d.]+)em/);
       var weight = m ? parseFloat(m[1]) * 10 : 10;
       _tagLinks.push({ text: text, href: href });
-      for (var r = 0; r < CFG.repeat; r++) {
-        result.push([text, weight]);
+      // 本体：原权重 → 先放入列表，螺旋算法从中心开始，优先占位
+      originals.push([text, weight]);
+      // 替身：缩放权重 → 后排入列表，只能填边缘缝隙
+      var copyW = Math.round(weight * CFG.repeat_scale);
+      for (var r = 1; r < CFG.repeat; r++) {
+        copies.push([text, copyW]);
       }
     });
-    return result;
+    // 本体按权重降序：最大标签抢最中心位置
+    originals.sort(function(a, b) { return b[1] - a[1]; });
+    // 本体在前、替身在后：螺旋放置时自然形成中心→边缘的层次
+    return originals.concat(copies);
   }
 
   function findByText(text) {
