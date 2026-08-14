@@ -27,7 +27,7 @@
     '#nm-panel {',
     '  position: fixed; z-index: 1002; width: 320px; max-width: 92vw;',
     '  background: #fff; border-radius: 12px;',
-    '  box-shadow: 0 4px 24px rgba(0,0,0,0.12);',
+    '  box-shadow: 0 5px 20px -4px rgba(0,0,0,0.5);',
     '  overflow: hidden; display: none;',
     '  border: 0.5px solid rgba(0,0,0,0.08);',
     '}',
