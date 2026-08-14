@@ -353,8 +353,6 @@
           updateLoopDisplay();
         }
 
-        engine.style.display = 'none';
-
         uiEl = document.getElementById('nav-music-ui');
         if (uiEl) {
           playEl = uiEl.querySelector('.nm-play');
