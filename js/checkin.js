@@ -204,7 +204,7 @@
     sunday.setDate(sunday.getDate() + 6);
 
     var days = [];
-    var postedTotal = 0, readDays = 0;
+    var postedTotal = 0, readTotal = 0;
     for (var i = 0; i < 7; i++) {
       var cd = new Date(monday);
       cd.setDate(cd.getDate() + i);
@@ -216,11 +216,11 @@
         day: cd.getDate(),
         month: cd.getMonth() + 1,
         posted: (entry && entry.posted) || 0,
-        read: !!(entry && entry.read)
+        read: (entry && entry.read) || 0
       };
       days.push(dayData);
       postedTotal += dayData.posted;
-      if (dayData.read) readDays++;
+      readTotal += dayData.read;
     }
 
     function getTier(current, goal, max) {
@@ -246,7 +246,7 @@
       },
       weekly: {
         posted: { current: postedTotal, goal: pGoal, max: pMax, tier: getTier(postedTotal, pGoal, pMax) },
-        read:   { current: readDays,    goal: rGoal, max: rMax, tier: getTier(readDays, rGoal, rMax) }
+        read:   { current: readTotal,    goal: rGoal, max: rMax, tier: getTier(readTotal, rGoal, rMax) }
       }
     };
   }
@@ -285,8 +285,8 @@
       if (day.posted > 0) {
         html += '<span class="cw-dot cw-dot-p" title="更文' + day.posted + '篇"></span>';
       }
-      if (day.read) {
-        html += '<span class="cw-dot cw-dot-r" title="细读"></span>';
+      if (day.read > 0) {
+        html += '<span class="cw-dot cw-dot-r" title="细读' + day.read + '篇"></span>';
       }
       html += '</div>';
       html += '</div>';
@@ -390,15 +390,16 @@
     var cardCls = 'tp-track-card';
     if (isPerfect) cardCls += ' tp-perfect';
 
-    // 分级标签
+    // 分级标签（perfect / overflow 按轨道区分措辞）
     var tierLabel = '';
     var tierCls = '';
+    var isReadTrack = (cls === 'r');
     switch (tier) {
       case 'below': tierLabel = '还需努力'; tierCls = 'tp-tier-below'; break;
       case 'pass': tierLabel = '目标达成'; tierCls = 'tp-tier-pass'; break;
       case 'close': tierLabel = '接近满分'; tierCls = 'tp-tier-close'; break;
-      case 'perfect': tierLabel = '日更达成!'; tierCls = 'tp-tier-perfect'; break;
-      case 'overflow': tierLabel = '写作力溢出!'; tierCls = 'tp-tier-overflow'; break;
+      case 'perfect': tierLabel = isReadTrack ? '读满达成!' : '日更达成!'; tierCls = 'tp-tier-perfect'; break;
+      case 'overflow': tierLabel = isReadTrack ? '阅读力溢出!' : '写作力溢出!'; tierCls = 'tp-tier-overflow'; break;
     }
 
     // 显示数字
@@ -425,7 +426,7 @@
     html += '<div class="tp-tick tp-tick-max' + (isPerfect ? ' tp-tick-active' : '') + '" style="left:100%">';
     if (isPerfect) html += '<div class="tp-tick-dot"></div>';
     html += '</div>';
-    html += '<div class="tp-tick-label" style="left:100%;' + (isClose ? 'opacity:0.5;color:#E65100' : '') + (isPerfect ? 'opacity:0.7;color:#FFB74D' : '') + '">日更 ' + track.max + '</div>';
+    html += '<div class="tp-tick-label" style="left:100%;' + (isClose ? 'opacity:0.5;color:#E65100' : '') + (isPerfect ? 'opacity:0.7;color:#FFB74D' : '') + '">' + (isReadTrack ? '读满 ' : '日更 ') + track.max + '</div>';
 
     html += '</div>'; // tp-prog-wrap
 
@@ -497,7 +498,7 @@
     function countRead(ks) {
       var n = 0;
       for (var i = 0; i < ks.length; i++) {
-        if (dates[ks[i]].read) n++;
+        n += (dates[ks[i]].read || 0);
       }
       return n;
     }
@@ -514,7 +515,7 @@
       '<div class="cs-section">' +
       '<div class="cs-stat-row">' +
       '<div class="cs-stat-card"><div class="cs-stat-num">' + countPosted(yearKeys) + '<span style="font-size:12px;font-weight:400;"> 篇</span></div><div class="cs-stat-label">更新文章</div></div>' +
-      '<div class="cs-stat-card"><div class="cs-stat-num">' + countRead(yearKeys) + '<span style="font-size:12px;font-weight:400;"> 天</span></div><div class="cs-stat-label">认真细读</div></div>' +
+      '<div class="cs-stat-card"><div class="cs-stat-num">' + countRead(yearKeys) + '<span style="font-size:12px;font-weight:400;"> 篇</span></div><div class="cs-stat-label">认真细读</div></div>' +
       '<div class="cs-stat-card"><div class="cs-stat-num">' + yearKeys.length + '</div><div class="cs-stat-label">年内活跃天</div></div>' +
       '<div class="cs-stat-card"><div class="cs-stat-num">' + monthKeys.length + '</div><div class="cs-stat-label">本月活跃天</div></div>' +
       '</div>' +
@@ -574,10 +575,10 @@
           var today = isToday(ds);
           var cls = 'cm-day' + (today ? ' cm-today' : '');
           html += '<td><div class="' + cls + '"><div class="cm-day-num">' + day + '</div>';
-          if (marks && (marks.posted > 0 || marks.read)) {
+          if (marks && (marks.posted > 0 || marks.read > 0)) {
             html += '<div class="cm-day-marks">';
             if (marks.posted > 0) html += '<span class="cm-mark cm-mark-posted">更文' + (marks.posted > 1 ? ' x' + marks.posted : '') + '</span>';
-            if (marks.read) html += '<span class="cm-mark cm-mark-read">细读</span>';
+            if (marks.read > 0) html += '<span class="cm-mark cm-mark-read">细读' + (marks.read > 1 ? ' x' + marks.read : '') + '</span>';
             html += '</div>';
           }
           html += '</div></td>';
@@ -606,9 +607,9 @@
       var marks = DATA.dates[ds];
       var lv = 0;
       if (marks) {
-        if (marks.read && marks.posted > 0) lv = 4;
+        if (marks.read > 0 && marks.posted > 0) lv = 4;
         else if (marks.posted > 0) lv = 3;
-        else if (marks.read) lv = 2;
+        else if (marks.read > 0) lv = 2;
         else lv = 1;
       }
       cw.push({ date: ds, level: lv, inYear: inYear });
