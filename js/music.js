@@ -20,6 +20,8 @@
   var LOOP_MODES = ['all', 'one', 'all', 'none'];
   var LOOP_ORDERS = ['list', 'list', 'random', 'list'];
   var LOOP_LABELS = ['列表循环', '单曲循环', '随机播放', '顺序播放'];
+  var VOLUME_KEY = 'nav-music-volume';
+  var LOOP_KEY = 'nav-music-loop';
 
   // ===== CSS =====
   var css = [
@@ -222,6 +224,7 @@
       }
       var label = document.querySelector('#nm-panel .nm-vol-label');
       if (label) label.textContent = volumeSlider.value;
+      localStorage.setItem(VOLUME_KEY, String(v));
     });
 
     // 静音
@@ -242,6 +245,7 @@
       }
       if (navAp && navAp.audio) navAp.audio.loop = (currentLoopIdx === 1);
       loopBtn.textContent = LOOP_LABELS[currentLoopIdx];
+      localStorage.setItem(LOOP_KEY, String(currentLoopIdx));
     });
 
     // 歌单点击（委托）
@@ -339,8 +343,26 @@
         window.__navAp = navAp;
         engine.classList.add('no-reload');
 
-        // 根据 APlayer 实际初始状态同步 currentLoopIdx
-        if (navAp.options) {
+        // 恢复上次音量
+        var savedVol = localStorage.getItem(VOLUME_KEY);
+        if (savedVol !== null && navAp.audio) {
+          var vol = parseFloat(savedVol);
+          if (!isNaN(vol) && vol >= 0 && vol <= 1) {
+            navAp.audio.volume = vol;
+          }
+        }
+
+        // 恢复循环模式：优先 localStorage，否则按 APlayer 初始状态同步
+        var savedLoop = localStorage.getItem(LOOP_KEY);
+        var savedLoopIdx = (savedLoop !== null) ? parseInt(savedLoop, 10) : NaN;
+        if (!isNaN(savedLoopIdx) && savedLoopIdx >= 0 && savedLoopIdx <= 3) {
+          currentLoopIdx = savedLoopIdx;
+          if (navAp.options) {
+            navAp.options.loop = LOOP_MODES[currentLoopIdx];
+            navAp.options.order = LOOP_ORDERS[currentLoopIdx];
+          }
+          if (navAp.audio) navAp.audio.loop = (currentLoopIdx === 1);
+        } else if (navAp.options) {
           if (navAp.options.order === 'random') {
             currentLoopIdx = 2; // 随机播放
           } else if (navAp.options.loop === 'one') {
@@ -350,8 +372,8 @@
           } else {
             currentLoopIdx = 0; // 列表循环（默认）
           }
-          updateLoopDisplay();
         }
+        updateLoopDisplay();
 
         uiEl = document.getElementById('nav-music-ui');
         if (uiEl) {
