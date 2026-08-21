@@ -697,6 +697,13 @@
   </url>
   
   <url>
+    <loc>https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
@@ -801,13 +808,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
@@ -825,7 +825,21 @@
   </url>
   
   <url>
+    <loc>https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -846,21 +860,7 @@
   </url>
   
   <url>
-    <loc>https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zwei-wings.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%BE%E5%A4%96%E6%8B%93%E5%B1%95/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
