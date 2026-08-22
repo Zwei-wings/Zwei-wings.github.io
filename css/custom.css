@@ -444,24 +444,53 @@
 .oc-voice-vol {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   flex-shrink: 0;
+  --oc-vol-track: #e0d5c8;
 }
 .oc-voice-mute {
+  display: inline-flex;
+  align-items: center;
   border: none;
   background: none;
   padding: 0;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 1;
   color: #b08968;
   transition: color 0.2s;
 }
 .oc-voice-mute:hover { color: #ff9a5c; }
+.oc-voice-mute svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+.oc-voice-mute .oc-vol-off { display: none; }
+.oc-voice-mute.muted .oc-vol-on { display: none; }
+.oc-voice-mute.muted .oc-vol-off { display: block; }
 .oc-voice-slider {
+  -webkit-appearance: none;
+  appearance: none;
   width: 56px;
   height: 3px;
-  accent-color: #ff9a5c;
+  border-radius: 3px;
+  background: var(--oc-vol-track);
+  outline: none;
+  cursor: pointer;
+}
+.oc-voice-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff9a5c;
+  cursor: pointer;
+}
+.oc-voice-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #ff9a5c;
   cursor: pointer;
 }
 @media (max-width: 600px) {
@@ -489,6 +518,7 @@
 [data-theme=dark] .oc-voice-name { color: rgba(255, 255, 255, 0.9); }
 [data-theme=dark] .oc-voice-time { color: rgba(255, 255, 255, 0.55); }
 [data-theme=dark] .oc-voice-mute { color: rgba(255, 255, 255, 0.55); }
+[data-theme=dark] .oc-voice-vol { --oc-vol-track: #3a3a3a; }
 [data-theme=dark] .oc-voice-text {
   color: rgba(255, 255, 255, 0.72);
   background: rgba(255, 154, 92, 0.07);

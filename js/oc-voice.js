@@ -73,16 +73,24 @@
         audio.preload = 'none';
         audio.volume = getStoredVolume(src);
 
+        function updateSliderFill() {
+          if (!slider) return;
+          var pct = Math.round(audio.volume * 100);
+          slider.style.background = 'linear-gradient(to right, #ff9a5c 0%, #ff9a5c ' + pct + '%, var(--oc-vol-track) ' + pct + '%)';
+        }
+
         function updateMuteIcon() {
-          if (muteBtn) muteBtn.textContent = audio.muted ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+          if (muteBtn) muteBtn.classList.toggle('muted', audio.muted);
         }
 
         if (slider) {
           slider.value = Math.round(audio.volume * 100);
+          updateSliderFill();
           slider.addEventListener('input', function () {
             var v = parseInt(slider.value, 10) / 100;
             audio.volume = v;
             if (v > 0) audio.muted = false;
+            updateSliderFill();
             updateMuteIcon();
             try { localStorage.setItem(VOLUME_PREFIX + src, String(v)); } catch (e) {}
           });
