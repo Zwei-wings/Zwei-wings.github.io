@@ -105,10 +105,10 @@
 <a href="/about/" title="关于"><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/placeholder/d570170f4f12e1ee829ca0e85a7dffeb77343a.svg">关于</a>
           </div>
 
-<h3 id="图集-gallery"><a href="#图集-gallery" class="headerlink" title="图集 gallery"></a>图集 gallery</h3><div class="justified-gallery"><p><img src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%8D%97%E9%99%A2cover.webp"><br><img src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%90%8D%E6%9F%AFcover.webp"></p>
+<h3 id="图集-gallery"><a href="#图集-gallery" class="headerlink" title="图集 gallery"></a>图集 gallery</h3><div class="justified-gallery"><p><img src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.png"><br><img src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2.png"><br><img src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/3.png"></p>
           </div>
 
-<h3 id="行内小图-inlineImg"><a href="#行内小图-inlineImg" class="headerlink" title="行内小图 inlineImg"></a>行内小图 inlineImg</h3><img class="inline-img" src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/favicon1.png" style="height:40px">
+<h3 id="行内小图-inlineImg"><a href="#行内小图-inlineImg" class="headerlink" title="行内小图 inlineImg"></a>行内小图 inlineImg</h3><img class="inline-img" src= "/img/loading.gif" data-lazy-src="/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.png" style="height:40px">
 
 <h3 id="其他标签"><a href="#其他标签" class="headerlink" title="其他标签"></a>其他标签</h3><ul>
 <li>mermaid：流程图标签，需先在主题配置里开启 mermaid 才会渲染</li>
@@ -120,27 +120,6 @@
       </categories>
       <tags>
         <tag>hexo使用</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试</title>
-    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-]]></content>
-      <categories>
-        <category>小说</category>
-        <category>南城院校风纪委员部</category>
-      </categories>
-      <tags>
-        <tag>原创</tag>
-        <tag>OC专栏</tag>
       </tags>
   </entry>
   <entry>
@@ -289,7 +268,7 @@
 </tr>
 <tr>
 <td>第二适性</td>
-<td>空间系</td>
+<td>精神系</td>
 </tr>
 <tr>
 <td>所属</td>
@@ -355,6 +334,27 @@
 <li>姬切+鬓角束发</li>
 </ul>
 <h2 id="出身背景-3"><a href="#出身背景-3" class="headerlink" title="出身背景"></a>出身背景</h2>]]></content>
+      <categories>
+        <category>小说</category>
+        <category>南城院校风纪委员部</category>
+      </categories>
+      <tags>
+        <tag>原创</tag>
+        <tag>OC专栏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>测试</title>
+    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+]]></content>
       <categories>
         <category>小说</category>
         <category>南城院校风纪委员部</category>
