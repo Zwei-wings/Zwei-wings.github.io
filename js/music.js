@@ -124,7 +124,8 @@
     var playing = !navAp.audio.paused;
     playEl.innerHTML = playing ? '\u23F8' : '\u25B6';
     if (navAp.list && navAp.list.audios && navAp.list.audios[navAp.list.index]) {
-      titleEl.textContent = navAp.list.audios[navAp.list.index].title;
+      var cur = navAp.list.audios[navAp.list.index];
+      titleEl.textContent = cur.name || cur.title || '';
     }
   }
 
@@ -139,8 +140,8 @@
       html += '<div class="' + cls + '" data-idx="' + i + '">';
       html += '<span class="nm-song-index">' + (i === curIdx ? '\u25B6' : (i + 1)) + '</span>';
       html += '<span class="nm-song-info">';
-      html += '<div class="nm-song-name">' + list[i].title + '</div>';
-      html += '<div class="nm-song-artist">' + (list[i].artist || '') + '</div>';
+      html += '<div class="nm-song-name">' + (list[i].name || list[i].title || '') + '</div>';
+      html += '<div class="nm-song-artist">' + (list[i].artist || list[i].author || '') + '</div>';
       html += '</span>';
       html += '<span class="nm-song-dur">' + fmtTime(list[i].duration) + '</span>';
       html += '</div>';
