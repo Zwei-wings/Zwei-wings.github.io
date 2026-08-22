@@ -91,7 +91,7 @@
 
 <h3 id="链接卡片-link"><a href="#链接卡片-link" class="headerlink" title="链接卡片 link"></a>链接卡片 link</h3><div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div>
 
-<h3 id="配音-voice"><a href="#配音-voice" class="headerlink" title="配音 voice"></a>配音 voice</h3><div class="oc-voice" data-src="/audio/南院-封艾羽.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">封艾羽</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+<h3 id="配音-voice"><a href="#配音-voice" class="headerlink" title="配音 voice"></a>配音 voice</h3><div class="oc-voice" data-src="/audio/南院-封艾羽.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">封艾羽</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音">🔊</button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
 
 <h3 id="勾选框-checkbox"><a href="#勾选框-checkbox" class="headerlink" title="勾选框 checkbox"></a>勾选框 checkbox</h3><div class="checkbox"><input type="checkbox">
             <p>待办事项</p>
@@ -346,13 +346,13 @@
   <entry>
     <title>测试</title>
     <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音">🔊</button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
 
 
-<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音">🔊</button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
 
 
-<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音">🔊</button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
 
 ]]></content>
       <categories>

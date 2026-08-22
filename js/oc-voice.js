@@ -1,12 +1,26 @@
 /**
- * OC 专栏配音播放条 — 播放/暂停、时长、同屏只播一个
- * 依赖结构：.oc-voice[data-src] > .oc-voice-btn / .oc-voice-name / .oc-voice-wave / .oc-voice-time / .oc-voice-text
+ * OC 专栏配音播放条 — 播放/暂停、时长、独立音量、同屏只播一个
+ * 依赖结构：.oc-voice[data-src] > .oc-voice-btn / .oc-voice-name / .oc-voice-wave / .oc-voice-time / .oc-voice-vol(.oc-voice-mute + .oc-voice-slider) / .oc-voice-text
  * 兼容 PJAX（事件委托 + pjax:complete 重建）
  */
 (function () {
   'use strict';
 
   var current = null; // 当前正在播放的 audio（同屏只播一个）
+
+  var VOLUME_PREFIX = 'oc-voice-volume:';
+  var DEFAULT_VOLUME = 0.7; // 与导航栏音乐播放器默认音量对齐
+
+  function getStoredVolume(src) {
+    try {
+      var v = localStorage.getItem(VOLUME_PREFIX + src);
+      if (v !== null) {
+        var n = parseFloat(v);
+        if (!isNaN(n) && n >= 0 && n <= 1) return n;
+      }
+    } catch (e) {}
+    return DEFAULT_VOLUME;
+  }
 
   function formatTime(sec) {
     if (isNaN(sec) || sec < 0) return '0:00';
@@ -52,9 +66,36 @@
 
         var btn = box.querySelector('.oc-voice-btn');
         var timeEl = box.querySelector('.oc-voice-time');
+        var slider = box.querySelector('.oc-voice-slider');
+        var muteBtn = box.querySelector('.oc-voice-mute');
 
         var audio = new Audio(src);
         audio.preload = 'none';
+        audio.volume = getStoredVolume(src);
+
+        function updateMuteIcon() {
+          if (muteBtn) muteBtn.textContent = audio.muted ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+        }
+
+        if (slider) {
+          slider.value = Math.round(audio.volume * 100);
+          slider.addEventListener('input', function () {
+            var v = parseInt(slider.value, 10) / 100;
+            audio.volume = v;
+            if (v > 0) audio.muted = false;
+            updateMuteIcon();
+            try { localStorage.setItem(VOLUME_PREFIX + src, String(v)); } catch (e) {}
+          });
+        }
+
+        if (muteBtn) {
+          muteBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            audio.muted = !audio.muted;
+            updateMuteIcon();
+          });
+        }
+        updateMuteIcon();
 
         audio.addEventListener('loadedmetadata', function () {
           if (timeEl) timeEl.textContent = formatTime(audio.duration);

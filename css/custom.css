@@ -440,6 +440,34 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 音量调节（静音图标 + 滑块） */
+.oc-voice-vol {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.oc-voice-mute {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: #b08968;
+  transition: color 0.2s;
+}
+.oc-voice-mute:hover { color: #ff9a5c; }
+.oc-voice-slider {
+  width: 56px;
+  height: 3px;
+  accent-color: #ff9a5c;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .oc-voice-slider { display: none; }
+}
+
 /* 台词引述（胶囊下方独占一行） */
 .oc-voice-text {
   flex-basis: 100%;
@@ -460,6 +488,7 @@
 }
 [data-theme=dark] .oc-voice-name { color: rgba(255, 255, 255, 0.9); }
 [data-theme=dark] .oc-voice-time { color: rgba(255, 255, 255, 0.55); }
+[data-theme=dark] .oc-voice-mute { color: rgba(255, 255, 255, 0.55); }
 [data-theme=dark] .oc-voice-text {
   color: rgba(255, 255, 255, 0.72);
   background: rgba(255, 154, 92, 0.07);
