@@ -607,6 +607,10 @@
   text-align: left;
   border: none;
 }
+/* 表头常写 **加粗**，strong 会被全局规则染橙 → 橙底橙字隐形，这里强制回白 */
+#article-container table thead th strong {
+  color: #fff;
+}
 #article-container table tbody td {
   padding: 10px 14px;
   color: #4a4238;
