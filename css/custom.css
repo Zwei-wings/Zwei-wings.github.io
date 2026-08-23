@@ -587,3 +587,51 @@
 [data-theme=dark] #article-container del {
   border-color: rgba(217, 184, 154, .5);
 }
+
+/* ===== Markdown 表格美化：圆角卡片 + 表头暖橙渐变 + 隔行条纹 ===== */
+#article-container table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid #f5c4b3;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#article-container table thead th {
+  background: linear-gradient(90deg, #ff9a5c, #ffba88);
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 14px;
+  text-align: left;
+  border: none;
+}
+#article-container table tbody td {
+  padding: 10px 14px;
+  color: #4a4238;
+  border: none;
+  border-top: 1px solid #f7ece1;
+  vertical-align: middle;
+}
+#article-container table tbody tr:nth-child(even) {
+  background: rgba(255, 154, 92, .05);
+}
+#article-container table tbody tr:hover {
+  background: rgba(255, 154, 92, .13);
+}
+
+/* 深色模式适配 */
+[data-theme=dark] #article-container table {
+  border-color: rgba(255, 154, 92, .3);
+}
+[data-theme=dark] #article-container table tbody td {
+  color: rgba(255, 255, 255, .78);
+  border-top-color: rgba(255, 154, 92, .12);
+}
+[data-theme=dark] #article-container table tbody tr:nth-child(even) {
+  background: rgba(255, 154, 92, .04);
+}
+[data-theme=dark] #article-container table tbody tr:hover {
+  background: rgba(255, 154, 92, .12);
+}
