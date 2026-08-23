@@ -523,3 +523,67 @@
   color: rgba(255, 255, 255, 0.72);
   background: rgba(255, 154, 92, 0.07);
 }
+
+/* ===== Markdown 内联语法美化：加粗 / 斜体 / 划去（防剧透） ===== */
+
+/* ① 加粗 <strong>：暖橙强调 + 悬停荧光底、下划线从中间弹出 */
+#article-container strong {
+  color: #ff9a5c;
+  font-weight: 700;
+  position: relative;
+  padding: 0 2px;
+  border-radius: 3px;
+  transition: background-color .3s ease;
+}
+#article-container strong:hover {
+  background-color: rgba(255, 154, 92, .18);
+}
+#article-container strong::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: #ff9a5c;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .3s ease;
+}
+#article-container strong:hover::after {
+  transform: scaleX(1);
+}
+
+/* ② 斜体 <em>：冷灰蓝 + 波浪下划线（中文无真斜体，靠波浪线补视觉信号） */
+#article-container em {
+  color: #5b7a99;
+  font-style: italic;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: rgba(91, 122, 153, .55);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+[data-theme=dark] #article-container em {
+  color: #8db3d6;
+  text-decoration-color: rgba(141, 179, 214, .55);
+}
+
+/* ③ 划去 <del>：防剧透（空虚线框占位，悬停/按住浮现文字） */
+#article-container del {
+  text-decoration: none;
+  color: transparent;
+  border: 1px dashed #d9b89a;
+  border-radius: 4px;
+  padding: 0 2px;
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease;
+}
+#article-container del:hover,
+#article-container del:active {
+  color: inherit;
+}
+[data-theme=dark] #article-container del {
+  border-color: rgba(217, 184, 154, .5);
+}
