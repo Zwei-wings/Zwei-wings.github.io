@@ -4055,7 +4055,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#77;&#101;&#116;&#105;&#110;&#x67;&#x4a;&#83;&#x40;&#49;&#x2e;&#50;">&#77;&#101;&#116;&#105;&#110;&#x67;&#x4a;&#83;&#x40;&#49;&#x2e;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#77;&#101;&#x74;&#105;&#110;&#103;&#74;&#83;&#64;&#49;&#x2e;&#50;">&#77;&#101;&#x74;&#105;&#110;&#103;&#74;&#83;&#64;&#49;&#x2e;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -4111,7 +4111,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#x6a;&#113;&#117;&#x65;&#114;&#121;&#x40;&#51;&#x2e;&#x37;&#x2e;&#49;">&#x6a;&#113;&#117;&#x65;&#114;&#121;&#x40;&#51;&#x2e;&#x37;&#x2e;&#49;</a> / <a href="mailto:&#x66;&#x61;&#110;&#99;&#x79;&#98;&#111;&#120;&#x40;&#51;&#46;&#x35;&#46;&#55;">&#x66;&#x61;&#110;&#99;&#x79;&#98;&#111;&#120;&#x40;&#51;&#46;&#x35;&#46;&#55;</a> / <a href="mailto:&#x74;&#121;&#x70;&#101;&#100;&#64;&#x32;&#x2e;&#48;&#46;&#x31;&#50;">&#x74;&#121;&#x70;&#101;&#100;&#64;&#x32;&#x2e;&#48;&#46;&#x31;&#50;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#113;&#117;&#x65;&#114;&#x79;&#64;&#51;&#x2e;&#55;&#x2e;&#49;">&#106;&#113;&#117;&#x65;&#114;&#x79;&#64;&#51;&#x2e;&#55;&#x2e;&#49;</a> / <a href="mailto:&#x66;&#x61;&#110;&#x63;&#121;&#98;&#x6f;&#x78;&#64;&#x33;&#46;&#x35;&#46;&#x37;">&#x66;&#x61;&#110;&#x63;&#121;&#98;&#x6f;&#x78;&#64;&#x33;&#46;&#x35;&#46;&#x37;</a> / <a href="mailto:&#116;&#x79;&#x70;&#x65;&#x64;&#x40;&#x32;&#46;&#x30;&#x2e;&#49;&#50;">&#116;&#x79;&#x70;&#x65;&#x64;&#x40;&#x32;&#46;&#x30;&#x2e;&#49;&#50;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>
