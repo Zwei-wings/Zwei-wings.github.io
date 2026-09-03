@@ -1,0 +1,33 @@
+/* 伏笔高亮标注：默认“藏”样式（文字照常显示，不显示任何标记）*/
+#article-container mark {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+/* 点开“显示伏笔标注”后：淡紫光晕 + 点状虚线下划线（不换字色、不加底色）*/
+body.show-vw-highlight #article-container mark {
+  text-shadow:
+    0 0 6px rgba(179, 157, 255, .85),
+    0 0 14px rgba(179, 157, 255, .45);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(140, 110, 235, .7);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* 深色模式：光晕提亮、点线颜色调亮（发光在深底更明显）*/
+[data-theme=dark] body.show-vw-highlight #article-container mark {
+  text-shadow:
+    0 0 7px rgba(200, 180, 255, .95),
+    0 0 16px rgba(200, 180, 255, .55);
+  text-decoration-color: rgba(185, 160, 250, .85);
+}
+
+/* 设置面板里开关按钮的“开启”态（与伏笔淡紫呼应）*/
+#vw-highlight-toggle.on {
+  color: #b39dff;
+}

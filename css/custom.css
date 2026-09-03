@@ -526,33 +526,10 @@
 
 /* ===== Markdown 内联语法美化：加粗 / 斜体 / 划去（防剧透） ===== */
 
-/* ① 加粗 <strong>：暖橙强调 + 悬停荧光底、下划线从中间弹出 */
+/* ① 加粗 <strong>：暖橙强调（仅字色 + 加粗；去除悬停底与下划线，与伏笔高亮错开） */
 #article-container strong {
   color: #ff9a5c;
   font-weight: 700;
-  position: relative;
-  padding: 0 2px;
-  border-radius: 3px;
-  transition: background-color .3s ease;
-}
-#article-container strong:hover {
-  background-color: rgba(255, 154, 92, .18);
-}
-#article-container strong::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 2px;
-  border-radius: 2px;
-  background: #ff9a5c;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .3s ease;
-}
-#article-container strong:hover::after {
-  transform: scaleX(1);
 }
 
 /* ② 斜体 <em>：冷灰蓝 + 波浪下划线（中文无真斜体，靠波浪线补视觉信号） */
