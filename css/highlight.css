@@ -19,15 +19,19 @@ body.show-vw-highlight #article-container mark {
   text-underline-offset: 5px;
 }
 
-/* 深色模式：光晕提亮、点线颜色调亮（发光在深底更明显）*/
+/* 深色模式：伏笔高亮改正红发光（与暗色主红同色，靠光晕+点线形态与加粗实色错开）*/
 [data-theme=dark] body.show-vw-highlight #article-container mark {
   text-shadow:
-    0 0 7px rgba(200, 180, 255, .95),
-    0 0 16px rgba(200, 180, 255, .55);
-  text-decoration-color: rgba(185, 160, 250, .85);
+    0 0 7px rgba(212, 79, 71, .85),
+    0 0 15px rgba(212, 79, 71, .45);
+  text-decoration-color: rgba(212, 79, 71, .85);
 }
 
 /* 设置面板里开关按钮的“开启”态（与伏笔淡紫呼应）*/
 #vw-highlight-toggle.on {
   color: #b39dff;
+}
+/* 深色模式：开关开启态改正红，呼应暗色伏笔光晕 */
+[data-theme=dark] #vw-highlight-toggle.on {
+  color: #d44f47;
 }

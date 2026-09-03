@@ -348,9 +348,9 @@
 #article-container blockquote p:first-child { padding-top: 0; }
 #article-container blockquote p:last-child { padding-bottom: 0; }
 [data-theme=dark] #article-container blockquote {
-  border-color: rgba(255, 154, 92, 0.3);
-  border-left-color: #ff9a5c;
-  background: rgba(255, 154, 92, 0.06);
+  border-color: rgba(212, 79, 71, 0.3);
+  border-left-color: #d44f47;
+  background: rgba(212, 79, 71, 0.06);
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -512,8 +512,8 @@
 
 /* ===== 深色模式适配 ===== */
 [data-theme=dark] .oc-voice {
-  background: rgba(255, 154, 92, 0.06);
-  border-color: rgba(255, 154, 92, 0.3);
+  background: rgba(212, 79, 71, 0.06);
+  border-color: rgba(212, 79, 71, 0.3);
 }
 [data-theme=dark] .oc-voice-name { color: rgba(255, 255, 255, 0.9); }
 [data-theme=dark] .oc-voice-time { color: rgba(255, 255, 255, 0.55); }
@@ -521,7 +521,7 @@
 [data-theme=dark] .oc-voice-vol { --oc-vol-track: #3a3a3a; }
 [data-theme=dark] .oc-voice-text {
   color: rgba(255, 255, 255, 0.72);
-  background: rgba(255, 154, 92, 0.07);
+  background: rgba(212, 79, 71, 0.07);
 }
 
 /* ===== Markdown 内联语法美化：加粗 / 斜体 / 划去（防剧透） ===== */
@@ -604,15 +604,412 @@
 
 /* 深色模式适配 */
 [data-theme=dark] #article-container table {
-  border-color: rgba(255, 154, 92, .3);
+  border-color: rgba(212, 79, 71, .3);
 }
 [data-theme=dark] #article-container table tbody td {
   color: rgba(255, 255, 255, .78);
-  border-top-color: rgba(255, 154, 92, .12);
+  border-top-color: rgba(212, 79, 71, .12);
 }
 [data-theme=dark] #article-container table tbody tr:nth-child(even) {
-  background: rgba(255, 154, 92, .04);
+  background: rgba(212, 79, 71, .04);
 }
 [data-theme=dark] #article-container table tbody tr:hover {
-  background: rgba(255, 154, 92, .12);
+  background: rgba(212, 79, 71, .12);
+}
+
+/* ===== 暗色模式：全局统一适配（2026-09-04） ===== */
+
+/* ① 背景图：暗色模式换用暗调图（Title_dark.jpg），不再用滤镜 + 黑遮罩（避免脏） */
+[data-theme=dark] #web_bg {
+  background-image: url('/img/Title_dark.jpg');
+  filter: none;
+}
+[data-theme=dark] #web_bg:before {
+  background-color: transparent;
+}
+/* 首页 banner(.full_page) + footer：去掉黑遮罩，让 Title_dark 与 #web_bg 无缝衔接（暗图本身够暗，无需再压一层黑） */
+[data-theme=dark] #page-header.full_page:before,
+[data-theme=dark] #footer:before {
+  background-color: transparent;
+}
+/* 文章页(.post-bg)与其他页(.not-home-page)的亮色 top_img 封面：保留 35% 遮罩，保证标题白字可读 */
+[data-theme=dark] #page-header.post-bg:before,
+[data-theme=dark] #page-header.not-home-page:before {
+  background-color: rgba(0, 0, 0, .35);
+}
+
+/* ② 全局滚动条：主红实色底 + 粉浅斜纹（实色不透明，避免半透明叠深底显得太暗） */
+[data-theme=dark] ::-webkit-scrollbar-thumb {
+  background-color: #d44f47;
+  background-image: -webkit-linear-gradient(45deg, #e88f89 25%, transparent 25%, transparent 50%, #e88f89 50%, #e88f89 75%, transparent 75%, transparent);
+}
+[data-theme=dark] ::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, .06);
+}
+/* 代码块内部滚动条（add2.css 用 !important 硬编码了亮橙，需更高优先级覆盖） */
+[data-theme=dark] #article-container pre[class*=language-]::-webkit-scrollbar-thumb {
+  background-color: #d44f47 !important;
+  background-image: -webkit-linear-gradient(45deg, #e88f89 25%, transparent 25%, transparent 50%, #e88f89 50%, #e88f89 75%, transparent 75%, transparent) !important;
+}
+
+/* ③ 目录卡选中高亮：浅橙底 → 暗红底 + 浅红字（主题选择器含 #aside-content 前缀、特异性更高，需完整路径覆盖才压得过） */
+[data-theme=dark] #aside-content #card-toc .toc-content .toc-link.active {
+  background: rgba(212, 79, 71, .18);
+  border-left-color: #d44f47;
+  color: #e88f89;
+}
+
+/* ④ Live2D 看板娘气泡对话框：白底 → 暗底亮字 + 暖橙描边 */
+[data-theme=dark] #oml2d-tips {
+  background: rgba(40, 40, 43, .96) !important;
+  color: rgba(255, 255, 255, .85) !important;
+  border: 1px solid rgba(212, 79, 71, .35) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .45) !important;
+}
+
+/* ⑤ 自制音乐播放器下拉歌单面板：白底 → 暗底（样式由 music.js 注入，此处用更高优先级覆盖） */
+[data-theme=dark] #nm-panel {
+  background: rgba(40, 40, 43, .97);
+  border-color: rgba(212, 79, 71, .3);
+  box-shadow: 0 5px 20px -4px rgba(0, 0, 0, .6);
+}
+[data-theme=dark] #nm-panel .nm-panel-header {
+  border-bottom-color: rgba(255, 255, 255, .08);
+}
+[data-theme=dark] #nm-panel .nm-vol-slider {
+  background: rgba(255, 255, 255, .12);
+}
+[data-theme=dark] #nm-panel .nm-vol-label {
+  color: rgba(255, 255, 255, .55);
+}
+[data-theme=dark] #nm-panel .nm-loop-btn {
+  border-color: rgba(255, 255, 255, .2);
+  color: rgba(255, 255, 255, .7);
+}
+[data-theme=dark] #nm-panel .nm-loop-btn:hover {
+  border-color: #d44f47;
+  color: #d44f47;
+}
+[data-theme=dark] #nm-panel .nm-panel-mute {
+  color: rgba(255, 255, 255, .6);
+}
+[data-theme=dark] #nm-panel .nm-panel-mute:hover {
+  color: #d44f47;
+}
+[data-theme=dark] #nm-panel .nm-song-item {
+  border-bottom-color: rgba(255, 255, 255, .06);
+}
+[data-theme=dark] #nm-panel .nm-song-item:hover {
+  background: rgba(212, 79, 71, .08);
+}
+[data-theme=dark] #nm-panel .nm-song-item.nm-current {
+  background: rgba(212, 79, 71, .16);
+}
+[data-theme=dark] #nm-panel .nm-song-index {
+  color: rgba(255, 255, 255, .35);
+}
+[data-theme=dark] #nm-panel .nm-song-item.nm-current .nm-song-index {
+  color: #d44f47;
+}
+[data-theme=dark] #nm-panel .nm-song-name {
+  color: rgba(255, 255, 255, .85);
+}
+[data-theme=dark] #nm-panel .nm-song-item.nm-current .nm-song-name {
+  color: #e88f89;
+}
+[data-theme=dark] #nm-panel .nm-song-artist {
+  color: rgba(255, 255, 255, .45);
+}
+[data-theme=dark] #nm-panel .nm-song-dur {
+  color: rgba(255, 255, 255, .35);
+}
+
+/* ⑥ Live2D 模型：暗色下微降亮度，避免过亮 */
+[data-theme=dark] #oml2d-canvas {
+  filter: brightness(.8);
+}
+
+/* ⑦ 作者卡头像：悬停时禁用白色 gif 背景（add2.css 硬编码，暗色下刺眼） */
+[data-theme=dark] .card-info-avatar:hover {
+  background: none;
+}
+
+/* ⑧ 首页顶部 banner：暗色下同步换 Title_dark（消除与 #web_bg 之间的硬分界；.full_page 只命中首页，不误伤文章页 .post-bg 封面） */
+[data-theme=dark] #page-header.full_page {
+  background-image: url('/img/Title_dark.jpg') !important;
+}
+
+/* ⑨ 作者头像：favicon1.png 是黑线条 logo（透明底），暗色下用 filter:invert 反色为白，省得再做一张图；hue-rotate(180deg) 防未来换彩色图色相翻转失真 */
+[data-theme=dark] .avatar-img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ⑩ 正文链接：暗色下主橙 → 主红（浅红 #e06a62，hover 实红 #d44f47） */
+[data-theme=dark] #article-container a {
+  color: #e06a62;
+}
+[data-theme=dark] #article-container a:hover {
+  color: #d44f47;
+}
+
+/* ⑪ 加粗 strong：暗色下跟随主红 */
+[data-theme=dark] #article-container strong {
+  color: #d44f47;
+}
+
+/* ⑫ 标题装饰 & 表头 & 列表标记：暗色下主橙 → 主红（彻底统一） */
+[data-theme=dark] #article-container h1::before,
+[data-theme=dark] .tag-cloud-title::before,
+[data-theme=dark] .category-title::before {
+  border-color: #e06a62;
+  background: #121212;
+}
+[data-theme=dark] #article-container h1::after,
+[data-theme=dark] .tag-cloud-title::after,
+[data-theme=dark] .category-title::after {
+  background: linear-gradient(90deg, rgba(212,79,71,.15), #e06a62, rgba(212,79,71,.15));
+}
+[data-theme=dark] #article-container h2::before {
+  background: #d44f47;
+}
+[data-theme=dark] #article-container h2::after {
+  background: #e06a62;
+}
+[data-theme=dark] #article-container table thead th {
+  background: linear-gradient(90deg, #c62828, #e53935);
+  color: #fff;
+}
+[data-theme=dark] #article-container table thead th strong {
+  color: #fff;
+}
+[data-theme=dark] #article-container ul > li::marker {
+  color: #d44f47;
+}
+
+/* ⑬ banner 兜底底色：暗色下改红（背景图加载失败/未就绪时避免露橙色 fallback 底板；head.styl 里 #page-header 默认 background-color 是浅橙 $light-blue） */
+[data-theme=dark] #page-header {
+  background-color: #d44f47;
+}
+
+/* ⑭ 全局链接悬停：主题 _global/index.styl:155 里 a:hover 是浅橙 $light-blue(#ffba88)，
+   影响首页文章卡片标题、meta 链接、作者卡"关于咕咕"按钮(a 标签)、TOC 链接等所有未单独适配的链接 */
+[data-theme=dark] a:hover {
+  color: #d44f47;
+}
+
+/* ⑮ 翻页按钮当前页：pagination.styl 里 .page-number.current 背景是浅橙 $theme-paginator-color(#ffc5a0) */
+[data-theme=dark] #pagination .page-number.current {
+  background: #d44f47;
+}
+
+/* ⑮b 翻页按钮基础色：add2.css 全局 a{color:#ff8c00} 让 .page-number / .extend 这些分页 <a> 也变橙，暗色下改回红 */
+[data-theme=dark] #pagination a.page-number,
+[data-theme=dark] #pagination a.extend {
+  color: #e06a62;
+}
+[data-theme=dark] #pagination a.page-number:hover,
+[data-theme=dark] #pagination a.extend:hover {
+  color: #d44f47;
+}
+
+/* ⑯ 版权块：post.styl 里 .post-copyright:before 图标与 .post-copyright-meta 文字是浅橙 $theme-color(#ffba88) */
+[data-theme=dark] #post .post-copyright:before {
+  color: #d44f47;
+}
+[data-theme=dark] #post .post-copyright .post-copyright-meta {
+  color: #e06a62;
+}
+
+/* ⑰ 文章标签：post.styl 里 .post-meta__tags 是浅橙边框+浅橙字，hover 浅橙底白字 */
+[data-theme=dark] #post .tag_share .post-meta__tags {
+  border-color: #e06a62;
+  color: #e06a62;
+}
+[data-theme=dark] #post .tag_share .post-meta__tags:hover {
+  background: #d44f47;
+  color: #fff;
+}
+
+/* ㉒ 作者卡"关于咕咕"按钮(#card-info-btn.button--animated)：light 下 --btn-bg=$button-bg=橙；
+   dark 下 darkmode.styl 把 --btn-bg 设 #1e1e1e 灰、--btn-hover-color 也设灰，与主红脱节 → 改红底白字 + 深红 hover 填充 */
+[data-theme=dark] #card-info-btn {
+  background-color: #d44f47;
+  color: #fff;
+}
+[data-theme=dark] #card-info-btn.button--animated:before {
+  background: #c62828;
+}
+
+/* ⑱ 签到页（checkin.js 注入 CSS，硬编码橙色）：写作轨(P)橙 → 红；阅读轨(R)紫暂保留 */
+[data-theme=dark] .card-checkin .checkin-link {
+  color: #e06a62;
+}
+[data-theme=dark] .cw-day.cw-today {
+  box-shadow: 0 0 0 1.5px #e06a62 inset;
+}
+[data-theme=dark] .cw-today .cw-day-num {
+  color: #d44f47;
+}
+[data-theme=dark] .cw-dot-p {
+  background: #e06a62;
+}
+[data-theme=dark] .cw-track-dot-p {
+  background: #e06a62;
+}
+[data-theme=dark] .cw-count-p {
+  color: #d44f47;
+}
+[data-theme=dark] .cw-bar-fill-p {
+  background: #e06a62;
+}
+[data-theme=dark] .cp-praise {
+  background: rgba(212, 79, 71, .10);
+  border-left-color: #d44f47;
+}
+[data-theme=dark] .cp-praise-main {
+  color: #e06a62;
+}
+[data-theme=dark] .cp-praise-sub {
+  color: #e88f89;
+}
+[data-theme=dark] .tp-track-card.tp-perfect {
+  box-shadow: 0 0 0 2px #e06a62;
+}
+[data-theme=dark] .tp-track-dot-p {
+  background: #e06a62;
+}
+[data-theme=dark] .tp-track-count-p {
+  color: #d44f47;
+}
+[data-theme=dark] .tp-prog-fill-p {
+  background: #e06a62;
+}
+[data-theme=dark] .tp-prog-fill-p-over {
+  background: linear-gradient(90deg, #e06a62, #d44f47);
+}
+[data-theme=dark] .tp-tick-pass.tp-tick-active {
+  background: #d44f47;
+}
+[data-theme=dark] .tp-tick-max.tp-tick-active {
+  background: #e88f89;
+}
+[data-theme=dark] .tp-tick-dot {
+  background: #d44f47;
+}
+[data-theme=dark] .tp-tick-active ~ .tp-tick-label,
+[data-theme=dark] .tp-tick-pass.tp-tick-active ~ .tp-tick-label {
+  color: #e06a62;
+}
+[data-theme=dark] .tp-tick-max.tp-tick-active ~ .tp-tick-label {
+  color: #e88f89;
+}
+[data-theme=dark] .tp-tier-close {
+  background: rgba(212, 79, 71, .12);
+  color: #e06a62;
+}
+[data-theme=dark] .tp-tier-perfect {
+  background: rgba(212, 79, 71, .16);
+  color: #e06a62;
+}
+[data-theme=dark] .tp-tier-overflow {
+  background: #d44f47;
+  color: #fff;
+}
+[data-theme=dark] .tp-overflow-label {
+  color: #e88f89;
+}
+[data-theme=dark] .tp-overflow-fill {
+  background: #d44f47;
+}
+[data-theme=dark] .ci-streak-card.ci-st-p {
+  background: rgba(212, 79, 71, .08);
+}
+[data-theme=dark] .ci-st-num-p {
+  color: #d44f47;
+}
+[data-theme=dark] .cs-stat-num {
+  color: #e06a62;
+}
+[data-theme=dark] .cm-nav-btn-page:hover {
+  background: #d44f47;
+  color: #fff;
+  border-color: #d44f47;
+}
+[data-theme=dark] .cm-day.cm-today {
+  box-shadow: 0 0 0 2px #e06a62 inset;
+}
+[data-theme=dark] .cm-mark-posted {
+  background: rgba(212, 79, 71, .16);
+  color: #e06a62;
+}
+[data-theme=dark] .ch-cell-lv1 { background: rgba(212, 79, 71, .35); }
+[data-theme=dark] .ch-cell-lv2 { background: #e88f89; }
+[data-theme=dark] .ch-cell-lv3 { background: #e06a62; }
+[data-theme=dark] .ch-cell-lv4 { background: #d44f47; }
+
+/* ⑱b 签到页月历表头：.cm-table th 自带 opacity:.5，把上面 #article-container table thead th 的红渐变
+   压成半透明 → 显灰（即你看到的"暗色遮罩"）。去掉透明度，让表头跟文章表格一样干净的红 */
+[data-theme=dark] .cm-table thead th {
+  opacity: 1;
+}
+
+/* ⑲ 首页文章列表 hover：homepage.styl 里 .article-title:hover / .article-meta-wrap a:hover 是浅橙 $text-hover(#ffba88)，
+   且 add2.css:30 有全局 a{color:#ff8c00} 橙，暗色下统一改红（完整路径提升特异性压过主题） */
+[data-theme=dark] #recent-posts > .recent-post-item > .recent-post-info > .article-title:hover {
+  color: #d44f47;
+}
+[data-theme=dark] #recent-posts > .recent-post-item > .recent-post-info > .article-meta-wrap a:hover {
+  color: #d44f47;
+}
+
+/* ⑳ 版权块链接：add2.css 全局 a{color:#ff8c00} 橙覆盖了主题 $a-link-color，暗色下改回红；
+   注意：基础色规则特异性高于全局 a:hover，hover 需用同样完整路径才能生效（否则基础/悬停同色） */
+[data-theme=dark] #post .post-copyright .post-copyright-info a {
+  color: #e06a62;
+}
+[data-theme=dark] #post .post-copyright .post-copyright-info a:hover {
+  color: #d44f47;
+}
+
+/* ㉑ 签到页阅读轨(R)：紫 → 蓝（与写作轨红形成红蓝对照） */
+[data-theme=dark] .cw-dot-r { background: #90caf9; }
+[data-theme=dark] .cw-track-dot-r { background: #90caf9; }
+[data-theme=dark] .cw-count-r { color: #42a5f5; }
+[data-theme=dark] .cw-bar-fill-r { background: #90caf9; }
+[data-theme=dark] .tp-track-dot-r { background: #90caf9; }
+[data-theme=dark] .tp-track-count-r { color: #42a5f5; }
+[data-theme=dark] .tp-prog-fill-r { background: #90caf9; }
+[data-theme=dark] .tp-prog-fill-r-over { background: linear-gradient(90deg, #90caf9, #42a5f5); }
+[data-theme=dark] .tp-tier-pass { background: rgba(66, 165, 245, .12); color: #42a5f5; }
+[data-theme=dark] .ci-st-num-r { color: #42a5f5; }
+[data-theme=dark] .cm-mark-read { background: rgba(66, 165, 245, .14); color: #90caf9; }
+[data-theme=dark] .ci-streak-card.ci-st-r { background: rgba(66, 165, 245, .08); }
+
+/* ㉓ 分类页分组配色：亮色保留"橙/绿/粉/蓝"四色分组意图；暗色只把深色 link + 浅色子项背景/边框适配，
+   count 数字与 ::before 装饰条保持原色（亮色版已在白底可读）。link 用 !important 覆盖亮色版的 !important。*/
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(1) > .category-list-link { color: #FFB088 !important; }
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(1) .category-list-child > .category-list-item {
+  background: rgba(255, 138, 92, .12);
+  border-color: rgba(255, 138, 92, .30);
+}
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(2) > .category-list-link { color: #7FE0C0 !important; }
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(2) .category-list-child > .category-list-item {
+  background: rgba(77, 189, 154, .12);
+  border-color: rgba(77, 189, 154, .30);
+}
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(3) > .category-list-link { color: #FFA8C2 !important; }
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(3) .category-list-child > .category-list-item {
+  background: rgba(255, 126, 168, .12);
+  border-color: rgba(255, 126, 168, .30);
+}
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(n+4) > .category-list-link { color: #90CAF9 !important; }
+[data-theme=dark] .category-lists .category-list > .category-list-item:nth-child(n+4) .category-list-child > .category-list-item {
+  background: rgba(100, 181, 246, .12);
+  border-color: rgba(100, 181, 246, .30);
+}
+
+/* ㉔ 分类页 hover 暗色适配（亮色版是 #faf8f5 米白 + rgba(0,0,0,.08) 阴影，暗色下分别变成"主红微透明"和"主红细边框"） */
+[data-theme=dark] .category-lists .category-list > .category-list-item:hover { background: rgba(212, 79, 71, .10); }
+[data-theme=dark] .category-list-child > .category-list-item:hover {
+  box-shadow: inset 0 0 0 1px rgba(212, 79, 71, .35);
 }
