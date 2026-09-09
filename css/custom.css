@@ -1045,3 +1045,199 @@
   border-color: #d44f47;
   box-shadow: 0 0 8px rgba(0, 0, 0, .55);
 }
+
+/* ===== Live2D 状态栏（看板娘加载/休息时屏幕边缘竖条）暗色适配（2026-09-09） ===== */
+/* oh-my-live2d 内联注入：白边框 #fff + 白字 #fff + 透明底，暗色下是突兀的白色空心竖条 → 深底 + 主红细边框 + 主红浅色字（inline style 需 !important 覆盖） */
+[data-theme=dark] #oml2d-statusBar {
+  background: rgba(40, 40, 43, .92) !important;
+  border-color: rgba(212, 79, 71, .35) !important;
+  color: #e88f89 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .6) !important;
+}
+
+/* ===== note 标签外挂 → 双主题渐变卡片（2026-09-09 定稿·A 橙味渐变） ===== */
+/* 定位：装内容的卡片容器（按钮组/图片/多媒体），非"一句话提示"。
+   配色走「三层色板」架构（复用）：
+     - 色值字典 + 角色调色类 由 scripts/colors.js 从 source/_data/characters.yml 自动生成（如 .Kanade 等）；
+     - note 只消费通用语义槽 var(--color-*)，默认橙/红棕基线定义在下方 :root / [data-theme=dark]；
+     - 未来分栏/按钮等组件同样认 var(--color-*)、挂 .Kanade 即可换角色色，色值只写 characters.yml 一处。
+   视觉：亮色「橙→浅橙」渐变实底（无纯白，与白底区分）+ 橙描边；暗色「红棕→深红棕」渐变实底（无纯黑）+ 红描边。
+   角标：左上角凸出圆标，随主题换色；fa 图标 <i> 与默认 ::before 二选一（传 fa 时藏 ::before）。 */
+
+/* —— 默认配色槽（博客基线：亮色暖橙 / 暗色红棕）——
+   角色调色类（.Kanade 等，脚本生成）通过覆盖 --color-* 换角色色（自身定义 > 继承自 :root）。 */
+:root {
+  --color-accent: #ff9a5c;
+  --color-accent-2: #ff7a3d;
+  --color-border: rgba(255, 154, 92, .55);
+  --color-bg-a: #ffb88a;
+  --color-bg-b: #ffdcc2;
+  --color-shadow: rgba(255, 154, 92, .22);
+}
+[data-theme=dark] {
+  --color-accent: #d44f47;
+  --color-accent-2: #a03028;
+  --color-border: rgba(212, 79, 71, .55);
+  --color-bg-a: #5a1f18;
+  --color-bg-b: #3a1210;
+  --color-shadow: rgba(0, 0, 0, .45);
+}
+
+.note {
+  position: relative;
+  margin: 0 0 1rem;
+  padding: 16px 18px 14px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-bg-a), var(--color-bg-b)) !important;
+  box-shadow: 0 3px 10px var(--color-shadow);
+  color: inherit !important;
+}
+
+/* 暗色：去掉主题 flat/modern 的 filter:brightness(.8) 脏压暗（背景/描边已随 [data-theme=dark] 重定义 --color-* 自动变深） */
+[data-theme=dark] .note {
+  filter: none;
+}
+
+/* 角色配色已迁移至 source/_data/characters.yml（由 scripts/colors.js 自动生成调色类，如 .Kanade/.Tsubasa/.Ego/.Aliena）。
+   用法不变：{% note Kanade %}；改色/新增角色只动 characters.yml，勿在 custom.css 手写角色色。 */
+
+/* 图标（fa <i> 或默认 ::before）→ 左上角凸出双色渐变圆标。
+   补 font-family:FA5 字体 + font-weight:900，让 <i class="note-icon fa-link">（无 fas 前缀）也能显示图标 */
+.note > .note-icon,
+.note:not(.no-icon)::before {
+  position: absolute !important;
+  top: -11px !important;
+  left: -11px !important;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  color: #fff;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--card-bg);
+}
+
+/* 传了 fa 图标（有 icon class）时彻底藏掉默认 ::before（含圆角标背景），避免与 <i> 双圆重叠 */
+.note.icon::before {
+  display: none !important;
+}
+
+/* note 内按钮：grid 精确 4 等分，绝不换行；按钮自然高度（图标收进卡片内），比例自然接近方形。
+   真因（用户洞察）：tip→note 后容器变窄，原 btns 是 flex-wrap + 百分比宽度 + min-width:120px，
+   触发换行（3+1）→ 换行后每个按钮变宽 → 长标题不再换行 → 单行文字把按钮横向撑长（宽>高）。
+   正解：CSS grid 替代 flex 精确 4 等分（杜绝换行），按钮宽度适中让长标题自然换行，
+   高度自然（不用 aspect-ratio 强制、不用 overflow 裁剪，图标正常显示）。 */
+.note .btns {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 !important;
+}
+
+/* 窄屏（移动端）降为 2 列，避免 4 列按钮过窄 */
+@media (max-width: 768px) {
+  .note .btns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.note .btns a {
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 16px 12px !important;
+  overflow: visible !important;
+}
+
+/* 图标收进卡片内，居中，下方留 10px（去掉原 -52px 凸出设计，与自然高度卡片匹配） */
+.note .btns a > img:first-child,
+.note .btns a > i:first-child {
+  margin: 0 0 10px !important;
+}
+
+/* hover 只放大、不上浮 */
+.note .btns a[href]:hover img:first-child,
+.note .btns a[href]:hover i:first-child {
+  transform: scale(1.08) !important;
+}
+
+/* ===== btns 按钮组 · 全局重设计 + 暗色适配（2026-09-09） ===== */
+/* 病根：add2.css 的 div .btns a { background:#f6f6f6 } 冷灰底 + #555 冷灰字，与博客暖色系（主红+暖橙）不搭、发脏。
+   全局三处 btns（about 推荐 / 指南导航 / 虚幻下载）统一换新：
+   亮色「暖白渐变 + 橙细描边 + 柔和投影」（不纯白、有块感、浮得起），
+   暗色「半透明白玻璃块 + 红细描边 + 亮暖字」（替代原 filter:brightness(.7) 脏压暗 + 透明底）。
+   icon 图标底从 Material 蓝 #2196f3 改主红 #d44f47，呼应博客主色。 */
+
+/* —— 亮色（未悬停）—— */
+div .btns a {
+  background: linear-gradient(180deg, #ffffff 0%, #fff1e3 100%) !important;
+  border: 1px solid rgba(255, 154, 92, .35) !important;
+  border-radius: 8px;
+  color: #6b5b52 !important;
+  box-shadow: 0 2px 6px rgba(255, 154, 92, .12);
+}
+
+/* 图片图标：白描边保留勾边 + 轻投影，圆形截图有浮起感 */
+div .btns a > img:first-child {
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .10);
+}
+
+/* fa 图标：Material 蓝 → 主红底 + 白字 */
+div .btns a > i:first-child {
+  background: #d44f47;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .10);
+}
+
+/* hover：橙味浅底 + 描边加深 + 文字暖橙 */
+div .btns a[href]:hover {
+  background: linear-gradient(180deg, #fff5eb 0%, #ffe4cf 100%) !important;
+  border-color: rgba(255, 154, 92, .6) !important;
+  color: #ff7a3d !important;
+}
+
+/* —— 暗色 —— */
+/* 去掉全局 filter:brightness(.7) 脏压暗 */
+[data-theme=dark] div.btns {
+  filter: none;
+}
+
+[data-theme=dark] div.btns a {
+  background: rgba(255, 255, 255, .07) !important;
+  border-color: rgba(212, 79, 71, .35) !important;
+  color: #e6d3d0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+}
+
+/* 暗色图片图标：白描边/白底 → 半透明白勾边 + 深底，避免刺眼 */
+[data-theme=dark] div.btns a > img:first-child {
+  border-color: rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+}
+
+/* 暗色 fa 图标：主红 → 深红底，白字保留 */
+[data-theme=dark] div.btns a > i:first-child {
+  background: #a03028;
+  color: #fff;
+  border-color: rgba(255, 255, 255, .16);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+}
+
+/* 暗色 hover：红味浅底 + 描边加深 + 文字红浅色 */
+[data-theme=dark] div.btns a[href]:hover {
+  background: rgba(212, 79, 71, .20) !important;
+  border-color: rgba(212, 79, 71, .55) !important;
+  color: #e88f89 !important;
+}
