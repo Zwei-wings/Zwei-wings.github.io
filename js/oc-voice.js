@@ -76,7 +76,7 @@
         function updateSliderFill() {
           if (!slider) return;
           var pct = Math.round(audio.volume * 100);
-          slider.style.background = 'linear-gradient(to right, #ff9a5c 0%, #ff9a5c ' + pct + '%, var(--oc-vol-track) ' + pct + '%)';
+          slider.style.background = 'linear-gradient(to right, var(--oc-voice-fill) 0%, var(--oc-voice-fill) ' + pct + '%, var(--oc-vol-track) ' + pct + '%)';
         }
 
         function updateMuteIcon() {

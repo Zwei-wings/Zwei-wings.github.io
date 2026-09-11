@@ -365,6 +365,7 @@
   border: 1px solid rgba(255, 154, 92, 0.28);
   border-radius: 12px;
   background: #fdf9f5;
+  --oc-voice-fill: #ff9a5c;
 }
 
 /* 播放键（圆形橙色，三角/暂停图标） */
@@ -523,6 +524,16 @@
   color: rgba(255, 255, 255, 0.72);
   background: rgba(212, 79, 71, 0.07);
 }
+/* 强调元素（播放键 / 波形 / 滑块 / 静音 hover）统一暗色红调，呼应容器与全站暗色主色 */
+[data-theme=dark] .oc-voice-btn { background: #d44f47; }
+[data-theme=dark] .oc-voice-btn:hover { background: #e5736b; }
+[data-theme=dark] .oc-voice-wave::before {
+  background: #e5736b;
+  box-shadow: 7px -3px 0 #e5736b, 14px 3px 0 #d44f47, 21px -5px 0 #e5736b, 28px 0 0 #d44f47, 35px -2px 0 #e5736b;
+}
+[data-theme=dark] .oc-voice-mute:hover { color: #e5736b; }
+[data-theme=dark] .oc-voice-slider::-webkit-slider-thumb { background: #d44f47; }
+[data-theme=dark] .oc-voice-slider::-moz-range-thumb { background: #d44f47; }
 
 /* ===== Markdown 内联语法美化：加粗 / 斜体 / 划去（防剧透） ===== */
 
