@@ -1086,6 +1086,7 @@
   --color-bg-a: #ffb88a;
   --color-bg-b: #ffdcc2;
   --color-shadow: rgba(255, 154, 92, .22);
+  --line: #ece3da;            /* 折叠块 summary/content 分隔线（中性淡色，预览同款） */
 }
 [data-theme=dark] {
   --color-accent: #d44f47;
@@ -1094,6 +1095,7 @@
   --color-bg-a: #5a1f18;
   --color-bg-b: #3a1210;
   --color-shadow: rgba(0, 0, 0, .45);
+  --line: rgba(255, 255, 255, .12);
 }
 
 .note {
@@ -1352,59 +1354,224 @@ body #article-container .btn-beautify:hover{ text-decoration: none; }
    ============================================================ */
 details:has(> .content) {
   margin: .9rem 0;
+  padding: 0;                 /* 关掉 butterfly add2.css 的 padding:16px，由内部自行控制留白 */
   border: 1px dashed var(--color-border);
   border-radius: 12px;
   background: transparent;
 }
 details:has(> .content) > summary {
+  position: relative;          /* 箭头绝对定位参照，规避「flex 子项 + 生成内容」错位 */
   list-style: none;
   cursor: pointer;
   user-select: none;
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  padding: .75rem 1.1rem;
+  margin: 0;                 /* 关掉 butterfly add2.css 的 margin:-16px */
+  padding: .7rem 2.4rem .7rem 1.4rem;   /* 右内边距留足放箭头；横向比 content 多内收 → summary 视觉上比内容块稍小（header 感） */
   font-weight: 600;
+  font-size: .8rem;           /* header 文字比内容(.7375rem)略大一点点，明确的标题层级 */
   color: var(--color-accent);
+  background: transparent;   /* 关键：盖掉主题 details>summary{background:#f6f6f6} 灰底 */
   border-bottom: 1px solid var(--line);
   transition: color .2s;
 }
+details:has(> .content) > summary > * { margin: 0; }  /* 清掉 butterfly 折叠标题里的 <p> 默认 margin，避免撑高导致文字/箭头错位 */
 details:has(> .content) > summary::-webkit-details-marker { display: none; }
 details:has(> .content) > summary::after {
   content: "";
-  margin-left: auto;
+  position: absolute;         /* 绝对定位，不依赖 flex 子项行为，箭头永远垂直居中 + 右侧固定 */
+  right: 1.4rem;
+  top: 50%;
   width: .5rem; height: .5rem;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
-  transform: rotate(45deg);
+  transform: translateY(-50%) rotate(45deg);   /* 垂直居中 + 朝下箭头 */
   transition: transform .25s ease;
 }
-details:has(> .content)[open] > summary::after { transform: rotate(-135deg); }
+details:has(> .content)[open] > summary::after { transform: translateY(-50%) rotate(-135deg); }
 details:has(> .content)[open] > summary { border-bottom-color: var(--color-border); }
-details:has(> .content) > .content { padding: .5rem 1.1rem 1rem; }
+details:has(> .content)[open] > .content {
+  margin: 0;                  /* 关掉 butterfly add2.css 的 margin:0 -16px -16px，否则内容左右各溢出 16px 戳出虚线框 */
+  padding: .5rem 1.1rem 1rem;  /* 横向内边距小于 summary 的 1.4rem → 内容文字更靠边，header 显小 */
+}
 
 /* —— OC 角色配色变体（渐变虚线边框实验）——
    命中两种写法：
    ① 标签参数（带逗号）：{% folding Kanade, @标题 %} → <details Kanade>
    ② 手动加类：<details class="Kanade" open>（与 note 的角色调色类同源）
    下方把角色名接到色板字典变量（scripts/colors.js 注入的 --kanade-* / --tsubasa-* / --ego-* / --aliena-*）。
-   渐变虚线用 background-clip 实现：border-box 画 accent→accent2 两色渐变（含透明段=虚线），
-   padding-box 填卡片色（与幽灵透明观感一致）。不再依赖 mask-composite（Safari<16.4 等不支持会整片铺开→灰底）。 */
+   默认纯色虚线（内部透明、圆角、所有浏览器稳）；支持 mask-composite 的浏览器升级为 accent→accent2 渐变虚线。
+   关键：不整片填充背景（之前用 background-clip 填 var(--card-bg)，暗色下 #121212 会成深灰块→灰底 bug）。 */
 details[Kanade], details.Kanade,
 details[Tsubasa], details.Tsubasa,
 details[Ego], details.Ego,
 details[Aliena], details.Aliena {
   position: relative;
-  border: 2px solid transparent;
+  border: 2px dashed var(--color-accent);
   border-radius: 12px;
-  background:
-    var(--card-bg) padding-box,
-    repeating-linear-gradient(90deg,
-              var(--color-accent) 0 9px,
-              var(--color-accent-2) 9px 16px,
-              transparent 16px 24px) border-box;
+  background: transparent;
 }
 details[Kanade], details.Kanade   { --color-accent: var(--kanade-accent);  --color-accent-2: var(--kanade-accent-2);  --color-border: var(--kanade-border); }
 details[Tsubasa], details.Tsubasa { --color-accent: var(--tsubasa-accent); --color-accent-2: var(--tsubasa-accent-2); --color-border: var(--tsubasa-border); }
 details[Ego], details.Ego         { --color-accent: var(--ego-accent);     --color-accent-2: var(--ego-accent-2);     --color-border: var(--ego-border); }
 details[Aliena], details.Aliena   { --color-accent: var(--aliena-accent);  --color-accent-2: var(--aliena-accent-2);  --color-border: var(--aliena-border); }
+
+/* 亮色下 Kanade 折叠标题文字改用绿色 accent2（#6bbd45）：accent #f2c94c 黄在白底上偏淡看不清。
+   仅亮色生效（暗色下黄字在深底对比高、保持原黄）；不影响渐变虚线边框（仍走 accent→accent2）。 */
+html:not([data-theme=dark]) details[Kanade] > summary,
+html:not([data-theme=dark]) details.Kanade > summary {
+  color: var(--kanade-accent-2);
+}
+
+/* 支持 mask-composite 的浏览器：隐藏纯色虚线，改用 ::before 环切出渐变虚线（内部透明、无灰底） */
+@supports ((-webkit-mask-composite: xor) or (mask-composite: exclude)) {
+  details[Kanade], details.Kanade,
+  details[Tsubasa], details.Tsubasa,
+  details[Ego], details.Ego,
+  details[Aliena], details.Aliena {
+    border-color: transparent;
+  }
+  details[Kanade]::before, details.Kanade::before,
+  details[Tsubasa]::before, details.Tsubasa::before,
+  details[Ego]::before, details.Ego::before,
+  details[Aliena]::before, details.Aliena::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: repeating-linear-gradient(90deg,
+                var(--color-accent) 0 9px,
+                var(--color-accent-2) 9px 16px,
+                transparent 16px 24px);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* —— 暗色适配：覆盖 butterfly 主题 add2.css 给 folding 的灰底与整体压暗 ——
+   add2.css 里有 details>summary{background:#f6f6f6} 和 [data-theme=dark] details{filter:brightness(.7)}，
+   前者亮色浅灰、暗色经 filter 变深灰；后者还会把我们的橙/红边框压暗 30%。
+   下面两条用更高特异性（attr + :has + 元素）盖掉它们。 */
+[data-theme=dark] details:has(> .content) {
+  filter: none;              /* 取消主题暗色压暗，红/橙边框保持原色 */
+}
+[data-theme=dark] details:has(> .content) > summary {
+  background: transparent;   /* 双保险：暗色下也绝无灰底 */
+}
+
+/* ============================================================
+   分栏 tabs · 胶囊骑卡 + 滑动指示块（2026-09-12）
+   视觉：.nav-tabs 变圆角胶囊轨道（复用主题 --tab-botton-bg 灰底），
+   负 margin 骑在内容卡上边；激活标签垫 --color-accent 主色滑动块
+   （.tab-slider，JS 动态定位 + 平滑滑动）；.tab-contents 变圆角描边透明卡。
+   色值走 custom.css 的 --color-accent / --color-border 语义槽（亮橙暗红）。
+   移动端 <768px 胶囊不骑边 + 禁用滑动块，退回静态高亮（后续单独议）。
+   ============================================================ */
+body #article-container .tabs {
+  position: relative;
+  margin: 1.4rem 0 1.2rem;
+  border: none;                     /* 去掉原左右下三边直角灰框 */
+}
+
+/* 胶囊轨道：圆角灰底条，负 margin 骑在内容卡上边 */
+body #article-container .tabs > .nav-tabs {
+  position: relative;               /* .tab-slider 定位参照 */
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 -18px 14px;           /* 下压 18px 骑卡，左缩进对齐内容 */
+  padding: 4px;
+  background: var(--tab-botton-bg);
+  border-radius: 999px;
+  z-index: 2;                       /* 压在内容卡上边 */
+}
+
+body #article-container .tabs > .nav-tabs > .tab {
+  position: relative;
+  z-index: 1;                       /* 文字在滑动块之上 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body #article-container .tabs > .nav-tabs > .tab button {
+  display: block;
+  padding: 6px 14px;
+  width: 100%;
+  border: none;                     /* 去掉原 border-top 2px */
+  border-radius: 999px;
+  background: transparent;          /* 去掉原灰底，改透明 */
+  color: var(--tab-botton-color);
+  line-height: 2;
+  transition: color .3s;
+}
+
+body #article-container .tabs > .nav-tabs > .tab button i {
+  width: 1.5em;
+}
+
+body #article-container .tabs > .nav-tabs > .tab:not(.active) button:hover {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+body #article-container .tabs > .nav-tabs > .tab.active button {
+  background: transparent;
+  color: #fff;                      /* 白字压在滑动块上 */
+  cursor: default;
+}
+
+/* 滑动指示块（JS 动态定位 translate + width/height） */
+body #article-container .tabs > .nav-tabs .tab-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-accent);
+  border-radius: 999px;
+  transition: none;
+  z-index: 0;
+  pointer-events: none;
+}
+/* 初始化定位完成后（.tabs 加 slider-ready）才开滑动动画，避免首屏从左上角飞入 */
+body #article-container .tabs.slider-ready > .nav-tabs .tab-slider {
+  transition: transform .35s cubic-bezier(.4, 0, .2, 1),
+              width .35s cubic-bezier(.4, 0, .2, 1),
+              height .35s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* 内容卡：圆角描边、透明底（不加填充） */
+body #article-container .tabs > .tab-contents {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: transparent;
+}
+
+body #article-container .tabs > .tab-contents .tab-item-content {
+  padding: 2.2rem 1.2rem 1.6rem;    /* 顶部多留白给骑边的胶囊 */
+}
+
+body #article-container .tabs .tab-to-top {
+  color: var(--color-accent);
+}
+
+/* 移动端兜底：胶囊不骑边、禁用滑动块、退回静态高亮 */
+@media (max-width: 768px) {
+  body #article-container .tabs > .nav-tabs {
+    margin: 0 0 10px 0;
+  }
+  body #article-container .tabs > .nav-tabs .tab-slider {
+    display: none;
+  }
+  body #article-container .tabs > .nav-tabs > .tab.active button {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  body #article-container .tabs > .nav-tabs > .tab:not(.active) button {
+    color: var(--tab-botton-color);
+  }
+  body #article-container .tabs > .tab-contents .tab-item-content {
+    padding: 1.2rem .7rem;
+  }
+}

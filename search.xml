@@ -1,6 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客日常使用指南</title>
+    <url>/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<h1 id="博客日常使用指南"><a href="#博客日常使用指南" class="headerlink" title="博客日常使用指南"></a>博客日常使用指南</h1><h2 id="基础命令行"><a href="#基础命令行" class="headerlink" title="基础命令行"></a>基础命令行</h2><h3 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a>hexo s</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/">http://localhost:4000/</a></li>
+<li><code>hexo s</code> 是 <code>hexo server</code> 的缩写，命令效果一致。</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可。</li>
+<li>对 Hexo 根目录 <code>_config.yml</code> 的修改，需要重启本地服务器后才能预览效果。</li>
+<li>预览草稿文章 <code>hexo s --drafts</code></li>
+</ul>
+<h3 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a>hexo new</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="string">&quot;title&quot;</span></span><br><span class="line">hexo <span class="keyword">new</span>  draft <span class="string">&quot;草稿文章&quot;</span></span><br><span class="line">hexo <span class="keyword">new</span> page</span><br></pre></td></tr></table></figure>
+<ul>
+<li>新建一个title.md博客文章</li>
+<li>draft 为草稿文档，不会展现在博客上，可用<code>hexo publish &quot;草稿文章&quot;</code> 发布成正式文章</li>
+<li><code>hexo new page</code> 创建一个文件夹</li>
+</ul>
+<h3 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a>hexo d</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<ul>
+<li>自动生成网站静态文件，并部署到设定的仓库。</li>
+<li><code>hexo d</code> 是 <code>hexo deploy</code> 的缩写，命令效果一致。</li>
+</ul>
+<h3 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a>hexo clean</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+<ul>
+<li>清除缓存文件 db.json 和已生成的静态文件 public 。</li>
+<li>网站显示异常时可以执行这条命令试试</li>
+</ul>
+<h3 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a>hexo g</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>生成网站静态文件到默认设置的 public 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li><code>hexo g</code> 是 <code>hexo generate</code> 的缩写，命令效果一致。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+<p>部署发布，命令可用&amp;&amp;连接</p>
+<h2 id="标签插件速查"><a href="#标签插件速查" class="headerlink" title="标签插件速查"></a>标签插件速查</h2><blockquote>
+<p>下面每个都是<strong>真实渲染</strong>的示例，网页上看效果；标签的具体写法，请看本地 md 源文件里对应的那几行。</p>
+</blockquote>
+<h3 id="提示框-note"><a href="#提示框-note" class="headerlink" title="提示框 note"></a>提示框 note</h3><div class="note info flat"><p>这是 info 提示框的效果</p>
+</div>
+
+<div class="note warning flat"><p>这是 warning 提示框的效果</p>
+</div>
+
+<div class="note primary flat"><p>这是 primary 提示框的效果</p>
+</div>
+
+<div class="note success flat"><p>这是 success 提示框的效果</p>
+</div>
+
+<div class="note danger flat"><p>这是 danger 提示框的效果</p>
+</div>
+
+<div class="note info flat"><p>这是 info flat 提示框的效果</p>
+</div>
+
+<div class="note info simple"><p>这是 info simple 提示框的效果</p>
+</div>
+
+<div class="note info modern"><p>这是 info modern 提示框的效果</p>
+</div>
+
+<ul>
+<li>颜色：default / primary / success / info / warning / danger</li>
+<li>样式（加在颜色后）：flat / modern / simple</li>
+</ul>
+<h3 id="折叠块-folding"><a href="#折叠块-folding" class="headerlink" title="折叠块 folding"></a>折叠块 folding</h3><details><summary> <p>点我展开/收起</p> </summary>
+              <div class="content">
+              <p>这里是折叠起来的内容</p>
+              </div>
+            </details>
+
+<details kanade><summary> <p>点我展开/收起</p> </summary>
+              <div class="content">
+              <p>这里是折叠起来的内容</p>
+              </div>
+            </details>
+
+<details tsubasa><summary> <p>点我展开/收起</p> </summary>
+              <div class="content">
+              <p>这里是折叠起来的内容</p>
+              </div>
+            </details>
+
+<details ego><summary> <p>点我展开/收起</p> </summary>
+              <div class="content">
+              <p>这里是折叠起来的内容</p>
+              </div>
+            </details>
+
+<details aliena><summary> <p>点我展开/收起</p> </summary>
+              <div class="content">
+              <p>这里是折叠起来的内容</p>
+              </div>
+            </details>
+
+<h3 id="分栏-tabs"><a href="#分栏-tabs" class="headerlink" title="分栏 tabs"></a>分栏 tabs</h3><div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">背景</button></li><li class="tab"><button type="button" data-href="#示例-2">能力</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><p>这是「背景」栏的内容</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><p>这是「能力」栏的内容</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<h3 id="时间线-timeline"><a href="#时间线-timeline" class="headerlink" title="时间线 timeline"></a>时间线 timeline</h3><div class="timeline"><p class="p h2">示例时间线</p><div class="timenode"><div class="meta"><p></p><p>2026-08</p>
+<p></p></div><div class="body"><p>发生了第一件事</p></div></div>
+<div class="timenode"><div class="meta"><p></p><p>2026-09</p>
+<p></p></div><div class="body"><p>发生了第二件事</p></div></div></div>
+
+<h3 id="防剧透-hide"><a href="#防剧透-hide" class="headerlink" title="防剧透 hide"></a>防剧透 hide</h3><span class="hide-inline"><button type="button" class="hide-button button--animated" style> 点我查看
+  </button><span class="hide-content">隐藏的答案</span></span>
+
+<div class="hide-block"><button type="button" class="hide-button button--animated" style>剧透警告
+    </button><div class="hide-content"><p>被藏起来的剧透内容</p>
+</div></div>
+
+<h3 id="按钮-btn"><a href="#按钮-btn" class="headerlink" title="按钮 btn"></a>按钮 btn</h3><a class="btn-beautify button--animated center" href="/about/" title="关于我"><i class="fas fa-user fa-fw"></i><span>关于我</span></a>
+
+<h3 id="链接卡片-link"><a href="#链接卡片-link" class="headerlink" title="链接卡片 link"></a>链接卡片 link</h3><p>这是单个：</p>
+<div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div>
+
+<p>这是多个：</p>
+<div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div><div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div>
+
+<h3 id="配音-voice"><a href="#配音-voice" class="headerlink" title="配音 voice"></a>配音 voice</h3><div class="oc-voice" data-src="/audio/南院-封艾羽.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">封艾羽</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+<h3 id="勾选框-checkbox"><a href="#勾选框-checkbox" class="headerlink" title="勾选框 checkbox"></a>勾选框 checkbox</h3><div class="checkbox"><input type="checkbox">
+            <p>待办事项</p>
+            </div>
+<div class="checkbox checked"><input type="checkbox" checked="checked">
+            <p>已完成</p>
+            </div>
+
+<h3 id="按钮组-btns"><a href="#按钮组-btns" class="headerlink" title="按钮组 btns"></a>按钮组 btns</h3><div class="btns ">
+            <a href="https://zwei-wings.github.io/" title="博客首页"><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/placeholder/d570170f4f12e1ee829ca0e85a7dffeb77343a.svg">博客首页</a>
+<a href="/about/" title="关于"><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/placeholder/d570170f4f12e1ee829ca0e85a7dffeb77343a.svg">关于</a>
+          </div>
+
+<h3 id="图集-gallery"><a href="#图集-gallery" class="headerlink" title="图集 gallery"></a>图集 gallery</h3><div class="justified-gallery"><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp"><br><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp"><br><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp"></p>
+          </div>
+
+<h3 id="行内小图-inlineImg"><a href="#行内小图-inlineImg" class="headerlink" title="行内小图 inlineImg"></a>行内小图 inlineImg</h3><p>也就是一行里插入一个图片<img class="inline-img" src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp" style="height:40px">的感觉。</p>
+<h3 id="其他标签"><a href="#其他标签" class="headerlink" title="其他标签"></a>其他标签</h3><ul>
+<li>mermaid：流程图标签，需先在主题配置里开启 mermaid 才会渲染</li>
+</ul>
+]]></content>
+      <categories>
+        <category>博客相关</category>
+        <category>应用指南</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>南院OC专栏-0</title>
+    <url>/2026/09/11/%E5%8D%97%E9%99%A2/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-0/</url>
+    <content><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>近期因为收到一些关于 OC 人设提供与沟通的反馈事项：</p>
+<ul>
+<li>填表过程、类项不统一导致细节人设缺失</li>
+<li>部分人不习惯群聊讨论氛围，需要私聊处理问题</li>
+<li>新人的 OC 设单薄，缺少重要信息</li>
+<li>还有其他一些关于设子的问题（这里不一一举例了）</li>
+</ul>
+<p>所以经过讨论，我们将在这里公开更新<strong>世界观</strong>、<strong>角色设定卡</strong>等模版（代码块右上角可以快速复制）。</p>
+<div class="note Kanade flat"><p>Kanade：<br>我的 QQ 和邮箱你们应该都清楚，其他还有什么问题随时反馈，看到就会回。<br>如果有不清楚联系方式的麻烦留言，不要等回头问到你又说你联系不上我。<br>搞 OC 又不是工作指标，如果创作群这边多次反馈某些人想让自家孩子当主角，又不积极主动沟通，我们会对该角色进行投票表决，讨论是否降级。</p>
+</div>
+
+
+<hr>
+<h1 id="角色卡模版"><a href="#角色卡模版" class="headerlink" title="角色卡模版"></a>角色卡模版</h1><h2 id="带说明版"><a href="#带说明版" class="headerlink" title="带说明版"></a>带说明版</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">——基本信息——</span><br><span class="line">姓名：（该角色的全名，20 字以内）</span><br><span class="line">别名&#x2F;称号：（其他角色对该角色的称呼，或该角色持有的称号）</span><br><span class="line">种族：（已存在的种族将按文中已有设定安排，未存在的种族需详细说明种族设定，非特殊种族则填人族）</span><br><span class="line">年龄：（以主角封艾羽 16 岁为参照）</span><br><span class="line">血型：（该角色的血型，允许设定稀有血型）</span><br><span class="line">身高：（萝莉体型 150 cm 以下，正太体型 155 cm 以下）</span><br><span class="line">体型：（详细体型说明，若角色持有多形态，可注明角色形态的尺寸，如设定角色的本体形态为身高 3 米的奇美拉等）</span><br><span class="line">——特征信息——</span><br><span class="line">命格：（该角色的命格，未商议者从圣杯、宝剑、星币、权杖中选取，也可不设定）</span><br><span class="line">特长&#x2F;兴趣：（该角色持有的非战斗&#x2F;魔法技能，亦或是感兴趣的事）</span><br><span class="line">喜恶&#x2F;弱点：（该角色喜好&#x2F;讨厌的颜色&#x2F;物品等，或是造成该角色弱化的原因）</span><br><span class="line">外貌特征：（需要说明发色与眸色，常服或与校服同时穿着的特征服饰等也在这里说明，靠文字讲不清楚的务必准备好参考图）</span><br><span class="line">行为特征：（需要说明该角色的特征动作与可能触发这个动作的场景，例如 xxx 跟别人打招呼时总是会风骚的撩头发等）</span><br><span class="line">声音特征&#x2F;语癖：（需要说明该角色的声线是什么样的，与外貌是否相符，可具体写某个动漫的某个角色作为参照，有句末语癖或口头禅的也需要说明，例如每句话的句末一定会加上“喵”等）</span><br><span class="line">性格特征：（需要描述该角色的性格特征，可用简短的描述加具体场景的说明，例如 xxx 是个兄控病娇，如果有人擅自接近她的哥哥，她就会“满怀笑意”的作出威胁等）</span><br><span class="line">——战斗信息——</span><br><span class="line">初出场魔力等级：（可用等阶为堇色五等到赤金十二等之间，记不清具体颜色可只填写数字）</span><br><span class="line">持有魔武：（魔武名格式为「xx·yyyy」，xx 为前缀&#x2F;称号，yyyy为魔武的本名，一般前缀为 2 个字，本名不限，但要求前缀需要短于本名）</span><br><span class="line">魔武出处：（需要说明魔武出自 xx 神话或是在 xx 动漫里见过等，若无出处则注明“原创”）</span><br><span class="line">魔武特质：（魔武附带的特殊能力，在角色无法召唤魔武时，该能力将失效）</span><br><span class="line">魔法属性：（想玩体术的请不要再跟我自称“没有魔法”了，一律写“物理”）</span><br><span class="line">第一适性——</span><br><span class="line">第二适性——</span><br><span class="line">（第一适性至少填写一个属性，且第一适性与第二适性不可为同一个属性，可填写的属性：物理、精神、生命、诅咒、召唤、神秘、空间、时间、元素【包括金&#x2F;光、木&#x2F;风、水&#x2F;冰、火&#x2F;雷、土&#x2F;暗】，既可填写“元素”，表示所有元素类的魔法，或填写具体的元素名称，表示特定元素的魔法）</span><br><span class="line">——人物经历——</span><br><span class="line">CP 关系：（角色是否拥有 cp，若原创 cp 需要提交第二份人设，或者提前和 cp 的设主沟通好）</span><br><span class="line">亲友关系：（角色与其他角色的关系，可设定为亲人，朋友等，若不符合剧情，此处可能被酌情删减）</span><br><span class="line">所属位面：（角色来自什么样的下级位面，若角色在南院位面出生则填南院即可）</span><br><span class="line">所属部门：（角色在第二区的哪个部门下工作&#x2F;直接隶属于结社的哪个角色手下，若不进入第二区则填“暂无”）</span><br><span class="line">过往经历：（角色在剧情中正式出场前的经历）</span><br><span class="line">剧情经历：（角色在剧情中的经历，可只写某些片段，但不能为空）</span><br><span class="line">——其他补充——</span><br><span class="line">（这里你可以写所有你想补充的事情，或者也可以直接联系创作群的成员进行讨论）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="空白模版"><a href="#空白模版" class="headerlink" title="空白模版"></a>空白模版</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">——基本信息——</span><br><span class="line">姓名：</span><br><span class="line">别名&#x2F;称号：</span><br><span class="line">种族：</span><br><span class="line">年龄：</span><br><span class="line">血型：</span><br><span class="line">身高：</span><br><span class="line">体型：</span><br><span class="line">——特征信息——</span><br><span class="line">命格：</span><br><span class="line">特长&#x2F;兴趣：</span><br><span class="line">喜恶&#x2F;弱点：</span><br><span class="line">外貌特征：</span><br><span class="line">行为特征：</span><br><span class="line">声音特征&#x2F;语癖：</span><br><span class="line">性格特征：</span><br><span class="line">——战斗信息——</span><br><span class="line">初出场魔力等级：</span><br><span class="line">持有魔武：</span><br><span class="line">魔武出处：</span><br><span class="line">魔武特质：</span><br><span class="line">魔法属性：</span><br><span class="line">第一适性——</span><br><span class="line">第二适性——</span><br><span class="line">——人物经历——</span><br><span class="line">CP 关系：</span><br><span class="line">亲友关系：</span><br><span class="line">所属位面：</span><br><span class="line">所属部门：</span><br><span class="line">过往经历：</span><br><span class="line">剧情经历：</span><br><span class="line">——其他补充——</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="世界观模版"><a href="#世界观模版" class="headerlink" title="世界观模版"></a>世界观模版</h1><p>为了方便沟通，我们经过讨论将世界观分为两类：</p>
+<ul>
+<li>A：对自家 OC 出身的位面进行设定，和南院位面无关。<em>（我们会提供模版，确保内部逻辑融洽即可）</em></li>
+<li>B：宏观的世界观设计，比如世界树、空间规则等。*（我们不提供模版，请直接向创作群成员提议。）</li>
+</ul>
+<p><em>PS：为了避免世界观冲突或产生漏洞，B类的审核会非常严格，最麻烦的情况下可能需要统一找时间和相关 OC 主逐个对线，请提前做好心理准备。</em></p>
+<h2 id="A-类（带说明版）"><a href="#A-类（带说明版）" class="headerlink" title="A 类（带说明版）"></a>A 类（带说明版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：（例如 Y-1111，指 Y 为末世世界，1111 为编号。现有末世 Y、类中世纪 T、乌托邦 M、东方玄幻&#x2F;武侠 C，如果不在这个范围请向创作群成员进行反馈）</span><br><span class="line">大致概述：（简要概括一下这个世界观最有特色的部分&#x2F;你最看重的部分）</span><br><span class="line">重要产物：（选填，简要说明这个世界观下最核心的机械&#x2F;魔法造物、资源等等都行）</span><br><span class="line">世界观主题：（比如这个世界观的核心背景是“人类和 AI 的智械危机”还是“社会 xx 阶级和 xx 阶级的斗争”之类的）</span><br></pre></td></tr></table></figure>
+<h2 id="A-类（空白版）"><a href="#A-类（空白版）" class="headerlink" title="A 类（空白版）"></a>A 类（空白版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：</span><br><span class="line">大致概述：</span><br><span class="line">重要产物：</span><br><span class="line">世界观主题：</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>小说</category>
+        <category>南城院校风纪委员部</category>
+      </categories>
+      <tags>
+        <tag>原创</tag>
+        <tag>OC专栏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>南院番外小剧场-2</title>
     <url>/2026/09/03/%E5%8D%97%E9%99%A2/%E7%95%AA%E5%A4%96/%E5%8D%97%E9%99%A2%E7%95%AA%E5%A4%96%E5%B0%8F%E5%89%A7%E5%9C%BA-2/</url>
     <content><![CDATA[<h1 id="互换服装小剧场"><a href="#互换服装小剧场" class="headerlink" title="互换服装小剧场"></a>互换服装小剧场</h1><h2 id="日月组"><a href="#日月组" class="headerlink" title="日月组"></a>日月组</h2><p><img src= "/img/loading.gif" data-lazy-src="/2026/09/03/%E5%8D%97%E9%99%A2/%E7%95%AA%E5%A4%96/%E5%8D%97%E9%99%A2%E7%95%AA%E5%A4%96%E5%B0%8F%E5%89%A7%E5%9C%BA-2/%E5%8D%97%E9%99%A2%E7%95%AA%E5%A4%96%E5%B0%8F%E5%89%A7%E5%9C%BA-2/%E6%97%A5%E6%9C%88%E7%BB%84%E5%B0%8F%E5%89%A7%E5%9C%BA.webp"></p>
@@ -28,43 +213,6 @@
       <tags>
         <tag>名柯</tag>
         <tag>同人</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>南院OC专栏-0</title>
-    <url>/2026/09/11/%E5%8D%97%E9%99%A2/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-0/</url>
-    <content><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>近期因为收到一些关于 OC 人设提供与沟通的反馈事项：</p>
-<ul>
-<li>填表过程、类项不统一导致细节人设缺失</li>
-<li>部分人不习惯群聊讨论氛围，需要私聊处理问题</li>
-<li>新人的 OC 设单薄，缺少重要信息</li>
-<li>还有其他一些关于设子的问题（这里不一一举例了）</li>
-</ul>
-<p>所以经过讨论，我们将在这里公开更新<strong>世界观</strong>、<strong>角色设定卡</strong>等模版，可以复制粘贴写文本，也可以直接网页填表然后截图发我（看你们喜欢哪种方式都行）。</p>
-<div class="note Kanade flat"><p>Kanade：<br>我的 QQ 和邮箱你们应该都清楚，其他还有什么问题随时反馈，看到就会回。<br>如果有不清楚联系方式的麻烦留言，不要等回头问到你又说你联系不上我。<br>搞 OC 又不是工作指标，如果创作群这边多次反馈某些人想让自家孩子当主角，又不积极主动沟通，我们会对该角色进行投票表决，讨论是否降级。</p>
-</div>
-
-
-<hr>
-<h1 id="角色卡模版"><a href="#角色卡模版" class="headerlink" title="角色卡模版"></a>角色卡模版</h1><h2 id="带说明版"><a href="#带说明版" class="headerlink" title="带说明版"></a>带说明版</h2><p>——基本信息——<br>姓名：（该角色的全名，20 字以内）<br>别名/称号：（其他角色对该角色的称呼，或该角色持有的称号）<br>种族：（已存在的种族将按文中已有设定安排，未存在的种族需详细说明种族设定，非特殊种族则填人族）<br>年龄：（以主角封艾羽 16 岁为参照）<br>血型：（该角色的血型，允许设定稀有血型）<br>身高：（萝莉体型 150 cm 以下，正太体型 155 cm 以下）<br>体型：（详细体型说明，若角色持有多形态，可注明角色形态的尺寸，如设定角色的本体形态为身高 3 米的奇美拉等）<br>——特征信息——<br>命格：（该角色的命格，未商议者从圣杯、宝剑、星币、权杖中选取，也可不设定）<br>特长/兴趣：（该角色持有的非战斗/魔法技能，亦或是感兴趣的事）<br>喜恶/弱点：（该角色喜好/讨厌的颜色/物品等，或是造成该角色弱化的原因）<br>外貌特征：（需要说明发色与眸色，常服或与校服同时穿着的特征服饰等也在这里说明，靠文字讲不清楚的务必准备好参考图）<br>行为特征：（需要说明该角色的特征动作与可能触发这个动作的场景，例如 xxx 跟别人打招呼时总是会风骚的撩头发等）<br>声音特征/语癖：（需要说明该角色的声线是什么样的，与外貌是否相符，可具体写某个动漫的某个角色作为参照，有句末语癖或口头禅的也需要说明，例如每句话的句末一定会加上“喵”等）<br>性格特征：（需要描述该角色的性格特征，可用简短的描述加具体场景的说明，例如 xxx 是个兄控病娇，如果有人擅自接近她的哥哥，她就会“满怀笑意”的作出威胁等）<br>——战斗信息——<br>初出场魔力等级：（可用等阶为堇色五等到赤金十二等之间，记不清具体颜色可只填写数字）<br>持有魔武：（魔武名格式为「xx·yyyy」，xx 为前缀/称号，yyyy为魔武的本名，一般前缀为 2 个字，本名不限，但要求前缀需要短于本名）<br>魔武出处：（需要说明魔武出自 xx 神话或是在 xx 动漫里见过等，若无出处则注明“原创”）<br>魔武特质：（魔武附带的特殊能力，在角色无法召唤魔武时，该能力将失效）<br>魔法属性：（想玩体术的请不要再跟我自称“没有魔法”了，一律写“物理”）<br>第一适性——<br>第二适性——<br>（第一适性至少填写一个属性，且第一适性与第二适性不可为同一个属性，可填写的属性：物理、精神、生命、诅咒、召唤、神秘、空间、时间、元素【包括金/光、木/风、水/冰、火/雷、土/暗】，既可填写“元素”，表示所有元素类的魔法，或填写具体的元素名称，表示特定元素的魔法）<br>——人物经历——<br>CP 关系：（角色是否拥有 cp，若原创 cp 需要提交第二份人设，或者提前和 cp 的设主沟通好）<br>亲友关系：（角色与其他角色的关系，可设定为亲人，朋友等，若不符合剧情，此处可能被酌情删减）<br>所属位面：（角色来自什么样的下级位面，若角色在南院位面出生则填南院即可）<br>所属部门：（角色在第二区的哪个部门下工作/直接隶属于结社的哪个角色手下，若不进入第二区则填“暂无”）<br>过往经历：（角色在剧情中正式出场前的经历）<br>剧情经历：（角色在剧情中的经历，可只写某些片段，但不能为空）<br>——其他补充——<br>（这里你可以写所有你想补充的事情，或者也可以直接联系创作群的成员进行讨论）</p>
-<h2 id="空白模版"><a href="#空白模版" class="headerlink" title="空白模版"></a>空白模版</h2><p>——基本信息——<br>姓名：<br>别名/称号：<br>种族：<br>年龄：<br>血型：<br>身高：<br>体型：<br>——特征信息——<br>命格：<br>特长/兴趣：<br>喜恶/弱点：<br>外貌特征：<br>行为特征：<br>声音特征/语癖：<br>性格特征：<br>——战斗信息——<br>初出场魔力等级：<br>持有魔武：<br>魔武出处：<br>魔武特质：<br>魔法属性：<br>第一适性——<br>第二适性——<br>——人物经历——<br>CP 关系：<br>亲友关系：<br>所属位面：<br>所属部门：<br>过往经历：<br>剧情经历：<br>——其他补充——</p>
-<hr>
-<h1 id="世界观模版"><a href="#世界观模版" class="headerlink" title="世界观模版"></a>世界观模版</h1><p>为了方便沟通，我们经过讨论将世界观分为两类：</p>
-<ul>
-<li>A：对自家 OC 出身的位面进行设定，和南院位面无关。<em>（我们会提供模版，确保内部逻辑融洽即可）</em></li>
-<li>B：宏观的世界观设计，比如世界树、空间规则等。*（我们不提供模版，请直接向创作群成员提议。）</li>
-</ul>
-<p><em>PS：为了避免世界观冲突或产生漏洞，B类的审核会非常严格，最麻烦的情况下可能需要统一找时间和相关 OC 主逐个对线，请提前做好心理准备。</em></p>
-<h2 id="A-类（带说明版）"><a href="#A-类（带说明版）" class="headerlink" title="A 类（带说明版）"></a>A 类（带说明版）</h2><p>位面编号：（例如 Y-1111，指 Y 为末世世界，1111 为编号。现有末世 Y、类中世纪 T、乌托邦 M、东方玄幻/武侠 C，如果不在这个范围请向创作群成员进行反馈）<br>大致概述：（简要概括一下这个世界观最有特色的部分/你最看重的部分）<br>重要产物：（选填，简要说明这个世界观下最核心的机械/魔法造物、资源等等都行）<br>世界观主题：（比如这个世界观的核心背景是“人类和 AI 的智械危机”还是“社会 xx 阶级和 xx 阶级的斗争”之类的）</p>
-<h2 id="A-类（空白版）"><a href="#A-类（空白版）" class="headerlink" title="A 类（空白版）"></a>A 类（空白版）</h2><p>位面编号：<br>大致概述：<br>重要产物：<br>世界观主题：</p>
-]]></content>
-      <categories>
-        <category>小说</category>
-        <category>南城院校风纪委员部</category>
-      </categories>
-      <tags>
-        <tag>原创</tag>
-        <tag>OC专栏</tag>
       </tags>
   </entry>
   <entry>
@@ -346,131 +494,6 @@
       <tags>
         <tag>原创</tag>
         <tag>OC专栏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客日常使用指南</title>
-    <url>/2021/01/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<h1 id="博客日常使用指南"><a href="#博客日常使用指南" class="headerlink" title="博客日常使用指南"></a>博客日常使用指南</h1><h2 id="基础命令行"><a href="#基础命令行" class="headerlink" title="基础命令行"></a>基础命令行</h2><h3 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a>hexo s</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<ul>
-<li>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/">http://localhost:4000/</a></li>
-<li><code>hexo s</code> 是 <code>hexo server</code> 的缩写，命令效果一致。</li>
-<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可。</li>
-<li>对 Hexo 根目录 <code>_config.yml</code> 的修改，需要重启本地服务器后才能预览效果。</li>
-<li>预览草稿文章 <code>hexo s --drafts</code></li>
-</ul>
-<h3 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a>hexo new</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="string">&quot;title&quot;</span></span><br><span class="line">hexo <span class="keyword">new</span>  draft <span class="string">&quot;草稿文章&quot;</span></span><br><span class="line">hexo <span class="keyword">new</span> page</span><br></pre></td></tr></table></figure>
-<ul>
-<li>新建一个title.md博客文章</li>
-<li>draft 为草稿文档，不会展现在博客上，可用<code>hexo publish &quot;草稿文章&quot;</code> 发布成正式文章</li>
-<li><code>hexo new page</code> 创建一个文件夹</li>
-</ul>
-<h3 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a>hexo d</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<ul>
-<li>自动生成网站静态文件，并部署到设定的仓库。</li>
-<li><code>hexo d</code> 是 <code>hexo deploy</code> 的缩写，命令效果一致。</li>
-</ul>
-<h3 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a>hexo clean</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-<ul>
-<li>清除缓存文件 db.json 和已生成的静态文件 public 。</li>
-<li>网站显示异常时可以执行这条命令试试</li>
-</ul>
-<h3 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a>hexo g</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<p>生成网站静态文件到默认设置的 public 文件夹。</p>
-<ul>
-<li>便于查看网站生成的静态文件或者手动部署网站；</li>
-<li>如果使用自动部署，不需要先执行该命令；</li>
-<li><code>hexo g</code> 是 <code>hexo generate</code> 的缩写，命令效果一致。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-<p>部署发布，命令可用&amp;&amp;连接</p>
-<h2 id="标签插件速查"><a href="#标签插件速查" class="headerlink" title="标签插件速查"></a>标签插件速查</h2><blockquote>
-<p>下面每个都是<strong>真实渲染</strong>的示例，网页上看效果；标签的具体写法，请看本地 md 源文件里对应的那几行。</p>
-</blockquote>
-<h3 id="提示框-note"><a href="#提示框-note" class="headerlink" title="提示框 note"></a>提示框 note</h3><div class="note info flat"><p>这是 info 提示框的效果</p>
-</div>
-
-<div class="note warning flat"><p>这是 warning 提示框的效果</p>
-</div>
-
-<div class="note primary flat"><p>这是 primary 提示框的效果</p>
-</div>
-
-<div class="note success flat"><p>这是 success 提示框的效果</p>
-</div>
-
-<div class="note danger flat"><p>这是 danger 提示框的效果</p>
-</div>
-
-<div class="note info flat"><p>这是 info flat 提示框的效果</p>
-</div>
-
-<div class="note info simple"><p>这是 info simple 提示框的效果</p>
-</div>
-
-<div class="note info modern"><p>这是 info modern 提示框的效果</p>
-</div>
-
-<ul>
-<li>颜色：default / primary / success / info / warning / danger</li>
-<li>样式（加在颜色后）：flat / modern / simple</li>
-</ul>
-<h3 id="折叠块-folding"><a href="#折叠块-folding" class="headerlink" title="折叠块 folding"></a>折叠块 folding</h3><details><summary> <p>点我展开/收起</p> </summary>
-              <div class="content">
-              <p>这里是折叠起来的内容</p>
-              </div>
-            </details>
-
-<h3 id="分栏-tabs"><a href="#分栏-tabs" class="headerlink" title="分栏 tabs"></a>分栏 tabs</h3><div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">背景</button></li><li class="tab"><button type="button" data-href="#示例-2">能力</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><p>这是「背景」栏的内容</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><p>这是「能力」栏的内容</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<h3 id="时间线-timeline"><a href="#时间线-timeline" class="headerlink" title="时间线 timeline"></a>时间线 timeline</h3><div class="timeline"><p class="p h2">示例时间线</p><div class="timenode"><div class="meta"><p></p><p>2026-08</p>
-<p></p></div><div class="body"><p>发生了第一件事</p></div></div>
-<div class="timenode"><div class="meta"><p></p><p>2026-09</p>
-<p></p></div><div class="body"><p>发生了第二件事</p></div></div></div>
-
-<h3 id="防剧透-hide"><a href="#防剧透-hide" class="headerlink" title="防剧透 hide"></a>防剧透 hide</h3><span class="hide-inline"><button type="button" class="hide-button button--animated" style> 点我查看
-  </button><span class="hide-content">隐藏的答案</span></span>
-
-<div class="hide-block"><button type="button" class="hide-button button--animated" style>剧透警告
-    </button><div class="hide-content"><p>被藏起来的剧透内容</p>
-</div></div>
-
-<h3 id="按钮-btn"><a href="#按钮-btn" class="headerlink" title="按钮 btn"></a>按钮 btn</h3><a class="btn-beautify button--animated center" href="/about/" title="关于我"><i class="fas fa-user fa-fw"></i><span>关于我</span></a>
-
-<h3 id="链接卡片-link"><a href="#链接卡片-link" class="headerlink" title="链接卡片 link"></a>链接卡片 link</h3><p>这是单个：</p>
-<div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div>
-
-<p>这是多个：</p>
-<div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div><div style="display: inline-block;"><a class="link-card" target="_blank" rel="external nofollow noopener noreferrer" title="https://zwei-wings.github.io/" href="https://zwei-wings.github.io/"><div class="left"><i class="fas fa-link"></i></div><div class="right"><p class="text">我的博客</p><p class="url">https://zwei-wings.github.io/</p></div></a></div>
-
-<h3 id="配音-voice"><a href="#配音-voice" class="headerlink" title="配音 voice"></a>配音 voice</h3><div class="oc-voice" data-src="/audio/南院-封艾羽.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">封艾羽</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-<h3 id="勾选框-checkbox"><a href="#勾选框-checkbox" class="headerlink" title="勾选框 checkbox"></a>勾选框 checkbox</h3><div class="checkbox"><input type="checkbox">
-            <p>待办事项</p>
-            </div>
-<div class="checkbox checked"><input type="checkbox" checked="checked">
-            <p>已完成</p>
-            </div>
-
-<h3 id="按钮组-btns"><a href="#按钮组-btns" class="headerlink" title="按钮组 btns"></a>按钮组 btns</h3><div class="btns ">
-            <a href="https://zwei-wings.github.io/" title="博客首页"><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/placeholder/d570170f4f12e1ee829ca0e85a7dffeb77343a.svg">博客首页</a>
-<a href="/about/" title="关于"><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/placeholder/d570170f4f12e1ee829ca0e85a7dffeb77343a.svg">关于</a>
-          </div>
-
-<h3 id="图集-gallery"><a href="#图集-gallery" class="headerlink" title="图集 gallery"></a>图集 gallery</h3><div class="justified-gallery"><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp"><br><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp"><br><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp"></p>
-          </div>
-
-<h3 id="行内小图-inlineImg"><a href="#行内小图-inlineImg" class="headerlink" title="行内小图 inlineImg"></a>行内小图 inlineImg</h3><p>也就是一行里插入一个图片<img class="inline-img" src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/sbc70.webp" style="height:40px">的感觉。</p>
-<h3 id="其他标签"><a href="#其他标签" class="headerlink" title="其他标签"></a>其他标签</h3><ul>
-<li>mermaid：流程图标签，需先在主题配置里开启 mermaid 才会渲染</li>
-</ul>
-]]></content>
-      <categories>
-        <category>博客相关</category>
-        <category>应用指南</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -5342,7 +5365,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#x4d;&#x65;&#116;&#x69;&#x6e;&#103;&#74;&#83;&#x40;&#x31;&#x2e;&#50;">&#x4d;&#x65;&#116;&#x69;&#x6e;&#103;&#74;&#83;&#x40;&#x31;&#x2e;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#x4d;&#x65;&#116;&#105;&#x6e;&#x67;&#x4a;&#83;&#64;&#x31;&#x2e;&#x32;">&#x4d;&#x65;&#116;&#105;&#x6e;&#x67;&#x4a;&#83;&#64;&#x31;&#x2e;&#x32;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -5398,7 +5421,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#113;&#x75;&#x65;&#114;&#121;&#x40;&#51;&#x2e;&#x37;&#46;&#49;">&#106;&#113;&#x75;&#x65;&#114;&#121;&#x40;&#51;&#x2e;&#x37;&#46;&#49;</a> / <a href="mailto:&#x66;&#97;&#x6e;&#99;&#121;&#98;&#111;&#x78;&#x40;&#51;&#x2e;&#x35;&#x2e;&#x37;">&#x66;&#97;&#x6e;&#99;&#121;&#98;&#111;&#x78;&#x40;&#51;&#x2e;&#x35;&#x2e;&#x37;</a> / <a href="mailto:&#x74;&#121;&#112;&#101;&#100;&#64;&#x32;&#x2e;&#48;&#x2e;&#49;&#50;">&#x74;&#121;&#112;&#101;&#100;&#64;&#x32;&#x2e;&#48;&#x2e;&#49;&#50;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#x6a;&#113;&#x75;&#x65;&#x72;&#x79;&#x40;&#51;&#x2e;&#x37;&#46;&#49;">&#x6a;&#113;&#x75;&#x65;&#x72;&#x79;&#x40;&#51;&#x2e;&#x37;&#46;&#49;</a> / <a href="mailto:&#x66;&#97;&#110;&#99;&#121;&#98;&#x6f;&#120;&#64;&#x33;&#x2e;&#x35;&#x2e;&#x37;">&#x66;&#97;&#110;&#99;&#121;&#98;&#x6f;&#120;&#64;&#x33;&#x2e;&#x35;&#x2e;&#x37;</a> / <a href="mailto:&#116;&#x79;&#x70;&#101;&#100;&#x40;&#50;&#x2e;&#48;&#46;&#49;&#50;">&#116;&#x79;&#x70;&#101;&#100;&#x40;&#50;&#x2e;&#48;&#46;&#49;&#50;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>
