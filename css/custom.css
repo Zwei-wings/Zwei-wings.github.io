@@ -515,6 +515,7 @@
 [data-theme=dark] .oc-voice {
   background: rgba(212, 79, 71, 0.06);
   border-color: rgba(212, 79, 71, 0.3);
+  --oc-voice-fill: #d44f47;
 }
 [data-theme=dark] .oc-voice-name { color: rgba(255, 255, 255, 0.9); }
 [data-theme=dark] .oc-voice-time { color: rgba(255, 255, 255, 0.55); }
@@ -523,6 +524,7 @@
 [data-theme=dark] .oc-voice-text {
   color: rgba(255, 255, 255, 0.72);
   background: rgba(212, 79, 71, 0.07);
+  border-left-color: #d44f47;
 }
 /* 强调元素（播放键 / 波形 / 滑块 / 静音 hover）统一暗色红调，呼应容器与全站暗色主色 */
 [data-theme=dark] .oc-voice-btn { background: #d44f47; }
