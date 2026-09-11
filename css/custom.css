@@ -1388,35 +1388,23 @@ details:has(> .content) > .content { padding: .5rem 1.1rem 1rem; }
    ① 标签参数（带逗号）：{% folding Kanade, @标题 %} → <details Kanade>
    ② 手动加类：<details class="Kanade" open>（与 note 的角色调色类同源）
    下方把角色名接到色板字典变量（scripts/colors.js 注入的 --kanade-* / --tsubasa-* / --ego-* / --aliena-*）。
-   渐变虚线用 ::before + mask 实现（元素本身保持透明幽灵感），颜色 = 该角色 accent → accent2 两色渐变。 */
+   渐变虚线用 background-clip 实现：border-box 画 accent→accent2 两色渐变（含透明段=虚线），
+   padding-box 填卡片色（与幽灵透明观感一致）。不再依赖 mask-composite（Safari<16.4 等不支持会整片铺开→灰底）。 */
 details[Kanade], details.Kanade,
 details[Tsubasa], details.Tsubasa,
 details[Ego], details.Ego,
 details[Aliena], details.Aliena {
   position: relative;
-  border: none;                 /* 关掉普通虚线，改走 ::before 渐变虚线 */
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background:
+    var(--card-bg) padding-box,
+    repeating-linear-gradient(90deg,
+              var(--color-accent) 0 9px,
+              var(--color-accent-2) 9px 16px,
+              transparent 16px 24px) border-box;
 }
 details[Kanade], details.Kanade   { --color-accent: var(--kanade-accent);  --color-accent-2: var(--kanade-accent-2);  --color-border: var(--kanade-border); }
 details[Tsubasa], details.Tsubasa { --color-accent: var(--tsubasa-accent); --color-accent-2: var(--tsubasa-accent-2); --color-border: var(--tsubasa-border); }
 details[Ego], details.Ego         { --color-accent: var(--ego-accent);     --color-accent-2: var(--ego-accent-2);     --color-border: var(--ego-border); }
 details[Aliena], details.Aliena   { --color-accent: var(--aliena-accent);  --color-accent-2: var(--aliena-accent-2);  --color-border: var(--aliena-border); }
-
-details[Kanade]::before, details.Kanade::before,
-details[Tsubasa]::before, details.Tsubasa::before,
-details[Ego]::before, details.Ego::before,
-details[Aliena]::before, details.Aliena::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: repeating-linear-gradient(90deg,
-              var(--color-accent) 0 9px,
-              var(--color-accent-2) 9px 16px,
-              transparent 16px 24px);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-          mask-composite: exclude;
-  pointer-events: none;
-}
