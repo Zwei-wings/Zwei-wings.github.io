@@ -1341,3 +1341,82 @@ body #article-container .btn-beautify:hover{ text-decoration: none; }
 [data-theme=dark] #article-container .btn-beautify.button--animated:before{
   background: #c62828;
 }
+
+/* ============================================================
+   折叠块 folding · 方案 C 幽灵描边（默认）
+   真实 DOM：<details><summary>标题</summary><div class="content">…</div></details>
+   （butterfly 的 folding 标签无自带 class，故用 details:has(> .content) 精准命中，
+    不影响手写原生 <details>）
+   配色走 --color-* 槽：默认站点橙/红（见上方 :root / [data-theme=dark] 基线）；
+   传角色名作参数（{% folding Kanade, @标题 %} → <details Kanade>）即换角色色。
+   ============================================================ */
+details:has(> .content) {
+  margin: .9rem 0;
+  border: 1px dashed var(--color-border);
+  border-radius: 12px;
+  background: transparent;
+}
+details:has(> .content) > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1.1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  border-bottom: 1px solid var(--line);
+  transition: color .2s;
+}
+details:has(> .content) > summary::-webkit-details-marker { display: none; }
+details:has(> .content) > summary::after {
+  content: "";
+  margin-left: auto;
+  width: .5rem; height: .5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .25s ease;
+}
+details:has(> .content)[open] > summary::after { transform: rotate(-135deg); }
+details:has(> .content)[open] > summary { border-bottom-color: var(--color-border); }
+details:has(> .content) > .content { padding: .5rem 1.1rem 1rem; }
+
+/* —— OC 角色配色变体（渐变虚线边框实验）——
+   命中两种写法：
+   ① 标签参数（带逗号）：{% folding Kanade, @标题 %} → <details Kanade>
+   ② 手动加类：<details class="Kanade" open>（与 note 的角色调色类同源）
+   下方把角色名接到色板字典变量（scripts/colors.js 注入的 --kanade-* / --tsubasa-* / --ego-* / --aliena-*）。
+   渐变虚线用 ::before + mask 实现（元素本身保持透明幽灵感），颜色 = 该角色 accent → accent2 两色渐变。 */
+details[Kanade], details.Kanade,
+details[Tsubasa], details.Tsubasa,
+details[Ego], details.Ego,
+details[Aliena], details.Aliena {
+  position: relative;
+  border: none;                 /* 关掉普通虚线，改走 ::before 渐变虚线 */
+}
+details[Kanade], details.Kanade   { --color-accent: var(--kanade-accent);  --color-accent-2: var(--kanade-accent-2);  --color-border: var(--kanade-border); }
+details[Tsubasa], details.Tsubasa { --color-accent: var(--tsubasa-accent); --color-accent-2: var(--tsubasa-accent-2); --color-border: var(--tsubasa-border); }
+details[Ego], details.Ego         { --color-accent: var(--ego-accent);     --color-accent-2: var(--ego-accent-2);     --color-border: var(--ego-border); }
+details[Aliena], details.Aliena   { --color-accent: var(--aliena-accent);  --color-accent-2: var(--aliena-accent-2);  --color-border: var(--aliena-border); }
+
+details[Kanade]::before, details.Kanade::before,
+details[Tsubasa]::before, details.Tsubasa::before,
+details[Ego]::before, details.Ego::before,
+details[Aliena]::before, details.Aliena::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: repeating-linear-gradient(90deg,
+              var(--color-accent) 0 9px,
+              var(--color-accent-2) 9px 16px,
+              transparent 16px 24px);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  pointer-events: none;
+}
