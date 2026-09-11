@@ -1241,3 +1241,90 @@ div .btns a[href]:hover {
   border-color: rgba(212, 79, 71, .55) !important;
   color: #e88f89 !important;
 }
+
+/* ===== 链接卡片 link-card · 暖橙描边美化（2026-09-11） ===== */
+/* 默认 #post a.link-card { background:var(--tab-botton-bg) 灰底; max-width:361px 偏窄 }
+   旧覆盖特异性不足 → 偏灰；现用 body 前缀 (1,1,2) 稳赢。
+   ★ 关键结构（实测）：butterfly 把每张卡片单独包进
+     <div style="display:inline-block"><a class="link-card">…</a></div>，
+     多张是各自独立 wrapper 的兄弟（非共一个父）。所以不能靠“父级 flex”，
+     否则要么 :has 永远不触发、要么把整篇文章 flex 化。
+     布局交给 source/js/link-card.js（JS 遍历相邻 wrapper 打 class），
+        单张 → .link-card-wrap 撑满整行；多张 → .link-multi 并排(每张约30%)。
+     wrapper 的内联 display:inline-block 无 !important，用 !important 覆写。 */
+body #article-container a.link-card{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: transparent;
+  border: 1px solid rgba(255,154,92,.42);
+  box-shadow: 0 2px 8px rgba(255,154,92,.14);
+  transition: all .25s;
+  text-decoration: none;
+  color: inherit;
+}
+body #article-container a.link-card:hover{
+  transform: translateY(-2px);
+  border-color: #FF9A5C;
+  box-shadow: 0 8px 18px rgba(255,154,92,.22);
+}
+body #article-container a.link-card div.left i{ color: #FF9A5C; }
+body #article-container a.link-card p.text{ color: #FF7A3D; }
+
+/* 布局改由 source/js/link-card.js 在渲染后打 class（不再依赖 CSS :has()，
+   之前嵌套 :has() 在部分浏览器整条失效 → 多卡被钉成 block 单列）。
+   规则：.link-card-wrap = 单卡（独占整行）；.link-multi = 同组≥2张（并排）。
+   wrapper 内联 style="display:inline-block" 无 !important，必须用 !important 覆写。 */
+#article-container div.link-card-wrap{
+  display: block !important;
+  width: 100% !important;
+  margin: .2rem 0;
+}
+#article-container div.link-multi{
+  display: inline-block !important;
+  width: 31% !important;
+  margin: .2rem .5rem .2rem 0;
+  vertical-align: top;
+}
+
+/* 暗色：红玻璃质感（透明底由上面的通用规则继承，这里只调描边/影/图标） */
+[data-theme=dark] #article-container a.link-card{
+  border-color: rgba(212,79,71,.38);
+  box-shadow: 0 2px 8px rgba(0,0,0,.45);
+}
+[data-theme=dark] #article-container a.link-card:hover{
+  border-color: #E56B6F;
+  box-shadow: 0 8px 18px rgba(0,0,0,.6);
+}
+[data-theme=dark] #article-container a.link-card div.left i{ color: #E56B6F; }
+[data-theme=dark] #article-container a.link-card p.text{ color: #E88F89; }
+
+/* ===== 按钮 btn 标签 · 对齐原生主题按钮（2026-09-11） ===== */
+/* 单个 btn 标签色来自 butterfly 变量（$btn-default-color=#777 + 冷色变体），与原生按钮（关于咕咕/reward/404 等）不是一套。
+   原生按钮亮色=--btn-bg 站点橙、暗色=#d44f47 主红；这里让 btn 同脸。
+   用 body 前缀把特异性提到(1,1,1)稳赢默认(1,0,1)；:not(.outline) 让所有彩色变体也归一到站点色，仅 outline 保留透明描边款 */
+body #article-container .btn-beautify:not(.outline){
+  background-color: var(--btn-bg);
+  color: #fff;
+}
+body #article-container .btn-beautify.outline{
+  background-color: transparent;
+  border: 1px solid var(--btn-bg);
+  color: var(--btn-bg);
+}
+body #article-container .btn-beautify:hover{ text-decoration: none; }
+
+[data-theme=dark] body #article-container .btn-beautify:not(.outline){
+  background-color: #d44f47;
+  color: #fff;
+}
+[data-theme=dark] body #article-container .btn-beautify.outline{
+  border-color: #d44f47;
+  color: #d44f47;
+}
+/* 扫光：暗色换成主红扫光，与 #card-info-btn 一致（亮色沿用默认白色扫光） */
+[data-theme=dark] #article-container .btn-beautify.button--animated:before{
+  background: #c62828;
+}
