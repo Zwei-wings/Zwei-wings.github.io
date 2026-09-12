@@ -560,8 +560,9 @@
   text-decoration-color: rgba(141, 179, 214, .55);
 }
 
-/* ③ 划去 <del>：防剧透（空虚线框占位，悬停/按住浮现文字） */
+/* ③ 划去 <del>：防剧透（空虚线框占位，悬停/按住浮现文字 + tooltip 提示窗） */
 #article-container del {
+  position: relative;             /* tooltip 定位参照 */
   text-decoration: none;
   color: transparent;
   border: 1px dashed #d9b89a;
@@ -576,6 +577,53 @@
 }
 [data-theme=dark] #article-container del {
   border-color: rgba(217, 184, 154, .5);
+}
+
+/* tooltip 小窗：默认「等等，你知道得太多了」，可 <del data-tip="说明"> 自定义 */
+#article-container del::after {
+  content: "等等，你知道得太多了";
+  position: absolute;
+  bottom: 135%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 10;
+}
+#article-container del[data-tip]::after {
+  content: attr(data-tip);
+}
+/* tooltip 小三角 */
+#article-container del::before {
+  content: "";
+  position: absolute;
+  bottom: 118%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--color-accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 10;
+}
+/* 悬停/按住弹出 */
+#article-container del:hover::after,
+#article-container del:active::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
+}
+#article-container del:hover::before,
+#article-container del:active::before {
+  opacity: 1;
 }
 
 /* ===== Markdown 表格美化：圆角卡片 + 表头暖橙渐变 + 隔行条纹 ===== */
@@ -1484,7 +1532,7 @@ body #article-container .tabs > .nav-tabs {
   gap: 4px;
   margin: 0 0 0 14px;               /* 左缩进对齐内容（骑卡改由 .tab-contents 负 margin 实现） */
   padding: 4px;
-  background: transparent;          /* 去灰底：描边即边界，无需底色区分 */
+  background: var(--card-bg);       /* 页面卡片底色（亮白暗深）：挡住内容卡描边线，又不显额外底色 */
   border: 1px solid var(--color-border);  /* 胶囊描边，与内容卡同色 */
   border-radius: 999px;
   z-index: 2;                       /* 压在内容卡上边 */
@@ -1517,12 +1565,14 @@ body #article-container .tabs > .nav-tabs > .tab button i {
 body #article-container .tabs > .nav-tabs > .tab:not(.active) button:hover {
   background: transparent;
   color: var(--color-accent);
+  border: none;                     /* 移除主题 hover 残留的 border-top */
 }
 
 body #article-container .tabs > .nav-tabs > .tab.active button {
   background: transparent;
   color: #fff;                      /* 白字压在滑动块上 */
   cursor: default;
+  border: none;                     /* 移除主题 active 残留的浅橙 border-top */
 }
 
 /* 滑动指示块（JS 动态定位 translate + width/height） */
@@ -1580,4 +1630,136 @@ body #article-container .tabs .tab-to-top {
   body #article-container .tabs > .tab-contents .tab-item-content {
     padding: 1.2rem .7rem;
   }
+}
+
+/* ============================================================
+   hideBlock 防剧透块 · 模糊揭示（2026-09-12）
+   按钮：主色文字 + 点状虚线下划线 + 前置箭头（方案1+3），无块无底
+   内容：默认模糊显示（能看出篇幅、看不清文字），点击按钮后渐清晰
+   与 folding（完全隐藏）形成两种层次；配色走 --color-accent 亮橙暗红
+   ============================================================ */
+body #article-container .hide-block {
+  margin: 0 0 .8rem;
+}
+
+/* 按钮：居中 + ▶▶◀◀ 实心三角浮动 + 点状下划线，放大字号强调 */
+body #article-container .hide-block > .hide-button {
+  display: block;
+  width: fit-content;                       /* 宽度自适应内容，居中且下划线不铺满 */
+  margin: 0 auto .5rem;
+  padding: 0;
+  background: transparent;                 /* 覆盖主题 $tag-hide-bg 浅橙 */
+  color: var(--color-accent);
+  font-weight: 500;                        /* 加粗，比正文更醒目 */
+  font-size: 1.1em;                        /* 放大字号，比正文更醒目 */
+  border: none;
+  border-bottom: 1px dotted var(--color-accent);
+  border-radius: 0;
+  line-height: 1.6;
+  cursor: pointer;                         /* 手型光标，暗示可点击 */
+  transition: color .3s, border-bottom-color .3s;
+}
+body #article-container .hide-block > .hide-button::before {
+  content: '\25B6\25B6\00A0';              /* ▶▶ + 空格（补偿右侧 HTML 尾随空格，左右对称） */
+  margin-right: .4em;
+  position: static;                        /* 覆盖主题 button--animated 的 absolute 扫光 */
+  inset: auto;
+  z-index: auto;
+  background: none;
+  display: inline-block;
+  animation: hb-float-l 1.8s ease-in-out infinite;
+}
+body #article-container .hide-block > .hide-button::after {
+  content: '\25C0\25C0';                   /* ◀◀ 右双三角（指向文字） */
+  margin-left: .4em;
+  display: inline-block;
+  animation: hb-float-r 1.8s ease-in-out infinite;
+}
+body #article-container .hide-block > .hide-button:hover {
+  color: var(--color-accent-2);            /* hover 变深，反馈更明显 */
+  border-bottom-style: solid;              /* 下划线变实 */
+}
+@keyframes hb-float-l {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2px); }      /* 左箭头往右（往中间聚拢，呼吸） */
+}
+@keyframes hb-float-r {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-2px); }     /* 右箭头往左（往中间聚拢，呼吸） */
+}
+
+/* 点击后按钮不消失，箭头反转表示「可收起」（误触可再点收起） */
+body #article-container .hide-block > .hide-button.open {
+  display: block;                          /* 覆盖主题 display none，按钮保持显示 */
+}
+body #article-container .hide-block > .hide-button.open::before {
+  content: '\25C0\25C0\00A0';              /* ◀◀ + 空格，箭头反转 */
+}
+body #article-container .hide-block > .hide-button.open::after {
+  content: '\25B6\25B6';                   /* ▶▶，箭头反转 */
+}
+
+/* 内容：默认模糊（看出篇幅、看不清文字），不可选中/交互 */
+body #article-container .hide-block > .hide-content {
+  display: block;                          /* 覆盖主题 display none */
+  filter: blur(8px);
+  transition: filter .45s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 点击按钮后：渐清晰、可选中/交互 */
+body #article-container .hide-block > .hide-button.open + .hide-content {
+  filter: blur(0px);
+  user-select: auto;
+  pointer-events: auto;
+}
+
+/* ============================================================
+   timeline 时间线 · 主色描边卡（2026-09-12）
+   覆盖 volantis 原生青色 #44d7b6，统一亮橙暗红；时间标签 .375rem→.9rem；
+   内容块改圆角描边卡；hover 圆点亮 + 卡片发光浮起
+   ============================================================ */
+
+/* 竖线：青色 → 主色淡 */
+body #article-container .timeline .timenode::before,
+body #article-container .timeline .timenode::after {
+  background: var(--color-border);
+}
+
+/* 圆点外圈：青色 → 主色淡 */
+body #article-container .timeline .timenode .meta::before {
+  background: var(--color-border);
+}
+
+/* 圆点内芯：青色 → 主色 */
+body #article-container .timeline .timenode .meta::after {
+  background: var(--color-accent);
+}
+
+/* 时间标签：放大（原 .375rem≈5px）+ 主色 */
+body #article-container .timeline .timenode .meta {
+  color: var(--color-accent);
+  font-size: .9rem;
+}
+
+/* 内容块：描边卡（透明底 + 主色描边）+ hover 过渡 */
+body #article-container .timeline .timenode .body {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+}
+
+/* hover：时间标签变深 + 圆点亮 + 卡片发光浮起 */
+body #article-container .timeline .timenode:hover .meta {
+  color: var(--color-accent-2);
+}
+body #article-container .timeline .timenode:hover .meta::after {
+  background: var(--color-accent);
+}
+body #article-container .timeline .timenode:hover .body {
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 18px var(--color-shadow), 0 0 0 3px var(--color-border);
+  transform: translateY(-3px);
 }
