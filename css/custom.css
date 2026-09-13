@@ -1801,3 +1801,74 @@ body #article-container .timeline .timenode:hover .body {
   border-bottom: 1px dashed #c0392b;
   padding: 0 2px;
 }
+
+/* ============================================================
+   正文普通链接美化（方案 D · 渐变下划线 + 光晕 + 外链↗ + 仿 del 气泡，2026-09-14）
+   作用域：仅 #article-container 内普通正文链接；
+   排除 .char-link（角色内链）/ .link-card（链接卡片）/ .btn-beautify（按钮），避免双重样式。
+   色值走 --color-accent 语义槽（亮橙 / 暗红），与角色配色体系同源。
+   - 渐变下划线 + 辉光：用 background-image 画线（悬停 0%→100% 滑入），不占伪元素
+   - 外链 ↗：::before，选择器排除本域名自动识别站外链接
+   - 悬停气泡：::after，仅当链接带 title 属性时弹出（markdown [文字](url "标题")），内容取 attr(title)
+   ============================================================ */
+#article-container a:not(.char-link):not(.link-card):not(.btn-beautify) {
+  position: relative;                       /* 气泡 / 图标定位参照 */
+  color: var(--color-accent);
+  text-decoration: none;
+  background-image: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;                  /* 渐变下划线，默认收起 */
+  transition: color .25s ease, background-size .28s ease, text-shadow .25s ease;
+}
+#article-container a:not(.char-link):not(.link-card):not(.btn-beautify):hover {
+  color: var(--color-accent-2);
+  background-size: 100% 2px;                /* 悬停：渐变线由短变长滑入 */
+  text-shadow: 0 0 12px var(--color-shadow);
+}
+
+/* 外链 ↗：绝对地址且非本域名（本博客内链为含域名的绝对地址，会被正确排除） */
+#article-container a[href^="http"]:not([href*="zwei-wings.github.io"]):not(.char-link):not(.link-card):not(.btn-beautify)::before {
+  content: "\2197";
+  font-size: .72em;
+  margin-right: 2px;
+  vertical-align: super;
+  opacity: .7;
+}
+
+/* 悬停气泡（仿 del）：仅当链接带 title 属性时弹出，内容取 title；暗色转红 */
+#article-container a[title]:not(.char-link):not(.link-card):not(.btn-beautify)::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 135%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80vw;
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 20;
+}
+#article-container a[title]:not(.char-link):not(.link-card):not(.btn-beautify):hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
+}
+
+/* 暗色：保留原有双红基调（base #e06a62 / hover #d44f47），辉光改红
+   （--color-shadow 暗色为黑色、--color-accent-2 暗色为 #a03028 偏暗，故显式覆盖） */
+[data-theme=dark] #article-container a:not(.char-link):not(.link-card):not(.btn-beautify) {
+  color: #e06a62;
+}
+[data-theme=dark] #article-container a:not(.char-link):not(.link-card):not(.btn-beautify):hover {
+  color: #d44f47;
+  text-shadow: 0 0 12px rgba(212, 79, 71, .5);
+}
