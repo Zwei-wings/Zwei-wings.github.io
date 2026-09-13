@@ -1763,3 +1763,41 @@ body #article-container .timeline .timenode:hover .body {
   box-shadow: 0 6px 18px var(--color-shadow), 0 0 0 3px var(--color-border);
   transform: translateY(-3px);
 }
+
+/* ============================================================
+   角色内链 a.char-link（2026-09-14）
+   正文里自动/手动生成的角色词条链接（scripts/character-links.js +
+   {% post_anchor %} 标签），与普通正文链接区分：
+   点状虚线下划线 + 站点主色（亮橙/暗红），hover 变实线 + 淡底。
+   色值走 --color-accent 语义槽，与角色配色体系同源。
+   ============================================================ */
+#article-container a.char-link {
+  color: var(--color-accent);
+  border-bottom: 1px dotted var(--color-border);
+  text-decoration: none;
+  padding: 0 1px;
+  transition: color .2s, border-bottom-color .2s, background-color .2s;
+}
+#article-container a.char-link:hover {
+  color: var(--color-accent-2);
+  border-bottom-style: solid;
+  background-color: var(--color-shadow);
+}
+
+/* 暗色：浅红文字 + 淡红底，保证深背景可读 */
+[data-theme=dark] #article-container a.char-link {
+  color: #e88f89;
+  border-bottom-color: rgba(232, 143, 137, .5);
+}
+[data-theme=dark] #article-container a.char-link:hover {
+  color: #f0a8a0;
+  background-color: rgba(212, 79, 71, .16);
+}
+
+/* 链接失效占位（slug 找不到文章时） */
+.post-anchor-missing {
+  color: #c0392b;
+  background: rgba(192, 57, 43, .1);
+  border-bottom: 1px dashed #c0392b;
+  padding: 0 2px;
+}
