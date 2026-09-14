@@ -1764,35 +1764,7 @@ body #article-container .timeline .timenode:hover .body {
   transform: translateY(-3px);
 }
 
-/* ============================================================
-   角色内链 a.char-link（2026-09-14）
-   正文里自动/手动生成的角色词条链接（scripts/character-links.js +
-   {% post_anchor %} 标签），与普通正文链接区分：
-   点状虚线下划线 + 站点主色（亮橙/暗红），hover 变实线 + 淡底。
-   色值走 --color-accent 语义槽，与角色配色体系同源。
-   ============================================================ */
-#article-container a.char-link {
-  color: var(--color-accent);
-  border-bottom: 1px dotted var(--color-border);
-  text-decoration: none;
-  padding: 0 1px;
-  transition: color .2s, border-bottom-color .2s, background-color .2s;
-}
-#article-container a.char-link:hover {
-  color: var(--color-accent-2);
-  border-bottom-style: solid;
-  background-color: var(--color-shadow);
-}
-
-/* 暗色：浅红文字 + 淡红底，保证深背景可读 */
-[data-theme=dark] #article-container a.char-link {
-  color: #e88f89;
-  border-bottom-color: rgba(232, 143, 137, .5);
-}
-[data-theme=dark] #article-container a.char-link:hover {
-  color: #f0a8a0;
-  background-color: rgba(212, 79, 71, .16);
-}
+/* 角色内链 .char-link 已统一沿用下方「正文普通链接美化（方案 D）」样式，不再单独定义。 */
 
 /* 链接失效占位（slug 找不到文章时） */
 .post-anchor-missing {
@@ -1804,14 +1776,14 @@ body #article-container .timeline .timenode:hover .body {
 
 /* ============================================================
    正文普通链接美化（方案 D · 渐变下划线 + 光晕 + 外链↗ + 仿 del 气泡，2026-09-14）
-   作用域：仅 #article-container 内普通正文链接；
-   排除 .char-link（角色内链）/ .link-card（链接卡片）/ .btn-beautify（按钮），避免双重样式。
+   作用域：#article-container 内正文链接（含角色内链 .char-link，统一同款样式）；
+   排除 .link-card（链接卡片）/ .btn-beautify（按钮）/ 含 <img> 的图片链接。
    色值走 --color-accent 语义槽（亮橙 / 暗红），与角色配色体系同源。
    - 渐变下划线 + 辉光：用 background-image 画线（悬停 0%→100% 滑入），不占伪元素
    - 外链 ↗：::before，选择器排除本域名自动识别站外链接
    - 悬停气泡：::after，仅当链接带 title 属性时弹出（markdown [文字](url "标题")），内容取 attr(title)
    ============================================================ */
-#article-container a:not(.char-link):not(.link-card):not(.btn-beautify) {
+#article-container a:not(.link-card):not(.btn-beautify):not(:has(img)) {
   position: relative;                       /* 气泡 / 图标定位参照 */
   color: var(--color-accent);
   text-decoration: none;
@@ -1821,14 +1793,14 @@ body #article-container .timeline .timenode:hover .body {
   background-size: 0% 2px;                  /* 渐变下划线，默认收起 */
   transition: color .25s ease, background-size .28s ease, text-shadow .25s ease;
 }
-#article-container a:not(.char-link):not(.link-card):not(.btn-beautify):hover {
+#article-container a:not(.link-card):not(.btn-beautify):not(:has(img)):hover {
   color: var(--color-accent-2);
   background-size: 100% 2px;                /* 悬停：渐变线由短变长滑入 */
   text-shadow: 0 0 12px var(--color-shadow);
 }
 
 /* 外链 ↗：绝对地址且非本域名（本博客内链为含域名的绝对地址，会被正确排除） */
-#article-container a[href^="http"]:not([href*="zwei-wings.github.io"]):not(.char-link):not(.link-card):not(.btn-beautify)::before {
+#article-container a[href^="http"]:not([href*="zwei-wings.github.io"]):not(.link-card):not(.btn-beautify):not(:has(img))::before {
   content: "\2197";
   font-size: .72em;
   margin-right: 2px;
@@ -1837,7 +1809,7 @@ body #article-container .timeline .timenode:hover .body {
 }
 
 /* 悬停气泡（仿 del）：仅当链接带 title 属性时弹出，内容取 title；暗色转红 */
-#article-container a[title]:not(.char-link):not(.link-card):not(.btn-beautify)::after {
+#article-container a[title]:not(.link-card):not(.btn-beautify):not(:has(img))::after {
   content: attr(title);
   position: absolute;
   bottom: 135%;
@@ -1858,17 +1830,17 @@ body #article-container .timeline .timenode:hover .body {
   transition: opacity .2s ease, transform .2s ease;
   z-index: 20;
 }
-#article-container a[title]:not(.char-link):not(.link-card):not(.btn-beautify):hover::after {
+#article-container a[title]:not(.link-card):not(.btn-beautify):not(:has(img)):hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(-3px);
 }
 
 /* 暗色：保留原有双红基调（base #e06a62 / hover #d44f47），辉光改红
    （--color-shadow 暗色为黑色、--color-accent-2 暗色为 #a03028 偏暗，故显式覆盖） */
-[data-theme=dark] #article-container a:not(.char-link):not(.link-card):not(.btn-beautify) {
+[data-theme=dark] #article-container a:not(.link-card):not(.btn-beautify):not(:has(img)) {
   color: #e06a62;
 }
-[data-theme=dark] #article-container a:not(.char-link):not(.link-card):not(.btn-beautify):hover {
+[data-theme=dark] #article-container a:not(.link-card):not(.btn-beautify):not(:has(img)):hover {
   color: #d44f47;
   text-shadow: 0 0 12px rgba(212, 79, 71, .5);
 }
