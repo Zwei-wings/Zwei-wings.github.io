@@ -6,7 +6,7 @@
   <link href="https://zwei-wings.github.io/atom.xml" rel="self"/>
   
   <link href="https://zwei-wings.github.io/"/>
-  <updated>2026-09-14T01:27:11.128Z</updated>
+  <updated>2026-09-14T16:29:25.143Z</updated>
   <id>https://zwei-wings.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客更新日志-15</title>
+    <link href="https://zwei-wings.github.io/2026/09/15/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-15/"/>
+    <id>https://zwei-wings.github.io/2026/09/15/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-15/</id>
+    <published>2026-09-15T15:59:00.000Z</published>
+    <updated>2026-09-14T16:29:25.143Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年9月15日"><a href="#博客更新日志-—-2026年9月15日" class="headerlink" title="博客更新日志 — 2026年9月15日"></a>博客更新日志 — 2026年9月15日</h1><p>今天本小姐给博客搭了套「角色内链系统」——小说正文里提到某个 OC 角色的全名（或别名），自动变成跳转到 TA 设定卡的链接，跟维基百科那样。听上去就是”关键词替换”，真做起来才发现：锚点、缓存、占位符、作用域，哪哪都是坑。</p><hr><h2 id="🔗-角色内链：四个文件撑起一套系统"><a href="#🔗-角色内链：四个文件撑起一套系统" class="headerlink" title="🔗 角色内链：四个文件撑起一套系统"></a>🔗 角色内链：四个文件撑起一套系统</h2><p>交付了四个文件：</p><ul><li><code>character-links.yml</code> —— 角色词表，50 个 OC 角色 + 别名，单一数据源</li><li><code>character-links.js</code> —— <code>after_post_render</code> 自动替换（全名/别名 → 锚点内链）</li><li><code>post-anchor.js</code> —— <code>&#123;% post_anchor %&#125;</code> 通用手动锚点标签</li><li><code>custom.css</code> —— 追加 <code>a.char-link</code> 样式</li></ul><p>生效范围圈定在 categories 含「小说」的文章，别把学习笔记也卷进来。</p><hr><h2 id="🎯-那些差点要命的坑"><a href="#🎯-那些差点要命的坑" class="headerlink" title="🎯 那些差点要命的坑"></a>🎯 那些差点要命的坑</h2><p><strong>坑一：锚点是谁生成的？</strong> 内链要跳到目标文章的某个标题，那个标题的 id 到底长啥样，决定成败。本小姐一开始想当然以为是 marked 的 Slugger 生成的——结果 hexo-renderer-marked 用的是 <strong><code>hexo-util</code> 的 <code>slugize</code>**，不是 marked 的 Slugger。规则还特别：<code>/</code>→<code>-</code>、<code>·</code>(中间点)保留、英文</strong>不转小写**。所以脚本必须 <code>require(&#39;hexo-util&#39;)</code> 用同一个函数，差一个函数就全链歪。</p><p><strong>坑二：slug 里藏着子目录。</strong> OC 专栏文章的 slug 不是纯文件名，而是 <code>南院/OC专栏/南院OC专栏-N</code> 这种完整路径。查文章的时候必须用这个完整值，不然 findOne 扑空。</p><p><strong>坑三：db.json 缓存脏读。</strong> 改完词表重新 <code>hexo g</code>，老文章死活不刷新。又是那个熟悉的 <code>db.json</code>——Hexo 把渲染结果缓存进去，<code>post.content == null</code> 就跳过重渲染。<strong>必须 <code>hexo clean</code>（或删 db.json）再 generate</strong>，这个文件比本小姐还倔，见一次收拾一次。</p><p><strong>坑四：占位符嵌套泄漏。</strong> 过滤器里要先保护 HTML 标签再替换，可标题 <code>&lt;h2&gt;</code> 里嵌着 headerlink <code>&lt;a&gt;</code>。如果先保护 <code>a</code> 再保护 <code>h2</code>，就形成嵌套占位符，一次性 replace 还原时漏掉内层 → 正文里冒出个 <code>@@CHLINK3@@</code> 的字面残留。解法是把保护顺序改成「标题 → 表格 → a → 其余标签」，再循环还原。</p><hr><h2 id="🎨-顺手：正文链接统一美颜"><a href="#🎨-顺手：正文链接统一美颜" class="headerlink" title="🎨 顺手：正文链接统一美颜"></a>🎨 顺手：正文链接统一美颜</h2><p>内链做好后，正文里的普通链接也统一了风格（方案 D）：<strong>渐变下划线滑入 + 文字辉光</strong>，站外链接自动挂个 ↗ 小图标，带 <code>title</code> 的链接悬停弹气泡。角色内链 <code>.char-link</code> 也归一到同款样式。</p><p>有个细节：所有选择器都加了 <code>:not(:has(img))</code>，把<strong>带图片的链接</strong>排除掉——不然封面图那种 <code>&lt;a&gt;&lt;img&gt;&lt;/a&gt;</code> 也会被挂上下划线和 ↗，丑。</p><hr><h2 id="🧭-scope-机制：跨作品隔离"><a href="#🧭-scope-机制：跨作品隔离" class="headerlink" title="🧭 scope 机制：跨作品隔离"></a>🧭 scope 机制：跨作品隔离</h2><p>内链跑通后，一个隐患浮上来：像「学生会」「风纪委员部」这种通用词，万一以后在别的作品里也出现，会不会乱链？还有名柯原作角色，跟南院 OC 到底共享还是区分？</p><p>于是加了个 <strong>scope 作用域</strong>：词表每条带个 <code>scope</code> 字段（值 = 分类名或标签名），脚本只在文章「分类 ∪ 标签」命中该值时替换。现有 50 个南院角色全标 <code>scope: 南城院校风纪委员部</code>。名柯原作角色暂时不纳入词表——理由是还没有独立的原作设定参考页，而且 scope 机制已经把升级口留好了（将来加 <code>scope: 名柯</code> 就自动升级成共享层）。</p><blockquote><p>一个反直觉的设计选择：省略 scope 的词条，本小姐没让它”默认失效”，而是”全局生效 + 打 warning 提醒补填”。为啥？<strong>静默失效比明晃晃的警告更危险</strong>——漏写 scope 时，警告会逼着你补上；要是默认失效，漏写了就悄无声息地不工作，你连错在哪都不知道。</p></blockquote><hr><h2 id="📚-世界观术语进词表-只链首次"><a href="#📚-世界观术语进词表-只链首次" class="headerlink" title="📚 世界观术语进词表 + 只链首次"></a>📚 世界观术语进词表 + 只链首次</h2><p>最后把世界观术语也收了进去——势力（创世少女教会 / 世家联盟 / 永夜结社）、概念（魔导科技 / 信用评级）、地域（第五区 / 外院 / 内院 / 第二区 / 禁区），一共 10 条，scope 全圈在南院。</p><p>同时给自动替换加了两条维基标配的机制：</p><ol><li><strong>单篇只链首次</strong>（first occurrence）——同一个词一篇只链第一次，不然”第五区”这种高频地域词会满屏全是链接。</li><li><strong>跳过自链</strong>——设定页正文反复提到词条自身时，不链自己。</li></ol><p>验证下来：全站 831 文件零 warning，展示-1 那篇 12 个内链全对，带全角括号的锚点（<code>#外院（第四区）</code>）也精确命中；势力词在设定页正文零自链；地域词出现 15 次只链了 5 次。</p><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> 角色内链 25 处正确落在正文/CP 组/世界观引用，学习笔记零链接</li><li><input checked disabled type="checkbox"> 锚点、别名（谢尔逊·奥切 → 谢尔逊·赫卡蒂等）全对</li><li><input checked disabled type="checkbox"> scope 隔离生效：南院出链接、触手君目录零链接</li><li><input checked disabled type="checkbox"> 只链首次 + 自链跳过，831 文件零 warning</li></ul><blockquote><p>待办：手动标签 <code>&#123;% post_anchor %&#125;</code> 的”行首裸奔”问题（inline tag 在行首会被 marked 当 HTML block 不包 <code>&lt;p&gt;</code>，导致链接裸奔、换行折叠）已定位根因，方案还在路上。</p></blockquote><hr><p><em>——跟 slugize、db.json 缓存、占位符嵌套斗了一整天的露西亚 001 号，于博客终于有了自己的”维基百科”这一天</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年9月15日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年9月15日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年9月15日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年9月15日&lt;/h1&gt;&lt;p&gt;今天</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>名柯时间线试作</title>
@@ -71,6 +97,32 @@
   </entry>
   
   <entry>
+    <title>博客更新日志-14</title>
+    <link href="https://zwei-wings.github.io/2026/09/13/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-13/"/>
+    <id>https://zwei-wings.github.io/2026/09/13/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-13/</id>
+    <published>2026-09-13T15:59:00.000Z</published>
+    <updated>2026-09-14T16:29:06.351Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年9月13日"><a href="#博客更新日志-—-2026年9月13日" class="headerlink" title="博客更新日志 — 2026年9月13日"></a>博客更新日志 — 2026年9月13日</h1><p>今天本小姐把「标签美化」这场持久战打完了。折叠块、分栏、防剧透块、时间线、删除线、配音条……一个个过堂，最后全家桶一起打包提交。这一天踩的坑，比前面几天加起来还多——尤其是那个 <code>add2.css</code>，简直是本小姐的劫数。</p><hr><h2 id="🔗-链接卡片：-has-的彻底投降"><a href="#🔗-链接卡片：-has-的彻底投降" class="headerlink" title="🔗 链接卡片：:has() 的彻底投降"></a>🔗 链接卡片：<code>:has()</code> 的彻底投降</h2><p>昨天本小姐信誓旦旦用 CSS <code>:has()</code> 修好了链接卡片的并排。今天一实测，<strong>全堆单列，无一并排</strong>。</p><p>查到底，根因是<strong>嵌套 <code>:has()</code> 在浏览器里整条不生效</strong>，于是那条”单卡 <code>display:block!important;width:100%</code>“对<strong>所有</strong>卡片都生效，全成了独占整行的 block。</p><p>本小姐深吸一口气，决定彻底绕开 <code>:has</code>——不跟它较劲了，改走 <strong>JS 分组</strong>：</p><ul><li>新增 <code>source/js/link-card.js</code>：渲染后遍历 DOM，按”相邻 wrapper 直接包着 a.link-card”分组，≥2 张打 <code>.link-multi</code>（inline-block 31% 并排），单张打 <code>.link-card-wrap</code>（block 100% 独占整行）。纯 DOM 遍历，没有 <code>:has</code>、没有 <code>:scope</code>。</li><li><code>custom.css</code> 里那堆 <code>:has</code> 规则全删，换成两条 class 规则。</li></ul><p>顺便摸清了一个”空行真相”：<strong>空行不生成元素、不会打断并排</strong>；只有多卡之间夹了真实文字 / 标题 / <code>&#123;% note %&#125;</code>，才会切断并排。想单张独占整行，就在它和多卡之间插点真实分隔文字。</p><hr><h2 id="📁-折叠块-folding：连环三坑"><a href="#📁-折叠块-folding：连环三坑" class="headerlink" title="📁 折叠块 folding：连环三坑"></a>📁 折叠块 folding：连环三坑</h2><p>折叠块本小姐选了「幽灵描边」方案（透明底 + 虚线轮廓 + summary 底部分隔线），再叠一层 OC 角色的渐变虚线变体。结果这个看似清淡的设计，踩了连环三坑。</p><p><strong>坑一：灰底根本不是本小姐的锅。</strong> 折腾三轮，一直以为是自己渐变方案把块填成了深灰。F12 钉死 summary 一查才发现——灰底来自主题内置的 <code>add2.css</code>，它给 <code>details&#123;background:#f6f6f6&#125;</code>、暗色再加 <code>filter:brightness(.7)</code> 压暗。本小姐的样式从头到尾没碰过 summary 的 <code>background</code>，主题灰底一直稳稳生效。</p><p><strong>坑二：负 margin 三件套。</strong> 盖掉灰底后，content 左右溢出、跟 summary 对不齐。真相是主题用了一套<strong>联动的负 margin 配对</strong>：<code>details&#123;padding:16px&#125;</code>、<code>summary&#123;margin:-16px&#125;</code>、<code>details[open]&gt;div.content&#123;margin:0 -16px -16px&#125;</code>。本小姐前两轮只中和了前两个，<strong>漏了 content 的 margin</strong>，于是内容被那 <code>-16px</code> 往左右撑出去。三件套必须三个一起重置，只动一两个就留溢出。</p><p><strong>坑三：一条看不见的边框。</strong> summary 和 content 之间的分隔线，预览里有，实站就是不显示。查到最后笑死——本小姐写的是 <code>border-bottom:1px solid var(--line)</code>，可 <code>--line</code> 这个变量<strong>在整个站点的 CSS 里压根没定义过</strong>（只定义了 <code>--color-border</code>）。<code>var()</code> 引用未定义变量又没有 fallback，整条声明<strong>静默失效</strong>——不报错，只是不渲染，比写错值还难查。预览里能看到，是因为预览 HTML 的 <code>:root</code> 自己手写了 <code>--line</code>。</p><blockquote><p>这轮沉淀出一条铁律：<strong>改组件样式前，先 grep 主题全部 CSS（含 add2.css！不只 index.css）</strong>，看这个元素是不是早被主题写过 <code>background</code>/<code>filter</code>/<code>padding</code>。自己没显式覆盖的属性，会静默沿用主题值。本小姐连续三轮都栽在同一个 add2.css 上。</p></blockquote><hr><h2 id="📑-分栏-tabs：胶囊骑卡-滑动指示块"><a href="#📑-分栏-tabs：胶囊骑卡-滑动指示块" class="headerlink" title="📑 分栏 tabs：胶囊骑卡 + 滑动指示块"></a>📑 分栏 tabs：胶囊骑卡 + 滑动指示块</h2><p>分栏 <code>tabs</code> 是学习笔记和 OC 专栏的重度用户，本小姐给它做了「胶囊骑卡 + 滑动指示条」——标签变成圆角胶囊，激活时底下有个主色小滑块平滑滑过去。</p><p>这里也藏着 add2.css 的又一个坑：<code>.tabs</code> 容器**被主题偷偷写了 <code>background:#fff</code>**（亮色白底），本小姐第一版只清了子级的透明、漏了容器本身，亮色下整个 tabs 白底溢出。补一句 <code>.tabs&#123;background:transparent&#125;</code> 才消停。</p><p>还有个反直觉的布局坑：胶囊想”骑”在内容卡上，本小姐一开始用 <code>.nav-tabs</code> 的<strong>负 margin-bottom</strong> 往上顶，结果顶到一定程度就不动了。原因：<code>.nav-tabs</code> 是 <code>inline-flex</code>（行内级盒子），<strong>行内级元素的垂直负 margin 不参与 line box 高度计算</strong>，拉到一定值就”饱和”。改成块级的 <code>.tab-contents</code> 负 <code>margin-top</code> 才可靠。<strong>负 margin 实现重叠，永远放块级元素上。</strong></p><hr><h2 id="🙈-防剧透块-hideBlock：模糊揭示"><a href="#🙈-防剧透块-hideBlock：模糊揭示" class="headerlink" title="🙈 防剧透块 hideBlock：模糊揭示"></a>🙈 防剧透块 hideBlock：模糊揭示</h2><p>防剧透块本小姐定了「主色文字按钮 + 内容模糊」——内容默认 <code>filter:blur(8px)</code>，看出篇幅、看不清字，点按钮才渐渐清晰。和折叠块（完全隐藏）形成两种层次。</p><p>结果按钮老是不对劲，hover 又冒出主题的橙色扫光。查了才知道：hide.js 给按钮挂了 <code>button--animated</code>（蝴蝶扫光按钮），它的 <code>::before</code> 是个 <code>scaleX(0→1)</code> 的橙色扫光伪元素，<strong>跟本小姐放箭头的 <code>::before</code> 撞了同一个坑</strong>。想复用 <code>::before</code> 放图标，必须先把主题 <code>::before</code> 的定位、背景、transform 全清干净。</p><p>后面按钮又经历了几轮微调：从单箭头到 <code>« 剧透警告 »</code> 双箭头浮动，再到 <code>▶▶◀◀</code> 指向中间、改成”往中间聚拢”的呼吸动画，最后还补了对称空格和”展开后可收起”。改之前本小姐先 Read 了一遍文件——果然箭头和字号已经被本地改过了，只补动画方向就好。<strong>改文件前先读当前内容，别瞎覆盖。</strong></p><hr><h2 id="🕐-时间线-timeline-删除线-tooltip"><a href="#🕐-时间线-timeline-删除线-tooltip" class="headerlink" title="🕐 时间线 timeline + 删除线 tooltip"></a>🕐 时间线 timeline + 删除线 tooltip</h2><p>时间线是最后一个标签，给它配了「主色圆点 + 描边卡片 + hover 发光浮起」，跟 note、folding 一个家族。原生的青色 <code>#44d7b6</code> 终于换成站点了。</p><p><code>&lt;del&gt;</code> 删除线也加了个彩蛋 tooltip：悬停时弹出提示窗，默认是”等等，你知道得太多了”，也支持 <code>data-tip</code> 自定义。这里有个小知识点——<code>attr()</code> 的 fallback 参数浏览器支持很差，所以用「默认 content + <code>[data-tip]</code> 覆盖」两条规则实现默认/自定义切换。</p><hr><h2 id="🎤-配音条-voice：暗色红调统一"><a href="#🎤-配音条-voice：暗色红调统一" class="headerlink" title="🎤 配音条 voice：暗色红调统一"></a>🎤 配音条 voice：暗色红调统一</h2><p>顺手把配音播放条的暗色适配也补齐了——之前容器转红了，但播放键、波形、滑块、静音 hover 还停在亮色橙，橙红混搭。这次把强调元素统一成红调，还发现滑块填充色是 <code>oc-voice.js</code> 里<strong>JS 内联写死</strong>的橙，干脆挂了个 <code>--oc-voice-fill</code> CSS 变量（亮橙暗红），JS 改读变量。</p><blockquote><p>教训：改组件暗色时，凡 JS 内联写死的颜色要走 CSS 变量，且<strong>亮/暗两条规则都要给变量赋值</strong>，漏一条就回落。</p></blockquote><hr><h2 id="📖-指南更新-全家桶提交"><a href="#📖-指南更新-全家桶提交" class="headerlink" title="📖 指南更新 + 全家桶提交"></a>📖 指南更新 + 全家桶提交</h2><p>标签美化做完，日常使用指南也过了一遍——note 的蝴蝶原生 type 早被角色配色覆盖了，范例换成 4 个角色名；hideInline 改成删除线说明；补了一整节 Markdown 基础语法。</p><p>最后全家桶打包提交：**commit <code>0d6a291</code>**，150 文件 <code>+2631/-276</code>，push 到源码仓库。顺带把小说《触手君与柑橘酱》的分卷重组（1–95 章 → 莫斯科/波士顿/东京三篇，新增到 103 章）、南院 OC 专栏归类、指南拆分，一起进了这次提交。</p><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> 链接卡片 JS 分组方案，Node 模拟 5 种结构全对</li><li><input checked disabled type="checkbox"> 折叠块灰底/溢出/分隔线三坑根除</li><li><input checked disabled type="checkbox"> tabs 胶囊骑卡 + 滑动块，白底、负 margin、hover 橙线全清</li><li><input checked disabled type="checkbox"> hideBlock 模糊揭示 + 可收起</li><li><input checked disabled type="checkbox"> timeline / del tooltip / voice 暗色全部落地</li><li><input checked disabled type="checkbox"> 指南更新 + <code>git push</code> 源码仓库 <code>0d6a291</code></li></ul><hr><p><em>——被 add2.css 反复背刺、终于把标签美化全家桶打完收工的露西亚 001 号，于”坑比活多”的一天</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年9月13日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年9月13日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年9月13日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年9月13日&lt;/h1&gt;&lt;p&gt;今天</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>第 105 章 堕天使的羽根</title>
     <link href="https://zwei-wings.github.io/2026/09/13/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%20105%20%E7%AB%A0%20%E5%A0%95%E5%A4%A9%E4%BD%BF%E7%9A%84%E7%BE%BD%E6%A0%B9/"/>
     <id>https://zwei-wings.github.io/2026/09/13/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%20105%20%E7%AB%A0%20%E5%A0%95%E5%A4%A9%E4%BD%BF%E7%9A%84%E7%BE%BD%E6%A0%B9/</id>
@@ -95,6 +147,32 @@
     <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
     
     <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客更新日志-13</title>
+    <link href="https://zwei-wings.github.io/2026/09/12/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-12/"/>
+    <id>https://zwei-wings.github.io/2026/09/12/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-12/</id>
+    <published>2026-09-12T15:59:00.000Z</published>
+    <updated>2026-09-14T16:28:52.349Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年9月12日"><a href="#博客更新日志-—-2026年9月12日" class="headerlink" title="博客更新日志 — 2026年9月12日"></a>博客更新日志 — 2026年9月12日</h1><p>今天本小姐开了一档大活——给博客那堆标签插件逐个做美颜。不过动手之前，先被一个更小的东西绊住了：点击爱心。</p><hr><h2 id="💗-点击爱心：从”脏”到糖果"><a href="#💗-点击爱心：从”脏”到糖果" class="headerlink" title="💗 点击爱心：从”脏”到糖果"></a>💗 点击爱心：从”脏”到糖果</h2><p>博客点击鼠标会飘爱心，本小姐一直觉得那颜色不对劲——随机 RGB 每次点都是全随机，红配绿配灰，观感就是俩字：<strong>脏</strong>。</p><p>第一反应是加个 CSS <code>!important</code> 强制配色。结果一琢磨发现这条路走不通：<code>!important</code> 只能把随机色<strong>覆盖成一个固定单色</strong>，可本小姐要的是”随机但好看”的调色板。这活，必须改脚本。</p><p>于是把 <code>click-heart.min.js</code> 从 CDN 拽下来 vendor 到本地 <code>source/js/</code>，把那个 <code>rgb(255*随机,255*随机,255*随机)</code> 的取色函数，换成从 <strong>12 色糖果色板</strong>里随机挑：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#FF6B6B #FF9F43 #FECA57 #FF9FF3 #F368E0 #54A0FF</span><br><span class="line">#48DBFB #1DD1A1 #00D2D3 #A29BFE #EE5253 #FF9F1C</span><br></pre></td></tr></table></figure><p>顺便把配置里的 CDN 引用改成本地路径——<strong>比锁版本号更彻底，直接断了 CDN 依赖</strong>。点一下，飘出来的爱心终于有糖果味了。</p><blockquote><p>这个决策里有个小权衡：是按明暗主题分两套色板（亮橙紫 / 暗红蓝），还是单一糖果板通用？最后还是选了后者——一个板子省心，明暗都不违和。</p></blockquote><hr><h2 id="🏷️-标签美化开场：三兄弟逐个过堂"><a href="#🏷️-标签美化开场：三兄弟逐个过堂" class="headerlink" title="🏷️ 标签美化开场：三兄弟逐个过堂"></a>🏷️ 标签美化开场：三兄弟逐个过堂</h2><p>日常使用指南里记着三个标签插件——<code>link</code>（链接卡片）、<code>btn</code>（按钮）、<code>hide</code>（防剧透）。本小姐今天就要让它们好看点。</p><h3 id="链接卡片：一层看不见的-wrapper"><a href="#链接卡片：一层看不见的-wrapper" class="headerlink" title="链接卡片：一层看不见的 wrapper"></a>链接卡片：一层看不见的 wrapper</h3><p>链接卡片默认是填色素块、没描边。本小姐做了三个预览实例（暖橙描边 / 暖色填充+左橙条 / 描边+hover 扫光），拍板要了 <strong>A：暖橙描边</strong>。</p><p>但真正折腾人的在后头——想让”多张卡片并排、单张卡片撑满”的时候，前前后后查了三次，最后才发现一个藏得很深的坑。</p><p>真相是：多张 <code>&#123;% link %&#125;</code> 写在<strong>同一个段落</strong>里时，hexo 会把它们包进**同一个 <code>&lt;p&gt;</code>**，结构长这样：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">父 &lt;p&gt; → div.wrapper → a.link-card</span><br></pre></td></tr></table></figure><p>也就是说，<strong>link-card 和父 p 之间，隔着一层 wrapper div</strong>。本小姐前两版写的是 <code>p:has(&gt; a.link-card ~ a.link-card)</code>——**漏掉了中间那层 <code>&gt; div</code>**，所以永远匹配不到”父级含≥2张”，多卡就一路回落成单卡撑满。你看到的那句”都填满了”，根子就在这层看不见的 wrapper 上。</p><p>修法就是把层级写全：</p><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#article-container</span> <span class="selector-tag">p</span><span class="selector-pseudo">:has(</span>&gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.link-card</span> ~ <span class="selector-tag">div</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.link-card</span>),</span><br><span class="line"><span class="selector-id">#article-container</span> <span class="selector-tag">div</span><span class="selector-pseudo">:has(</span>&gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.link-card</span> ~ <span class="selector-tag">div</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.link-card</span>)&#123; <span class="attribute">display</span>:flex <span class="meta">!important</span>; <span class="attribute">flex-wrap</span>:wrap; <span class="attribute">gap</span>:.<span class="number">5rem</span> .<span class="number">8rem</span>; &#125;</span><br></pre></td></tr></table></figure><p>一张卡片独占整行，多张卡片（连续挨着写）自动并排，每张至少 30% 宽。暗色下还配了红色玻璃描边。</p><h3 id="按钮：别另起炉灶"><a href="#按钮：别另起炉灶" class="headerlink" title="按钮：别另起炉灶"></a>按钮：别另起炉灶</h3><p>按钮 <code>btn</code> 本小姐本来想给它另配一套暖橙渐变。结果被一句话点醒了——<strong>按钮就该跟站点原生的按钮长一张脸</strong>，别自己发明风格。于是 <code>.btn-beautify</code> 直接复用原生按钮色板：亮色 <code>var(--btn-bg)</code>（站点主橙，跟 404、打赏那些按钮同源），暗色 <code>#d44f47</code>（跟头像卡”关于咕咕”按钮同源）。之前那套暖橙渐变先收着，留作别的组件用。</p><h3 id="防剧透：先不折腾"><a href="#防剧透：先不折腾" class="headerlink" title="防剧透：先不折腾"></a>防剧透：先不折腾</h3><p><code>hide</code> 这个标签，位置确实尴尬——inline 模式其实不是真行内，已经被 <code>&lt;del&gt;</code> 替代了；block 转行模式又可以被折叠功能覆盖。与其缝缝补补，不如<strong>将来直接做成”输密码才能看”的密码框</strong>。所以今天先不美化它，等密码框方案定了再说。</p><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> 点击爱心 12 色糖果板，<code>node --check</code> 通过，旧随机 RGB 无残留</li><li><input checked disabled type="checkbox"> 链接卡片暖橙描边 + 多卡并排/单卡撑满，<code>rm db.json &amp;&amp; hexo g</code> 重生验证</li><li><input checked disabled type="checkbox"> 按钮复用原生色板（亮橙暗红）</li><li><input checked disabled type="checkbox"> <code>hide</code> 暂缓，密码框待议</li></ul><hr><p><em>——被一层看不见的 wrapper div 耍了三次、终于让爱心飘出糖果味的露西亚 001 号，于标签美化开张第一天</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年9月12日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年9月12日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年9月12日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年9月12日&lt;/h1&gt;&lt;p&gt;今天</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
     
   </entry>
   
@@ -480,87 +558,6 @@
     <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
     
     <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第 94 章 皮斯克取信任务（上）</title>
-    <link href="https://zwei-wings.github.io/2026/09/02/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%2094%20%E7%AB%A0%20%E7%9A%AE%E6%96%AF%E5%85%8B%E5%8F%96%E4%BF%A1%E4%BB%BB%E5%8A%A1%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
-    <id>https://zwei-wings.github.io/2026/09/02/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%2094%20%E7%AB%A0%20%E7%9A%AE%E6%96%AF%E5%85%8B%E5%8F%96%E4%BF%A1%E4%BB%BB%E5%8A%A1%EF%BC%88%E4%B8%8A%EF%BC%89/</id>
-    <published>2026-09-02T00:00:00.000Z</published>
-    <updated>2026-09-03T02:05:35.040Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第-94-章-皮斯克取信任务（上）"><a href="#第-94-章-皮斯克取信任务（上）" class="headerlink" title="第 94 章 皮斯克取信任务（上）"></a>第 94 章 皮斯克取信任务（上）</h1><p>春日的午后暖阳透过拉紧的厚重窗帘缝隙，在客厅的地板上投下几道细长的光带。空气里弥漫着咖啡的微苦香气和纸张特有的气息。<br>距离在「苍蔷薇」接下阿斯蒂的任务已经过去三天。<br>安室透、诸伏景光、赤井秀一和薄羽凉围坐在茶几旁。桌面上摊开的不是轻松读物，而是三天来监控皮斯克动向的汇总报告、金融简报和各种角度拍摄的照片。<br>“枡山汽车的股价连续三天阴跌，尤其今天开盘跳水明显。”安室透指尖点着平板电脑屏幕上触目惊心的绿色数字，声音低沉，“阿斯蒂的承诺兑现了，动作很快，也很狠。”<br>“皮斯克的公开行程取消了至少一半，”诸伏景光翻动着记录，“不仅公司总部的安保等级明显提高，爱尔兰威士忌也几乎寸步不离。”<br>“他在收缩防线，试图稳住核心资产和人脉。但阿斯蒂这次显然是全方位施压，经济打击只是开始。”赤井秀一接过话头，语气带着惯有的冷静分析，“他手下几个外围的灰色产业据点，这两天也频频被‘热心市民’举报或遭到不明势力骚扰，损失不小。”<br>“外围据点被清扫，核心产业受到狙击……”薄羽凉懒洋洋地窝在沙发里，嘴边叼着沾有奶油的餐叉，显得有些含糊不清的感叹道，“阿斯蒂下手也越来越快准狠了呢。”<br>“这正是我们预期的「困境」。”安室透放下平板，身体微微前倾，眼神锐利，“如今外部的压力已经给足，皮斯克寻找外援的窗口期应该近了，我们需要一个足够自然、又能让他无法拒绝的契机。”<br>“但若是完全由我们这边主动接触的话，”诸伏景光若有所思的捏了捏下巴，眉头微蹙，“痕迹太重，推进计划的成效怕是会大打折扣。”<br>“啊，那倒是不用担心哦。”薄羽凉歪了歪头，嘴角勾起一抹孩童般狡黠又带着点笃定的笑容，“听上去，契机已经自己找上门了呢。”<br>话音落下的瞬间，客厅里其余三人都是一怔。<br>但随即，安室透眼神一凝，诸伏景光翻阅报告的手指顿住，赤井秀一墨绿色的眼眸瞬间锁定了玄关方向。<br>屋内顿时陷入了一片微妙的沉寂，只有墙上挂钟秒针走动的滴答声清晰可闻。<br>不多时，一阵有节奏的敲门声响了起来。<br>笃、笃、笃。<br>安室透瞬间收敛了所有外露的思绪，脸上恢复了属于“波本”的沉稳表情，对着离门最近的诸伏景光微微颔首。<br>两人悄然交换了一个眼神，接收到信号的诸伏景光随即起身走向玄关，步伐稳健，动作自然地透过猫眼向外确认。<br>门外的景象透过猫眼清晰可见——一位身着剪裁利落的深色西装、气质沉稳的中年男性安静地站立着，他的脸上没有任何多余的表情，目光平静地直视前方，仿佛一尊凝固的雕像。<br>诸伏景光无声地回头，向客厅方向的安室透递去一个确认的眼神，无声地做了个口型：玛克白兰地。<br>安室透接收到信号，微微颔首，紫灰色的眼眸中锐利的光芒一闪而过，随即被妥善收敛。<br>诸伏景光这才转动门把手，将门打开，侧身让出通道。<br>“请进。”<br>门外的中年男人这才步伐从容地踏入客厅。他的视线迅速而精准地扫过室内，在沙发上面带慵懒笑意、正小口舔着餐叉上奶油的薄羽凉身上停留了一瞬，然后便落回到明显处于主导位置的安室透身上，带着一丝不易察觉的审视。<br>“这不是玛克先生吗，真是稀客。”安室透脸上挂着恰到好处的礼貌微笑，“这个时间点来访，想必不只是为了喝杯咖啡？”<br>“贸然打扰，失礼了。”玛克略一欠身，姿态恭敬却又并不显得卑微，“但眼下确有这么一件事，希望得到诸位的助力。”<br>“助力？”安室透身体向后微靠，指尖在平板电脑光滑的边缘轻点一下，仿佛在掂量这个词的分量，“能让玛克先生感到棘手的事情，听起来可不是普通的麻烦啊。”<br>“说来惭愧，”玛克作出一副苦恼的表情，“最近有些不知天高地厚的老鼠，趁着皮斯克大人诸事繁忙，抽不出身，便对我们的几个外围运输节点和仓库据点频频骚扰，手段卑劣，造成了不小的损失和困扰。”<br>客厅里响起薄羽凉一声轻微的、带着奶油甜味的叹息。<br>他放下餐叉，整个人更深地陷进柔软的沙发靠垫里，金色的发丝在窗帘缝隙透过的光线下闪着细碎的光，碧眸懒洋洋地半眯着，仿佛一只午后被打扰了清梦的猫。<br>“啊啦，”少年的声音带着点黏糊的甜意，却又透着一丝锐利的讽刺，“皮斯克老爷子向来手下能人众多，哪里需要我们这几个闲人插手？”<br>“当然，”玛克立刻接话，姿态放得更低了些，甚至对着薄羽凉的方向微微躬身，“这种小事，自是不好劳烦香槟大人亲自出手。”<br>他的语气谦恭而谨慎，仿佛在安抚一只随时可能亮出利爪的高贵猫咪。但紧接着，他又话锋一转，目光重新聚焦在安室透等人身上，眼神里带上了一丝不易察觉的精明计算和引诱。<br>“不过对刚刚获得代号的新人而言，”玛克意有所指地停顿了一下，视线扫过安室透、诸伏景光和赤井秀一三人，“这无疑也是一个很好的表现机会。”<br>“以波本先生你们的能力，这个任务想来不过是举手之劳而已，”他向前微微迈了一小步，声音压低，带着一种推心置腹般的说服力，“若是能请到几位来解决掉这几件事……”<br>空气里咖啡的微苦香气似乎凝滞了一瞬。<br>安室透嘴角那抹公式化的弧度依旧没有变化，紫灰色的眼眸却如同深潭，让人窥不见底。<br>他没有立刻回应玛克的提议，指尖依旧无意识地轻点着平板边缘，发出几乎微不可闻的笃笃声。<br>这个提议，来得太巧了。<br>皮斯克的外围据点被骚扰，这正是阿斯蒂的手笔，也是他们计划中施加给皮斯克的第一波压力。玛克此刻的求助，无疑是将他们计划中接近皮斯克的“借口”亲手奉上。<br>但对方是否察觉到更深层次的联系？<br>而最终打破这短暂沉寂的，是薄羽凉。<br>他像是完全没感受到客厅里瞬间绷紧的气氛，又或者根本不在意。碧色的眼眸慵懒地半睁着，长长的金色睫毛在脸颊投下小片阴影。<br>少年惬意地伸了个懒腰，骨骼发出轻微的咔哒声，整个人像只餍足的猫，更深地陷进柔软的沙发里。<br>“哈——”薄羽凉发出一个意义不明的感叹音，语气天真又刻薄，带着浓浓的鼻音，“玛克先生的意思是说，皮斯克老爷子现在焦头烂额，后院起火，连几只小老鼠都拍不死，所以才需要临时找几个‘新人’去帮他打扫院子？”<br>“香槟大人言重了。”玛克的脸色微微僵了一下，但很快恢复如常，他微微躬身，语气更加诚恳，“皮斯克大人只是事务繁忙，分身乏术。至于波本诸位的能力，组织上下有目共睹，绝非寻常新人可比。”<br>“若能借几位之手，迅速平息这些小麻烦，不仅能替皮斯克大人分忧，更能彰显诸位的才干……当然，也少不了应有的报酬。”<br>他刻意加重了“报酬”二字，目光在安室透和薄羽凉之间游移，显然明白真正能做决定的是谁——至少表面上还是需要香槟的首肯。<br>听到这里，安室透终于停下了手指的动作，抬起眼，迎上玛克试探的目光。<br>“报酬倒是其次，”他开口，声音平稳温和，“能为组织分忧，是我们份内之事。”<br>这句话说得滴水不漏，既表示了可以出力，又没承诺具体怎么做，更没提皮斯克的名字，只强调了“组织”。<br>“前辈怎么看？”他微微侧头，目光投向沙发上的薄羽凉，姿态带着下属请示前辈的自然，“既然是外围据点的小问题，让我们练练手也未尝不可？”<br>薄羽凉歪着头，仿佛在认真思考一个无关紧要的提议。<br>他伸出舌尖，慢悠悠地舔掉餐叉尖端最后一点奶油，碧眸在安室透脸上转了转，又扫过诸伏景光和赤井秀一，最后落回玛克身上。<br>“唔……”少年拖长了调子，显得有些漫不经心，“听起来像是收拾几个不长眼的蟊贼？无聊又琐碎的工作呢。”<br>玛克的心微微提起。<br>但薄羽凉的话锋却陡然一转，碧眸闪过一丝狡黠的光。<br>“不过嘛……”他看向安室透三人，嘴角弯起一个带着点恶劣趣味的弧度，“既然玛克先生都亲自上门了，透酱若是想稍微去玩玩，也不是不行。”<br>“当然，前提是不可以受伤哦？”薄羽凉眨了眨眼，望着安室透低声嘱咐道，“不然，我可是会生气的。”<br>“多谢香槟大人成全！”玛克立刻躬身，“波本先生，具体的情况和地点，稍后我会将详细信息发送给您指定的安全渠道。”<br>“好。” 安室透简洁地应下，脸上重新挂起波本式的、带着距离感的微笑，“期待玛克先生的情报。”<br>送客的姿态已然摆明。诸伏景光适时起身，再次将玛克送至玄关。<br>门打开又关上，隔绝了外面下午的光线。<br>客厅里重新只剩下四人。空气仿佛在玛克离开后才重新开始流动，咖啡的香气和纸张的味道再次变得清晰。<br>“这个契机倒是比预想的来得更快，也更直接。”<br>赤井秀一从沙发靠背上直起身，拿起茶几上一枚子弹在指间随意地把玩着，声音恢复了惯有的冷静。<br>“或许，这也在那位阿斯蒂的计划之中。”<br>“不过也正好，不是吗？”诸伏景光应声，“利用这次行动，名正言顺地接触皮斯克的核心运输网络，也能更清晰地评估他目前真实的防御状态。”<br>“嗯，苏格兰说得没错。”安室透拿起平板，屏幕的光映在他脸上，紫灰色的眼眸深处是锐利的算计。<br>“最重要的是，既要解决掉造成麻烦的‘老鼠’，展示我们的价值，但又不能做得太彻底干净，让皮斯克觉得不再需要我们这根‘外援’稻草。”<br>“那么，”他开口，声音平稳却带着不容置疑的执行力，“就让我们‘帮’皮斯克好好打扫一下院子吧。记住，既要让主人看到成效……”他的目光扫过诸伏景光和赤井秀一，嘴角勾起一抹冰冷的弧度，“又要留下足够多的‘灰尘’，让他觉得……”<br>“非我们不可。”</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;第-94-章-皮斯克取信任务（上）&quot;&gt;&lt;a href=&quot;#第-94-章-皮斯克取信任务（上）&quot; class=&quot;headerlink&quot; title=&quot;第 94 章 皮斯克取信任务（上）&quot;&gt;&lt;/a&gt;第 94 章 皮斯克取信任务（上）&lt;/h1&gt;&lt;p&gt;春日的午后暖阳透过拉</summary>
-      
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="触手君与柑橘酱" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/"/>
-    
-    
-    <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
-    
-    <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第 93 章 玛克白兰地</title>
-    <link href="https://zwei-wings.github.io/2026/09/01/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%2093%20%E7%AB%A0%20%E7%8E%9B%E5%85%8B%E7%99%BD%E5%85%B0%E5%9C%B0/"/>
-    <id>https://zwei-wings.github.io/2026/09/01/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%2093%20%E7%AB%A0%20%E7%8E%9B%E5%85%8B%E7%99%BD%E5%85%B0%E5%9C%B0/</id>
-    <published>2026-09-01T00:00:00.000Z</published>
-    <updated>2026-09-03T03:27:32.865Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第-93-章-玛克白兰地"><a href="#第-93-章-玛克白兰地" class="headerlink" title="第 93 章 玛克白兰地"></a>第 93 章 玛克白兰地</h1><p>空气中弥漫着高级雪茄的余韵和一丝不易察觉的焦躁。<br>皮斯克靠坐在宽大的真皮沙发上，指间夹着的雪茄烟雾缭绕，将他沟壑纵横的脸庞笼罩在阴影里。<br>面前矮桌上摊开的几份报告记录着近一周内名下几家明面上的企业受到的“意外”审查，以及两三名外围成员突然失去联络的消息。<br>房间内还有另外几名成员，都是他从威士忌时代就跟随着的心腹。其中代号爱尔兰威士忌的青年也赫然在列，此刻正抱着双臂站在皮斯克身侧，扮演着沉默而忠心耿耿的护卫角色。<br>此刻，其中一人正在向皮斯克汇报着近期的状况。<br>“……<mark>综上所述，虽然造成的实质性损失并不多，但朗姆的人近来确实在金融市场和一些灰色渠道上陆续给我们制造了不少麻烦。这种骚扰若是持续下去，无疑会使我们很被动。”</mark><br><mark>“还有我们之前接触的几个摇摆不定的中间人……”另一人略显迟疑的补充道，“最近也疑似收到了来自朗姆那边的警告与拉拢，就算没有直接投靠对面，也貌似在与我们撇清关系。”</mark><br>皮斯克缓缓吐出一个烟圈，灰白的眉毛拧在一起。<br>以他多年经营的人脉、狡兔三窟的隐藏资产以及作为元老的经验，这些接连不断的损失和骚扰虽然也达不到令他伤筋动骨的地步，但却又微妙地比他最初的心理预期要高出不少。<br>简而言之就是，这点金钱上的损失倒不至于让他当场破产，但显然会让他感觉很心疼。<br>“哼，朗姆……”皮斯克的声音低沉沙哑，带着一种被岁月和权力浸染过的厚重感，“那位先生许久不曾露面，反倒是让朗姆这只老狐狸越来越肆无忌惮了。”<br>“不过，最近对面的行事风格看上去倒不像是朗姆本人，更像是……阿斯蒂那个丫头。”<br>“是的，如您所说，”其中一名汇报者立刻接话，他边说边小心翼翼地观察着皮斯克的脸色，额头渗出细密的汗珠，“那几位中间人似乎都是在被邀约前往「苍蔷薇」后选择倒戈的，想来必然是阿斯蒂的手笔。”<br>“朗姆不过是急于立威，才派她这只‘信鸽’出来扑腾几下，她倒直接冲着名单来了……”皮斯克嗤笑一声，“年纪不大，胃口倒是不小。”<br>一旁负责报告的两人见此顿时欲言又止地对视了一眼。<br>“但、但是……”其中一人犹豫着开口，“皮斯克大人，她在东京的情报网确实非常棘手，以至于朗姆的人几乎每次行动都能比我们快上一步。”<br>“而且这种持续的、精准的骚扰，像是在不断收紧丝线，时间长了……终究是个隐患。虽然我们根基深厚，但总是被动防守的话，难免会被她找到真正的弱点。”<br>房间内的气氛重新凝重起来。<br>皮斯克沉默着，雪茄的红光在阴影中明明灭灭。<br>他当然知道对方说得有道理，被动防御终归不是长久之计，若是被其缠上，迟早会被耗死或找到机会咬中要害。<br>虽然他并不觉得那个年纪轻轻的小丫头能掀起什么风浪，但站在对方身后的朗姆却也心眼颇多，不得不防。<br>只是，如今的破局之法……<br>就在这时，角落里的中年男人缓缓向前迈了一步。<br>“皮斯克大人，”他的声音平稳清晰，瞬间吸引了所有人的注意，“或许我们可以将敌方制造的混乱，转化为引入新变量的契机。”<br>听此，皮斯克抬起眼皮，浑浊却锐利的目光如探照灯般，仔细地、毫不客气地打量着这个主动发言的人。<br>那是一个看起来大约四十多岁的中年男人，面容方正，气质内敛，眼神平静无波，穿着剪裁得体但毫不起眼的深色西装。<br>他对这张脸倒是挺眼熟，印象中是大约十年前加入派系，算是有着一定的资历。<br>只不过，这人平时行事低调，汇报工作言简意赅，也似乎没有什么特别出彩的功绩，以至于存在感有些稀薄，就连皮斯克本人也得好好想一想才能勉强记起对方的代号。<br>“玛克，”皮斯克低沉的声音准确地叫出了他的代号，带着一丝探究，“你有什么高见？”<br>“高见不敢当。”玛克微微欠身，姿态谦恭但言语直接，“我认为，与其坐等她继续在我们的地盘上织网，不如主动引入一股她意想不到、也没有能力完全掌控的外部力量，彻底打乱她的节奏，甚至反客为主。”<br>“外部力量？”皮斯克挑眉。<br>他吸了一口雪茄，浓郁的烟雾再次升腾，将他思索的表情笼罩得更加深邃。<br>“是的。”玛克眼中闪过一丝精光，“比如……”<br>他没有回避皮斯克审视的目光，平静地、一字一顿地抛出了那个足以搅动当前僵局的名字。<br>“香槟。”<br>皮斯克浑浊的双眼在雪茄的烟雾中微微眯起，仿佛在掂量玛克提议的分量。<br>“香槟？”皮斯克沙哑的声音打破了沉寂，带着一丝不易察觉的玩味和更深的考量，“那只……‘Boss 的番犬’？”<br>他缓缓吐出烟圈，灰白色的眉毛微蹙，像是在掂量这个名字的分量。<br>“玛克，你的思路确实跳出了棋盘。”皮斯克的声音听不出太多情绪，更像是在陈述一个事实，“但香槟……他向来只为那位先生服务，从来不会、也绝不能偏袒任何一方。”<br>“他固然不会成为朗姆的助力，与我们为敌，但同样不可能把命押在我们身上。”<br>玛克面对着皮斯克审视的目光，没有丝毫慌乱，反而显得更加沉稳。<br>“您所言极是，皮斯克大人。”<br>“直接接触香槟，风险确实极高。”他微微欠身，语气平和地解释，“「番犬」代表的是那位先生的意志，不仅立场超然，性格也同样难以捉摸。轻易介入朗姆与我们之间的斗争，对他而言几乎没有任何好处，是我们双方都极难拉拢的对象。”<br>“但是，”玛克话锋一转，眼神中闪烁着精明的光，“「新·威士忌组」就另当别论了。”<br>“「新·威士忌组」……”皮斯克的雪茄在指间微微一顿，“你是说，近来刚在组织内部崭露头角的那支新人队伍？”<br>如果他没记错，那似乎是为了填补威士忌死后俄罗斯分部动荡产生的人员空缺，而受到提拔的一批新人。<br>由于他们从 Boss 那里得到的代号恰好又是三种威士忌，于是便通称为「新·威士忌组」。<br>“没错，这支队伍如今可谓是备受瞩目。”玛克微微颔首，“据我所知，他们一直是由香槟亲自进行指导的。”<br>“这意味着那位先生很可能是想以香槟为中心，建立一个独立的行动小组，并负责处理一些特殊任务。”<br>“皮斯克大人，这就是我们需要的‘外部力量’——一股阿斯蒂无法预见、难以掌控，但却又不得不应对，甚至天然会让她有所忌惮的势力。”<br>“退一万步说，阿斯蒂的情报网或许庞大，”玛克顿了顿，“但她难道还能与一支直接效命于那位先生的特殊小队，发生正面冲突吗？”<br>皮斯克的身体慢慢靠回沙发靠背，雪茄的红光在阴影中明灭不定，如同他此刻翻涌的思绪。<br>一时间，屋内陷入了寂静，所有人的目光都聚焦在他身上。<br>他沉默了几秒，浑浊的目光再次穿透烟雾，精准地聚焦在玛克身上，带着一丝更深层次的探究和审视，仿佛第一次真正看清这个低调的下属。<br>“看上去，你已经有办法让这支小队为我们所用了？”<br>感受到皮斯克话语中蕴含的许可和期待，玛克的态度更加从容，他嘴角甚至牵起一丝极淡的、胸有成竹的笑意。<br>“是，如您所见，”他微微颔首肯定了皮斯克的推测，“这些新人刚刚获得代号，根基尚浅，正需要大量显眼的功绩来证明自身的能力。”<br>他伸出手指，精准地点了点其中一份报告上一个不起眼的冲突记录。<br>“而正好，最近也有几个本土的极道组织与我们的势力发生了摩擦。”<br>“只要我们将朗姆派系造成的其中一部分损失推到组织的外敌身上，以此为由私下请求香槟及其小队的协助……”<br>玛克抬起头，迎向皮斯克的目光，清晰地、一字一句地道出计划的精髓。<br>“便能让这支队伍出现在您需要他们出现的地方，不是吗？”<br>烟雾缭绕中，皮斯克那沟壑纵横的脸上看不出明显的喜怒。他深深地吸了一口雪茄，让辛辣的烟雾在肺腑间盘旋，灼烧着纷繁的思绪。<br>玛克的计划胆大、刁钻，甚至带着点阴险的巧妙。<br>利用 Boss 的直属力量去对抗朗姆的锋芒，同时还能顺手清除外部麻烦……确实是一步跳出棋盘的好棋。<br>唯一的风险在于，这一切是否真能瞒过香槟那双非人的眼睛？<br>虽然早已被 Boss 拴上了项圈，但那头怪物可从来不是什么好相与的角色。<br>这一点皮斯克可谓是再清楚不过。<br>若是香槟的矛头最终并未顺利指向朗姆，而是发现他在擅自推进那份研究资料的话……<br>果然，还是有必要做两手准备。<br>皮斯克的指尖在真皮沙发的扶手上缓缓敲击着，发出沉闷而规律的笃笃声。这声音在寂静中格外清晰，仿佛是他脑中飞速运转的齿轮在相互咬合，权衡着利弊。<br>良久，那敲击声停了下来。<br>“那么，”皮斯克低沉沙哑的声音打破了沉寂，带着一种不容置疑的决断，“将这个提议付诸实践的任务……”<br>“就交给你了，玛克。”<br>“是，皮斯克大人。”玛克没有任何多余的表情，仅是微微躬身，姿态恭敬而利落，“我定当谨慎行事，确保一切符合您的预期。”<br>见此，皮斯克也不再多言，只是轻轻挥了挥夹着雪茄的手，示意散会。<br>几名心腹成员暗自松了口气，他们无声地向皮斯克行礼，然后依次安静地退出了这间充满权力与烟味气息的房间。<br>唯有作为护卫的爱尔兰仍站在原地，他深深地看了一眼依旧稳坐如山的皮斯克，又瞥向玛克的背影，眼神深处闪过一丝不易察觉的审视。<br><mark>而离开房间的玛克跟在其余几人身后，穿过走廊，直至四下无人时才放缓了脚步。</mark><br><mark>确认身后没有尾巴，他迅速闪身进入一个僻静的休息角，从怀里掏出手机，指尖在冰冷的屏幕上编辑着简讯。</mark><br><mark>其信息内容简洁、冰冷，遵循着既定的联络暗语格式，指向一个只有特定人员知晓的秘密邮箱。</mark></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;第-93-章-玛克白兰地&quot;&gt;&lt;a href=&quot;#第-93-章-玛克白兰地&quot; class=&quot;headerlink&quot; title=&quot;第 93 章 玛克白兰地&quot;&gt;&lt;/a&gt;第 93 章 玛克白兰地&lt;/h1&gt;&lt;p&gt;空气中弥漫着高级雪茄的余韵和一丝不易察觉的焦躁。&lt;br&gt;皮斯</summary>
-      
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="触手君与柑橘酱" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/"/>
-    
-    
-    <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
-    
-    <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>南院OC专栏-12</title>
-    <link href="https://zwei-wings.github.io/2026/08/31/%E5%8D%97%E9%99%A2/OC%E4%B8%93%E6%A0%8F/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-12/"/>
-    <id>https://zwei-wings.github.io/2026/08/31/%E5%8D%97%E9%99%A2/OC%E4%B8%93%E6%A0%8F/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-12/</id>
-    <published>2026-08-31T04:00:00.000Z</published>
-    <updated>2026-09-12T04:43:42.663Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安德莉丝·帕拉戴"><a href="#安德莉丝·帕拉戴" class="headerlink" title="安德莉丝·帕拉戴"></a>安德莉丝·帕拉戴</h1><blockquote><p>愿</p></blockquote><h2 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h2><table><thead><tr><th><strong>项目</strong></th><th><strong>内容</strong></th></tr></thead><tbody><tr><td>姓名</td><td>安德莉丝·帕拉戴</td></tr><tr><td>别名</td><td>曲未终</td></tr><tr><td>性别</td><td>女</td></tr><tr><td>身高</td><td>167 cm</td></tr><tr><td>种族</td><td>稀有种-血族</td></tr><tr><td>魔武</td><td>「神眷·圣罚金字塔」</td></tr><tr><td>第一适性<br></td><td>空间系</td></tr><tr><td>第二适性</td><td>神秘系</td></tr><tr><td>所属</td><td><del>永夜结社-「失乐园」</del></td></tr><tr><td>命格</td><td><del>「女皇」</del></td></tr></tbody></table><h2 id="人设图"><a href="#人设图" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%AE%89%E5%BE%B7%E8%8E%89%E4%B8%9D-2%E6%94%B9.webp"></p><p>主要细节：</p><ul><li>白发红眸</li><li>编发发环 <em>（未完全体现）</em></li><li>哥特系+轻洛丽塔</li></ul><h2 id="出身背景"><a href="#出身背景" class="headerlink" title="出身背景"></a>出身背景</h2><h2 id="印象曲推荐"><a href="#印象曲推荐" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><p><em>可在音乐播放器中试听</em></p><ul><li>God knows…（平野绫）</li><li>Tír na nÓg（上田麗奈)</li></ul><hr><h1 id="黛薇儿·卡莱茵"><a href="#黛薇儿·卡莱茵" class="headerlink" title="黛薇儿·卡莱茵"></a>黛薇儿·卡莱茵</h1><blockquote><p>愿</p></blockquote><h2 id="基础信息-1"><a href="#基础信息-1" class="headerlink" title="基础信息"></a>基础信息</h2><table><thead><tr><th><strong>项目</strong></th><th><strong>内容</strong></th></tr></thead><tbody><tr><td>姓名</td><td>黛薇儿·卡莱茵</td></tr><tr><td>别名</td><td>曲未央</td></tr><tr><td>性别</td><td>女</td></tr><tr><td>身高</td><td>174 cm</td></tr><tr><td>种族</td><td>亚人种-拉米亚</td></tr><tr><td>魔武</td><td>「机械装置的百科全书」<del>（人造魔武）</del></td></tr><tr><td>第一适性<br></td><td>元素系-金属/光明</td></tr><tr><td>第二适性</td><td>精神系</td></tr><tr><td>所属</td><td><del>永夜结社-「操偶师」</del></td></tr><tr><td>命格</td><td><del>暂无</del></td></tr></tbody></table><h2 id="人设图-1"><a href="#人设图-1" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E9%BB%9B%E8%96%87%E5%84%BF%C2%B7%E5%8D%A1%E8%8E%B1%E8%8C%B5.webp"></p><p>主要细节：</p><ul><li>白发红眸+紫色挑染</li><li>蝴蝶耳饰 <em>（未体现）</em></li><li>蛇尾</li></ul><h2 id="出身背景-1"><a href="#出身背景-1" class="headerlink" title="出身背景"></a>出身背景</h2><h2 id="印象曲推荐-1"><a href="#印象曲推荐-1" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul><li>永凋花坠（言和）</li></ul><hr><h1 id="维多利亚·拉普斯"><a href="#维多利亚·拉普斯" class="headerlink" title="维多利亚·拉普斯"></a>维多利亚·拉普斯</h1><blockquote><p>愿</p></blockquote><h2 id="基础信息-2"><a href="#基础信息-2" class="headerlink" title="基础信息"></a>基础信息</h2><table><thead><tr><th><strong>项目</strong></th><th><strong>内容</strong></th></tr></thead><tbody><tr><td>姓名</td><td>维多利亚·拉普斯</td></tr><tr><td>别名</td><td>-</td></tr><tr><td>性别</td><td>女</td></tr><tr><td>身高</td><td>184 cm</td></tr><tr><td>种族</td><td>稀有种-血族</td></tr><tr><td>魔武</td><td>「神眷·德古拉之棺」</td></tr><tr><td>第一适性<br></td><td>诅咒系</td></tr><tr><td>第二适性</td><td>精神系</td></tr><tr><td>所属</td><td><del>永夜结社-失乐园所属</del></td></tr><tr><td>命格</td><td><del>暂无</del></td></tr></tbody></table><h2 id="人设图-2"><a href="#人设图-2" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E7%BB%B4%E5%A4%9A%E5%88%A9%E4%BA%9A.webp"></p><p>主要细节：</p><ul><li>白发红眸</li><li>额心纹饰 <em>（未完全体现）</em></li><li>尖长指甲 <em>（未完全体现）</em></li><li>吸血鬼元素</li></ul><h2 id="出身背景-2"><a href="#出身背景-2" class="headerlink" title="出身背景"></a>出身背景</h2><h2 id="印象曲推荐-2"><a href="#印象曲推荐-2" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul><li>Paper Bouquet（Mili）</li></ul><hr><h1 id="夏莉娅·格蕾特"><a href="#夏莉娅·格蕾特" class="headerlink" title="夏莉娅·格蕾特"></a>夏莉娅·格蕾特</h1><blockquote><p>愿</p></blockquote><h2 id="基础信息-3"><a href="#基础信息-3" class="headerlink" title="基础信息"></a>基础信息</h2><table><thead><tr><th><strong>项目</strong></th><th><strong>内容</strong></th></tr></thead><tbody><tr><td>姓名</td><td>夏莉娅·格蕾特</td></tr><tr><td>别名</td><td>-</td></tr><tr><td>性别</td><td>女</td></tr><tr><td>身高</td><td>177 cm</td></tr><tr><td>种族</td><td>稀有种-血族</td></tr><tr><td>魔武</td><td>「神眷·智者头冠」</td></tr><tr><td>第一适性<br></td><td>精神系</td></tr><tr><td>第二适性</td><td>元素系-土/暗影</td></tr><tr><td>所属</td><td><del>永夜结社-失乐园所属</del></td></tr><tr><td>命格</td><td><del>暂无</del></td></tr></tbody></table><h2 id="人设图-3"><a href="#人设图-3" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%A4%8F%E8%8E%89%E5%A8%85%C2%B7%E6%A0%BC%E8%95%BE%E7%89%B9.webp"></p><p>主要细节：</p><ul><li>白发红眸</li><li>黑礼帽+燕尾服</li><li>绅士手杖</li></ul><h2 id="出身背景-3"><a href="#出身背景-3" class="headerlink" title="出身背景"></a>出身背景</h2><h2 id="印象曲推荐-3"><a href="#印象曲推荐-3" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul><li>恨海情天（漆柚/椒椒JMJ）——可代夏安组（夏莉娅×安莲娜）</li></ul>]]></content>
-    
-    
-    <summary type="html">安德莉丝+黛薇儿+维多利亚+夏莉娅</summary>
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="南城院校风纪委员部" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E5%8D%97%E5%9F%8E%E9%99%A2%E6%A0%A1%E9%A3%8E%E7%BA%AA%E5%A7%94%E5%91%98%E9%83%A8/"/>
-    
-    
-    <category term="原创" scheme="https://zwei-wings.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-    <category term="OC专栏" scheme="https://zwei-wings.github.io/tags/OC%E4%B8%93%E6%A0%8F/"/>
     
   </entry>
   
