@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>测试</title>
+    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="音频测试"><a href="#音频测试" class="headerlink" title="音频测试"></a>音频测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h1 id="留言测试"><a href="#留言测试" class="headerlink" title="留言测试"></a>留言测试</h1><h2 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h2><div class="note Kanade flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h2><div class="note Tsubasa flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="艾格·拉缇斯"><a href="#艾格·拉缇斯" class="headerlink" title="艾格·拉缇斯"></a>艾格·拉缇斯</h2><div class="note Ego flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="安莲娜·克莉丝"><a href="#安莲娜·克莉丝" class="headerlink" title="安莲娜·克莉丝"></a>安莲娜·克莉丝</h2><div class="note Aliena flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+  </entry>
+  <entry>
     <title>第 80 章 尾声</title>
     <url>/2026/08/19/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/2_%E6%B3%A2%E5%A3%AB%E9%A1%BF%E7%AF%87/%E7%AC%AC%2080%20%E7%AB%A0%20%E5%B0%BE%E5%A3%B0/</url>
     <content><![CDATA[<h1 id="第-80-章-尾声"><a href="#第-80-章-尾声" class="headerlink" title="第 80 章 尾声"></a>第 80 章 尾声</h1><p>波士顿的郊外的夜风很凉，也很安静。<br>互相支撑着的两人从一处半塌的排水口探出头来，外面是一片荒芜的河堤，远处是城市边缘零星的灯火，更远处是公路偶尔掠过的车灯光束。<br>环视一周，确认环境基本安全，安室透转而探了探薄羽凉的体温。直至确认对方虽然指尖偏凉但没有到危险的程度，自愈后的伤口也似乎没有发炎现象，他才勉强松了半口气。<br>“先找地方落脚。”<br>话音未落，两道刺目的车前灯光撕破了暗色的夜幕，随即一辆黑色轿车如同幽灵般停在了那里。<br>副驾驶的车窗无声降下，露出了驾驶座上贝尔摩德那张完美无瑕却带着审视意味的脸。<br>她的视线无声地掠过了薄羽凉苍白的面容和颈间那个不起眼的皮质项圈，嘴角才挑起一个极淡的弧度。<br>“走吧，”贝尔摩德微微偏了偏头，示意两人上车，“这里的动静很快会引来不必要的关注，动作快。”<br>说话间，后座的诸伏景光已经推开了车门。<br>碍于一旁还有贝尔摩德的存在，他也不便表现得过度亲近，但那双湖蓝色的眼眸中显然交织着难以掩饰的焦虑与终于寻到人的如释重负，飞快地从安室透和薄羽凉身上扫过。<br>脸色发白的少年虽然还是维持着平时那副游刃有余的表情，但显然没什么说服力。<br>他身上还穿着那件伪装用的维修工制服，只是腰腹部前后赫然有着两个破洞，像是受过贯穿伤，哪怕只看那已经开始氧化发黑的血迹，就知道当时的出血量绝对不小。<br>但反观Zero的状况，同样是被那场突如其来的塌方掩埋在废墟下，居然除了前襟那片显然是溅到的血迹，身上连一道擦伤都没有。<br>会变成这样的原因可谓是显而易见。香槟前辈，不仅在紧急关头将他甩出了危险的塌方地带，对Zero也……<br>诸伏景光努力克制住自己的表情，起身帮着安室透先将薄羽凉扶进后座。车门合上的瞬间隔绝了外面冰冷的夜风，车内暖气的温度裹着淡淡的皮革与香水的味道扑面而来。<br>直到这时，贝尔摩德才靠在副驾驶上悠悠开口。<br>“看来我们的「番犬」这次吃了不少苦头？”她的语气慵懒，听不出是关切还是嘲弄，“你这副狼狈的样子，倒还真是难得一见呢。”<br>“好过分啊，贝尔。”薄羽凉拖长尾音抗议道，“多少也稍微关心一下伤员……”<br>他的话刚刚说到一半，那只纤长漂亮的手便像是早有预料的从驾驶座伸了过来，打断了他的抱怨。<br>——被递来的透明罐子里装着一堆琥珀色的橘子糖。<br><mark>“所以，潘多拉呢？”</mark><br><mark>贝尔摩德故意朝他晃了晃那只糖罐，包装的玻璃糖纸便不时折射出五彩斑斓的光线，像是装着一整罐的阳光。</mark><br><mark>“在啦在啦。”薄羽凉撇了撇嘴，从口袋里摸出那枚指甲盖大小的宝石，将糖罐换了下来，“真是个无情的女人。”</mark><br><mark>贝尔摩德似是轻笑一声，对这个评价不置可否。</mark><br><mark>她打量了一下手里的宝石，重新拢了拢肩上的披肩，语气里带上了点懒洋洋的揶揄。</mark><br><mark>“还能斗嘴，看来伤得确实不重。”</mark><br>她的声音不大，几乎要融进夜风之中，但贝尔摩德知道那个听力异于常人的香槟一定听见了。<br>随后她微微抬眸，不着痕迹地看向中央的后视镜。<br>镜中正倒映出后座三人的身影，而薄羽凉顺手将糖罐塞到安室透手中，后者习以为常地拧开了盖子，摸出橘子糖递回去。<br>两人之间的距离不远不近，既足够他在颠簸时能及时伸手扶住少年摇摇欲坠的身体，又不至于在旁人眼中显得过于亲昵。<br>而贝尔摩德的视线在安室透手中的糖罐上定格了半秒，最后才像是长长的叹了口气。<br><mark>与香槟搭档了长达三年的时间，她早就知道对方总是有各种各样的仪式感。</mark><br><mark>从清除目标时的「晚安」，到花瓶里的各色玫瑰，有些仪式的意义或许连贝尔摩德自己也不太清楚，但唯独橘子糖……香槟从不会轻易给出橘子糖。</mark><br><mark>他给出的每颗橘子糖都是一个承诺，是他欠下的人情。</mark><br><mark>所以某种意义上，只要拥有一颗香槟给出的橘子糖，就能让他帮忙做一件事。</mark><br><mark>她的视线最终定格在安室透手里的糖罐上，那里正装着足以令整个组织疯狂的承诺。</mark><br><mark>波本啊波本，你到底是什么人。</mark></p>
@@ -1937,7 +1964,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#x4d;&#x65;&#116;&#105;&#x6e;&#103;&#74;&#x53;&#64;&#49;&#46;&#x32;">&#x4d;&#x65;&#116;&#105;&#x6e;&#103;&#74;&#x53;&#64;&#49;&#46;&#x32;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#77;&#101;&#x74;&#105;&#110;&#103;&#74;&#x53;&#x40;&#x31;&#x2e;&#50;">&#77;&#101;&#x74;&#105;&#110;&#103;&#74;&#x53;&#x40;&#x31;&#x2e;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -1993,7 +2020,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#x71;&#x75;&#x65;&#x72;&#x79;&#x40;&#51;&#46;&#x37;&#46;&#49;">&#106;&#x71;&#x75;&#x65;&#x72;&#x79;&#x40;&#51;&#46;&#x37;&#46;&#49;</a> / <a href="mailto:&#x66;&#97;&#110;&#x63;&#121;&#98;&#111;&#x78;&#64;&#x33;&#x2e;&#53;&#46;&#x37;">&#x66;&#97;&#110;&#x63;&#121;&#98;&#111;&#x78;&#64;&#x33;&#x2e;&#53;&#46;&#x37;</a> / <a href="mailto:&#116;&#x79;&#112;&#101;&#x64;&#x40;&#x32;&#x2e;&#48;&#46;&#x31;&#x32;">&#116;&#x79;&#112;&#101;&#x64;&#x40;&#x32;&#x2e;&#48;&#46;&#x31;&#x32;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#x71;&#x75;&#x65;&#114;&#x79;&#64;&#51;&#46;&#55;&#x2e;&#x31;">&#106;&#x71;&#x75;&#x65;&#114;&#x79;&#64;&#51;&#46;&#55;&#x2e;&#x31;</a> / <a href="mailto:&#x66;&#97;&#x6e;&#x63;&#121;&#x62;&#111;&#x78;&#64;&#51;&#x2e;&#53;&#x2e;&#55;">&#x66;&#97;&#x6e;&#x63;&#121;&#x62;&#111;&#x78;&#64;&#51;&#x2e;&#53;&#x2e;&#55;</a> / <a href="mailto:&#x74;&#121;&#x70;&#x65;&#100;&#64;&#50;&#46;&#48;&#x2e;&#49;&#50;">&#x74;&#121;&#x70;&#x65;&#100;&#64;&#50;&#46;&#48;&#x2e;&#49;&#50;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>
@@ -15817,38 +15844,6 @@ values 容器首个元素的地址：0164DBE8
 <p><em>PS：为了避免世界观冲突或产生漏洞，B类的审核会非常严格，最麻烦的情况下可能需要统一找时间和相关 OC 主逐个对线，请提前做好心理准备。</em></p>
 <h2 id="A-类（带说明版）"><a href="#A-类（带说明版）" class="headerlink" title="A 类（带说明版）"></a>A 类（带说明版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：（例如 Y-1111，指 Y 为末世世界，1111 为编号。现有末世 Y、类中世纪 T、乌托邦 M、东方玄幻&#x2F;武侠 C，如果不在这个范围请向创作群成员进行反馈）</span><br><span class="line">大致概述：（简要概括一下这个世界观最有特色的部分&#x2F;你最看重的部分）</span><br><span class="line">重要产物：（选填，简要说明这个世界观下最核心的机械&#x2F;魔法造物、资源等等都行）</span><br><span class="line">世界观主题：（比如这个世界观的核心背景是“人类和 AI 的智械危机”还是“社会 xx 阶级和 xx 阶级的斗争”之类的）</span><br></pre></td></tr></table></figure>
 <h2 id="A-类（空白版）"><a href="#A-类（空白版）" class="headerlink" title="A 类（空白版）"></a>A 类（空白版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：</span><br><span class="line">大致概述：</span><br><span class="line">重要产物：</span><br><span class="line">世界观主题：</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>小说</category>
-        <category>南城院校风纪委员部</category>
-      </categories>
-      <tags>
-        <tag>原创</tag>
-        <tag>OC专栏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试</title>
-    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="音频测试"><a href="#音频测试" class="headerlink" title="音频测试"></a>音频测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h1 id="留言测试"><a href="#留言测试" class="headerlink" title="留言测试"></a>留言测试</h1><h2 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h2><div class="note Kanade flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h2><div class="note Tsubasa flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="艾格·拉缇斯"><a href="#艾格·拉缇斯" class="headerlink" title="艾格·拉缇斯"></a>艾格·拉缇斯</h2><div class="note Ego flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="安莲娜·克莉丝"><a href="#安莲娜·克莉丝" class="headerlink" title="安莲娜·克莉丝"></a>安莲娜·克莉丝</h2><div class="note Aliena flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>]]></content>
       <categories>
         <category>小说</category>
         <category>南城院校风纪委员部</category>
