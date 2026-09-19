@@ -33,7 +33,18 @@
         tabs[j].addEventListener('click', function () {
           var n = this.parentNode;                        // .nav-tabs
           var s = n.querySelector('.tab-slider');
-          requestAnimationFrame(function () { position(n, s); });
+          requestAnimationFrame(function () {
+            // 横向滚动容器（滚动条已隐藏）：把激活胶囊滚进视野，带 10px 边距
+            var act = n.querySelector('.tab.active');
+            if (act && n.scrollWidth > n.clientWidth) {
+              if (act.offsetLeft < n.scrollLeft + 10) {
+                n.scrollLeft = Math.max(0, act.offsetLeft - 10);
+              } else if (act.offsetLeft + act.offsetWidth + 10 > n.scrollLeft + n.clientWidth) {
+                n.scrollLeft = act.offsetLeft + act.offsetWidth + 10 - n.clientWidth;
+              }
+            }
+            position(n, s);
+          });
         });
       }
     }

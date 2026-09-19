@@ -1528,7 +1528,10 @@ body #article-container .tabs {
 body #article-container .tabs > .nav-tabs {
   position: relative;               /* .tab-slider 定位参照 */
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;                /* 禁止折行：胶囊再多也保持单行，靠横向滑动 */
+  max-width: calc(100% - 28px);     /* 限制宽度：左右各留 14px 缩进（左靠 margin，右靠此处），超宽触发横向滚动 */
+  overflow-x: auto;                 /* 内部胶囊横向滑动 */
+  overflow-y: hidden;
   gap: 4px;
   margin: 0 0 0 14px;               /* 左缩进对齐内容（骑卡改由 .tab-contents 负 margin 实现） */
   padding: 4px;
@@ -1536,6 +1539,13 @@ body #article-container .tabs > .nav-tabs {
   border: 1px solid var(--color-border);  /* 胶囊描边，与内容卡同色 */
   border-radius: 999px;
   z-index: 2;                       /* 压在内容卡上边 */
+  scrollbar-width: none;            /* Firefox 隐藏横向滚动条 */
+  -ms-overflow-style: none;         /* 旧 IE/Edge 隐藏 */
+}
+
+/* 隐藏横向滚动条（Chrome / Safari / 新 Edge） */
+body #article-container .tabs > .nav-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 body #article-container .tabs > .nav-tabs > .tab {
@@ -1544,6 +1554,7 @@ body #article-container .tabs > .nav-tabs > .tab {
   margin: 0;
   padding: 0;
   list-style: none;
+  flex-shrink: 0;                   /* nowrap 下禁止胶囊被压扁 */
 }
 
 body #article-container .tabs > .nav-tabs > .tab button {
@@ -1555,6 +1566,7 @@ body #article-container .tabs > .nav-tabs > .tab button {
   background: transparent;          /* 去掉原灰底，改透明 */
   color: var(--tab-botton-color);
   line-height: 2;
+  white-space: nowrap;              /* 胶囊文字不折行 */
   transition: color .3s;
 }
 
@@ -1613,6 +1625,7 @@ body #article-container .tabs .tab-to-top {
 @media (max-width: 768px) {
   body #article-container .tabs > .nav-tabs {
     margin: 0 0 10px 0;
+    max-width: 100%;                /* 移动端左边距归零，宽度占满 */
   }
   body #article-container .tabs > .tab-contents {
     margin-top: 0;                  /* 移动端不骑卡 */
