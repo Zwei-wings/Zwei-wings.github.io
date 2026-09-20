@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>测试</title>
-    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="音频测试"><a href="#音频测试" class="headerlink" title="音频测试"></a>音频测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h1 id="留言测试"><a href="#留言测试" class="headerlink" title="留言测试"></a>留言测试</h1><h2 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h2><div class="note Kanade flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h2><div class="note Tsubasa flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="艾格·拉缇斯"><a href="#艾格·拉缇斯" class="headerlink" title="艾格·拉缇斯"></a>艾格·拉缇斯</h2><div class="note Ego flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="安莲娜·克莉丝"><a href="#安莲娜·克莉丝" class="headerlink" title="安莲娜·克莉丝"></a>安莲娜·克莉丝</h2><div class="note Aliena flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-
-<h1 id="视频测试"><a href="#视频测试" class="headerlink" title="视频测试"></a>视频测试</h1><h2 id="正常视频"><a href="#正常视频" class="headerlink" title="正常视频"></a>正常视频</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1F7411v7Dt&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div>         → 正常视频
-
-<h2 id="指定某-P（仅「真·分P视频」有效）"><a href="#指定某-P（仅「真·分P视频」有效）" class="headerlink" title="指定某 P（仅「真·分P视频」有效）"></a>指定某 P（仅「真·分P视频」有效）</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=11&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 指定第 11 P（不写数字则默认第 1 P）
-
-<h2 id="合集视频（每集是独立-BV-号，不需要也不该写数字）"><a href="#合集视频（每集是独立-BV-号，不需要也不该写数字）" class="headerlink" title="合集视频（每集是独立 BV 号，不需要也不该写数字）"></a>合集视频（每集是独立 BV 号，不需要也不该写数字）</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1wdEg6nErs&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 该 BV 号本身就是合集第 8 集，已自定位]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-  </entry>
-  <entry>
     <title>南院OC专栏-2</title>
     <url>/2026/08/21/%E5%8D%97%E9%99%A2/OC%E4%B8%93%E6%A0%8F/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-2/</url>
     <content><![CDATA[<h1 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h1><blockquote>
@@ -92,7 +58,7 @@
 <td><del>「世界」</del></td>
 </tr>
 </tbody></table>
-<h2 id="人设图"><a href="#人设图" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%90%9B%E5%88%9D%E6%99%93%E4%B8%89%E8%A7%86%E5%9B%BE.webp"></p>
+<h2 id="人设图"><a href="#人设图" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%90%9B%E5%88%9D%E6%99%93.webp"></p>
 <p>主要细节：</p>
 <ul>
 <li>蓝发紫眸</li>
@@ -396,6 +362,115 @@
         <tag>原创</tag>
         <tag>OC专栏</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>博客更新日志-16</title>
+    <url>/2026/09/20/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-20/</url>
+    <content><![CDATA[<h1 id="博客更新日志-—-2026年9月20日"><a href="#博客更新日志-—-2026年9月20日" class="headerlink" title="博客更新日志 — 2026年9月20日"></a>博客更新日志 — 2026年9月20日</h1><p>这两天本小姐做的两件事，看着八竿子打不着，骨子里是同一个毛病：<strong>「看起来能用」和「真的对」，中间隔着一整个太平洋</strong>。</p>
+<p>分栏胶囊折行撑歪了，没人会说它”坏了”；B站视频写错分P也照样播——只不过永远播的是第 1P。这俩都属于”不报错、不崩、但就是不对”的那类问题，最难抓，也最值得抓。</p>
+<hr>
+<h2 id="➡️-分栏胶囊：折行撑框-→-单行横滑"><a href="#➡️-分栏胶囊：折行撑框-→-单行横滑" class="headerlink" title="➡️ 分栏胶囊：折行撑框 → 单行横滑"></a>➡️ 分栏胶囊：折行撑框 → 单行横滑</h2><p><code>&#123;% tabs %&#125;</code> 顶部那排胶囊，<code>flex-wrap: wrap</code> 一直是老规矩。胶囊一多就折行，圆角轨道从”一条横条”被撑成”一个方框”——前阵子做完「胶囊骑卡」之后就留着这条尾巴，今天来收。</p>
+<p>方案分三层：</p>
+<p><strong>第一层，不许折行。</strong> <code>flex-wrap: nowrap</code>，胶囊再多也排成一行。</p>
+<p><strong>第二层，超出就让容器自己滑。</strong> 光 nowrap 还不够——胶囊要么被压扁、要么撑破容器。所以给 <code>.nav-tabs</code> 配 <code>overflow-x: auto</code>，再加一道 <code>max-width: calc(100% - 28px)</code>（左右各留 14px 缩进、对称），宽度一到上限，胶囊就开始在轨道里横滑。滚动条顺手藏掉，三行标准写法各管一家：<code>scrollbar-width: none</code>（Firefox）、<code>-ms-overflow-style: none</code>（旧 Edge）、<code>::-webkit-scrollbar&#123;display:none&#125;</code>（Chrome / Safari）。</p>
+<p><strong>第三层，别让胶囊被挤瘦。</strong> <code>.tab</code> 加 <code>flex-shrink: 0</code>，按钮加 <code>white-space: nowrap</code>。nowrap 的暗坑就在这儿——你不许它换行，浏览器转手就去压宽度，得手动把”可压缩”这个权利收回来。</p>
+<blockquote>
+<p>有个细节本小姐特意没动：<code>.nav-tabs</code> 保持 <code>inline-flex</code>，<strong>没有</strong>改成 <code>flex</code>。因为 flex 会让轨道永远撑满整行，胶囊只有两三个的时候，右边挂一大条空白，很难看。inline-flex 则是”有几颗胶囊就包多宽”——短则紧凑、长则触发滚动，两种形态都对。</p>
+</blockquote>
+<h3 id="最妙的一处：滑动块不用改"><a href="#最妙的一处：滑动块不用改" class="headerlink" title="最妙的一处：滑动块不用改"></a>最妙的一处：滑动块不用改</h3><p>轨道变成滚动容器之后，本小姐第一反应是”滑动块是不是得跟着重算坐标”。想了想发现不用，而且理由挺漂亮：</p>
+<ul>
+<li><code>.tab-slider</code> 是 <code>position: absolute</code>，包含块正好是 <code>.nav-tabs</code>——轨道横滑时，滑动块作为轨道的内容<strong>一起滚</strong>，永远罩在激活胶囊上；</li>
+<li><code>.tab</code> 自身 <code>position: relative</code>，它的 <code>offsetParent</code> 也还是 <code>.nav-tabs</code>。所以 <code>offsetLeft</code> 和容器的 <code>scrollLeft</code> <strong>本来就在同一个坐标系里</strong>，手动把激活胶囊滚进视野时，算出来的位置天然对得上。</li>
+</ul>
+<p>于是定位逻辑一行没改。</p>
+<h3 id="JS-里补的一段"><a href="#JS-里补的一段" class="headerlink" title="JS 里补的一段"></a>JS 里补的一段</h3><p><code>tab-slider.js</code> 的点击回调里，<code>requestAnimationFrame</code> 内先判断 <code>scrollWidth &gt; clientWidth</code>（真的溢出了才滚），把激活胶囊滚进视野、左右各留 10px 边距，再调 <code>position()</code> 定位滑动块。</p>
+<blockquote>
+<p>为什么非走 <code>requestAnimationFrame</code>？因为切 active 是主题 <code>clickFnOfTabs</code> 的活，本文件只负责让滑动块跟上去——得等下一帧 active 换完了再读位置，不然量到的是旧的。</p>
+</blockquote>
+<p>顺手还修了个不对称：<code>max-width</code> 从 <code>calc(100% - 14px)</code> 改成 <code>calc(100% - 28px)</code>。原版左缩进 14px、右边顶死文章右边缘，一条轨道看着就是歪的。</p>
+<hr>
+<h2 id="🎬-B站视频嵌入：一个下标错位，两类”看着正常”"><a href="#🎬-B站视频嵌入：一个下标错位，两类”看着正常”" class="headerlink" title="🎬 B站视频嵌入：一个下标错位，两类”看着正常”"></a>🎬 B站视频嵌入：一个下标错位，两类”看着正常”</h2><p>B站嵌入是个自定义 tag：<code>&#123;% bilibili BV号 [分P] %&#125;</code>。这两天它出了桩怪事——<strong>指定分P有时候灵、有时候不灵，而且不灵的那些显示得完全正常</strong>。</p>
+<h3 id="根因是一行下标"><a href="#根因是一行下标" class="headerlink" title="根因是一行下标"></a>根因是一行下标</h3><p>脚本里原先写的是 <code>mode = args[1]</code>、<code>page = args[2]</code>，可实际用法是 <code>&#123;% bilibili BV号 8 %&#125;</code>——<strong>数字落在 <code>args[1]</code>，<code>args[2]</code> 是空的</strong>。于是 <code>page</code> 永远是 <code>parseInt(&#39;&#39;)</code> → 恒等于 1。</p>
+<p>抓证据倒很干脆：翻构建产物里那 22 个 iframe，**全部 <code>page=1</code>**。全军覆没，只是有的没暴露出来。</p>
+<h3 id="为什么只暴露一半？"><a href="#为什么只暴露一半？" class="headerlink" title="为什么只暴露一半？"></a>为什么只暴露一半？</h3><p>这里本小姐被结结实实上了一课。关键在于——<strong>「分P」和「合集」是两种完全不同的结构</strong>：</p>
+<ul>
+<li><strong>真·分P视频</strong>：一个 BV 号里装着多个 cid，<code>page=N</code> 才跳得动。数字失效就死死停在第 1P → <strong>问题暴露</strong>。</li>
+<li><strong>合集（<code>ugc_season</code>）</strong>：合集里<strong>每一集都是独立稿件</strong>，各自只有 1P。BV 号本身已经把那一集定位好了，后缀的数字只是”这是合集第几集”的标注 → 失效了也照样对，<strong>看起来正常</strong>。</li>
+</ul>
+<p>反向验一下就明白了：4 个合集后面写的数字，<strong>全部等于</strong>该 BV 在合集中的真实序号（4/4 吻合）——那些数字标记的确实是”合集第几集”，只是它压根不该出现在 tag 里。</p>
+<h3 id="修法与清理"><a href="#修法与清理" class="headerlink" title="修法与清理"></a>修法与清理</h3><p><code>scripts/bilibili.js</code> 的解析逻辑改成：<strong>第 2 位是纯数字就直接当分P序号，否则按「模式 [分P]」解析</strong>。这样 <code>BV号 8</code>、<code>BV号 audio 2</code> 两种写法都通。</p>
+<p>然后按结构规矩过文章：</p>
+<ul>
+<li>合集后面那 4 个多余数字全清（OC 专栏-1 两处、专栏-2 两处）——合集只写 BV 号；</li>
+<li>3 处真分P（P11 / P15 / P7）的数字保留，修好后正常生效；</li>
+<li>测试页那行原本拿<strong>合集 BV</strong> 当”指定第 8P”的示例，本身就是错误示范，换成真分P示例，另补一行合集的正确写法。</li>
+</ul>
+<p>验证：真分P 输出 <code>page=11</code> / <code>page=15</code> / <code>page=7</code>，合集 4 处回到 <code>page=1</code>，构建零 error。</p>
+<h3 id="顺手核实了一个参数名"><a href="#顺手核实了一个参数名" class="headerlink" title="顺手核实了一个参数名"></a>顺手核实了一个参数名</h3><p>官方文档（<code>player.bilibili.com</code> 的播放器参数页）只列了 <code>p</code>。但翻播放器页面的内联脚本，实际是 <code>p: SP.p || SP.page</code>——**<code>page</code> 是个有效别名**。所以参数名不用动，只改解析就够了。</p>
+<hr>
+<h2 id="🔍-全量体检：23-个-tag，逐个调-API"><a href="#🔍-全量体检：23-个-tag，逐个调-API" class="headerlink" title="🔍 全量体检：23 个 tag，逐个调 API"></a>🔍 全量体检：23 个 tag，逐个调 API</h2><p>修完心里没底：还有没有别的藏着的？干脆把 <code>source/**/*.md</code> 全量扫一遍，共 <strong>23 个 tag / 20 个唯一视频</strong>，逐个调 <code>view?bvid=</code> 接口核对「真实结构 vs 文章写法」。</p>
+<p>判定规则三条：单P 或合集却写了数字 → 错；数字超出 <code>videos</code> 分P数 → 越界；<code>videos &gt; 1</code> 却没写数字 → 拎出来人工确认。</p>
+<p>结果：<strong>全部通过</strong>，无越界、无”合集误写数字”。只剩 2 处”真分P 但没写数字”要人看一眼，核实下来都正确，而且<strong>是故意不写的</strong>：</p>
+<ul>
+<li>一处 2P 视频（P1 正片 / P2 Cover），上下文指的就是正片本身，<code>page=1</code> 正是目标；</li>
+<li>一处 2P 视频（P1 OP / P2 ED），挂在 OP 曲的标签页下，<code>page=1</code> 也正是目标。</li>
+</ul>
+<blockquote>
+<p>为什么不干脆把 <code>1</code> 补上去？两个理由：一是<strong>多写那一个数字，将来 UP 主调整分P顺序时反而更容易把人带沟里</strong>；二是现状本就正确，没坏别修。</p>
+</blockquote>
+<p>顺带沉淀一条最快判别法：<strong>在 B站点开同一稿件的另一集，看地址栏</strong>——只有 <code>?p=</code> 在变、BV 号不变 = 真分P（tag 里要写数字）；整个 BV 号都换了 = 合集（只写 BV，别写数字）。</p>
+<hr>
+<h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
+<li><input checked disabled type="checkbox"> 分栏胶囊单行横滑，滚动条三标准藏干净，滑动块随内容滚动仍精准罩住激活胶囊</li>
+<li><input checked disabled type="checkbox"> 点击时激活胶囊自动滚进视野（左右各留 10px）</li>
+<li><input checked disabled type="checkbox"> <code>bilibili.js</code> 下标错位修复，纯数字 / 模式+数字两种写法都通</li>
+<li><input checked disabled type="checkbox"> 4 处合集多余数字清除，3 处真分P 生效</li>
+<li><input checked disabled type="checkbox"> 全站 23 tag / 20 视频逐个体检通过，零越界、零误写</li>
+</ul>
+<hr>
+<p><em>——终于弄明白”分P”和”合集”压根不是同一件事的露西亚 001 号，于”看着正常”最不可信的一天</em></p>
+]]></content>
+      <categories>
+        <category>博客相关</category>
+        <category>更新日志</category>
+      </categories>
+      <tags>
+        <tag>更新日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>测试</title>
+    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="音频测试"><a href="#音频测试" class="headerlink" title="音频测试"></a>音频测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h1 id="留言测试"><a href="#留言测试" class="headerlink" title="留言测试"></a>留言测试</h1><h2 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h2><div class="note Kanade flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h2><div class="note Tsubasa flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="艾格·拉缇斯"><a href="#艾格·拉缇斯" class="headerlink" title="艾格·拉缇斯"></a>艾格·拉缇斯</h2><div class="note Ego flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="安莲娜·克莉丝"><a href="#安莲娜·克莉丝" class="headerlink" title="安莲娜·克莉丝"></a>安莲娜·克莉丝</h2><div class="note Aliena flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+
+<h1 id="视频测试"><a href="#视频测试" class="headerlink" title="视频测试"></a>视频测试</h1><h2 id="正常视频"><a href="#正常视频" class="headerlink" title="正常视频"></a>正常视频</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1F7411v7Dt&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div>         → 正常视频
+
+<h2 id="指定某-P（仅「真·分P视频」有效）"><a href="#指定某-P（仅「真·分P视频」有效）" class="headerlink" title="指定某 P（仅「真·分P视频」有效）"></a>指定某 P（仅「真·分P视频」有效）</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=11&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 指定第 11 P（不写数字则默认第 1 P）
+
+<h2 id="合集视频（每集是独立-BV-号，不需要也不该写数字）"><a href="#合集视频（每集是独立-BV-号，不需要也不该写数字）" class="headerlink" title="合集视频（每集是独立 BV 号，不需要也不该写数字）"></a>合集视频（每集是独立 BV 号，不需要也不该写数字）</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1wdEg6nErs&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 该 BV 号本身就是合集第 8 集，已自定位]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
   </entry>
   <entry>
     <title>南院OC专栏-1</title>
@@ -2733,7 +2808,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#77;&#x65;&#116;&#105;&#110;&#103;&#74;&#83;&#x40;&#49;&#46;&#50;">&#77;&#x65;&#116;&#105;&#110;&#103;&#74;&#83;&#x40;&#49;&#46;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#77;&#101;&#116;&#105;&#x6e;&#x67;&#74;&#x53;&#x40;&#x31;&#46;&#x32;">&#77;&#101;&#116;&#105;&#x6e;&#x67;&#74;&#x53;&#x40;&#x31;&#46;&#x32;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -2789,7 +2864,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#x71;&#x75;&#101;&#114;&#x79;&#64;&#x33;&#x2e;&#55;&#x2e;&#x31;">&#106;&#x71;&#x75;&#101;&#114;&#x79;&#64;&#x33;&#x2e;&#55;&#x2e;&#x31;</a> / <a href="mailto:&#x66;&#x61;&#110;&#99;&#121;&#98;&#111;&#120;&#x40;&#x33;&#46;&#53;&#46;&#x37;">&#x66;&#x61;&#110;&#99;&#121;&#98;&#111;&#120;&#x40;&#x33;&#46;&#53;&#46;&#x37;</a> / <a href="mailto:&#x74;&#121;&#x70;&#x65;&#x64;&#x40;&#50;&#46;&#48;&#46;&#x31;&#50;">&#x74;&#121;&#x70;&#x65;&#x64;&#x40;&#50;&#46;&#48;&#46;&#x31;&#50;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#x71;&#117;&#101;&#x72;&#121;&#64;&#x33;&#x2e;&#x37;&#46;&#x31;">&#106;&#x71;&#117;&#101;&#x72;&#121;&#64;&#x33;&#x2e;&#x37;&#46;&#x31;</a> / <a href="mailto:&#x66;&#97;&#110;&#x63;&#x79;&#x62;&#x6f;&#120;&#x40;&#x33;&#x2e;&#x35;&#46;&#55;">&#x66;&#97;&#110;&#x63;&#x79;&#x62;&#x6f;&#120;&#x40;&#x33;&#x2e;&#x35;&#46;&#55;</a> / <a href="mailto:&#x74;&#121;&#112;&#x65;&#100;&#64;&#50;&#x2e;&#x30;&#x2e;&#x31;&#50;">&#x74;&#121;&#112;&#x65;&#100;&#64;&#50;&#x2e;&#x30;&#x2e;&#x31;&#50;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>

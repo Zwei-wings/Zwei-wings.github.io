@@ -6,7 +6,7 @@
   <link href="https://zwei-wings.github.io/atom.xml" rel="self"/>
   
   <link href="https://zwei-wings.github.io/"/>
-  <updated>2026-09-20T04:59:43.479Z</updated>
+  <updated>2026-09-20T08:04:30.112Z</updated>
   <id>https://zwei-wings.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客更新日志-16</title>
+    <link href="https://zwei-wings.github.io/2026/09/20/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-20/"/>
+    <id>https://zwei-wings.github.io/2026/09/20/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-09-20/</id>
+    <published>2026-09-20T15:59:00.000Z</published>
+    <updated>2026-09-20T08:04:30.112Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年9月20日"><a href="#博客更新日志-—-2026年9月20日" class="headerlink" title="博客更新日志 — 2026年9月20日"></a>博客更新日志 — 2026年9月20日</h1><p>这两天本小姐做的两件事，看着八竿子打不着，骨子里是同一个毛病：<strong>「看起来能用」和「真的对」，中间隔着一整个太平洋</strong>。</p><p>分栏胶囊折行撑歪了，没人会说它”坏了”；B站视频写错分P也照样播——只不过永远播的是第 1P。这俩都属于”不报错、不崩、但就是不对”的那类问题，最难抓，也最值得抓。</p><hr><h2 id="➡️-分栏胶囊：折行撑框-→-单行横滑"><a href="#➡️-分栏胶囊：折行撑框-→-单行横滑" class="headerlink" title="➡️ 分栏胶囊：折行撑框 → 单行横滑"></a>➡️ 分栏胶囊：折行撑框 → 单行横滑</h2><p><code>&#123;% tabs %&#125;</code> 顶部那排胶囊，<code>flex-wrap: wrap</code> 一直是老规矩。胶囊一多就折行，圆角轨道从”一条横条”被撑成”一个方框”——前阵子做完「胶囊骑卡」之后就留着这条尾巴，今天来收。</p><p>方案分三层：</p><p><strong>第一层，不许折行。</strong> <code>flex-wrap: nowrap</code>，胶囊再多也排成一行。</p><p><strong>第二层，超出就让容器自己滑。</strong> 光 nowrap 还不够——胶囊要么被压扁、要么撑破容器。所以给 <code>.nav-tabs</code> 配 <code>overflow-x: auto</code>，再加一道 <code>max-width: calc(100% - 28px)</code>（左右各留 14px 缩进、对称），宽度一到上限，胶囊就开始在轨道里横滑。滚动条顺手藏掉，三行标准写法各管一家：<code>scrollbar-width: none</code>（Firefox）、<code>-ms-overflow-style: none</code>（旧 Edge）、<code>::-webkit-scrollbar&#123;display:none&#125;</code>（Chrome / Safari）。</p><p><strong>第三层，别让胶囊被挤瘦。</strong> <code>.tab</code> 加 <code>flex-shrink: 0</code>，按钮加 <code>white-space: nowrap</code>。nowrap 的暗坑就在这儿——你不许它换行，浏览器转手就去压宽度，得手动把”可压缩”这个权利收回来。</p><blockquote><p>有个细节本小姐特意没动：<code>.nav-tabs</code> 保持 <code>inline-flex</code>，<strong>没有</strong>改成 <code>flex</code>。因为 flex 会让轨道永远撑满整行，胶囊只有两三个的时候，右边挂一大条空白，很难看。inline-flex 则是”有几颗胶囊就包多宽”——短则紧凑、长则触发滚动，两种形态都对。</p></blockquote><h3 id="最妙的一处：滑动块不用改"><a href="#最妙的一处：滑动块不用改" class="headerlink" title="最妙的一处：滑动块不用改"></a>最妙的一处：滑动块不用改</h3><p>轨道变成滚动容器之后，本小姐第一反应是”滑动块是不是得跟着重算坐标”。想了想发现不用，而且理由挺漂亮：</p><ul><li><code>.tab-slider</code> 是 <code>position: absolute</code>，包含块正好是 <code>.nav-tabs</code>——轨道横滑时，滑动块作为轨道的内容<strong>一起滚</strong>，永远罩在激活胶囊上；</li><li><code>.tab</code> 自身 <code>position: relative</code>，它的 <code>offsetParent</code> 也还是 <code>.nav-tabs</code>。所以 <code>offsetLeft</code> 和容器的 <code>scrollLeft</code> <strong>本来就在同一个坐标系里</strong>，手动把激活胶囊滚进视野时，算出来的位置天然对得上。</li></ul><p>于是定位逻辑一行没改。</p><h3 id="JS-里补的一段"><a href="#JS-里补的一段" class="headerlink" title="JS 里补的一段"></a>JS 里补的一段</h3><p><code>tab-slider.js</code> 的点击回调里，<code>requestAnimationFrame</code> 内先判断 <code>scrollWidth &gt; clientWidth</code>（真的溢出了才滚），把激活胶囊滚进视野、左右各留 10px 边距，再调 <code>position()</code> 定位滑动块。</p><blockquote><p>为什么非走 <code>requestAnimationFrame</code>？因为切 active 是主题 <code>clickFnOfTabs</code> 的活，本文件只负责让滑动块跟上去——得等下一帧 active 换完了再读位置，不然量到的是旧的。</p></blockquote><p>顺手还修了个不对称：<code>max-width</code> 从 <code>calc(100% - 14px)</code> 改成 <code>calc(100% - 28px)</code>。原版左缩进 14px、右边顶死文章右边缘，一条轨道看着就是歪的。</p><hr><h2 id="🎬-B站视频嵌入：一个下标错位，两类”看着正常”"><a href="#🎬-B站视频嵌入：一个下标错位，两类”看着正常”" class="headerlink" title="🎬 B站视频嵌入：一个下标错位，两类”看着正常”"></a>🎬 B站视频嵌入：一个下标错位，两类”看着正常”</h2><p>B站嵌入是个自定义 tag：<code>&#123;% bilibili BV号 [分P] %&#125;</code>。这两天它出了桩怪事——<strong>指定分P有时候灵、有时候不灵，而且不灵的那些显示得完全正常</strong>。</p><h3 id="根因是一行下标"><a href="#根因是一行下标" class="headerlink" title="根因是一行下标"></a>根因是一行下标</h3><p>脚本里原先写的是 <code>mode = args[1]</code>、<code>page = args[2]</code>，可实际用法是 <code>&#123;% bilibili BV号 8 %&#125;</code>——<strong>数字落在 <code>args[1]</code>，<code>args[2]</code> 是空的</strong>。于是 <code>page</code> 永远是 <code>parseInt(&#39;&#39;)</code> → 恒等于 1。</p><p>抓证据倒很干脆：翻构建产物里那 22 个 iframe，**全部 <code>page=1</code>**。全军覆没，只是有的没暴露出来。</p><h3 id="为什么只暴露一半？"><a href="#为什么只暴露一半？" class="headerlink" title="为什么只暴露一半？"></a>为什么只暴露一半？</h3><p>这里本小姐被结结实实上了一课。关键在于——<strong>「分P」和「合集」是两种完全不同的结构</strong>：</p><ul><li><strong>真·分P视频</strong>：一个 BV 号里装着多个 cid，<code>page=N</code> 才跳得动。数字失效就死死停在第 1P → <strong>问题暴露</strong>。</li><li><strong>合集（<code>ugc_season</code>）</strong>：合集里<strong>每一集都是独立稿件</strong>，各自只有 1P。BV 号本身已经把那一集定位好了，后缀的数字只是”这是合集第几集”的标注 → 失效了也照样对，<strong>看起来正常</strong>。</li></ul><p>反向验一下就明白了：4 个合集后面写的数字，<strong>全部等于</strong>该 BV 在合集中的真实序号（4/4 吻合）——那些数字标记的确实是”合集第几集”，只是它压根不该出现在 tag 里。</p><h3 id="修法与清理"><a href="#修法与清理" class="headerlink" title="修法与清理"></a>修法与清理</h3><p><code>scripts/bilibili.js</code> 的解析逻辑改成：<strong>第 2 位是纯数字就直接当分P序号，否则按「模式 [分P]」解析</strong>。这样 <code>BV号 8</code>、<code>BV号 audio 2</code> 两种写法都通。</p><p>然后按结构规矩过文章：</p><ul><li>合集后面那 4 个多余数字全清（OC 专栏-1 两处、专栏-2 两处）——合集只写 BV 号；</li><li>3 处真分P（P11 / P15 / P7）的数字保留，修好后正常生效；</li><li>测试页那行原本拿<strong>合集 BV</strong> 当”指定第 8P”的示例，本身就是错误示范，换成真分P示例，另补一行合集的正确写法。</li></ul><p>验证：真分P 输出 <code>page=11</code> / <code>page=15</code> / <code>page=7</code>，合集 4 处回到 <code>page=1</code>，构建零 error。</p><h3 id="顺手核实了一个参数名"><a href="#顺手核实了一个参数名" class="headerlink" title="顺手核实了一个参数名"></a>顺手核实了一个参数名</h3><p>官方文档（<code>player.bilibili.com</code> 的播放器参数页）只列了 <code>p</code>。但翻播放器页面的内联脚本，实际是 <code>p: SP.p || SP.page</code>——**<code>page</code> 是个有效别名**。所以参数名不用动，只改解析就够了。</p><hr><h2 id="🔍-全量体检：23-个-tag，逐个调-API"><a href="#🔍-全量体检：23-个-tag，逐个调-API" class="headerlink" title="🔍 全量体检：23 个 tag，逐个调 API"></a>🔍 全量体检：23 个 tag，逐个调 API</h2><p>修完心里没底：还有没有别的藏着的？干脆把 <code>source/**/*.md</code> 全量扫一遍，共 <strong>23 个 tag / 20 个唯一视频</strong>，逐个调 <code>view?bvid=</code> 接口核对「真实结构 vs 文章写法」。</p><p>判定规则三条：单P 或合集却写了数字 → 错；数字超出 <code>videos</code> 分P数 → 越界；<code>videos &gt; 1</code> 却没写数字 → 拎出来人工确认。</p><p>结果：<strong>全部通过</strong>，无越界、无”合集误写数字”。只剩 2 处”真分P 但没写数字”要人看一眼，核实下来都正确，而且<strong>是故意不写的</strong>：</p><ul><li>一处 2P 视频（P1 正片 / P2 Cover），上下文指的就是正片本身，<code>page=1</code> 正是目标；</li><li>一处 2P 视频（P1 OP / P2 ED），挂在 OP 曲的标签页下，<code>page=1</code> 也正是目标。</li></ul><blockquote><p>为什么不干脆把 <code>1</code> 补上去？两个理由：一是<strong>多写那一个数字，将来 UP 主调整分P顺序时反而更容易把人带沟里</strong>；二是现状本就正确，没坏别修。</p></blockquote><p>顺带沉淀一条最快判别法：<strong>在 B站点开同一稿件的另一集，看地址栏</strong>——只有 <code>?p=</code> 在变、BV 号不变 = 真分P（tag 里要写数字）；整个 BV 号都换了 = 合集（只写 BV，别写数字）。</p><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> 分栏胶囊单行横滑，滚动条三标准藏干净，滑动块随内容滚动仍精准罩住激活胶囊</li><li><input checked disabled type="checkbox"> 点击时激活胶囊自动滚进视野（左右各留 10px）</li><li><input checked disabled type="checkbox"> <code>bilibili.js</code> 下标错位修复，纯数字 / 模式+数字两种写法都通</li><li><input checked disabled type="checkbox"> 4 处合集多余数字清除，3 处真分P 生效</li><li><input checked disabled type="checkbox"> 全站 23 tag / 20 视频逐个体检通过，零越界、零误写</li></ul><hr><p><em>——终于弄明白”分P”和”合集”压根不是同一件事的露西亚 001 号，于”看着正常”最不可信的一天</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年9月20日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年9月20日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年9月20日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年9月20日&lt;/h1&gt;&lt;p&gt;这两</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>第 112 章 鹬蚌相争（下）</title>
@@ -373,31 +399,6 @@
   </entry>
   
   <entry>
-    <title>南院OC专栏-0</title>
-    <link href="https://zwei-wings.github.io/2026/09/11/%E5%8D%97%E9%99%A2/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-0/"/>
-    <id>https://zwei-wings.github.io/2026/09/11/%E5%8D%97%E9%99%A2/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-0/</id>
-    <published>2026-09-11T00:00:00.000Z</published>
-    <updated>2026-09-14T17:11:49.908Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>近期因为收到一些关于 OC 人设提供与沟通的反馈事项：</p><ul><li>填表过程、类项不统一导致细节人设缺失</li><li>部分人不习惯群聊讨论氛围，需要私聊处理问题</li><li>新人的 OC 设单薄，缺少重要信息</li><li>还有其他一些关于设子的问题（这里不一一举例了）</li></ul><p>所以经过讨论，我们将在这里公开更新<strong>世界观</strong>、<strong>角色设定卡</strong>等模版（代码块右上角可以快速复制）。</p><div class="note Kanade flat"><p>Kanade：<br>我的 QQ 和邮箱你们应该都清楚，其他还有什么问题随时反馈，看到就会回。<br>如果有不清楚联系方式的麻烦留言，不要等回头问到你又说你联系不上我。<br>搞 OC 又不是工作指标，如果创作群这边多次反馈某些人想让自家孩子当主角，又不积极主动沟通，我们会对该角色进行投票表决，讨论是否降级。</p></div><hr><h1 id="角色卡模版"><a href="#角色卡模版" class="headerlink" title="角色卡模版"></a>角色卡模版</h1><h2 id="带说明版"><a href="#带说明版" class="headerlink" title="带说明版"></a>带说明版</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">——基本信息——</span><br><span class="line">姓名：（该角色的全名，20 字以内）</span><br><span class="line">别名&#x2F;称号：（其他角色对该角色的称呼，或该角色持有的称号）</span><br><span class="line">种族：（已存在的种族将按文中已有设定安排，未存在的种族需详细说明种族设定，非特殊种族则填人族）</span><br><span class="line">年龄：（以主角封艾羽 16 岁为参照）</span><br><span class="line">血型：（该角色的血型，允许设定稀有血型）</span><br><span class="line">身高：（萝莉体型 150 cm 以下，正太体型 155 cm 以下）</span><br><span class="line">体型：（详细体型说明，若角色持有多形态，可注明角色形态的尺寸，如设定角色的本体形态为身高 3 米的奇美拉等）</span><br><span class="line">——特征信息——</span><br><span class="line">命格：（该角色的命格，未商议者从圣杯、宝剑、星币、权杖中选取，也可不设定）</span><br><span class="line">特长&#x2F;兴趣：（该角色持有的非战斗&#x2F;魔法技能，亦或是感兴趣的事）</span><br><span class="line">喜恶&#x2F;弱点：（该角色喜好&#x2F;讨厌的颜色&#x2F;物品等，或是造成该角色弱化的原因）</span><br><span class="line">外貌特征：（需要说明发色与眸色，常服或与校服同时穿着的特征服饰等也在这里说明，靠文字讲不清楚的务必准备好参考图）</span><br><span class="line">行为特征：（需要说明该角色的特征动作与可能触发这个动作的场景，例如 xxx 跟别人打招呼时总是会风骚的撩头发等）</span><br><span class="line">声音特征&#x2F;语癖：（需要说明该角色的声线是什么样的，与外貌是否相符，可具体写某个动漫的某个角色作为参照，有句末语癖或口头禅的也需要说明，例如每句话的句末一定会加上“喵”等）</span><br><span class="line">性格特征：（需要描述该角色的性格特征，可用简短的描述加具体场景的说明，例如 xxx 是个兄控病娇，如果有人擅自接近她的哥哥，她就会“满怀笑意”的作出威胁等）</span><br><span class="line">——战斗信息——</span><br><span class="line">初出场魔力等级：（可用等阶为堇色五等到赤金十二等之间，记不清具体颜色可只填写数字）</span><br><span class="line">持有魔武：（魔武名格式为「xx·yyyy」，xx 为前缀&#x2F;称号，yyyy为魔武的本名，一般前缀为 2 个字，本名不限，但要求前缀需要短于本名）</span><br><span class="line">魔武出处：（需要说明魔武出自 xx 神话或是在 xx 动漫里见过等，若无出处则注明“原创”）</span><br><span class="line">魔武特质：（魔武附带的特殊能力，在角色无法召唤魔武时，该能力将失效）</span><br><span class="line">魔法属性：（想玩体术的请不要再跟我自称“没有魔法”了，一律写“物理”）</span><br><span class="line">第一适性——</span><br><span class="line">第二适性——</span><br><span class="line">（第一适性至少填写一个属性，且第一适性与第二适性不可为同一个属性，可填写的属性：物理、精神、生命、诅咒、召唤、神秘、空间、时间、元素【包括金&#x2F;光、木&#x2F;风、水&#x2F;冰、火&#x2F;雷、土&#x2F;暗】，既可填写“元素”，表示所有元素类的魔法，或填写具体的元素名称，表示特定元素的魔法）</span><br><span class="line">——人物经历——</span><br><span class="line">CP 关系：（角色是否拥有 cp，若原创 cp 需要提交第二份人设，或者提前和 cp 的设主沟通好）</span><br><span class="line">亲友关系：（角色与其他角色的关系，可设定为亲人，朋友等，若不符合剧情，此处可能被酌情删减）</span><br><span class="line">所属位面：（角色来自什么样的下级位面，若角色在南院位面出生则填南院即可）</span><br><span class="line">所属部门：（角色在第二区的哪个部门下工作&#x2F;直接隶属于结社的哪个角色手下，若不进入第二区则填“暂无”）</span><br><span class="line">过往经历：（角色在剧情中正式出场前的经历）</span><br><span class="line">剧情经历：（角色在剧情中的经历，可只写某些片段，但不能为空）</span><br><span class="line">——其他补充——</span><br><span class="line">（这里你可以写所有你想补充的事情，或者也可以直接联系创作群的成员进行讨论）</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="空白模版"><a href="#空白模版" class="headerlink" title="空白模版"></a>空白模版</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">——基本信息——</span><br><span class="line">姓名：</span><br><span class="line">别名&#x2F;称号：</span><br><span class="line">种族：</span><br><span class="line">年龄：</span><br><span class="line">血型：</span><br><span class="line">身高：</span><br><span class="line">体型：</span><br><span class="line">——特征信息——</span><br><span class="line">命格：</span><br><span class="line">特长&#x2F;兴趣：</span><br><span class="line">喜恶&#x2F;弱点：</span><br><span class="line">外貌特征：</span><br><span class="line">行为特征：</span><br><span class="line">声音特征&#x2F;语癖：</span><br><span class="line">性格特征：</span><br><span class="line">——战斗信息——</span><br><span class="line">初出场魔力等级：</span><br><span class="line">持有魔武：</span><br><span class="line">魔武出处：</span><br><span class="line">魔武特质：</span><br><span class="line">魔法属性：</span><br><span class="line">第一适性——</span><br><span class="line">第二适性——</span><br><span class="line">——人物经历——</span><br><span class="line">CP 关系：</span><br><span class="line">亲友关系：</span><br><span class="line">所属位面：</span><br><span class="line">所属部门：</span><br><span class="line">过往经历：</span><br><span class="line">剧情经历：</span><br><span class="line">——其他补充——</span><br></pre></td></tr></table></figure><hr><h1 id="世界观模版"><a href="#世界观模版" class="headerlink" title="世界观模版"></a>世界观模版</h1><p>为了方便沟通，我们经过讨论将世界观分为两类：</p><ul><li>A：对自家 OC 出身的位面进行设定，和南院位面无关。<em>（我们会提供模版，确保内部逻辑融洽即可）</em></li><li>B：宏观的世界观设计，比如世界树、空间规则等。<em>（我们不提供模版，请直接向创作群成员提议。）</em></li></ul><p><em>PS：为了避免世界观冲突或产生漏洞，B类的审核会非常严格，最麻烦的情况下可能需要统一找时间和相关 OC 主逐个对线，请提前做好心理准备。</em></p><h2 id="A-类（带说明版）"><a href="#A-类（带说明版）" class="headerlink" title="A 类（带说明版）"></a>A 类（带说明版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：（例如 Y-1111，指 Y 为末世世界，1111 为编号。现有末世 Y、类中世纪 T、乌托邦 M、东方玄幻&#x2F;武侠 C，如果不在这个范围请向创作群成员进行反馈）</span><br><span class="line">大致概述：（简要概括一下这个世界观最有特色的部分&#x2F;你最看重的部分）</span><br><span class="line">重要产物：（选填，简要说明这个世界观下最核心的机械&#x2F;魔法造物、资源等等都行）</span><br><span class="line">世界观主题：（比如这个世界观的核心背景是“人类和 AI 的智械危机”还是“社会 xx 阶级和 xx 阶级的斗争”之类的）</span><br></pre></td></tr></table></figure><h2 id="A-类（空白版）"><a href="#A-类（空白版）" class="headerlink" title="A 类（空白版）"></a>A 类（空白版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：</span><br><span class="line">大致概述：</span><br><span class="line">重要产物：</span><br><span class="line">世界观主题：</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">说明与模板</summary>
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="南城院校风纪委员部" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E5%8D%97%E5%9F%8E%E9%99%A2%E6%A0%A1%E9%A3%8E%E7%BA%AA%E5%A7%94%E5%91%98%E9%83%A8/"/>
-    
-    
-    <category term="原创" scheme="https://zwei-wings.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-    <category term="OC专栏" scheme="https://zwei-wings.github.io/tags/OC%E4%B8%93%E6%A0%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>第 103 章 缺角的骑士（四）</title>
     <link href="https://zwei-wings.github.io/2026/09/11/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%20103%20%E7%AB%A0%20%E7%BC%BA%E8%A7%92%E7%9A%84%E9%AA%91%E5%A3%AB%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
     <id>https://zwei-wings.github.io/2026/09/11/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%20103%20%E7%AB%A0%20%E7%BC%BA%E8%A7%92%E7%9A%84%E9%AA%91%E5%A3%AB%EF%BC%88%E5%9B%9B%EF%BC%89/</id>
@@ -422,6 +423,31 @@
     <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
     
     <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>南院OC专栏-0</title>
+    <link href="https://zwei-wings.github.io/2026/09/11/%E5%8D%97%E9%99%A2/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-0/"/>
+    <id>https://zwei-wings.github.io/2026/09/11/%E5%8D%97%E9%99%A2/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-0/</id>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-14T17:11:49.908Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>近期因为收到一些关于 OC 人设提供与沟通的反馈事项：</p><ul><li>填表过程、类项不统一导致细节人设缺失</li><li>部分人不习惯群聊讨论氛围，需要私聊处理问题</li><li>新人的 OC 设单薄，缺少重要信息</li><li>还有其他一些关于设子的问题（这里不一一举例了）</li></ul><p>所以经过讨论，我们将在这里公开更新<strong>世界观</strong>、<strong>角色设定卡</strong>等模版（代码块右上角可以快速复制）。</p><div class="note Kanade flat"><p>Kanade：<br>我的 QQ 和邮箱你们应该都清楚，其他还有什么问题随时反馈，看到就会回。<br>如果有不清楚联系方式的麻烦留言，不要等回头问到你又说你联系不上我。<br>搞 OC 又不是工作指标，如果创作群这边多次反馈某些人想让自家孩子当主角，又不积极主动沟通，我们会对该角色进行投票表决，讨论是否降级。</p></div><hr><h1 id="角色卡模版"><a href="#角色卡模版" class="headerlink" title="角色卡模版"></a>角色卡模版</h1><h2 id="带说明版"><a href="#带说明版" class="headerlink" title="带说明版"></a>带说明版</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">——基本信息——</span><br><span class="line">姓名：（该角色的全名，20 字以内）</span><br><span class="line">别名&#x2F;称号：（其他角色对该角色的称呼，或该角色持有的称号）</span><br><span class="line">种族：（已存在的种族将按文中已有设定安排，未存在的种族需详细说明种族设定，非特殊种族则填人族）</span><br><span class="line">年龄：（以主角封艾羽 16 岁为参照）</span><br><span class="line">血型：（该角色的血型，允许设定稀有血型）</span><br><span class="line">身高：（萝莉体型 150 cm 以下，正太体型 155 cm 以下）</span><br><span class="line">体型：（详细体型说明，若角色持有多形态，可注明角色形态的尺寸，如设定角色的本体形态为身高 3 米的奇美拉等）</span><br><span class="line">——特征信息——</span><br><span class="line">命格：（该角色的命格，未商议者从圣杯、宝剑、星币、权杖中选取，也可不设定）</span><br><span class="line">特长&#x2F;兴趣：（该角色持有的非战斗&#x2F;魔法技能，亦或是感兴趣的事）</span><br><span class="line">喜恶&#x2F;弱点：（该角色喜好&#x2F;讨厌的颜色&#x2F;物品等，或是造成该角色弱化的原因）</span><br><span class="line">外貌特征：（需要说明发色与眸色，常服或与校服同时穿着的特征服饰等也在这里说明，靠文字讲不清楚的务必准备好参考图）</span><br><span class="line">行为特征：（需要说明该角色的特征动作与可能触发这个动作的场景，例如 xxx 跟别人打招呼时总是会风骚的撩头发等）</span><br><span class="line">声音特征&#x2F;语癖：（需要说明该角色的声线是什么样的，与外貌是否相符，可具体写某个动漫的某个角色作为参照，有句末语癖或口头禅的也需要说明，例如每句话的句末一定会加上“喵”等）</span><br><span class="line">性格特征：（需要描述该角色的性格特征，可用简短的描述加具体场景的说明，例如 xxx 是个兄控病娇，如果有人擅自接近她的哥哥，她就会“满怀笑意”的作出威胁等）</span><br><span class="line">——战斗信息——</span><br><span class="line">初出场魔力等级：（可用等阶为堇色五等到赤金十二等之间，记不清具体颜色可只填写数字）</span><br><span class="line">持有魔武：（魔武名格式为「xx·yyyy」，xx 为前缀&#x2F;称号，yyyy为魔武的本名，一般前缀为 2 个字，本名不限，但要求前缀需要短于本名）</span><br><span class="line">魔武出处：（需要说明魔武出自 xx 神话或是在 xx 动漫里见过等，若无出处则注明“原创”）</span><br><span class="line">魔武特质：（魔武附带的特殊能力，在角色无法召唤魔武时，该能力将失效）</span><br><span class="line">魔法属性：（想玩体术的请不要再跟我自称“没有魔法”了，一律写“物理”）</span><br><span class="line">第一适性——</span><br><span class="line">第二适性——</span><br><span class="line">（第一适性至少填写一个属性，且第一适性与第二适性不可为同一个属性，可填写的属性：物理、精神、生命、诅咒、召唤、神秘、空间、时间、元素【包括金&#x2F;光、木&#x2F;风、水&#x2F;冰、火&#x2F;雷、土&#x2F;暗】，既可填写“元素”，表示所有元素类的魔法，或填写具体的元素名称，表示特定元素的魔法）</span><br><span class="line">——人物经历——</span><br><span class="line">CP 关系：（角色是否拥有 cp，若原创 cp 需要提交第二份人设，或者提前和 cp 的设主沟通好）</span><br><span class="line">亲友关系：（角色与其他角色的关系，可设定为亲人，朋友等，若不符合剧情，此处可能被酌情删减）</span><br><span class="line">所属位面：（角色来自什么样的下级位面，若角色在南院位面出生则填南院即可）</span><br><span class="line">所属部门：（角色在第二区的哪个部门下工作&#x2F;直接隶属于结社的哪个角色手下，若不进入第二区则填“暂无”）</span><br><span class="line">过往经历：（角色在剧情中正式出场前的经历）</span><br><span class="line">剧情经历：（角色在剧情中的经历，可只写某些片段，但不能为空）</span><br><span class="line">——其他补充——</span><br><span class="line">（这里你可以写所有你想补充的事情，或者也可以直接联系创作群的成员进行讨论）</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="空白模版"><a href="#空白模版" class="headerlink" title="空白模版"></a>空白模版</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">——基本信息——</span><br><span class="line">姓名：</span><br><span class="line">别名&#x2F;称号：</span><br><span class="line">种族：</span><br><span class="line">年龄：</span><br><span class="line">血型：</span><br><span class="line">身高：</span><br><span class="line">体型：</span><br><span class="line">——特征信息——</span><br><span class="line">命格：</span><br><span class="line">特长&#x2F;兴趣：</span><br><span class="line">喜恶&#x2F;弱点：</span><br><span class="line">外貌特征：</span><br><span class="line">行为特征：</span><br><span class="line">声音特征&#x2F;语癖：</span><br><span class="line">性格特征：</span><br><span class="line">——战斗信息——</span><br><span class="line">初出场魔力等级：</span><br><span class="line">持有魔武：</span><br><span class="line">魔武出处：</span><br><span class="line">魔武特质：</span><br><span class="line">魔法属性：</span><br><span class="line">第一适性——</span><br><span class="line">第二适性——</span><br><span class="line">——人物经历——</span><br><span class="line">CP 关系：</span><br><span class="line">亲友关系：</span><br><span class="line">所属位面：</span><br><span class="line">所属部门：</span><br><span class="line">过往经历：</span><br><span class="line">剧情经历：</span><br><span class="line">——其他补充——</span><br></pre></td></tr></table></figure><hr><h1 id="世界观模版"><a href="#世界观模版" class="headerlink" title="世界观模版"></a>世界观模版</h1><p>为了方便沟通，我们经过讨论将世界观分为两类：</p><ul><li>A：对自家 OC 出身的位面进行设定，和南院位面无关。<em>（我们会提供模版，确保内部逻辑融洽即可）</em></li><li>B：宏观的世界观设计，比如世界树、空间规则等。<em>（我们不提供模版，请直接向创作群成员提议。）</em></li></ul><p><em>PS：为了避免世界观冲突或产生漏洞，B类的审核会非常严格，最麻烦的情况下可能需要统一找时间和相关 OC 主逐个对线，请提前做好心理准备。</em></p><h2 id="A-类（带说明版）"><a href="#A-类（带说明版）" class="headerlink" title="A 类（带说明版）"></a>A 类（带说明版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：（例如 Y-1111，指 Y 为末世世界，1111 为编号。现有末世 Y、类中世纪 T、乌托邦 M、东方玄幻&#x2F;武侠 C，如果不在这个范围请向创作群成员进行反馈）</span><br><span class="line">大致概述：（简要概括一下这个世界观最有特色的部分&#x2F;你最看重的部分）</span><br><span class="line">重要产物：（选填，简要说明这个世界观下最核心的机械&#x2F;魔法造物、资源等等都行）</span><br><span class="line">世界观主题：（比如这个世界观的核心背景是“人类和 AI 的智械危机”还是“社会 xx 阶级和 xx 阶级的斗争”之类的）</span><br></pre></td></tr></table></figure><h2 id="A-类（空白版）"><a href="#A-类（空白版）" class="headerlink" title="A 类（空白版）"></a>A 类（空白版）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">位面编号：</span><br><span class="line">大致概述：</span><br><span class="line">重要产物：</span><br><span class="line">世界观主题：</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">说明与模板</summary>
+    
+    
+    
+    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="南城院校风纪委员部" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E5%8D%97%E5%9F%8E%E9%99%A2%E6%A0%A1%E9%A3%8E%E7%BA%AA%E5%A7%94%E5%91%98%E9%83%A8/"/>
+    
+    
+    <category term="原创" scheme="https://zwei-wings.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+    <category term="OC专栏" scheme="https://zwei-wings.github.io/tags/OC%E4%B8%93%E6%A0%8F/"/>
     
   </entry>
   
@@ -522,34 +548,6 @@
       
       
     <summary type="html">&lt;h1 id=&quot;第-99-章-海神号（下）&quot;&gt;&lt;a href=&quot;#第-99-章-海神号（下）&quot; class=&quot;headerlink&quot; title=&quot;第 99 章 海神号（下）&quot;&gt;&lt;/a&gt;第 99 章 海神号（下）&lt;/h1&gt;&lt;p&gt;宴会的另一边，对此尚未察觉的萩原研二正心满意足地夹起</summary>
-      
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="触手君与柑橘酱" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/"/>
-    
-    
-    <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
-    
-    <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第 98 章 海神号（中）</title>
-    <link href="https://zwei-wings.github.io/2026/09/06/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%2098%20%E7%AB%A0%20%E6%B5%B7%E7%A5%9E%E5%8F%B7%EF%BC%88%E4%B8%AD%EF%BC%89/"/>
-    <id>https://zwei-wings.github.io/2026/09/06/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%2098%20%E7%AB%A0%20%E6%B5%B7%E7%A5%9E%E5%8F%B7%EF%BC%88%E4%B8%AD%EF%BC%89/</id>
-    <published>2026-09-06T00:00:00.000Z</published>
-    <updated>2026-09-14T17:11:54.851Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第-98-章-海神号（中）"><a href="#第-98-章-海神号（中）" class="headerlink" title="第 98 章 海神号（中）"></a>第 98 章 海神号（中）</h1><p>次日，傍晚六点。<br>目标所在的“海神号”如同一座移动的白色宫殿，停泊在暮色渐浓的码头上。灯光从无数舷窗中透出，在深蓝的海面上投下细碎摇晃的金色倒影。<br>登船口处，衣着光鲜的宾客正陆续通过安检，侍者彬彬有礼地接过邀请函，空气中弥漫着香水、海风与隐约的香槟气味。<br>为了安全起见，参加任务的几人并没有同行，而是在交代了行动计划后便各自分散开来，诸伏景光扮作了报社的记者，而赤井秀一则是以自由摄影师的身份行动。<br>至于安室透， 他此刻正向侍者递上烫金的请柬，一身剪裁得体的深灰色西装衬得他肤色愈发明晰，金发在码头灯光下泛着柔和光泽。<br>而值得一提的是，他身侧还挽着一位慵懒而疏离的“女伴”。<br>“清水晴彦先生，远野梦子小姐，欢迎登船。”侍者礼貌的核验了上面的名字，便朝两人微微躬身行礼，“晚宴将在主宴会厅于七点半正式开始，在此之前，您可以随意游览。您的套房在 B 层，房卡已备好。”<br>于是那位身着酒红色长裙的女性便笑吟吟的道谢，微卷的栗色长发披散在肩头，几缕发丝恰到好处地修饰着脸颊线条，海蓝色的眼瞳在码头灯光下越发温顺。<br>她放松地搭在安室透的臂弯里，身体重心也微微靠向他，似乎一副毫无戒备的依赖姿态。两人挽着手臂走上甲板，姿态自然得像任何一对前来享受夜晚的年轻情侣。<br>直到并肩走出一段距离，柔和的女声才刻意压低了声量，如同情人耳语般响起。<br>“紧张吗，透酱？”她的语气似是带着几分调侃。<br>“比起这个，”安室透同样低声回应，目光扫过前方华丽的船舱入口，“我更担心你那双高跟鞋。七厘米，你真的能走稳？”<br>“小看我？”她轻笑了声，脚步却丝毫未乱，“别忘了，芬酱的平衡技巧可是我教的。”<br>这位“女伴”自然就是薄羽凉。<br>由于任务的风险较大，为了保险起见，如何在接头时避免向可能存在的 FBI 眼线暴露自己的真容显然是一个重要的问题。<br>而这便是薄羽凉给出的作答——<br>由他来负责这次任务中最危险的部分。<br><mark>用他的说法就是，即便中途出了什么意外，他也有绝对可以从中脱身的实力，不必暴露其他人的行踪，顺便也可以借此机会检验一下安室透的易容术如今学得怎么样了，可谓是一举多得。<br>顺带一提，那本就是两人在前往盗取潘多拉宝石之前作下的约定，而薄羽凉向来不会违背承诺。<br>因此从波士顿回来后的这两三个月，他自然是一点没藏私，再加上安室透本就擅长观察和模仿，虽然时间不长，但早已掌握了大半。<br>所以如今这张属于“远野梦子”的妆面，便有九成都是安室透亲手完成的，剩下一成的细节则由薄羽凉进行完善与补足。</mark><br>迎面吹来的海风带着咸湿的气息，也浸着一种初春的寒意。<br>两人按照预定路线穿过人群，视线则不着痕迹地扫过倚在船舷处，似乎摆弄着相机的赤井秀一，又与混进人群的诸伏景光擦肩而过。<br>四人没有明显的眼神交流，却默契地保持了微妙的距离和角度，以确保彼此都在视线余光范围内。<br>直至确认登船过程顺利，他们才继续按照预定方案，先各自前往分配的套房安置。<br>安室透和薄羽凉的套房位于 B 层走廊中段，有一个小小的观景阳台。房间还算宽敞，装饰以海洋蓝和象牙白为主，大床上铺着丝质床罩，茶几上摆放着欢迎水果和纸巾。<br>套房的门一关上，安室透便轻轻抽回了手。<br>他松开领带，走到窗边，掀开窗帘一角向外观察，从这里能望见码头的灯光渐远，看来游轮已经缓缓离港，沿既定航线驶向夜幕下的东京湾。<br>“他们应该也到了。”说着，安室透将脱下的西装外套搭在了椅背上，“景光的房间在我们斜对面，赤井在上一层，视角可以覆盖顶层观景酒吧的入口。”<br>“嗯哼，”薄羽凉不置可否的应了一声，又转而看了眼现在的时间，“距离九点还有两个多小时。”<br>“怎么说？”他缓步走向桌边，拿起了未开封的瓶装水，那副优雅的女性姿态自然得不像是演出来的，“先休息，还是再去熟悉一下路线？”<br>“路线我和莱伊已经反复核对过三次。”安室透转过身，目光落在了薄羽凉的脸上，“你需要卸掉一部分妆吗？一直带着全妆到九点可能会影响状态。”<br>“不用，”薄羽凉拧开水瓶喝了一口，“在无法预料接下来可能发生什么的情况下，还是谨慎点为好。”<br>这是事实。<br>因此安室透没有再说什么，只是视线随着少年的动作下滑了些许，落在了他纤细的颈间——出于伪装的需要，那里现在并没有戴着黑色的项圈，而是换成了一条精致的细丝巾，将后颈处的月牙形疤痕完全遮盖。<br><mark>说实话，薄羽凉的喉结并不明显，仅有在吞咽时才能看见微微滚动的痕迹。这一点，安室透在进行易容的时候就已经注意到了。<br>所以从某种意义上而言，薄羽凉的女装不仅是动作与伪音都同样完美，也显然有着比芬恩要更不容易被识破的生理特征。以至于几小时前，安室透第一次看见对方这副打扮时，差点以为他本来就是女性。</mark><br>屋内一时陷入了寂静，只剩下薄羽凉拆开糖纸的细响，或是安室透划动平板时发出的细微声音。<br>调出游轮的内部结构图，安室透的指尖在屏幕上划动，几条备用路线和紧急撤离点再次标注清晰，也将任务前的最后准备工作梳理得有条不紊。<br>直至晚上七点左右，估算着晚宴即将开始，安室透才终于关闭了手里的设备。<br>“差不多了。”他抬起头，看向薄羽凉，“游轮晚宴从七点半开始，一小时后离席，时间恰好足够。”<br>“好哦～”薄羽凉重新站起身，走到全身镜前，最后检查了一遍自己的妆容和衣着，指尖拂过颈间的丝巾，确认其牢固。脸上微微调整过幅度的笑容则又回到了属于“远野梦子”的、带着点慵懒的优雅之中。<br>安室透也重新穿好西装外套，整理了一下领带。两人再次对视一眼，无需多言，便一前一后走出了套房。<br>主宴会厅位于游轮的上层甲板，挑高的穹顶悬挂着璀璨的水晶吊灯，将整个空间映照得如同白昼。<br>穿着华服的宾客们三三两两地聚在一起，衣香鬓影，觥筹交错。空气里混合着高级香水、食物香气与淡淡的酒味，背景则是乐队现场演奏的舒缓爵士乐。<br>安室透从侍者托盘中取了两杯香槟，将其中一杯递给身侧的女伴，两人默契地碰杯，姿态自然地融入人群，目光却已不着痕迹地扫视全场。<br>他们虽然需要确认环境，留意可能的监视者，但同时也要确保自己看起来就像是普通宾客。<br>而薄羽凉则微微靠着安室透，扮演着一个有些慵懒、依赖男伴的女性角色，海蓝色的眼眸半眯着，似乎对周围的一切只是漫不经心地观察，但谁也不知道这位小鸟依人的“女伴”其实将宴会厅每个角落的声音都尽收耳中。<br>直到一个过于响亮、带着点惊喜和随性的声音穿透了不算嘈杂的背景乐，径直闯入两人的听觉范围——<br>“哇哦！这可真是……豪华啊！你说对吧，小阵平？”<br>这个声音……<br>安室透的身体几不可察地僵了一瞬，握着香槟杯的手指也微微收紧，就连冰凉的杯壁传递来的那股寒意，似乎也要沿着脊椎窜了上去。<br>他几乎要控制不住转头去看的冲动，但卧底的本能死死压住了这个动作，只是维持着侧头倾听薄羽凉说话的姿态，而眼角的余光已经如雷达般锁定了声音来源的方向。<br>薄羽凉显然也听到了。<br>只是他本就没有安室透那么多的顾忌，所以那双海蓝色的眼眸也索性顺势朝那边瞥去——<br>就见不远处，靠近餐台的位置，站着两个与周围衣冠楚楚的宾客画风略有不同的青年。<br>其中一个穿着休闲西装却没打领带，衬衫领口随意敞着，半长的黑发在脑后扎了个小揪，紫罗兰色的眼睛正兴致勃勃地四处张望，手里还端着一大盘堆得高高的甜点，赫然是萩原研二。<br>而他旁边那位，则是顶着一头标志性的天然卷，戴着墨镜，身穿黑色西装，浑身散发着“别来烦我”气场的松田阵平，此刻正一脸嫌弃地看着萩原盘子里的食物小山。<br>“喂喂……你是饿死鬼投胎吗，hagi？”<br>“有什么关系嘛，反正也是休假。”萩原研二笑嘻嘻地叉起一块蛋糕送进嘴里，含糊不清地说，“而且主办方邀请函上写了‘携伴参加’，小阵平你不也来了嘛……啊！那边有奶酪塔！”<br>“人多眼杂，你这家伙也稍微注意点形象啊……”旁边的松田阵平啧了一声，但最后还是跟了上去。<br>见此，薄羽凉的视线在两人的背影上似乎多停留了一秒，才终于慢悠悠地转回来。<br>“真巧，是上次那位两位爆处班的警官呢。”薄羽凉用只有安室透能听到的气音，带着点玩味地评价，“看来今晚的‘惊喜’不止一个。”<br>而安室透的大脑已经飞速运转了起来。<br>他们怎么会在这里？！<br>警视厅爆炸物处理班的两个王牌，出现在这种商业巨贾和名流云集的慈善晚宴上……是巧合？还是……不，看他们的衣着和状态，比起工作，更像是被邀请来休假的。<br>萩原研二本就擅长这种社交场合，交际圈也广泛得夸张，偶尔会收到这种请柬倒也不奇怪。至于松田阵平……八成是被萩原硬拉来的。<br>理智告诉安室透，这不过是一场纯粹的偶遇，但情感和潜伏者的警惕性却在尖叫——如今任何计划外的变数都可能是危险的导火索，尤其当变数是两个观察力敏锐的同期时。<br>若是这里只有安室透也就罢了，毕竟他与薄羽凉在上次的炸弹案里已经跟这两人打过照面，几乎等同于过了明路，只是碰个面还不至于遭到怀疑。<br>但偏偏，此刻这艘船上还有 Hiro 也在！<br>万一萩松两人不小心当着诸星或者薄羽凉的面叫破了 Hiro 的身份的话……后果简直不堪设想。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;第-98-章-海神号（中）&quot;&gt;&lt;a href=&quot;#第-98-章-海神号（中）&quot; class=&quot;headerlink&quot; title=&quot;第 98 章 海神号（中）&quot;&gt;&lt;/a&gt;第 98 章 海神号（中）&lt;/h1&gt;&lt;p&gt;次日，傍晚六点。&lt;br&gt;目标所在的“海神号”如同一座</summary>
       
     
     
