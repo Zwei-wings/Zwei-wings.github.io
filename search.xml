@@ -1,6 +1,403 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>测试</title>
+    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="音频测试"><a href="#音频测试" class="headerlink" title="音频测试"></a>音频测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
+
+
+<h1 id="留言测试"><a href="#留言测试" class="headerlink" title="留言测试"></a>留言测试</h1><h2 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h2><div class="note Kanade flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h2><div class="note Tsubasa flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="艾格·拉缇斯"><a href="#艾格·拉缇斯" class="headerlink" title="艾格·拉缇斯"></a>艾格·拉缇斯</h2><div class="note Ego flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+<h2 id="安莲娜·克莉丝"><a href="#安莲娜·克莉丝" class="headerlink" title="安莲娜·克莉丝"></a>安莲娜·克莉丝</h2><div class="note Aliena flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+</div>
+
+
+<h1 id="视频测试"><a href="#视频测试" class="headerlink" title="视频测试"></a>视频测试</h1><h2 id="正常视频"><a href="#正常视频" class="headerlink" title="正常视频"></a>正常视频</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1F7411v7Dt&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div>         → 正常视频
+
+<h2 id="指定某-P（仅「真·分P视频」有效）"><a href="#指定某-P（仅「真·分P视频」有效）" class="headerlink" title="指定某 P（仅「真·分P视频」有效）"></a>指定某 P（仅「真·分P视频」有效）</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=11&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 指定第 11 P（不写数字则默认第 1 P）
+
+<h2 id="合集视频（每集是独立-BV-号，不需要也不该写数字）"><a href="#合集视频（每集是独立-BV-号，不需要也不该写数字）" class="headerlink" title="合集视频（每集是独立 BV 号，不需要也不该写数字）"></a>合集视频（每集是独立 BV 号，不需要也不该写数字）</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1wdEg6nErs&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 该 BV 号本身就是合集第 8 集，已自定位]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>南院OC专栏-2</title>
+    <url>/2026/08/21/%E5%8D%97%E9%99%A2/OC%E4%B8%93%E6%A0%8F/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-2/</url>
+    <content><![CDATA[<h1 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h1><blockquote>
+<p>愿你守护的世界，不再禁锢你铿锵的声嗓。</p>
+</blockquote>
+<h2 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h2><table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>姓名</td>
+<td>君初晓，字子命</td>
+</tr>
+<tr>
+<td>别名</td>
+<td>夜刀神翼（やどがみ つばさ）</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>女</td>
+</tr>
+<tr>
+<td>身高</td>
+<td>182 cm</td>
+</tr>
+<tr>
+<td>种族</td>
+<td>人类种</td>
+</tr>
+<tr>
+<td>魔武</td>
+<td>「绝刃·天羽羽斩」</td>
+</tr>
+<tr>
+<td>第一适性<br></td>
+<td>空间系</td>
+</tr>
+<tr>
+<td>第二适性</td>
+<td>元素系-火/雷</td>
+</tr>
+<tr>
+<td>所属</td>
+<td>风纪委员部-部长</td>
+</tr>
+<tr>
+<td>CP</td>
+<td><del>莫笙箫（君臣组）</del></td>
+</tr>
+<tr>
+<td>命格</td>
+<td><del>「世界」</del></td>
+</tr>
+</tbody></table>
+<h2 id="人设图"><a href="#人设图" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%90%9B%E5%88%9D%E6%99%93%E4%B8%89%E8%A7%86%E5%9B%BE.webp"></p>
+<p>主要细节：</p>
+<ul>
+<li>蓝发紫眸</li>
+<li>半扎发型 <em>（未完全呈现）</em></li>
+<li>百褶长裙</li>
+<li>太刀</li>
+</ul>
+<h2 id="出身背景"><a href="#出身背景" class="headerlink" title="出身背景"></a>出身背景</h2><p>南院第十三届毕业生，第七代风委部部长，出身于南院四大世家的君家。为了应对家族内部施加的压力，而将风委部的事务大部分交予了醉仙霖处理。</p>
+<h2 id="印象曲推荐"><a href="#印象曲推荐" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul>
+<li>Fearless Bird（Arika）</li>
+<li>FLIGHT FEATHERS（水树奈奈)</li>
+<li>Beyond the BLADE（水树奈奈）</li>
+<li>風のあなたに（水树奈奈）——可代雪晓组（君初雪×君初晓）</li>
+<li>可惜夜（tayori）——可代君臣组（君初晓×莫笙箫）</li>
+</ul>
+<details><summary> <p>音乐视频</p> </summary>
+              <div class="content">
+              <div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">Fearless Bird（Arika）</button></li><li class="tab"><button type="button" data-href="#示例-2">FLIGHT FEATHERS（水树奈奈)）</button></li><li class="tab"><button type="button" data-href="#示例-3">Beyond the BLADE（水树奈奈）</button></li><li class="tab"><button type="button" data-href="#示例-4">風のあなたに（水树奈奈）</button></li><li class="tab"><button type="button" data-href="#示例-5">可惜夜（tayori）</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1LY3dztEFC&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1Es411s7rd&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-3"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1aF411E7j9&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-4"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=15&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-5"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1sb421n7Gj&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+              </div>
+            </details>
+
+
+<hr>
+<h1 id="莫笙箫-望月绘空"><a href="#莫笙箫-望月绘空" class="headerlink" title="莫笙箫/望月绘空"></a>莫笙箫/望月绘空</h1><blockquote>
+<p>愿你锈蚀的剑刃，不再因乍现的寒光而尘封。</p>
+</blockquote>
+<h2 id="基础信息-1"><a href="#基础信息-1" class="headerlink" title="基础信息"></a>基础信息</h2><table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>姓名</td>
+<td>莫笙箫，字少臣</td>
+</tr>
+<tr>
+<td>别名</td>
+<td>望月绘空（もちつき えそら）</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>男</td>
+</tr>
+<tr>
+<td>身高</td>
+<td>184 cm</td>
+</tr>
+<tr>
+<td>种族</td>
+<td>人类种</td>
+</tr>
+<tr>
+<td>魔武</td>
+<td>「神刃·天丛云剑」</td>
+</tr>
+<tr>
+<td>第一适性<br></td>
+<td>元素系-木/风</td>
+</tr>
+<tr>
+<td>第二适性</td>
+<td>物理系</td>
+</tr>
+<tr>
+<td>所属</td>
+<td>风纪委员部</td>
+</tr>
+<tr>
+<td>CP</td>
+<td><del>君初晓（君臣组）</del></td>
+</tr>
+<tr>
+<td>命格</td>
+<td><del>「审判」</del></td>
+</tr>
+</tbody></table>
+<h2 id="人设图-1"><a href="#人设图-1" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E8%8E%AB%E7%AC%99%E7%AE%AB.webp"></p>
+<p>主要细节：</p>
+<ul>
+<li>黑发黑眸</li>
+<li>长发，尾部束起</li>
+<li>古风装束</li>
+<li>玉箫/折扇 <em>（未呈现）</em></li>
+<li>病弱感 <em>（未完全呈现）</em></li>
+</ul>
+<h2 id="出身背景-1"><a href="#出身背景-1" class="headerlink" title="出身背景"></a>出身背景</h2><p>南院第十三届毕业生，出身于南院四大世家的莫家，自小与君初晓有着婚约。虽然确实继承了家族的传承魔武，但因为并非嫡子而在世家圈子里不太受待见，养成了藏拙的习惯，性格也略显腹黑。</p>
+<hr>
+<h1 id="醉仙霖-酒见雫"><a href="#醉仙霖-酒见雫" class="headerlink" title="醉仙霖/酒见雫"></a>醉仙霖/酒见雫</h1><blockquote>
+<p>愿你炽热的侠道，不再被责任的重担所阻断。</p>
+</blockquote>
+<h2 id="基础信息-2"><a href="#基础信息-2" class="headerlink" title="基础信息"></a>基础信息</h2><table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>姓名</td>
+<td>醉仙霖</td>
+</tr>
+<tr>
+<td>别名</td>
+<td>酒见雫（さけみ しずく）</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>女</td>
+</tr>
+<tr>
+<td>身高</td>
+<td>163 cm</td>
+</tr>
+<tr>
+<td>种族</td>
+<td>人类种</td>
+</tr>
+<tr>
+<td>魔武</td>
+<td>「亘古·山河社稷图」</td>
+</tr>
+<tr>
+<td>第一适性<br></td>
+<td>元素系-水/冰</td>
+</tr>
+<tr>
+<td>第二适性</td>
+<td>空间系</td>
+</tr>
+<tr>
+<td>所属</td>
+<td>风纪委员部</td>
+</tr>
+<tr>
+<td>CP</td>
+<td><del>殷御麒（麒霖组）</del></td>
+</tr>
+<tr>
+<td>命格</td>
+<td><del>「权杖·骑士」</del></td>
+</tr>
+</tbody></table>
+<h2 id="人设图-2"><a href="#人设图-2" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E9%86%89%E4%BB%99%E9%9C%96.webp"></p>
+<p>主要细节：</p>
+<ul>
+<li>黑发紫眸</li>
+<li>高马尾</li>
+<li>古风侠客气质 <em>（未完全体现）</em></li>
+<li>酒葫芦 <em>（未体现）</em></li>
+</ul>
+<h2 id="出身背景-2"><a href="#出身背景-2" class="headerlink" title="出身背景"></a>出身背景</h2><p>来自编号为 C-0268 的修仙位面，本是出身修真宗门的千金小姐，奈何有着一颗惩奸除恶、行侠仗义的武侠心，也因此带着一股大大咧咧、不拘小节的江湖气。</p>
+<h2 id="印象曲推荐-1"><a href="#印象曲推荐-1" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul>
+<li>冠世一战（三无 Marblue）</li>
+<li>两相知（三无Marblue/祖娅纳惜）</li>
+</ul>
+<details><summary> <p>音乐视频</p> </summary>
+              <div class="content">
+              <div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">冠世一战（三无 Marblue）</button></li><li class="tab"><button type="button" data-href="#示例-2">两相知（三无Marblue/祖娅纳惜）</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV17t411y7D2&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV14Q4y1Y77x&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+              </div>
+            </details>
+
+<hr>
+<h1 id="殷御麒-御堂佑麒"><a href="#殷御麒-御堂佑麒" class="headerlink" title="殷御麒/御堂佑麒"></a>殷御麒/御堂佑麒</h1><blockquote>
+<p>愿你咽下的心声，不再是沉默的一厢情愿。</p>
+</blockquote>
+<h2 id="基础信息-3"><a href="#基础信息-3" class="headerlink" title="基础信息"></a>基础信息</h2><table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>姓名</td>
+<td>殷御麒</td>
+</tr>
+<tr>
+<td>别名</td>
+<td>御堂佑麒（みどう ゆさき）</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>男</td>
+</tr>
+<tr>
+<td>身高</td>
+<td>182 cm</td>
+</tr>
+<tr>
+<td>种族</td>
+<td>稀有种-龙族</td>
+</tr>
+<tr>
+<td>魔武</td>
+<td>「亘古·两仪太极图」</td>
+</tr>
+<tr>
+<td>第一适性<br></td>
+<td>元素系-土/暗影</td>
+</tr>
+<tr>
+<td>第二适性</td>
+<td>空间系</td>
+</tr>
+<tr>
+<td>所属</td>
+<td>风纪委员部</td>
+</tr>
+<tr>
+<td>CP</td>
+<td><del>醉仙霖（麒霖组）</del></td>
+</tr>
+<tr>
+<td>命格</td>
+<td><del>「圣杯·骑士」</del></td>
+</tr>
+</tbody></table>
+<h2 id="人设图-3"><a href="#人设图-3" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%BE%A1%E4%B8%83.webp"></p>
+<p>主要细节：</p>
+<ul>
+<li>黑发红眸</li>
+<li>龙角龙尾（东方龙）</li>
+<li>黑红唐装</li>
+<li>红色流苏耳坠 <em>（未完全呈现）</em></li>
+</ul>
+<h2 id="出身背景-3"><a href="#出身背景-3" class="headerlink" title="出身背景"></a>出身背景</h2><p>来自编号为 C-0268 的修仙位面，从族谱上来算是族内第七个、也是最小的孩子。从小被托付给修真宗门的掌门，和掌门家的千金一起长大，于是暗恋青梅竹马但死活不肯开口的别扭醋精龙一只。</p>
+<hr>
+<h1 id="司陵满-天满司"><a href="#司陵满-天满司" class="headerlink" title="司陵满/天满司"></a>司陵满/天满司</h1><blockquote>
+<p>愿你遗失的心跳，不再沉寂于黄沙漫漫的戈壁。</p>
+</blockquote>
+<h2 id="基础信息-4"><a href="#基础信息-4" class="headerlink" title="基础信息"></a>基础信息</h2><table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>姓名</td>
+<td>司陵满</td>
+</tr>
+<tr>
+<td>别名</td>
+<td>天满司（あまみち つかさ）</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>男</td>
+</tr>
+<tr>
+<td>身高</td>
+<td>152 cm</td>
+</tr>
+<tr>
+<td>种族</td>
+<td>人类种</td>
+</tr>
+<tr>
+<td>魔武</td>
+<td>「深渊·冥古亡灵书」</td>
+</tr>
+<tr>
+<td>第一适性<br></td>
+<td>召唤系</td>
+</tr>
+<tr>
+<td>第二适性</td>
+<td>精神系</td>
+</tr>
+<tr>
+<td>所属</td>
+<td>风纪委员部-西境要塞</td>
+</tr>
+<tr>
+<td>CP</td>
+<td><del>苏怀钰（满钰组）</del></td>
+</tr>
+<tr>
+<td>命格</td>
+<td><del>「宝剑·国王」</del></td>
+</tr>
+</tbody></table>
+<h2 id="人设图-4"><a href="#人设图-4" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%A4%A9%E6%BB%A1%E5%8F%B8.webp"></p>
+<p>主要细节：</p>
+<ul>
+<li>橙发蓝眸</li>
+<li>前发遮住一只眼睛</li>
+<li>正太体形</li>
+<li>机械义肢</li>
+<li>银色长枪</li>
+</ul>
+<h2 id="出身背景-4"><a href="#出身背景-4" class="headerlink" title="出身背景"></a>出身背景</h2><p>来自编号为 Y-0713 的末世位面，但对自己的过往几乎绝口不提。选择驻边的理由是比起他人更相信自己的能力，因此非常不放心让他人来守护自己的安全。</p>
+<h2 id="印象曲推荐-2"><a href="#印象曲推荐-2" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2>]]></content>
+      <categories>
+        <category>小说</category>
+        <category>南城院校风纪委员部</category>
+      </categories>
+      <tags>
+        <tag>原创</tag>
+        <tag>OC专栏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>南院OC专栏-1</title>
     <url>/2026/08/21/%E5%8D%97%E9%99%A2/OC%E4%B8%93%E6%A0%8F/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-1/</url>
     <content><![CDATA[<h1 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h1><blockquote>
@@ -310,372 +707,9 @@
 </ul>
 <details><summary> <p>音乐视频</p> </summary>
               <div class="content">
-              <div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">Futurism（高垣彩阳)</button></li><li class="tab"><button type="button" data-href="#示例-2">SONG FOR THE WORLD（高垣彩阳）</button></li><li class="tab"><button type="button" data-href="#示例-3">あしたのあたし（高垣彩阳）</button></li><li class="tab"><button type="button" data-href="#示例-4">放課後キーホルダー（高垣彩阳）</button></li><li class="tab"><button type="button" data-href="#示例-5">RELIEF BULLET（泽城美雪）</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1WA411F7je&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1dJ411q7UX&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-3"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-4"><p><em>这首没找到带中文字幕版</em></p><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV14krnBzEmQ&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-5"><p><em>这首没找到带中文字幕版</em></p><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1cHjn6qED2&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+              <div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">Futurism（高垣彩阳)</button></li><li class="tab"><button type="button" data-href="#示例-2">SONG FOR THE WORLD（高垣彩阳）</button></li><li class="tab"><button type="button" data-href="#示例-3">あしたのあたし（高垣彩阳）</button></li><li class="tab"><button type="button" data-href="#示例-4">放課後キーホルダー（高垣彩阳）</button></li><li class="tab"><button type="button" data-href="#示例-5">RELIEF BULLET（泽城美雪）</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1WA411F7je&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1dJ411q7UX&page=7&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-3"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=11&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-4"><p><em>这首没找到带中文字幕版</em></p><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV14krnBzEmQ&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-5"><p><em>这首没找到带中文字幕版</em></p><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1cHjn6qED2&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
               </div>
             </details>]]></content>
-      <categories>
-        <category>小说</category>
-        <category>南城院校风纪委员部</category>
-      </categories>
-      <tags>
-        <tag>原创</tag>
-        <tag>OC专栏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>南院OC专栏-2</title>
-    <url>/2026/08/21/%E5%8D%97%E9%99%A2/OC%E4%B8%93%E6%A0%8F/%E5%8D%97%E9%99%A2OC%E4%B8%93%E6%A0%8F-2/</url>
-    <content><![CDATA[<h1 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h1><blockquote>
-<p>愿你守护的世界，不再禁锢你铿锵的声嗓。</p>
-</blockquote>
-<h2 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h2><table>
-<thead>
-<tr>
-<th><strong>项目</strong></th>
-<th><strong>内容</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>姓名</td>
-<td>君初晓，字子命</td>
-</tr>
-<tr>
-<td>别名</td>
-<td>夜刀神翼（やどがみ つばさ）</td>
-</tr>
-<tr>
-<td>性别</td>
-<td>女</td>
-</tr>
-<tr>
-<td>身高</td>
-<td>182 cm</td>
-</tr>
-<tr>
-<td>种族</td>
-<td>人类种</td>
-</tr>
-<tr>
-<td>魔武</td>
-<td>「绝刃·天羽羽斩」</td>
-</tr>
-<tr>
-<td>第一适性<br></td>
-<td>空间系</td>
-</tr>
-<tr>
-<td>第二适性</td>
-<td>元素系-火/雷</td>
-</tr>
-<tr>
-<td>所属</td>
-<td>风纪委员部-部长</td>
-</tr>
-<tr>
-<td>CP</td>
-<td><del>莫笙箫（君臣组）</del></td>
-</tr>
-<tr>
-<td>命格</td>
-<td><del>「世界」</del></td>
-</tr>
-</tbody></table>
-<h2 id="人设图"><a href="#人设图" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%90%9B%E5%88%9D%E6%99%93%E4%B8%89%E8%A7%86%E5%9B%BE.webp"></p>
-<p>主要细节：</p>
-<ul>
-<li>蓝发紫眸</li>
-<li>半扎发型 <em>（未完全呈现）</em></li>
-<li>百褶长裙</li>
-<li>太刀</li>
-</ul>
-<h2 id="出身背景"><a href="#出身背景" class="headerlink" title="出身背景"></a>出身背景</h2><p>南院第十三届毕业生，第七代风委部部长，出身于南院四大世家的君家。为了应对家族内部施加的压力，而将风委部的事务大部分交予了醉仙霖处理。</p>
-<h2 id="印象曲推荐"><a href="#印象曲推荐" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul>
-<li>Fearless Bird（Arika）</li>
-<li>FLIGHT FEATHERS（水树奈奈)</li>
-<li>Beyond the BLADE（水树奈奈）</li>
-<li>風のあなたに（水树奈奈）——可代雪晓组（君初雪×君初晓）</li>
-<li>可惜夜（tayori）——可代君臣组（君初晓×莫笙箫）</li>
-</ul>
-<details><summary> <p>音乐视频</p> </summary>
-              <div class="content">
-              <div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">Fearless Bird（Arika）</button></li><li class="tab"><button type="button" data-href="#示例-2">FLIGHT FEATHERS（水树奈奈)）</button></li><li class="tab"><button type="button" data-href="#示例-3">Beyond the BLADE（水树奈奈）</button></li><li class="tab"><button type="button" data-href="#示例-4">風のあなたに（水树奈奈）</button></li><li class="tab"><button type="button" data-href="#示例-5">可惜夜（tayori）</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1LY3dztEFC&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1Es411s7rd&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-3"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1aF411E7j9&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-4"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1ZE411y7DB&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-5"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1sb421n7Gj&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-              </div>
-            </details>
-
-
-<hr>
-<h1 id="莫笙箫-望月绘空"><a href="#莫笙箫-望月绘空" class="headerlink" title="莫笙箫/望月绘空"></a>莫笙箫/望月绘空</h1><blockquote>
-<p>愿你锈蚀的剑刃，不再因乍现的寒光而尘封。</p>
-</blockquote>
-<h2 id="基础信息-1"><a href="#基础信息-1" class="headerlink" title="基础信息"></a>基础信息</h2><table>
-<thead>
-<tr>
-<th><strong>项目</strong></th>
-<th><strong>内容</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>姓名</td>
-<td>莫笙箫，字少臣</td>
-</tr>
-<tr>
-<td>别名</td>
-<td>望月绘空（もちつき えそら）</td>
-</tr>
-<tr>
-<td>性别</td>
-<td>男</td>
-</tr>
-<tr>
-<td>身高</td>
-<td>184 cm</td>
-</tr>
-<tr>
-<td>种族</td>
-<td>人类种</td>
-</tr>
-<tr>
-<td>魔武</td>
-<td>「神刃·天丛云剑」</td>
-</tr>
-<tr>
-<td>第一适性<br></td>
-<td>元素系-木/风</td>
-</tr>
-<tr>
-<td>第二适性</td>
-<td>物理系</td>
-</tr>
-<tr>
-<td>所属</td>
-<td>风纪委员部</td>
-</tr>
-<tr>
-<td>CP</td>
-<td><del>君初晓（君臣组）</del></td>
-</tr>
-<tr>
-<td>命格</td>
-<td><del>「审判」</del></td>
-</tr>
-</tbody></table>
-<h2 id="人设图-1"><a href="#人设图-1" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E8%8E%AB%E7%AC%99%E7%AE%AB.webp"></p>
-<p>主要细节：</p>
-<ul>
-<li>黑发黑眸</li>
-<li>长发，尾部束起</li>
-<li>古风装束</li>
-<li>玉箫/折扇 <em>（未呈现）</em></li>
-<li>病弱感 <em>（未完全呈现）</em></li>
-</ul>
-<h2 id="出身背景-1"><a href="#出身背景-1" class="headerlink" title="出身背景"></a>出身背景</h2><p>南院第十三届毕业生，出身于南院四大世家的莫家，自小与君初晓有着婚约。虽然确实继承了家族的传承魔武，但因为并非嫡子而在世家圈子里不太受待见，养成了藏拙的习惯，性格也略显腹黑。</p>
-<hr>
-<h1 id="醉仙霖-酒见雫"><a href="#醉仙霖-酒见雫" class="headerlink" title="醉仙霖/酒见雫"></a>醉仙霖/酒见雫</h1><blockquote>
-<p>愿你炽热的侠道，不再被责任的重担所阻断。</p>
-</blockquote>
-<h2 id="基础信息-2"><a href="#基础信息-2" class="headerlink" title="基础信息"></a>基础信息</h2><table>
-<thead>
-<tr>
-<th><strong>项目</strong></th>
-<th><strong>内容</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>姓名</td>
-<td>醉仙霖</td>
-</tr>
-<tr>
-<td>别名</td>
-<td>酒见雫（さけみ しずく）</td>
-</tr>
-<tr>
-<td>性别</td>
-<td>女</td>
-</tr>
-<tr>
-<td>身高</td>
-<td>163 cm</td>
-</tr>
-<tr>
-<td>种族</td>
-<td>人类种</td>
-</tr>
-<tr>
-<td>魔武</td>
-<td>「亘古·山河社稷图」</td>
-</tr>
-<tr>
-<td>第一适性<br></td>
-<td>元素系-水/冰</td>
-</tr>
-<tr>
-<td>第二适性</td>
-<td>空间系</td>
-</tr>
-<tr>
-<td>所属</td>
-<td>风纪委员部</td>
-</tr>
-<tr>
-<td>CP</td>
-<td><del>殷御麒（麒霖组）</del></td>
-</tr>
-<tr>
-<td>命格</td>
-<td><del>「权杖·骑士」</del></td>
-</tr>
-</tbody></table>
-<h2 id="人设图-2"><a href="#人设图-2" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E9%86%89%E4%BB%99%E9%9C%96.webp"></p>
-<p>主要细节：</p>
-<ul>
-<li>黑发紫眸</li>
-<li>高马尾</li>
-<li>古风侠客气质 <em>（未完全体现）</em></li>
-<li>酒葫芦 <em>（未体现）</em></li>
-</ul>
-<h2 id="出身背景-2"><a href="#出身背景-2" class="headerlink" title="出身背景"></a>出身背景</h2><p>来自编号为 C-0268 的修仙位面，本是出身修真宗门的千金小姐，奈何有着一颗惩奸除恶、行侠仗义的武侠心，也因此带着一股大大咧咧、不拘小节的江湖气。</p>
-<h2 id="印象曲推荐-1"><a href="#印象曲推荐-1" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2><ul>
-<li>冠世一战（三无 Marblue）</li>
-<li>两相知（三无Marblue/祖娅纳惜）</li>
-</ul>
-<details><summary> <p>音乐视频</p> </summary>
-              <div class="content">
-              <div class="tabs" id="示例"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#示例-1">冠世一战（三无 Marblue）</button></li><li class="tab"><button type="button" data-href="#示例-2">两相知（三无Marblue/祖娅纳惜）</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="示例-1"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV17t411y7D2&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="示例-2"><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV14Q4y1Y77x&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-              </div>
-            </details>
-
-<hr>
-<h1 id="殷御麒-御堂佑麒"><a href="#殷御麒-御堂佑麒" class="headerlink" title="殷御麒/御堂佑麒"></a>殷御麒/御堂佑麒</h1><blockquote>
-<p>愿你咽下的心声，不再是沉默的一厢情愿。</p>
-</blockquote>
-<h2 id="基础信息-3"><a href="#基础信息-3" class="headerlink" title="基础信息"></a>基础信息</h2><table>
-<thead>
-<tr>
-<th><strong>项目</strong></th>
-<th><strong>内容</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>姓名</td>
-<td>殷御麒</td>
-</tr>
-<tr>
-<td>别名</td>
-<td>御堂佑麒（みどう ゆさき）</td>
-</tr>
-<tr>
-<td>性别</td>
-<td>男</td>
-</tr>
-<tr>
-<td>身高</td>
-<td>182 cm</td>
-</tr>
-<tr>
-<td>种族</td>
-<td>稀有种-龙族</td>
-</tr>
-<tr>
-<td>魔武</td>
-<td>「亘古·两仪太极图」</td>
-</tr>
-<tr>
-<td>第一适性<br></td>
-<td>元素系-土/暗影</td>
-</tr>
-<tr>
-<td>第二适性</td>
-<td>空间系</td>
-</tr>
-<tr>
-<td>所属</td>
-<td>风纪委员部</td>
-</tr>
-<tr>
-<td>CP</td>
-<td><del>醉仙霖（麒霖组）</del></td>
-</tr>
-<tr>
-<td>命格</td>
-<td><del>「圣杯·骑士」</del></td>
-</tr>
-</tbody></table>
-<h2 id="人设图-3"><a href="#人设图-3" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%BE%A1%E4%B8%83.webp"></p>
-<p>主要细节：</p>
-<ul>
-<li>黑发红眸</li>
-<li>龙角龙尾（东方龙）</li>
-<li>黑红唐装</li>
-<li>红色流苏耳坠 <em>（未完全呈现）</em></li>
-</ul>
-<h2 id="出身背景-3"><a href="#出身背景-3" class="headerlink" title="出身背景"></a>出身背景</h2><p>来自编号为 C-0268 的修仙位面，从族谱上来算是族内第七个、也是最小的孩子。从小被托付给修真宗门的掌门，和掌门家的千金一起长大，于是暗恋青梅竹马但死活不肯开口的别扭醋精龙一只。</p>
-<hr>
-<h1 id="司陵满-天满司"><a href="#司陵满-天满司" class="headerlink" title="司陵满/天满司"></a>司陵满/天满司</h1><blockquote>
-<p>愿你遗失的心跳，不再沉寂于黄沙漫漫的戈壁。</p>
-</blockquote>
-<h2 id="基础信息-4"><a href="#基础信息-4" class="headerlink" title="基础信息"></a>基础信息</h2><table>
-<thead>
-<tr>
-<th><strong>项目</strong></th>
-<th><strong>内容</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>姓名</td>
-<td>司陵满</td>
-</tr>
-<tr>
-<td>别名</td>
-<td>天满司（あまみち つかさ）</td>
-</tr>
-<tr>
-<td>性别</td>
-<td>男</td>
-</tr>
-<tr>
-<td>身高</td>
-<td>152 cm</td>
-</tr>
-<tr>
-<td>种族</td>
-<td>人类种</td>
-</tr>
-<tr>
-<td>魔武</td>
-<td>「深渊·冥古亡灵书」</td>
-</tr>
-<tr>
-<td>第一适性<br></td>
-<td>召唤系</td>
-</tr>
-<tr>
-<td>第二适性</td>
-<td>精神系</td>
-</tr>
-<tr>
-<td>所属</td>
-<td>风纪委员部-西境要塞</td>
-</tr>
-<tr>
-<td>CP</td>
-<td><del>苏怀钰（满钰组）</del></td>
-</tr>
-<tr>
-<td>命格</td>
-<td><del>「宝剑·国王」</del></td>
-</tr>
-</tbody></table>
-<h2 id="人设图-4"><a href="#人设图-4" class="headerlink" title="人设图"></a>人设图</h2><p><img src= "/img/loading.gif" data-lazy-src="https://zwei-wings.github.io/about/index/%E5%A4%A9%E6%BB%A1%E5%8F%B8.webp"></p>
-<p>主要细节：</p>
-<ul>
-<li>橙发蓝眸</li>
-<li>前发遮住一只眼睛</li>
-<li>正太体形</li>
-<li>机械义肢</li>
-<li>银色长枪</li>
-</ul>
-<h2 id="出身背景-4"><a href="#出身背景-4" class="headerlink" title="出身背景"></a>出身背景</h2><p>来自编号为 Y-0713 的末世位面，但对自己的过往几乎绝口不提。选择驻边的理由是比起他人更相信自己的能力，因此非常不放心让他人来守护自己的安全。</p>
-<h2 id="印象曲推荐-2"><a href="#印象曲推荐-2" class="headerlink" title="印象曲推荐"></a>印象曲推荐</h2>]]></content>
       <categories>
         <category>小说</category>
         <category>南城院校风纪委员部</category>
@@ -731,38 +765,6 @@
         <tag>名柯</tag>
         <tag>同人</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>测试</title>
-    <url>/2026/08/02/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="音频测试"><a href="#音频测试" class="headerlink" title="音频测试"></a>音频测试</h1><h2 id="样本一"><a href="#样本一" class="headerlink" title="样本一"></a>样本一</h2><div class="oc-voice" data-src="/audio/audio-1.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 1</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本二"><a href="#样本二" class="headerlink" title="样本二"></a>样本二</h2><div class="oc-voice" data-src="/audio/audio-2.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 2</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h2 id="样本三"><a href="#样本三" class="headerlink" title="样本三"></a>样本三</h2><div class="oc-voice" data-src="/audio/audio-3.mp3"><button class="oc-voice-btn" type="button" aria-label="播放配音样本"></button><span class="oc-voice-name">样本 3</span><span class="oc-voice-wave" aria-hidden="true"></span><span class="oc-voice-time">0:00</span><span class="oc-voice-vol"><button class="oc-voice-mute" type="button" aria-label="静音"><svg class="oc-vol-on" viewbox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><svg class="oc-vol-off" viewbox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button><input class="oc-voice-slider" type="range" min="0" max="100" value="70"></span><p class="oc-voice-text">愿你太阳色的羽翼，不再因血濡而变得沉重。</p></div>
-
-
-<h1 id="留言测试"><a href="#留言测试" class="headerlink" title="留言测试"></a>留言测试</h1><h2 id="封艾羽-赤羽奏"><a href="#封艾羽-赤羽奏" class="headerlink" title="封艾羽/赤羽奏"></a>封艾羽/赤羽奏</h2><div class="note Kanade flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="君初晓-夜刀神翼"><a href="#君初晓-夜刀神翼" class="headerlink" title="君初晓/夜刀神翼"></a>君初晓/夜刀神翼</h2><div class="note Tsubasa flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="艾格·拉缇斯"><a href="#艾格·拉缇斯" class="headerlink" title="艾格·拉缇斯"></a>艾格·拉缇斯</h2><div class="note Ego flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-<h2 id="安莲娜·克莉丝"><a href="#安莲娜·克莉丝" class="headerlink" title="安莲娜·克莉丝"></a>安莲娜·克莉丝</h2><div class="note Aliena flat"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-</div>
-
-
-<h1 id="视频测试"><a href="#视频测试" class="headerlink" title="视频测试"></a>视频测试</h1><h2 id="正常视频"><a href="#正常视频" class="headerlink" title="正常视频"></a>正常视频</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1F7411v7Dt&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div>         → 正常视频
-
-<h2 id="指定某-P"><a href="#指定某-P" class="headerlink" title="指定某 P"></a>指定某 P</h2><div class="bili-video" style="position:relative;width:100%;aspect-ratio:16/9;"><iframe src="//player.bilibili.com/player.html?bvid=BV1wdEg6nErs&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;"></iframe></div> → 指定第 8 P（默认第 1 集）]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
   </entry>
   <entry>
     <title>第 111 章 鹬蚌相争（中）</title>
@@ -2731,7 +2733,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#x4d;&#x65;&#x74;&#105;&#110;&#x67;&#74;&#x53;&#x40;&#x31;&#46;&#50;">&#x4d;&#x65;&#x74;&#105;&#110;&#x67;&#74;&#x53;&#x40;&#x31;&#46;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#77;&#x65;&#116;&#105;&#110;&#103;&#74;&#83;&#x40;&#49;&#46;&#50;">&#77;&#x65;&#116;&#105;&#110;&#103;&#74;&#83;&#x40;&#49;&#46;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -2787,7 +2789,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#x6a;&#113;&#117;&#101;&#x72;&#x79;&#x40;&#x33;&#x2e;&#x37;&#46;&#49;">&#x6a;&#113;&#117;&#101;&#x72;&#x79;&#x40;&#x33;&#x2e;&#x37;&#46;&#49;</a> / <a href="mailto:&#102;&#x61;&#110;&#99;&#121;&#x62;&#x6f;&#x78;&#x40;&#51;&#x2e;&#53;&#x2e;&#55;">&#102;&#x61;&#110;&#99;&#121;&#x62;&#x6f;&#x78;&#x40;&#51;&#x2e;&#53;&#x2e;&#55;</a> / <a href="mailto:&#116;&#x79;&#x70;&#x65;&#100;&#x40;&#x32;&#46;&#x30;&#46;&#x31;&#x32;">&#116;&#x79;&#x70;&#x65;&#100;&#x40;&#x32;&#46;&#x30;&#46;&#x31;&#x32;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#x71;&#x75;&#101;&#114;&#x79;&#64;&#x33;&#x2e;&#55;&#x2e;&#x31;">&#106;&#x71;&#x75;&#101;&#114;&#x79;&#64;&#x33;&#x2e;&#55;&#x2e;&#x31;</a> / <a href="mailto:&#x66;&#x61;&#110;&#99;&#121;&#98;&#111;&#120;&#x40;&#x33;&#46;&#53;&#46;&#x37;">&#x66;&#x61;&#110;&#99;&#121;&#98;&#111;&#120;&#x40;&#x33;&#46;&#53;&#46;&#x37;</a> / <a href="mailto:&#x74;&#121;&#x70;&#x65;&#x64;&#x40;&#50;&#46;&#48;&#46;&#x31;&#50;">&#x74;&#121;&#x70;&#x65;&#x64;&#x40;&#50;&#46;&#48;&#46;&#x31;&#50;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>
