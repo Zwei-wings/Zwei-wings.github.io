@@ -1134,6 +1134,7 @@
   --color-bg-a: #ffb88a;
   --color-bg-b: #ffdcc2;
   --color-shadow: rgba(255, 154, 92, .22);
+  --color-label-fg: #fff;     /* 角色名牌字色槽基线；角色 note 由调色类按角色覆盖（见「角色名牌」段） */
   --line: #ece3da;            /* 折叠块 summary/content 分隔线（中性淡色，预览同款） */
 }
 [data-theme=dark] {
@@ -1190,6 +1191,44 @@
 /* 传了 fa 图标（有 icon class）时彻底藏掉默认 ::before（含圆角标背景），避免与 <i> 双圆重叠 */
 .note.icon::before {
   display: none !important;
+}
+
+/* ===== 角色名牌：note 左上角的“名字吊牌”（2026-09-22） ===== */
+/* 带角色 class 的 note（{% note Kanade %}）不再显示圆标，改显示角色名吊牌：
+     底   = 主题表面色 var(--card-bg)（亮色白 / 暗色深）→ 不跟卡片底色撞，两个主题都不脏；
+     描边 = 角色色渐变（--color-accent → --color-accent-2）；
+     ⚠ CSS 边框不能渐变，而 border-image 又不支持圆角，故用「双层背景」实现：
+        padding-box 铺实底、border-box 铺渐变，夹在中间的 1px 透明边框自然露成渐变描边，
+        圆角（999px 胶囊）照样保住。
+     字色 = var(--color-label-fg)，由 scripts/colors.js 按角色生成（亮色主题取角色 bg_dark[0]，
+            暗色主题取 accent），保证对比度：Kanade 黄底 8.2:1 / Tsubasa 4.6:1 / Ego 7.1:1。
+   标记（.vw-role）与名字文本（data-role-label）由 scripts/colors.js 的 after_post_render 注入，
+   所以新增角色只改 characters.yml，这里不必也不该列出角色名。 */
+.note.vw-role:not(.no-icon)::before {
+  content: attr(data-role-label);
+  width: auto;
+  height: 22px;
+  padding: 0 11px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background:
+    linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+    linear-gradient(135deg, var(--color-accent), var(--color-accent-2)) border-box;
+  color: var(--color-label-fg);
+  font-family: inherit;   /* 覆盖圆标的 FA 字体：吊牌里装的是名字，不是图标 */
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+
+/* 角色 note 里名字取代图标：藏掉 fa <i>，并让 ::before 无视上面 .icon 的隐藏规则 */
+.note.vw-role > .note-icon {
+  display: none !important;
+}
+
+.note.vw-role.icon::before {
+  display: flex !important;
 }
 
 /* note 内按钮：grid 精确 4 等分，绝不换行；按钮自然高度（图标收进卡片内），比例自然接近方形。
