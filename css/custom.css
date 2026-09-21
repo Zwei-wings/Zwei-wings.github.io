@@ -1203,13 +1203,18 @@
      字色 = var(--color-label-fg)，由 scripts/colors.js 按角色生成（亮色主题取角色 bg_dark[0]，
             暗色主题取 accent），保证对比度：Kanade 黄底 8.2:1 / Tsubasa 4.6:1 / Ego 7.1:1。
    标记（.vw-role）与名字文本（data-role-label）由 scripts/colors.js 的 after_post_render 注入，
-   所以新增角色只改 characters.yml，这里不必也不该列出角色名。 */
+   所以新增角色只改 characters.yml，这里不必也不该列出角色名。
+   尺寸（2026-09-22 调大）：字号 1em = 正文字号（正文继承 --global-font-size 14px），
+   所以右下角字号按钮放大正文时吊牌同步跟着长；高度/内距按 14px 字号配 26px / 13px（上下各 6px）。
+   ⚠ 高度与 top 是耦合的：top = -(高度/2)，即让吊牌竖直中心正好落在卡片上沿（与原圆标
+     top:-11px + 22px 的几何一致）。改 height 请同步改 top，否则吊牌会往下沉。 */
 .note.vw-role:not(.no-icon)::before {
   content: attr(data-role-label);
   width: auto;
-  height: 22px;
-  padding: 0 11px;
-  border: 1px solid transparent;
+  height: 26px;
+  top: -13px !important;   /* 需 !important：通用圆标规则里 top 带 !important（特异性压不过） */
+  padding: 0 13px;
+  border: 2px solid transparent;   /* 描边加宽：双层背景里这层透明边框就是渐变描边的宽度 */
   border-radius: 999px;
   background:
     linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
@@ -1217,7 +1222,7 @@
   color: var(--color-label-fg);
   font-family: inherit;   /* 覆盖圆标的 FA 字体：吊牌里装的是名字，不是图标 */
   font-weight: 500;
-  font-size: 12px;
+  font-size: 1em;         /* = 正文字号 */
   letter-spacing: .2px;
   white-space: nowrap;
 }
