@@ -1159,13 +1159,20 @@
   color: inherit !important;
 }
 
+/* 连续相邻的 note（中间没有正文段落时）：上一个的下边距要为「下一个上凸 13px 的吊牌」让路。
+   ⚠ 相邻兄弟元素的 margin 会折叠且**取较大值**，所以这里写 26px 才有效果
+     （若只写 margin-top 而小于 1rem，会被 .note 自己的 margin-bottom 吃掉、等于没写） */
+.note + .note {
+  margin-top: 26px;
+}
+
 /* ===== 暗色专属：角色色从「底」退到「描边」（2026-09-22） =====
    亮色模式不变，仍用 bg_light 浅色渐变底；暗色下改成：
      底   = 统一暗色 var(--note-bg)（#1e1e1e，比父卡片 --card-bg(#121212) 亮半档
             → 保住「卡片浮起来」的体量感，不至于跟文章大卡片糊成一片）；
      描边 = 角色色渐变（accent → accent2，与名字吊牌同款双层背景写法，2px）。
-   为什么这么改：暗色下不再需要给每个角色各配一套 bg_dark 深色底 —— 角色的个性
-   只由描边表达，底色全站统一一个值，维护成本归零。
+   为什么这么改：暗色下不需要给每个角色各配一套深色底（原 characters.yml 的 bg_dark 字段
+   已随之移除）—— 角色的个性只由描边表达，底色全站统一一个值，维护成本归零。
    附带好处：名字吊牌底仍是 --card-bg(#121212)，比 note 底暗半档，两者天然分出层次。
    ⚠ 与吊牌同款坑：CSS 边框不能渐变，故同样用「padding-box 铺实底 + border-box 铺渐变」
       的双层背景，中间那圈透明边框就是渐变描边（改 border-width 即改描边粗细）。 */
@@ -1214,7 +1221,7 @@
      ⚠ CSS 边框不能渐变，而 border-image 又不支持圆角，故用「双层背景」实现：
         padding-box 铺实底、border-box 铺渐变，夹在中间的 1px 透明边框自然露成渐变描边，
         圆角（999px 胶囊）照样保住。
-     字色 = var(--color-label-fg)，由 scripts/colors.js 按角色生成（亮色主题取角色 bg_dark[0]，
+     字色 = var(--color-label-fg)，由 scripts/colors.js 按角色生成（亮色主题取角色 label_fg，
             暗色主题取 accent），保证对比度：Kanade 黄底 8.2:1 / Tsubasa 4.6:1 / Ego 7.1:1。
    标记（.vw-role）与名字文本（data-role-label）由 scripts/colors.js 的 after_post_render 注入，
    所以新增角色只改 characters.yml，这里不必也不该列出角色名。
@@ -1248,6 +1255,14 @@
 
 .note.vw-role.icon::before {
   display: flex !important;
+}
+
+/* 有吊牌的 note：上内边距加大，把正文首行从吊牌下沿（卡内 13px）拉开。
+   原本 .note 的 padding-top 只有 16px，首行字形几乎贴住吊牌底边。
+   只作用于「真会显示吊牌」的 note（:not(.no-icon)），普通 note 与 no-icon 的不受影响。
+   ⚠ 必须带 !important：.note 基线的 padding 带 !important，普通声明压不过它。 */
+.note.vw-role:not(.no-icon) {
+  padding-top: 24px !important;
 }
 
 /* note 内按钮：grid 精确 4 等分，绝不换行；按钮自然高度（图标收进卡片内），比例自然接近方形。
