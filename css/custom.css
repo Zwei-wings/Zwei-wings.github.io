@@ -1131,8 +1131,12 @@
   --color-accent: #ff9a5c;
   --color-accent-2: #ff7a3d;
   --color-border: rgba(255, 154, 92, .55);
-  --color-bg-a: #ffb88a;
-  --color-bg-b: #ffdcc2;
+  /* note 底基线（默认橙 = 非角色 note 的底色）。2026-09-22 由 #ffb88a→#ffdcc2 换成「糖果芒果橙」。
+     为什么不靠「降饱和」变浅：降 HSL 的 S 只能靠抬 B 通道实现，B 一涨就发灰发土——
+     同明度 84 下，饱和 75% 的 B=184，饱和 100% 的 B=173。橙/红这类暖色相变浅的正解是
+     「保饱和 + 提明度」，所以这里 S 仍 94%，只把明度定在 86→93（色相 30° 略偏黄，取更暖的糖果感）。 */
+  --color-bg-a: #fddbb9;      /* note 底「上带」：HSL 30° / 饱和 94% / 明度 86 */
+  --color-bg-b: #feeddc;      /* note 底「下带」：同色相同饱和，明度 93 —— 渐变只靠 7 点明度差撑 */
   --color-shadow: rgba(255, 154, 92, .22);
   --color-label-fg: #fff;     /* 角色名牌字色槽基线；角色 note 由调色类按角色覆盖（见「角色名牌」段） */
   --line: #ece3da;            /* 折叠块 summary/content 分隔线（中性淡色，预览同款） */
@@ -1148,13 +1152,30 @@
   --note-bg: #1e1e1e;         /* 暗色 note 统一底：比父卡片 --card-bg(#121212) 亮半档 */
 }
 
+/* 亮色 note 底：角色双色渐变（165° 近垂直 + 两色各留 35% 纯色平台）
+   ⚠ 铺法的两个坑（2026-09-22 实测，改角度前务必先看这段）：
+   ① 渐变的分量不是按角度算的，是按「垂直于渐变方向的 50% 分割线」算的。
+      note 卡片很扁（约 7:1），135° 对角渐变的分割线在扁卡上正好把第一色切成
+      一个左侧窄楔形（实测纯色区仅占约 16% 面积），于是「某色总压过另一色」。
+      改成 165°（近垂直）后两色各占一条完整横带，且不再被左上角的吊牌遮挡。
+   ② 两色各留一段「纯色平台」（A 0–35%、B 65–100%）：
+      不加平台的话中间过渡带太宽，前半段就被后一色吃掉，分量继续失衡。
+      → 想让某一色分量更大，调的就是这两组百分比（35% 越大、该色占得越多）。
+   ③ 平台宽度还管「中段会不会过灰」：平台越窄、过渡带越宽，两端色相的差值全挤在
+      中间那一段里。Haruka 的「蓝(H214) → 黄(H48)」隔了 166°、接近互补，
+      渐变中点必然趋近灰（B 通道 250→175、R 通道 219→253，中途撞成 R≈G≈B）；
+      平台从 25% 收到 35% 后，灰带由占卡片约 50% 高缩到约 30%，基本看不出来。
+      ⚠ 这是「收窄」不是「消除」——想彻底不灰得换三色渐变或用 `in oklch` 插值。
+   ⚠ 暗色主题不受本行影响：下面 [data-theme=dark] .note 用双层背景整块覆盖了 background。 */
 .note {
   position: relative;
   margin: 0 0 1rem;
   padding: 16px 18px 14px !important;
   border: 1px solid var(--color-border) !important;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--color-bg-a), var(--color-bg-b)) !important;
+  background: linear-gradient(165deg,
+    var(--color-bg-a) 0%, var(--color-bg-a) 35%,
+    var(--color-bg-b) 65%, var(--color-bg-b) 100%) !important;
   box-shadow: 0 3px 10px var(--color-shadow);
   color: inherit !important;
 }
