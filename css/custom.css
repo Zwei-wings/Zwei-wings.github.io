@@ -1145,6 +1145,7 @@
   --color-bg-b: #3a1210;
   --color-shadow: rgba(0, 0, 0, .45);
   --line: rgba(255, 255, 255, .12);
+  --note-bg: #1e1e1e;         /* 暗色 note 统一底：比父卡片 --card-bg(#121212) 亮半档 */
 }
 
 .note {
@@ -1158,9 +1159,22 @@
   color: inherit !important;
 }
 
-/* 暗色：去掉主题 flat/modern 的 filter:brightness(.8) 脏压暗（背景/描边已随 [data-theme=dark] 重定义 --color-* 自动变深） */
+/* ===== 暗色专属：角色色从「底」退到「描边」（2026-09-22） =====
+   亮色模式不变，仍用 bg_light 浅色渐变底；暗色下改成：
+     底   = 统一暗色 var(--note-bg)（#1e1e1e，比父卡片 --card-bg(#121212) 亮半档
+            → 保住「卡片浮起来」的体量感，不至于跟文章大卡片糊成一片）；
+     描边 = 角色色渐变（accent → accent2，与名字吊牌同款双层背景写法，2px）。
+   为什么这么改：暗色下不再需要给每个角色各配一套 bg_dark 深色底 —— 角色的个性
+   只由描边表达，底色全站统一一个值，维护成本归零。
+   附带好处：名字吊牌底仍是 --card-bg(#121212)，比 note 底暗半档，两者天然分出层次。
+   ⚠ 与吊牌同款坑：CSS 边框不能渐变，故同样用「padding-box 铺实底 + border-box 铺渐变」
+      的双层背景，中间那圈透明边框就是渐变描边（改 border-width 即改描边粗细）。 */
 [data-theme=dark] .note {
-  filter: none;
+  filter: none;   /* 去掉主题 flat/modern 的 filter:brightness(.8) 脏压暗 */
+  border: 2px solid transparent !important;
+  background:
+    linear-gradient(var(--note-bg), var(--note-bg)) padding-box,
+    linear-gradient(135deg, var(--color-accent), var(--color-accent-2)) border-box !important;
 }
 
 /* 角色配色已迁移至 source/_data/characters.yml（由 scripts/colors.js 自动生成调色类，如 .Kanade/.Tsubasa/.Ego/.Aliena）。
