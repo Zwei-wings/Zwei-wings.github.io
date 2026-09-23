@@ -1535,62 +1535,9 @@ details:has(> .content)[open] > .content {
   padding: .5rem 1.1rem 1rem;  /* 横向内边距小于 summary 的 1.4rem → 内容文字更靠边，header 显小 */
 }
 
-/* —— OC 角色配色变体（渐变虚线边框实验）——
-   命中两种写法：
-   ① 标签参数（带逗号）：{% folding Kanade, @标题 %} → <details Kanade>
-   ② 手动加类：<details class="Kanade" open>（与 note 的角色调色类同源）
-   下方把角色名接到色板字典变量（scripts/colors.js 注入的 --kanade-* / --tsubasa-* / --ego-* / --aliena-*）。
-   默认纯色虚线（内部透明、圆角、所有浏览器稳）；支持 mask-composite 的浏览器升级为 accent→accent2 渐变虚线。
-   关键：不整片填充背景（之前用 background-clip 填 var(--card-bg)，暗色下 #121212 会成深灰块→灰底 bug）。 */
-details[Kanade], details.Kanade,
-details[Tsubasa], details.Tsubasa,
-details[Ego], details.Ego,
-details[Aliena], details.Aliena {
-  position: relative;
-  border: 2px dashed var(--color-accent);
-  border-radius: 12px;
-  background: transparent;
-}
-details[Kanade], details.Kanade   { --color-accent: var(--kanade-accent);  --color-accent-2: var(--kanade-accent-2);  --color-border: var(--kanade-border); }
-details[Tsubasa], details.Tsubasa { --color-accent: var(--tsubasa-accent); --color-accent-2: var(--tsubasa-accent-2); --color-border: var(--tsubasa-border); }
-details[Ego], details.Ego         { --color-accent: var(--ego-accent);     --color-accent-2: var(--ego-accent-2);     --color-border: var(--ego-border); }
-details[Aliena], details.Aliena   { --color-accent: var(--aliena-accent);  --color-accent-2: var(--aliena-accent-2);  --color-border: var(--aliena-border); }
-
-/* 亮色下 Kanade 折叠标题文字改用绿色 accent2（#6bbd45）：accent #f2c94c 黄在白底上偏淡看不清。
-   仅亮色生效（暗色下黄字在深底对比高、保持原黄）；不影响渐变虚线边框（仍走 accent→accent2）。 */
-html:not([data-theme=dark]) details[Kanade] > summary,
-html:not([data-theme=dark]) details.Kanade > summary {
-  color: var(--kanade-accent-2);
-}
-
-/* 支持 mask-composite 的浏览器：隐藏纯色虚线，改用 ::before 环切出渐变虚线（内部透明、无灰底） */
-@supports ((-webkit-mask-composite: xor) or (mask-composite: exclude)) {
-  details[Kanade], details.Kanade,
-  details[Tsubasa], details.Tsubasa,
-  details[Ego], details.Ego,
-  details[Aliena], details.Aliena {
-    border-color: transparent;
-  }
-  details[Kanade]::before, details.Kanade::before,
-  details[Tsubasa]::before, details.Tsubasa::before,
-  details[Ego]::before, details.Ego::before,
-  details[Aliena]::before, details.Aliena::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    padding: 2px;
-    background: repeating-linear-gradient(90deg,
-                var(--color-accent) 0 9px,
-                var(--color-accent-2) 9px 16px,
-                transparent 16px 24px);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            mask-composite: exclude;
-    pointer-events: none;
-  }
-}
+/* —— OC 角色配色变体（双色渐变虚线）——
+   已迁移至 scripts/colors.js 自动生成（遍历 source/_data/characters.yml）。
+   新增角色只改 yml，勿在此手写 details[角色名] 选择器。 */
 
 /* —— 暗色适配：覆盖 butterfly 主题 add2.css 给 folding 的灰底与整体压暗 ——
    add2.css 里有 details>summary{background:#f6f6f6} 和 [data-theme=dark] details{filter:brightness(.7)}，
@@ -1950,4 +1897,180 @@ body #article-container .timeline .timenode:hover .body {
 [data-theme=dark] #article-container a:not(.link-card):not(.btn-beautify):not(:has(img)):hover {
   color: #d44f47;
   text-shadow: 0 0 12px rgba(212, 79, 71, .5);
+}
+
+/* ============================================================
+   B站视频外框 · 天线小电视（2026-09-23）
+   复用 --color-accent / --color-border / --color-shadow 语义槽（亮橙暗红），
+   与 timeline 卡、正文链接同源。顶部两根 V 形天线（::before/::after）+ 圆点底座，
+   仿 B站小电视；外层不 overflow:hidden（免裁天线），视频由 .bili-video-inner 裁圆角。
+   ============================================================ */
+
+#article-container .bili-video {
+  position: relative;
+  margin: 30px 0 16px;                  /* 上边距留给框外天线 */
+  padding: 6px;
+  border: 2px solid var(--color-border);
+  border-radius: 14px;
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+}
+
+/* 两根天线：从框顶伸出、向外张开的 V 形 */
+#article-container .bili-video::before,
+#article-container .bili-video::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  width: 2px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+#article-container .bili-video::before {
+  left: calc(50% - 13px);
+  transform: rotate(-28deg);
+}
+#article-container .bili-video::after {
+  left: calc(50% + 11px);
+  transform: rotate(28deg);
+}
+
+/* 天线底座圆点 */
+#article-container .bili-video .bili-antenna-dot {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* hover：边框转主色 + 发光浮起（与 timeline 卡同款） */
+#article-container .bili-video:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 18px var(--color-shadow), 0 0 0 3px var(--color-border);
+  transform: translateY(-2px);
+}
+
+/* 视频内层：裁圆角 + 保持 16:9 */
+#article-container .bili-video-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 9px;
+}
+#article-container .bili-video-inner iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ===== 正文图片外框（2026-09-23 定稿）=====
+   分流靠 scripts/image-figure.js 在渲染阶段定结构，CSS 只管两套外观：
+     无 alt 的裸图 → .vw-img          柔影悬浮（安静，笔记截图用）
+     有 alt 的图   → figure.vw-figure  相纸白框 + 图注（重点图/立绘用）
+   hover 一律只加深阴影 + 上浮 2px，不带颜色
+   （原来复用 B 站视频卡的橙色描边会顶掉黑柔影，反而越悬停越平）。 */
+
+/* ⚠⚠ 必须先放开 fancybox 外层的裁剪，否则下面所有阴影/描边都是白写。
+   主题 add2.css 有一条全局 `.fancybox{display:flex;flex-flow:column;overflow:hidden;...}`，
+   而 fancybox 在客户端会把每张正文图包进 <a class="fancybox">。那个 a 是 flex 列容器：
+     · 宽度 = 图片宽度 → 左右零余量，横宽的图左右阴影全被切
+     · 上边界 = 图片上沿（img 的 margin 只在下方）→ 向上蔓延的阴影被切
+     · hover 的 translateY(-2px) 把图片顶出 a → 上边缘真被裁掉
+   于是必须放开正文范围内 a 的裁剪（图库除外，它靠这层 overflow 裁 2px 圆角）。 */
+#article-container a.fancybox {
+  overflow: visible;
+}
+#article-container .justified-gallery a.fancybox,
+#article-container div.gallery a.fancybox {
+  overflow: hidden;
+}
+
+#article-container img.vw-img {
+  display: block;
+  margin: 0 auto 1.2rem;
+  border-radius: 12px;
+  /* 档 1：描边给轮廓（白底图在白卡上不再消失）+ 贴边影给存在感。
+     ⚠ 模糊半径要小：14px 会把那点暗度摊成雾，6px 才是贴着下沿的一条暗带 */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .07), 0 2px 6px rgba(0, 0, 0, .16);
+  transition: box-shadow .25s, transform .25s;
+}
+[data-theme=dark] #article-container img.vw-img {
+  /* 暗色下黑影基本失效（黑底上画黑影等于没画），轮廓全靠这圈白描边 */
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .1), 0 2px 6px rgba(0, 0, 0, .5);
+}
+/* hover：切到档 2 —— 接触影变松 + 多一层远影，就是「图被抬起」的物理表现。
+   不引入任何颜色（原来的 3px 橙框会顶掉黑柔影，反而更平、更突兀） */
+#article-container img.vw-img:hover {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .07), 0 3px 6px rgba(0, 0, 0, .1), 0 10px 26px rgba(0, 0, 0, .18);
+  transform: translateY(-2px);
+}
+[data-theme=dark] #article-container img.vw-img:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 3px 6px rgba(0, 0, 0, .45), 0 10px 26px rgba(0, 0, 0, .5);
+}
+
+/* —— 相纸白框 ——
+   纸 = 主题表面色（亮 #fff / 暗 --note-bg #1e1e1e，与 note 底同档），
+   靠一圈 1px 细边 + 柔影立起来；图注占下缘那圈加厚留白。
+   ⚠ 暗色下的相纸是「比卡片亮半档」而不是纯白——暗页面糊一块白太刺眼。 */
+#article-container figure.vw-figure {
+  --photo-bg: #fdfaf4;
+  --photo-cap: #8b857c;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 1.4rem;
+  padding: 8px 8px 0;
+  border-radius: 4px;
+  background: var(--photo-bg);
+  /* 纸用暖白（不是纯白）：亮色下卡片底是 #fff，纯白纸等于没有纸。
+     暖白给「纸 vs 卡片」一层色温差，1px 纸边再给一层明暗差 */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .13), 0 6px 18px rgba(0, 0, 0, .14);
+  transition: box-shadow .25s, transform .25s;
+}
+[data-theme=dark] #article-container figure.vw-figure {
+  --photo-bg: #231f1a;
+  --photo-cap: #9d978e;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 6px 18px rgba(0, 0, 0, .6);
+}
+#article-container figure.vw-figure:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .13), 0 12px 30px rgba(0, 0, 0, .2);
+}
+[data-theme=dark] #article-container figure.vw-figure:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 12px 30px rgba(0, 0, 0, .7);
+}
+
+/* 相纸内的图：直角感（纸不跟卡片一样圆）+ 一圈细线。
+   ⚠ 这圈线是「图 vs 纸」唯一的边界：白底截图贴在纸上，不写它就糊成一片，
+     留白再宽也没用
+   ⚠ fancybox 会在客户端把 img 包进 <a>，所以 a 也要显式变块级，否则 img 的 100% 基准会飘 */
+#article-container .vw-figure > a.fancybox {
+  display: block;
+}
+#article-container .vw-figure img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .09);
+}
+[data-theme=dark] #article-container .vw-figure img {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .12);
+}
+
+/* 图注：下缘加厚留白里的那行小字 */
+#article-container .vw-figure > figcaption {
+  padding: 9px 6px 11px;
+  font-size: .85em;
+  line-height: 1.55;
+  text-align: center;
+  color: var(--photo-cap);
 }
