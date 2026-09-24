@@ -2074,3 +2074,360 @@ body #article-container .timeline .timenode:hover .body {
   text-align: center;
   color: var(--photo-cap);
 }
+
+/* ===== Gitalk 评论区 → 站内色板适配（2026-09-24 定稿·纯调色） ===== */
+/* 定位：只把 Gitalk 自带的「GitHub 蓝 / 灰 / 白」换成站内糖果芒果橙(亮) / 红棕(暗)。
+   不动 DOM、不改 gitalk.pug、不加 JS；主色消费站内 --color-*，
+   以后改 characters.yml 的角色色板，评论框跟着变。
+   三个必须绕开的机关（改本段前先读）：
+     ① 权重：gitalk.css 由 gitalk.pug 在页面运行时才 append 进 <head>，排在 custom.css 之后 →
+        裸写 .gt-xxx 会被它压掉。故本段选择器一律带 #gitalk-container 前缀（id 权重更高）。
+     ② 暗色滤镜：主题 darkmode.styl 给 #gitalk-container 挂了 filter:brightness(.8)，
+        会把调好的红棕一并压灰 → 暗色第一条先 filter:none 关掉。
+     ③ 暗色图标：同处还挂了 #gitalk-container svg{fill:#fff!important} → 要改回主色
+        必须 !important 且用 html[data-theme=dark] 前缀抬权重。
+   甲乙分工：亮色主按钮取乙(--color-accent-2 深橙，白字更好读)；
+             暗色主按钮取甲(--color-accent 主红)。 */
+
+/* ---------- 亮色（默认） ---------- */
+
+/* 容器基线：未登录 / 加载中 / 报错态（.gt-no-init / .gt-initing / .gt-error）的文字
+   直接继承这里 —— 实测暗色下向上继承到的仍是亮色正文色(#4c4948)，会深字压深底，
+   所以两态都必须显式接管。 */
+#gitalk-container {
+  color: #4c4948;
+}
+
+/* 链接 / 用户名 / 提示 / 图标 */
+#gitalk-container a,
+#gitalk-container .gt-comment-username,
+#gitalk-container .gt-header-controls-tip {
+  color: var(--color-accent);
+}
+#gitalk-container a:hover {
+  color: var(--color-accent-2);
+  border-color: var(--color-accent-2);
+}
+#gitalk-container a.is--active,
+#gitalk-container a.is--active:hover {
+  color: #4c4948;            /* 当前 tab 不该发光，用正文色 */
+}
+#gitalk-container svg {
+  fill: var(--color-accent);
+}
+#gitalk-container .gt-link {
+  border-bottom-color: var(--color-accent);
+}
+#gitalk-container .gt-popup .gt-action.is--active:before {
+  background: var(--color-accent);
+}
+
+/* 输入框 / 预览区 */
+#gitalk-container .gt-header-textarea,
+#gitalk-container .gt-header-preview {
+  background-color: #fdf5ef;              /* 极浅暖橙：与纯白页面拉开一层 */
+  border-color: rgba(255, 154, 92, .3);
+  color: #4c4948;
+}
+#gitalk-container .gt-header-textarea:hover {
+  background-color: #fff8f2;
+}
+#gitalk-container .gt-header-textarea::placeholder {
+  color: rgba(0, 0, 0, .35);
+}
+
+/* 按钮：主 = 乙(--color-accent-2)；预览 = 白底 + accent 描边 */
+#gitalk-container .gt-btn {
+  background-color: var(--color-accent-2);
+  border-color: var(--color-accent-2);
+  color: #fff;
+}
+#gitalk-container .gt-btn-public:hover {
+  background-color: #ff8b52;
+  border-color: #ff8b52;
+}
+#gitalk-container .gt-btn-preview {
+  background-color: #fff;
+  border-color: var(--color-border);
+  color: var(--color-accent);
+}
+#gitalk-container .gt-btn-preview:hover {
+  background-color: #fff5ee;
+  border-color: var(--color-accent-2);
+  color: var(--color-accent-2);
+}
+#gitalk-container .gt-spinner::before {
+  border-color: rgba(255, 255, 255, .5);
+  border-top-color: #fff;
+}
+#gitalk-container .gt-loader {
+  border-color: rgba(0, 0, 0, .2);
+}
+#gitalk-container .gt-loader:before {
+  background-color: var(--color-accent);
+}
+
+/* 评论列表 */
+#gitalk-container .gt-meta {
+  border-bottom-color: var(--line);
+}
+#gitalk-container .gt-version,
+#gitalk-container .gt-comment-text,
+#gitalk-container .gt-comment-date {
+  color: #a08c7d;
+}
+#gitalk-container .gt-comment-content {
+  background-color: #fdf7f3;
+}
+#gitalk-container .gt-comment-content:hover {
+  box-shadow: 0 .625em 2em 0 var(--color-shadow);
+}
+#gitalk-container .gt-comment-admin .gt-comment-content {
+  background-color: #fff2e6;              /* 博主自己的评论：淡橙标记 */
+}
+#gitalk-container .gt-comment-body {
+  color: #4c4948 !important;              /* 原规则带 !important，需同级覆盖 */
+}
+#gitalk-container .gt-copyright {
+  border-top-color: var(--line);
+}
+#gitalk-container .gt-popup {
+  background: #fff;
+  border-color: var(--line);
+}
+#gitalk-container .gt-error {
+  color: #d94a45;
+}
+
+/* 评论 / 预览里的 markdown 正文（Gitalk 内嵌了整套 github-markdown 配色，不盖就漏白块） */
+#gitalk-container .markdown-body {
+  color: #4c4948;
+}
+#gitalk-container .markdown-body a {
+  color: var(--color-accent);
+}
+#gitalk-container .markdown-body h1,
+#gitalk-container .markdown-body h2 {
+  border-bottom-color: var(--line);
+}
+#gitalk-container .markdown-body h6 {
+  color: #a08c7d;
+}
+#gitalk-container .markdown-body hr {
+  background-color: var(--line);
+}
+#gitalk-container .markdown-body blockquote {
+  color: #a08c7d;
+  border-left-color: var(--color-border);
+}
+#gitalk-container .markdown-body code {
+  background-color: rgba(255, 154, 92, .14);
+  color: #b8562a;
+}
+#gitalk-container .markdown-body pre,
+#gitalk-container .markdown-body .highlight pre {
+  background-color: #fdf3ea;
+}
+#gitalk-container .markdown-body pre code {
+  background-color: transparent;
+  color: inherit;
+}
+#gitalk-container .markdown-body table th,
+#gitalk-container .markdown-body table td {
+  border-color: var(--line);
+}
+#gitalk-container .markdown-body table tr {
+  background-color: #fff;
+  border-top-color: var(--line);
+}
+#gitalk-container .markdown-body table tr:nth-child(2n) {
+  background-color: #fdf7f3;
+}
+#gitalk-container .markdown-body img {
+  background-color: transparent;
+}
+#gitalk-container .markdown-body kbd {
+  color: #4c4948;
+  background-color: #fdf3ea;
+  border-color: var(--line);
+  box-shadow: none;
+}
+#gitalk-container .markdown-body .email-hidden-toggle a {
+  color: #4c4948;
+  background: rgba(255, 154, 92, .18);
+}
+#gitalk-container .markdown-body .email-hidden-reply .email-signature-reply {
+  color: #a08c7d;
+  border-left-color: var(--line);
+}
+
+/* ---------- 暗色 ---------- */
+
+/* ① 先关掉主题的整体压暗滤镜：不关的话下面调好的红棕会被一起压灰
+   同时接管容器基线字色（未登录/加载/报错态的文字靠继承，见亮色段说明） */
+html[data-theme=dark] #gitalk-container {
+  filter: none !important;
+  color: #ded8d2;
+}
+/* ③ 图标：主题给 #gitalk-container 下所有 svg 挂了白色 !important，抬权重 + !important 改回主红 */
+html[data-theme=dark] #gitalk-container svg {
+  fill: var(--color-accent) !important;
+}
+
+html[data-theme=dark] #gitalk-container a,
+html[data-theme=dark] #gitalk-container .gt-comment-username,
+html[data-theme=dark] #gitalk-container .gt-header-controls-tip {
+  color: var(--color-accent);
+}
+html[data-theme=dark] #gitalk-container a:hover {
+  color: #e5736b;
+  border-color: #e5736b;
+}
+html[data-theme=dark] #gitalk-container a.is--active,
+html[data-theme=dark] #gitalk-container a.is--active:hover {
+  color: #ded8d2;
+}
+html[data-theme=dark] #gitalk-container .gt-link {
+  border-bottom-color: var(--color-accent);
+}
+html[data-theme=dark] #gitalk-container .gt-popup .gt-action.is--active:before {
+  background: var(--color-accent);
+}
+
+/* 输入框 / 预览区：统一到暗色 note 底(#1e1e1e)，边界靠白细线（黑影在暗色无效） */
+html[data-theme=dark] #gitalk-container .gt-header-textarea,
+html[data-theme=dark] #gitalk-container .gt-header-preview {
+  background-color: var(--note-bg);
+  border-color: rgba(255, 255, 255, .12);
+  color: #ded8d2;
+}
+html[data-theme=dark] #gitalk-container .gt-header-textarea:hover {
+  background-color: #242424;
+}
+html[data-theme=dark] #gitalk-container .gt-header-textarea::placeholder {
+  color: rgba(255, 255, 255, .35);
+}
+
+/* 按钮：主 = 甲(--color-accent)；预览 = 透明底 + 主红描边 */
+html[data-theme=dark] #gitalk-container .gt-btn {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+html[data-theme=dark] #gitalk-container .gt-btn-public:hover {
+  background-color: #e06058;
+  border-color: #e06058;
+}
+html[data-theme=dark] #gitalk-container .gt-btn-preview {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-accent);
+}
+html[data-theme=dark] #gitalk-container .gt-btn-preview:hover {
+  background-color: rgba(212, 79, 71, .14);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+html[data-theme=dark] #gitalk-container .gt-loader {
+  border-color: rgba(255, 255, 255, .25);
+}
+html[data-theme=dark] #gitalk-container .gt-loader:before {
+  background-color: var(--color-accent);
+}
+
+/* 评论列表 */
+html[data-theme=dark] #gitalk-container .gt-meta,
+html[data-theme=dark] #gitalk-container .gt-copyright {
+  border-color: var(--line);
+}
+html[data-theme=dark] #gitalk-container .gt-version,
+html[data-theme=dark] #gitalk-container .gt-comment-text,
+html[data-theme=dark] #gitalk-container .gt-comment-date {
+  color: rgba(255, 255, 255, .55);
+}
+html[data-theme=dark] #gitalk-container .gt-comment-content {
+  background-color: var(--note-bg);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .08);
+}
+html[data-theme=dark] #gitalk-container .gt-comment-content:hover {
+  box-shadow: 0 0 0 1px var(--color-border), 0 6px 20px rgba(0, 0, 0, .5);
+}
+html[data-theme=dark] #gitalk-container .gt-comment-admin .gt-comment-content {
+  background-color: #2a1a15;              /* 博主评论：暖棕标记 */
+}
+html[data-theme=dark] #gitalk-container .gt-comment-body {
+  color: #ded8d2 !important;
+}
+html[data-theme=dark] #gitalk-container .gt-popup {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, .12);
+}
+html[data-theme=dark] #gitalk-container .gt-error {
+  color: #e5736b;
+}
+
+/* markdown 正文 */
+html[data-theme=dark] #gitalk-container .markdown-body {
+  color: #ded8d2;
+}
+html[data-theme=dark] #gitalk-container .markdown-body a {
+  color: var(--color-accent);
+}
+html[data-theme=dark] #gitalk-container .markdown-body h1,
+html[data-theme=dark] #gitalk-container .markdown-body h2 {
+  border-bottom-color: var(--line);
+}
+html[data-theme=dark] #gitalk-container .markdown-body h6 {
+  color: rgba(255, 255, 255, .55);
+}
+html[data-theme=dark] #gitalk-container .markdown-body hr {
+  background-color: var(--line);
+}
+html[data-theme=dark] #gitalk-container .markdown-body blockquote {
+  color: rgba(255, 255, 255, .55);
+  border-left-color: var(--color-border);
+}
+html[data-theme=dark] #gitalk-container .markdown-body code {
+  background-color: rgba(255, 255, 255, .12);
+  color: inherit;
+}
+/* 代码块：保留暖浅底 + 强制深字。Gitalk 内嵌 30+ 条语法高亮 token 色(.pl-*)全是深色系，
+   改深底会让它们集体不可读；保持浅底最稳。
+   ⚠ 必须显式给 pre 定深字：正文那条 #ded8d2 会被 pre 内文字继承，压浅底就全瞎。 */
+html[data-theme=dark] #gitalk-container .markdown-body pre,
+html[data-theme=dark] #gitalk-container .markdown-body .highlight pre {
+  background-color: #efe9e3;
+  color: #24292e;
+}
+html[data-theme=dark] #gitalk-container .markdown-body pre code {
+  background-color: transparent;
+  color: inherit;
+}
+html[data-theme=dark] #gitalk-container .markdown-body table th,
+html[data-theme=dark] #gitalk-container .markdown-body table td {
+  border-color: var(--line);
+}
+html[data-theme=dark] #gitalk-container .markdown-body table tr {
+  background-color: transparent;
+  border-top-color: var(--line);
+}
+html[data-theme=dark] #gitalk-container .markdown-body table tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, .04);
+}
+html[data-theme=dark] #gitalk-container .markdown-body img {
+  background-color: transparent;
+}
+html[data-theme=dark] #gitalk-container .markdown-body kbd {
+  color: #ded8d2;
+  background-color: #2b2b2b;
+  border-color: rgba(255, 255, 255, .16);
+  box-shadow: none;
+}
+html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-toggle a {
+  color: #ded8d2;
+  background: rgba(255, 255, 255, .14);
+}
+html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-reply .email-signature-reply {
+  color: rgba(255, 255, 255, .55);
+  border-left-color: rgba(255, 255, 255, .14);
+}
