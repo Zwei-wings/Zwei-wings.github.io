@@ -2431,3 +2431,115 @@ html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-reply .emai
   color: rgba(255, 255, 255, .55);
   border-left-color: rgba(255, 255, 255, .14);
 }
+
+/* ===== 不蒜子（busuanzi）故障期间的临时隐藏 =====
+   2026-10-05：busuanzi.ibruce.info 后端挂了（同 host 静态 JS 仍 200，
+   但计数接口 /busuanzi 持续 502 + 超时），页面上三个数字全填不上 → 先藏起来。
+   共三处：文章页顶部「阅读量」、列表页侧栏「本站访客数／本站总访问量」。
+   ⚠ 脚本仍照常加载：服务恢复后计数会继续累积，删掉本段即可让数字重新显示。 */
+
+/* 1) 文章页顶部「阅读量」整栏——连它前面那个 | 分隔符一起藏（分隔符是它的前一个兄弟） */
+.post-meta-pv-cv,
+.post-meta-separator:has(+ .post-meta-pv-cv) {
+  display: none;
+}
+
+/* 2) 侧栏「网站资讯」里两行不蒜子数字。
+      .webinfo-item 没有专属类名（同一个类也用于文章数目／已运行时间／最后更新时间），
+      所以只能靠 :has() 反查里面是不是装的不蒜子槽位——这样不会误伤另外三行。
+      ⚠ 必须 !important：主题自带规则 `#aside-content .card-webinfo .webinfo .webinfo-item`
+      权重 (1,3,0)，而 `.webinfo-item:has(#id)` 只算 (1,1,0)，不加会被它压掉、display 仍是 flex
+      （2026-10-05 第一次就栽在这：规则加载了、就是不生效）。 */
+.webinfo-item:has(#busuanzi_value_site_uv),
+.webinfo-item:has(#busuanzi_value_site_pv) {
+  display: none !important;
+}
+
+/* ============================================================
+   ⑳ 分享栏（share.js）：新增「复制链接」按钮 + 微信二维码弹层暗色适配
+   ============================================================
+   两件事，都落在同一排元素上，但互不相干：
+     ① 「复制链接」按钮 —— 三个平台图标（QQ/微信/微博）**保持原品牌色不动**，
+        新按钮走站内橙/红。造型完全复用 .social-share-icon，不另写一套尺寸。
+        逻辑与"为什么自己写"见 source/js/share-copy.js 头部注释。
+     ② 微信二维码弹层 —— share.js 把弹层底色**写死成 #fff**，暗色下会弹出一整块白板。
+        2026-10-05 headless 实测（暗色页面）：bg rgb(255,255,255)、h4 条 rgb(243,243,243)、
+        字 rgb(102,102,102)/rgb(119,119,119)、阴影 rgb(170,170,170)。
+        这里只换外壳；二维码本体是 base64 PNG、**自带白底黑点**，必须保持原样，
+        否则反相后在暗色底上根本扫不出来。
+
+   色值来源（跟站内 note / btn / 标签同一套槽）：
+     亮 #ff7a3d（= var(--color-accent-2)）   暗 #d44f47（= var(--color-accent)）
+   ⚠ 为什么一路 !important：share.js 自带
+      `.social-share .social-share-icon:hover { background:#666; color:#fff }`，权重 (0,3,0)，
+      与本段同级且在前 —— 不加 !important 会被它抢走 hover 底色（灰色）。
+   ⚠ 本按钮内部**只允许放 SVG、不写任何文字**：share.js 的
+      `.social-share * { font-family:"socialshare" !important }` 会把容器内一切文字
+      强制换成图标字体（变成空框）。SVG 走 stroke 画笔，不吃字体，才安全。
+   回退：删本段 + 撤掉 source/js/share-copy.js 与其在 _config.butterfly.yml 的引用行。
+   ============================================================ */
+
+/* ①-a 复制按钮（亮色）：尺寸位置全部沿用 .social-share-icon，只改颜色 */
+.social-share .social-share-icon.vw-share-copy {
+  color: #ff7a3d !important;
+  border-color: #ff7a3d !important;
+}
+.social-share .social-share-icon.vw-share-copy:hover {
+  background: #ff7a3d !important;
+  border-color: #ff7a3d !important;
+  color: #fff !important;
+}
+
+/* ①-b 按钮内的内联 SVG：1em 见方（em 基准 = 图标的 1.2em 字号），垂直居中 */
+.social-share .vw-share-copy svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+/* ①-c 复制成功态：短暂换成对勾 + 填实底。
+       触屏没有 :hover，所以 .is-done 必须自己带底色，不能只靠 hover。 */
+.social-share .social-share-icon.vw-share-copy.is-done {
+  background: #ff7a3d !important;
+  border-color: #ff7a3d !important;
+  color: #fff !important;
+}
+
+/* ①-d 复制失败态（极少触发）：图标压淡，title 里说明原因。
+       附带一个用途：headless 取证时它就是「点击确实绑上了事件」的证据 ——
+       剪贴板权限被环境拒掉时会亮起来，若它也一直不亮，说明事件没绑上。 */
+.social-share .social-share-icon.vw-share-copy.is-fail {
+  opacity: .4;
+}
+
+/* ①-e 复制按钮（暗色） */
+[data-theme=dark] .social-share .social-share-icon.vw-share-copy {
+  color: #d44f47 !important;
+  border-color: #d44f47 !important;
+}
+[data-theme=dark] .social-share .social-share-icon.vw-share-copy:hover,
+[data-theme=dark] .social-share .social-share-icon.vw-share-copy.is-done {
+  background: #d44f47 !important;
+  border-color: #d44f47 !important;
+  color: #fff !important;
+}
+
+/* ② 微信二维码弹层（暗色）：写死的白壳换成主题变量 */
+[data-theme=dark] .social-share .icon-wechat .wechat-qrcode {
+  background-color: var(--card-bg);
+  border-color: var(--line);
+  color: var(--font-color);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .55);
+}
+[data-theme=dark] .social-share .icon-wechat .wechat-qrcode h4 {
+  background-color: var(--note-bg);
+  color: var(--font-color);
+}
+/* 底部那个指向图标的小三角原本写死 #fff，得跟着外壳走 */
+[data-theme=dark] .social-share .icon-wechat .wechat-qrcode:after {
+  border-color: var(--card-bg) transparent transparent transparent;
+}
+/* 二维码本体保持白底（PNG 自带），只加圆角，让它像一枚嵌进深色卡的贴纸 */
+[data-theme=dark] .social-share .icon-wechat .wechat-qrcode .qrcode img {
+  border-radius: 4px;
+}
