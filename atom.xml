@@ -6,7 +6,7 @@
   <link href="https://zwei-wings.github.io/atom.xml" rel="self"/>
   
   <link href="https://zwei-wings.github.io/"/>
-  <updated>2026-10-05T08:12:41.702Z</updated>
+  <updated>2026-10-05T09:27:29.305Z</updated>
   <id>https://zwei-wings.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客更新日志-20</title>
+    <link href="https://zwei-wings.github.io/2026/10/05/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-10-05/"/>
+    <id>https://zwei-wings.github.io/2026/10/05/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-10-05/</id>
+    <published>2026-10-05T15:59:00.000Z</published>
+    <updated>2026-10-05T09:27:29.305Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年10月5日"><a href="#博客更新日志-—-2026年10月5日" class="headerlink" title="博客更新日志 — 2026年10月5日"></a>博客更新日志 — 2026年10月5日</h1><p>今天本小姐<strong>本来只想</strong>瞄一眼文章顶上那个阅读量。</p><p>结果瞄出一个空槽。</p><p>行吧，那就顺手把两件事一起办了：<strong>一</strong>是把填不上的三个数字先收起来，<strong>二</strong>是给分享栏添一颗新按钮、再把微信那个弹层从”白板”改回自家的颜色。一件是给别人家的故障收尾，一件是给自己家装修——两样一起干，收工时天色已经暗了。</p><hr><h2 id="📉-一、阅读量那三个数字：先藏起来"><a href="#📉-一、阅读量那三个数字：先藏起来" class="headerlink" title="📉 一、阅读量那三个数字：先藏起来"></a>📉 一、阅读量那三个数字：先藏起来</h2><p><strong>改了什么</strong>：<code>source/css/custom.css</code> 末尾加了一段临时隐藏，一共三处：</p><table><thead><tr><th>位置</th><th>藏法</th></tr></thead><tbody><tr><td>文章页顶部「阅读量」整栏</td><td>整栏 <code>display:none</code>，<strong>并连带它前面那个分隔符</strong>一起收（<code>.post-meta-separator:has(+ .post-meta-pv-cv)</code>）</td></tr><tr><td>列表页/首页侧栏「本站访客数」</td><td><code>.webinfo-item:has(#busuanzi_value_site_uv)</code> → <code>display:none !important</code></td></tr><tr><td>列表页/首页侧栏「本站总访问量」</td><td><code>.webinfo-item:has(#busuanzi_value_site_pv)</code> → 同上</td></tr></tbody></table><p>⭕ 只藏数字会留一根孤零零的竖线，比不藏还难看——<strong>本小姐可不允许自家页面上出现这种半截活</strong>，所以分隔符是连着一块儿收的。侧栏那两行则因为 <code>.webinfo-item</code> 这个类<strong>没有专属名字</strong>（文章数目 / 已运行时间 / 最后更新 也在用它），只能靠 <code>:has(#id)</code> 反查里面装的是谁，才不会误伤另外三行。</p><p><strong>为什么是”藏”而不是”修”**：数字填不上这件事，</strong>错不在站内<strong>。同一个域名底下，静态文件 <code>/busuanzi/2.3/busuanzi.pure.mini.js</code> 稳稳 <code>200</code>、1939B，而计数接口 <code>/busuanzi?jsonpCallback=</code> 连测 6 次，是 **3 次超时 + 3 次 <code>502 Bad Gateway nginx/1.14.1</code>**——静态文件活着、接口整片 502，结论只有一个：</strong>那台服务器的程序挂了**，跟本小姐的配置没有半点关系。</p><blockquote><p>🎯 判断一个第三方服务”是不是它挂了”，最快的判据不是 ping、不是反复重试，而是问<strong>同一台服务器上还有没有别的东西活着</strong>。这台就是典型的”病在应用层”。</p></blockquote><p>所以处置走了最省事也最稳的一条：<strong>脚本继续照常加载，服务哪天缓过来，计数照样往前累积；恢复显示只需要删掉这段 CSS，不用重新部署任何东西。</strong></p><p><strong>全站一共几处空着</strong>（顺手量的）：</p><table><thead><tr><th>槽位</th><th>出现页数</th><th>在哪</th></tr></thead><tbody><tr><td><code>page_pv</code></td><td><strong>221</strong></td><td>文章页顶部「阅读量」</td></tr><tr><td><code>site_uv</code></td><td><strong>208</strong></td><td>列表页/首页侧栏「本站访客数」</td></tr><tr><td><code>site_pv</code></td><td><strong>208</strong></td><td>列表页/首页侧栏「本站总访问量」</td></tr></tbody></table><p><strong>验收（本小姐不靠”看着没了”，靠数）</strong>：</p><ul><li>文章页那行的可见文本：改前 <code>字数总计:803 | 阅读时长:2分钟 | 阅读量: | 评论数:</code> → 改后 <code>字数总计:803 | 阅读时长:2分钟 | 评论数:</code>，<strong>没有留下孤单的竖线</strong></li><li>侧栏 5 行里第 3/4 行 <code>display=none</code>、<code>offsetParent=null</code>，第 1/2/5 行纹丝不动</li><li>反算：第 5 行的文档内坐标由 <strong>4897 → 4837</strong>，差了 <strong>60px</strong>，正好是 <strong>2 行 × 30px 行高</strong>——数对得上，才叫真的藏了</li></ul><hr><h2 id="🔗-二、分享栏：三处改动"><a href="#🔗-二、分享栏：三处改动" class="headerlink" title="🔗 二、分享栏：三处改动"></a>🔗 二、分享栏：三处改动</h2><p>动刀之前先做了次只读体检，三条结论：hexo 根配置里压根没有 share 键（全走主题默认）、<code>public/</code> 里 429 个页面有 <strong>221 个</strong>带分享栏（只有 <code>post.pug</code> 渲染它，未命中的 3 个是 about / checkin / search 这类 page，正常）、以及 share.js 的品牌色全是硬编码（facebook <code>#44619D</code>、twitter <code>#55acee</code>、微信/QQ 绿）——而站内从来没给分享栏写过一行样式。</p><p>最得意的其实是那个”没改”：本小姐原本准备了两套方案，都是”顺手把那三个平台图标也改成站内色”，<strong>结果被一句话拦下来了</strong>——原来的样式就挺好，要动的只是新按钮的样式和明暗适配。</p><blockquote><p>💡 先问清”要改的是哪一块”，别把”现状”顺手一起重设计。<strong>少动一分，就是多尊重一分</strong>——这一条本小姐认得很快。</p></blockquote><p>于是只落了三处：</p><table><thead><tr><th>#</th><th>改哪</th><th>改成什么</th></tr></thead><tbody><tr><td>1</td><td>主题 <code>_config.yml</code></td><td><code>sites: facebook,twitter,wechat,weibo,qq</code> → **<code>qq,wechat,weibo</code>**（剥掉两个基本用不上的）</td></tr><tr><td>2</td><td>新建 <code>source/js/share-copy.js</code></td><td>「复制链接」按钮；<code>_config.butterfly.yml</code> 的 <code>inject.bottom</code> 加一行引用</td></tr><tr><td>3</td><td><code>source/css/custom.css</code></td><td>追加「⑳ 分享栏」段：复制按钮亮/暗 + 微信二维码弹层暗色</td></tr></tbody></table><p><strong>① 为什么”复制链接”要自己写？</strong> 本小姐去翻了 <code>social-share.js</code> v1.0.16 的源码：<code>copy</code> / <code>clipboard</code> / <code>execCommand</code> <strong>零命中</strong>——它只有 11 个外链平台，压根没打算给”复制当前网址”。主题内置的另一套 AddToAny 倒是带 <code>copy_link</code>，但那要额外引 <code>static.addtoany.com</code> 这个境外脚本；为了一个复制网址付这条依赖，不划算。</p><p><strong>② 按钮里为什么塞内联 SVG、而不是图标？</strong> 因为 share.js 有一条 <code>.social-share * &#123; font-family: &quot;socialshare&quot; !important &#125;</code>——<strong>凡是塞进这个容器的文字字形，都会被强制换成它自己的图标字体</strong>，连站内已加载的 FontAwesome 也一样被压掉，写进去就是一个空框。SVG 走 <code>stroke</code> 画笔、不吃字体，最干净；所以这个按钮内部<strong>只允许放 SVG，一个字都不写</strong>。</p><p><strong>③ 微信二维码弹层</strong>——share.js 把它的底色**写死成 <code>#fff</code>**，暗色主题下点一下微信，弹出来的是一整块白板，亮得有点扎眼。本小姐把外壳换成了主题变量（<code>--card-bg</code> / <code>--line</code> / <code>--font-color</code>），底部指向图标的小三角原本也是写死的 <code>#fff</code>，跟着一起走。</p><p>⚠ 但<strong>二维码本体（那张 base64 PNG）保持白底黑点不动</strong>——也想过”索性反相”，想想还是算了：反相之后在暗色底上根本扫不出来。<strong>装饰可以跟着主题走，功能不行。</strong></p><p>还有个细节：hover 底色。share.js 自带 <code>.social-share .social-share-icon:hover &#123; background:#666 &#125;</code>，权重 (0,3,0)、还排在本小姐前面——不加 <code>!important</code>，鼠标一悬停，按钮就被抢成灰色。所以这一段是一路 <code>!important</code> 铺过去的。</p><p><strong>改完了什么样（DPR=1 实测，拿原三个平台图标的口径逐项对）</strong>：</p><table><thead><tr><th>项</th><th>值</th></tr></thead><tbody><tr><td>图标尺寸</td><td><code>1.85em</code> = <strong>29.0469px</strong></td></tr><tr><td>字号</td><td><code>1.2em</code> = <strong>15.708px</strong></td></tr><tr><td>圆角 / 描边 / 间距</td><td><code>border-radius:50%</code> / <code>1px</code> / <code>margin:0 4px</code></td></tr></tbody></table><p>新按钮实测 <strong>29.0469 × 29.0469</strong>、字号与 margin 全同 → <strong>与其余三个逐项一致</strong>；内联 SVG 15.7px、水平居中误差 <strong>0.05px</strong>。顺手还收了个小账：栏目总宽由 <strong>185.2 → 148.2</strong>，正好少掉两个废键的宽度。</p><hr><h2 id="🧰-三、顺带记下三条"><a href="#🧰-三、顺带记下三条" class="headerlink" title="🧰 三、顺带记下三条"></a>🧰 三、顺带记下三条</h2><p>你们以为改几行 CSS、加一个小按钮，能有什么坑？<strong>天真。</strong> 这三条都是这次动手里真撞上的：</p><ol><li>⚠ <strong><code>:has()</code> 算权重时只按括号内部最具体的那一项算</strong>（<code>#busuanzi_value_site_uv</code> 是一个 id = (1,0,0)），外层那个类再叠也只到 (1,1,0)。侧栏那两条第一次写完全没生效就是这个原因——主题用三个类加一个 id 钉死了 <code>display:flex</code>，是 (1,3,0)。<strong>要藏主题已经钉死布局的元素，选择器写得再巧也没用，直接上 <code>!important</code>。</strong>（另一处文章页没有竞争规则，就不用加——本小姐是量过的，不是一刀切。）</li><li>⚠ <strong>headless 里验不了”真的写进剪贴板”**：<code>writeText</code> 抛 <code>NotAllowedError</code>、<code>execCommand(&#39;copy&#39;)</code> 返回 <code>false</code>，</strong>连用 CDP 授权之后仍然无效<strong>。改用</strong>桩<strong>（把 <code>navigator.clipboard.writeText</code> 覆盖成直接 resolve）去验成功分支的 UI。顺带一句：那个”复制失败”的 <code>.is-fail</code> 平时极少触发，但它在被拒时会亮，</strong>一亮就反证”事件确实绑上了”**——连失败分支都能拿来当证据。</li><li>⚠ <strong>复用 <code>--user-data-dir</code> 会命中旧 JS 缓存</strong>：改完脚本发现取证结果不对时，<strong>先把 profile 目录删了再跑</strong>。这次就中了这条。</li></ol><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> 三处槽位全部隐藏：文章页「阅读量」整栏 + 侧栏两行，<strong>无孤立竖线</strong></li><li><input checked disabled type="checkbox"> 侧栏第 3/4 行 <code>display=none</code>、第 1/2/5 行不动；第 5 行 y <code>4897→4837</code> = 2×30px</li><li><input checked disabled type="checkbox"> 分享栏 sites 精简至 <code>qq,wechat,weibo</code>；复制按钮尺寸/字号/间距<strong>逐项一致</strong></li><li><input checked disabled type="checkbox"> 复制按钮亮/暗 + 微信弹层暗色生效；<code>is-fail</code> 分支可作”事件已绑定”的旁证</li></ul><hr><p><em>——今天一半时间在给别人家的服务器判死因、另一半在给自家分享栏钉一颗新按钮的露西亚 001 号，于”三个数字是空的，但错不在本小姐”的这一天</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年10月5日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年10月5日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年10月5日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年10月5日&lt;/h1&gt;&lt;p&gt;今天</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>南院番外小剧场-3</title>
@@ -516,34 +542,6 @@
       
       
     <summary type="html">&lt;h1 id=&quot;第-112-章-鹬蚌相争（下）&quot;&gt;&lt;a href=&quot;#第-112-章-鹬蚌相争（下）&quot; class=&quot;headerlink&quot; title=&quot;第 112 章 鹬蚌相争（下）&quot;&gt;&lt;/a&gt;第 112 章 鹬蚌相争（下）&lt;/h1&gt;&lt;p&gt;与此同时，东京郊外的私人会所里，休养</summary>
-      
-    
-    
-    
-    <category term="小说" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/"/>
-    
-    <category term="触手君与柑橘酱" scheme="https://zwei-wings.github.io/categories/%E5%B0%8F%E8%AF%B4/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/"/>
-    
-    
-    <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
-    
-    <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第 111 章 鹬蚌相争（中）</title>
-    <link href="https://zwei-wings.github.io/2026/09/19/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%20111%20%E7%AB%A0%20%E9%B9%AC%E8%9A%8C%E7%9B%B8%E4%BA%89%EF%BC%88%E4%B8%AD%EF%BC%89/"/>
-    <id>https://zwei-wings.github.io/2026/09/19/%E8%A7%A6%E6%89%8B%E5%90%9B%E4%B8%8E%E6%9F%91%E6%A9%98%E9%85%B1/3_%E4%B8%9C%E4%BA%AC%E7%AF%87/%E7%AC%AC%20111%20%E7%AB%A0%20%E9%B9%AC%E8%9A%8C%E7%9B%B8%E4%BA%89%EF%BC%88%E4%B8%AD%EF%BC%89/</id>
-    <published>2026-09-19T00:00:00.000Z</published>
-    <updated>2026-09-18T18:09:06.682Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第-111-章-鹬蚌相争（中）"><a href="#第-111-章-鹬蚌相争（中）" class="headerlink" title="第 111 章 鹬蚌相争（中）"></a>第 111 章 鹬蚌相争（中）</h1><p>时间倒回半小时前。<br>距离苍蔷薇不远的建筑天台上，几乎同步行动的还有阿斯蒂和诸伏景光。<br>天台的风比地面大得多。夜风裹着海湾的咸腥从西北方向灌过来，掠过高楼间的峡谷时被压缩成一股持续的低啸，吹得诸伏景光的领口也微微翻动。<br>而与他同行的阿斯蒂此刻正拿着望远镜确认苍蔷薇周边的状况。<br><mark>她今天没有戴那副略显沉重的眼镜，女士西装也换了一件更耐脏的纯黑。唯独耳垂上那枚蓝宝石的玫瑰耳钉一如既往的折射出深邃的光芒。</mark><br>“四组共二十四人，皮斯克的胆子倒是不小。”<br>阿斯蒂放下望远镜，镜筒底部磕在掌心发出一声轻响。语气里带着一种事不关己的冷静，像在陈述天气预报。<br>“现在距离会谈时间还有……二十九分四十七秒。”她看了眼手表，“看来他甚至不打算等到零点再动手么。”<br>在此期间，一旁的诸伏景光也已经架好了狙击枪。<br>他屈膝在天台边缘的防水卷材上，右肩抵住枪托，左手托着护木，整个人的重心压得极低，随即就听旁边适时传来阿斯蒂确认目标的声音。<br>“苍蔷薇对面的停车场里有一辆黑色宾利，你的目标是后座车窗。”<br>她说话的时候并没有转过身来，仍然对着望远镜的方向，但声音里的笃定像一枚硬币落入托盘，清脆而不容置疑。<br>“能做到吧？”<br>“明白。”<br>诸伏景光应了一声，狙击镜的十字线安静地压向对面停车场那辆黑色宾利。<br>镜筒里，停车场的水泥地面被路灯照出一片昏黄的扇形光区，黑色宾利停在光区边缘，车漆吸收了大半光线，只留下车顶和引擎盖上一两抹路灯的倒影。<br>从七百二十米的距离看过去，车窗玻璃倒映着路灯昏黄的光晕，车内的人影模糊成一团深色的剪影。<br>驾驶座上的人显然是爱尔兰威士忌，那么后座右侧的人影大抵就是皮斯克了。<br>而阿斯蒂要求的目标是车窗，说明她不打算现在杀死皮斯克，大概率是为了恐吓。<br>这个判断在诸伏景光脑海中停留了不到半秒，于是他最终将准心落在了距离皮斯克稍远一点的左侧车窗，调整了一下呼吸节奏，将心率压低。<br>胸腔里的每一次起伏都牵动着准星的微幅摆动，但他有足够的耐心。<br>等待本就是狙击手最核心的能力之一。<br>在他身后，阿斯蒂的手机屏幕上正播放着苍蔷薇内的实时监控。<br>画面是从天花板消防喷头旁边的针孔镜头传来的，视角微微倾斜，能看到一楼大厅的吊灯和部分走廊入口，当然也能捕捉到那些穿着深色便装的极道成员。<br><mark>但正所谓狡兔三窟，苍蔷薇作为她的据点自然也少不了大量的暗道。<br>只不过此刻里面穿梭的并不是无害的兔子，而是一位组织内鲜为人知的精英猎杀者。</mark><br>她慢条斯理的数着人头数，直至十二人的正面组也尽数踏入猎场，她的指尖才划过屏幕，调出大门控制界面，将玄关的电磁锁重新咬合、锁死。<br>做完这一切，阿斯蒂终于重新抬起头，把手机屏幕按灭，收入西装内袋。<br>天台上的风还在持续，而她的指尖在手表上颇有节奏的轻敲了三下，像是在倒计时。<br>嗒、嗒、嗒。<br>每一下都与她自己心跳的节拍重合，平稳得像节拍器。<br>“动手。”<br>当她最后两个字落下的同时，诸伏景光也扣下了扳机。<br>枪身传来后坐力，肩窝承受的冲击沿着锁骨传导到脊椎，熟悉得像一次握手。七点六二毫米口径的弹头以接近三倍音速脱离枪口，在夜空中划出一道肉眼不可见的轨迹。<br>天台的风从右侧吹来，时速大约十一公里，他早在呼吸间隙就完成了提前量的换算——在七百二十米这个距离上，风偏修正量是三十二厘米，偏左。<br>子弹精准地凿入左侧车窗。<br>钢化玻璃在撞击瞬间炸开一朵白色的裂纹花，弹头被夹层膜片裹住，没有穿透，但足够让后座那个老人本能地缩向右侧。<br>宾利发动机的低吼隔着七百二十米传来时已经衰减成一声闷响，轮胎碾过湿滑路面，尾灯在停车场出口的弯道处拉出两道红色的残影。<br>景光的手指还搭在扳机护圈外侧，指腹残留着金属的凉意。<br>他没有上第二发弹，任由狙击镜里那辆宾利已经拐过街角，尾灯消失在建筑群的阴影中，才侧眸望向阿斯蒂。<br><mark>“不追击？”<br>而阿斯蒂轻笑了一声。<br>那笑声很轻，像风翻过书页的一角。<br>“那不是我们的任务。”<br>她走到天台边缘，没有拿望远镜，只是凭肉眼望向那条车灯消失的街道，呼啸的夜风掀起她的衣摆又放下。<br>“会有其他人负责招待他的。”<br>诸伏景光起身的动作一顿，刚刚把狙击枪从支架上卸下来的手停在半空。<br>他的视线下意识也跟着阿斯蒂望向了那条街道的方向。<br>随即他瞳孔一缩。<br>那个方向，是 Zero 安排的包围网。</mark></p><hr><p>而半个街区之外的公路上，黑色宾利如同一支离弦的箭般在街道间穿行，车身每一次急转都几乎要皮斯克后脑撞上已经布满蛛网裂痕的车窗。<br>碎裂的夹层膜片在他肩头散落如霜，颈部有细小的玻璃碎渣嵌入皮肤，他无心去拂。<br>“开快点。”他压低声音，喉头滚动时带出一丝不甚明显的喘息。<br>在组织待了五十多年，这是皮斯克第一次如此狼狈地逃命。<br>手腕上的红痕是方才紧急刹车时安全带勒出的印子，他松开领带结，只感觉那团锦缎像绞索一样勒住了喉咙，令人无法呼吸。<br>爱尔兰威士忌没有回答，只是将油门踩到底。<br>宾利的发动机发出一声压抑的咆哮，排气管在街角甩出一串白烟。而直至那飞驰的风吹在脸上，皮斯克绷紧的神经才稍作缓和。<br>“左侧车窗，七百米以上的狙击。”他吸了口气，缓缓直起身，侧头看了一眼左侧车窗上那个弹孔，眼神在裂纹中心停留了不到一秒，“精度到这个程度……能做到的人不多。”<br>爱尔兰威士忌从后视镜里瞥了他一眼，没有接话。<br>宾利在深夜的街道上连续变道，从商业区的双向四车道拐进一条相对狭窄的次级道路，轮胎碾过路面接缝时发出有节奏的闷响。<br>皮斯克从西装内袋里取出一块手帕，慢条斯理地擦了擦刚才攥门把手时掌心渗出的汗，目光移向车窗外的夜色。<br>作为阿斯蒂的据点，苍蔷薇的选址一直很讲究，附近的岔路极多，也便于撤离。<br>但此刻，当宾利沿着这条次级道路向东北方向行驶时，街道两侧的路灯间隔却变得不均匀起来，有些路段甚至整段陷入黑暗。<br>第一个让他警觉的细节出现在第三个路口。<br>爱尔兰威士忌原本打算右转上主干道，但右侧车道前方停着一辆熄火的厢式货车，占据了大半幅路面。货车没有开双闪，没有任何警示标志，就那样安静地停在阴影里。<br>爱尔兰威士忌低声骂了一句，只能继续直行。<br>皮斯克没有说话，但他的手帕已经重新攥在了手里。<br>第二个路口。左侧岔道被一排临时施工护栏封死，黄色警示牌上的字在路灯下模糊不清，护栏后面的路面连施工机械都没有，只有黑漆漆的空地。宾利再次被迫直行。<br>第三个细节出现得比前两次更隐蔽。后视镜里多了一辆深灰色的轿车，距离大约三百米，车灯是标准的暖白色，看起来没有任何异常。<br>但皮斯克注意到它的速度——宾利在七秒前刚经过一个限速四十的测速点，当时时速降到了四十八左右，而那辆车跟了整整七秒，始终保持着几乎恒定的距离。<br>七秒，足够一辆正常行驶的车完成一次超车或者变道。<br>皮斯克的手指在膝盖上敲了两下，节奏很轻，像在弹一段只有他自己能听见的旋律。<br>“前面左转，进巷子。”<br>爱尔兰威士忌一顿，不由得从后视镜里看了他一眼。<br>“那条巷子很窄，两辆车的宽度都勉强。”<br>“进去。”<br>见皮斯克坚持，爱尔兰威士忌也不再质疑。<br>宾利在下一个路口的黄灯闪烁时猛打方向盘，车身侧倾，后轮短暂地失去抓地力又迅速恢复，黑色车身切入一条仅容一辆半轿车通过的巷口。<br>巷子两侧是红砖仓库的山墙，墙面斑驳，没有任何窗户。路灯在这里彻底消失了，只有车灯照出的两束光锥切割着黑暗。<br>后视镜里，那辆深灰色轿车在路口没有跟进。它直行了。<br>爱尔兰威士忌的呼吸明显松了一拍。<br><mark>但皮斯克的手帕在膝盖上被攥成了一个更紧的团。<br>因为他知道，只要当宾利重新驶回主干道，就会再次有其他外形的车继续跟上来。<br>在追他们的根本不是阿斯蒂的人。<br>这种行动模式更有计划性，覆盖面也更广，不是阿斯蒂那个小丫头能做到的。<br>——分明是官方组织的风格。<br>“该死，偏偏是公安的鬣狗！那些家伙到底是怎么知道的……”</mark><br>皮斯克低咒了一声，指尖微颤地摸出电话，迅速按下一串号码，直通私人会所里那个现在正负责代理事务的沉默男人，玛克白兰地。<br>电话响了五声才被接起。<br>“玛克。”皮斯克压着嗓音，指节在膝盖上叩出断续的节奏，“你那边怎么样？”<br>听筒里传来纸张翻动的窸窣声，然后是一个沉稳的男声响起。<br>“皮斯克先生？会所一切正常。”玛克白兰地中规中矩的答道，“您留下的几份文件我已经归类好了，今晚预备处理的是几笔款项的对账，还有——”<br>“我问的不是文件。”皮斯克打断他，目光死死盯住右侧后视镜，“会所附近有没有异常？有没有人盯着？”<br>那条巷子的尽头，一辆银灰色 SUV 正从岔口缓缓探出车头，车灯熄灭着，像一条蛰伏的鱼。<br>玛克白兰地沉默了两秒。那两秒足够皮斯克后颈的汗珠滑进衬衫领口。<br>“没有异常。”他的声音依旧平稳，似乎刚刚的沉默只是现场向负责人确认了一下，“一个小时前巡夜的人说北侧街道有辆黑色桑塔纳停了太久。”<br>“不过调查下来似乎是附近住户的车，引擎盖是凉的，停了至少三个小时。”<br>说着，玛克白兰地的语气里也带上了点担忧，旋即追问道。<br>“怎么了，皮斯克先生？您的声音听起来……有些紧。”</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;第-111-章-鹬蚌相争（中）&quot;&gt;&lt;a href=&quot;#第-111-章-鹬蚌相争（中）&quot; class=&quot;headerlink&quot; title=&quot;第 111 章 鹬蚌相争（中）&quot;&gt;&lt;/a&gt;第 111 章 鹬蚌相争（中）&lt;/h1&gt;&lt;p&gt;时间倒回半小时前。&lt;br&gt;距离苍蔷薇</summary>
       
     
     
