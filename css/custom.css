@@ -2562,11 +2562,22 @@ html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-reply .emai
   opacity: .75;
 }
 
-/* ===== 搜索弹窗尺寸适配：结果区随视口高度（2026-10-16，选定"统一舒展"） =====
-   背景：主题把结果区封顶 10.5rem(210px)，大屏上弹窗成"一小块"（2K 屏也只看得到约 2 条结果）。
-   方案：clamp 保底 10.5rem、随视口 36vh 增高、上限 24rem(480px)——矮屏温和、高屏舒展。
-   实现要点：选择器与主题同款（#local-search .search-dialog .search-result-list），靠
-   custom.css 在主题样式之后加载来覆盖；移动端 ≤768px 的 75vh!important 不受影响（有意保留）。 */
-#local-search .search-dialog .search-result-list {
-  max-height: clamp(10.5rem, 36vh, 24rem);
+/* ===== 搜索弹窗尺寸适配 v2：垂直居中 + 结果区随视口（2026-10-16，选定"80% 饱满版"） =====
+   背景：主题弹窗贴顶（top:5rem）+ 结果区封顶 10.5rem(210px)，大屏上又小又"上紧下松"。
+   方案：① 桌面端垂直居中——用 top/bottom:0 + margin:auto 均分上下留白（刻意不用 transform：
+   弹窗出场动画 titlescale 用了 transform:scale，硬做会与动画打架）；
+   ② 结果区按视口放大：calc(80vh - 7.4rem)，其中 7.4rem=148px 是实测的"弹窗除结果区外的固定部分"，
+   上限 40rem(800px)；保底 10.5rem 维持极矮屏观感。整体约占视口高 80%、上下留白各约 10%。
+   范围：全部包在 ≥769px 内——移动端 ≤768px 主题自带的全屏搜索与 75vh 规则不受影响。 */
+@media (min-width: 769px) {
+  #local-search .search-dialog {
+    top: 0;
+    bottom: 0;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  #local-search .search-dialog .search-result-list {
+    max-height: clamp(10.5rem, calc(80vh - 7.4rem), 40rem);
+  }
 }
