@@ -2543,3 +2543,21 @@ html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-reply .emai
 [data-theme=dark] .social-share .icon-wechat .wechat-qrcode .qrcode img {
   border-radius: 4px;
 }
+
+/* ===== 搜索索引加载提示（配套改良版搜索脚本 /js/local-search-fixed.js，2026-10-16） ===== */
+#local-search-results .local-search__tip {
+  padding: 22px 0 26px;
+  text-align: center;
+  font-size: .92rem;
+  color: var(--font-color);
+  opacity: .75;
+}
+#local-search-results .local-search__retry {
+  cursor: pointer;
+  color: var(--color-accent, #d47e3a);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+#local-search-results .local-search__retry:hover {
+  opacity: .75;
+}
