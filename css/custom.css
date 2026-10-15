@@ -2561,3 +2561,12 @@ html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-reply .emai
 #local-search-results .local-search__retry:hover {
   opacity: .75;
 }
+
+/* ===== 搜索弹窗尺寸适配：结果区随视口高度（2026-10-16，选定"统一舒展"） =====
+   背景：主题把结果区封顶 10.5rem(210px)，大屏上弹窗成"一小块"（2K 屏也只看得到约 2 条结果）。
+   方案：clamp 保底 10.5rem、随视口 36vh 增高、上限 24rem(480px)——矮屏温和、高屏舒展。
+   实现要点：选择器与主题同款（#local-search .search-dialog .search-result-list），靠
+   custom.css 在主题样式之后加载来覆盖；移动端 ≤768px 的 75vh!important 不受影响（有意保留）。 */
+#local-search .search-dialog .search-result-list {
+  max-height: clamp(10.5rem, 36vh, 24rem);
+}
