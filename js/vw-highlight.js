@@ -1,17 +1,24 @@
 // 在设置面板（#rightside-config-hide）里，紧挨字号按钮注入“显示伏笔标注”开关
 // 该容器本身受齿轮按钮(#rightside_config)控制显隐，所以本按钮自动同受控制。
+//
+// 定位：一次性彩蛋。状态只活在当前这份 DOM 里，不做任何持久化——
+// 打开新页面 / 刷新 / 翻到下一章，一律回到关闭。
 (function () {
-  var KEY = 'vw-highlight-on'
+  var LEGACY_KEY = 'vw-highlight-on' // 旧版记忆键，仅用于清理历史残留
   var btn = null
+
+  // 旧版本把开关状态写进 localStorage，导致“一次开启永久记住”。
+  // 现在改为不记忆，顺手把老访客浏览器里的残留值抹掉。
+  try { localStorage.removeItem(LEGACY_KEY) } catch (e) {}
 
   function hasMarks() {
     return document.querySelectorAll('#article-container mark').length > 0
   }
 
+  // 不写任何存储：只改当前页面的状态
   function apply(on) {
     document.body.classList.toggle('show-vw-highlight', on)
     if (btn) btn.classList.toggle('on', on)
-    try { localStorage.setItem(KEY, on ? '1' : '0') } catch (e) {}
   }
 
   function buildButton() {
@@ -38,10 +45,8 @@
       apply(!document.body.classList.contains('show-vw-highlight'))
     })
 
-    // 初始：默认隐藏（无记忆时）；有记忆则跟随用户上次选择
-    var saved = '0'
-    try { saved = localStorage.getItem(KEY) || '0' } catch (e) {}
-    apply(saved === '1')
+    // 初始：一律关闭（不读取任何记忆）
+    apply(false)
     refresh()
   }
 
