@@ -88,6 +88,20 @@
   color: var(--cl-bg);
 }
 
+/* 排序靠右，跟筛选同一行；窄屏换行时自动落到下一行 */
+.cl-sort-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.cl-sort-label {
+  font-size: 12px;
+  color: var(--cl-muted);
+  margin-right: 1px;
+}
+
 /* ---------- 海报墙 ---------- */
 .cl-sec { display: none; }
 .cl-sec.on { display: block; }

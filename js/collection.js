@@ -29,7 +29,7 @@
 
     /* ---------- 筛选 ---------- */
     function applyFilter(kind) {
-      [].forEach.call(wrap.querySelectorAll('.cl-chip'), function (c) {
+      [].forEach.call(wrap.querySelectorAll('.cl-chip[data-filter]'), function (c) {
         c.classList.toggle('on', c.getAttribute('data-filter') === kind);
       });
       [].forEach.call(wrap.querySelectorAll('.cl-card'), function (card) {
@@ -41,9 +41,50 @@
       });
     }
 
-    [].forEach.call(wrap.querySelectorAll('.cl-chip'), function (c) {
+    [].forEach.call(wrap.querySelectorAll('.cl-chip[data-filter]'), function (c) {
       c.addEventListener('click', function () { applyFilter(c.getAttribute('data-filter')); });
     });
+
+    /* ---------- 排序 ---------- */
+    // 卡片上带 data-score（10 分制原值）与 data-name，重排靠挪 DOM，不用重渲染
+    // 「首字母」口径：数字/英文排前面（A→Z），中文按拼音。直接 localeCompare('zh')
+    // 会把拉丁字母整体排到汉字后面，AKB0048 就掉到表尾了，所以先按字符类型分组。
+    function cmpName(a, b) {
+      var na = a.getAttribute('data-name');
+      var nb = b.getAttribute('data-name');
+      var ga = /^[0-9A-Za-z]/.test(na) ? 0 : 1;
+      var gb = /^[0-9A-Za-z]/.test(nb) ? 0 : 1;
+      if (ga !== gb) return ga - gb;
+      return na.localeCompare(nb, 'zh-Hans-CN');
+    }
+
+    function sortCards(mode) {
+      [].forEach.call(wrap.querySelectorAll('.cl-grid'), function (grid) {
+        var cards = [].slice.call(grid.querySelectorAll('.cl-card'));
+        cards.sort(function (a, b) {
+          if (mode === 'name') return cmpName(a, b);
+          var sa = parseFloat(a.getAttribute('data-score'));
+          var sb = parseFloat(b.getAttribute('data-score'));
+          var na = isNaN(sa), nb = isNaN(sb);
+          if (na && nb) return cmpName(a, b);
+          if (na) return 1;              // 没打分的沉底
+          if (nb) return -1;
+          return (sb - sa) || cmpName(a, b);   // 分数高→低
+        });
+        cards.forEach(function (c) { grid.appendChild(c); });
+      });
+      [].forEach.call(wrap.querySelectorAll('.cl-sort'), function (b) {
+        var on = b.getAttribute('data-sort') === mode;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+
+    [].forEach.call(wrap.querySelectorAll('.cl-sort'), function (b) {
+      b.addEventListener('click', function () { sortCards(b.getAttribute('data-sort')); });
+    });
+
+    sortCards('score');   // 默认：分数高→低
 
     /* ---------- 详情浮层 ---------- */
     function open(card) {
