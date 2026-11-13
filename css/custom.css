@@ -2584,3 +2584,23 @@ html[data-theme=dark] #gitalk-container .markdown-body .email-hidden-reply .emai
     max-height: clamp(10.5rem, calc(80vh - 7.4rem), 40rem);
   }
 }
+
+/* ===== 文字选中：保持原色，只换背景 =====
+   主题 _global/index.styl 里写死了 *::selection { color: #F7F7F7 }，
+   撞上浅色选中底色就糊成一片。这里让文字颜色跟随元素自身（链接仍是橙、
+   代码仍是高亮色、暗色正文仍是浅灰），真正的视觉反馈交给背景。
+   范围覆盖全局，含正文、导航栏、播放器面板。 */
+*::selection {
+  color: inherit !important;
+  background: rgba(255, 154, 92, .35) !important;
+}
+*::-moz-selection {
+  color: inherit !important;
+  background: rgba(255, 154, 92, .35) !important;
+}
+[data-theme=dark] *::selection {
+  background: rgba(224, 106, 98, .35) !important;
+}
+[data-theme=dark] *::-moz-selection {
+  background: rgba(224, 106, 98, .35) !important;
+}
