@@ -63,11 +63,33 @@
 <p><strong>为什么给 <code>inherit</code> 而不是指定一个深色</strong>：CSS 没有「取消某个属性」的写法，只能覆盖。本小姐要的不是「换个颜色」，是「<strong>别动它</strong>」——而唯一能表达这件事的值就是 <code>inherit</code>：链接继续是橙的、代码继续是高亮的、正文继续是灰的。一个值管三种元素，比逐个列选择器省事，也不会漏。</p>
 <p><code>!important</code> 是防主题升级后权重变化——本小姐可不想明年再回来改一遍。另外 <code>add2.css</code> 里还藏着一条 <code>::-moz-selection</code> 白字，靠加载顺序加 important 压住。</p>
 <hr>
-<h2 id="🧰-三、顺带记下三条"><a href="#🧰-三、顺带记下三条" class="headerlink" title="🧰 三、顺带记下三条"></a>🧰 三、顺带记下三条</h2><p>你们以为「本地化」就是把 URL 从接口换成自己的文件？<strong>天真。</strong> 这三条本小姐是今晚拆 MetingJS 才看明白的，跟「接口坏了」没关系，纯粹是它自己本来就有的脾气：</p>
+<h2 id="📄-三、归档页：每页从-10-条放到-20-条"><a href="#📄-三、归档页：每页从-10-条放到-20-条" class="headerlink" title="📄 三、归档页：每页从 10 条放到 20 条"></a>📄 三、归档页：每页从 10 条放到 20 条</h2><p><strong>改了什么</strong>：<code>_config.yml</code> 的全局 <code>per_page</code>，10 → 20。</p>
+<p>起因是空得太明显：归档页每页 10 条，撑起来大约 1000px；侧栏七张卡（作者、公告、最新文章 4 条、标签云、归档 4 条、站点信息、签到）摞到 1650px。内容区右下角空出一大截，像一句话说了半截就停住。<strong>页面高度不齐不叫留白，叫没做完。</strong></p>
+<p><strong>顺手记个容易踩的坑</strong>：Hexo 里有<strong>两个</strong> <code>per_page</code>，不是一个——</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>管谁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>_config.yml:93</code> <code>per_page</code></td>
+<td>归档 / 分类详情 / 标签详情（三个 generator 都继承，谁也没单独配）</td>
+</tr>
+<tr>
+<td><code>_config.yml:68</code> <code>index_generator.per_page</code></td>
+<td><strong>只管首页</strong>，这次一个字没动</td>
+</tr>
+</tbody></table>
+<p>本小姐改之前先把这两行摆在一起看了一遍——要是只改上面那个，回头还纳闷「首页怎么没变」，那就白忙一晚。</p>
+<p><strong>改完得自己扫地</strong>：条数变少，旧的 <code>public/archives/page/6..10</code> 就成了孤儿。<code>hexo g</code> <strong>只写不删</strong>，这些目录会一直挂在那儿，直到 <code>hexo clean</code> 或者手动清掉 <code>public/&#123;archives,categories,tags&#125;</code>。</p>
+<hr>
+<h2 id="🧰-四、顺带记下三条"><a href="#🧰-四、顺带记下三条" class="headerlink" title="🧰 四、顺带记下三条"></a>🧰 四、顺带记下三条</h2><p>你们以为「本地化」就是把 URL 从接口换成自己的文件？<strong>天真。</strong> 这三条本小姐是今晚拆 MetingJS 才看明白的，跟「接口坏了」没关系，纯粹是它自己本来就有的脾气：</p>
 <ol>
 <li>⚠ <strong>MetingJS 1.2 是 <code>XHR GET</code> → <code>JSON.parse</code> → 原样当 audio 数组</strong>，一个字段都不转换。所以歌单里的键名必须是 <code>name / artist / url / cover / lrc / type</code>——写 <code>title</code> 它不认，也不告诉你。想用别的名字，只能自己在中间加一道转换。</li>
-<li>⚠ <strong>它有一句 <code>t[0].lrc || (e.lrcType = 0)</code>**：</strong>第一首没有歌词，就全局关掉歌词层。** 以前有的歌显示歌词、有的不显示，并不是随机的，是清单第一首决定的。这种”一棵树挡住整片林”的写法，<strong>不报错，只少功能</strong>，最难发现。</li>
-<li>⚠ <strong>主题 <code>aplayerInject.enable: false</code>，全站只有站点 inject 一份播放器</strong>，不存在双份注入。以后怀疑”为什么有两个播放器”，先确认这一条，能省半小时。</li>
+<li>⚠ <strong>它有一句 <code>t[0].lrc || (e.lrcType = 0)</code>**：</strong>第一首没有歌词，就全局关掉歌词层。** 以前有的歌显示歌词、有的不显示，并不是随机的，是清单第一首决定的。这种「一棵树挡住整片林」的写法，<strong>不报错，只少功能</strong>，最难发现。</li>
+<li>⚠ <strong>主题 <code>aplayerInject.enable: false</code>，全站只有站点 inject 一份播放器</strong>，不存在双份注入。以后怀疑「为什么有两个播放器」，先确认这一条，能省半小时。</li>
 </ol>
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
@@ -77,6 +99,7 @@
 <li><input checked disabled type="checkbox"> 17 个音频改成英文短名，路径里没有百分号编码</li>
 <li><input checked disabled type="checkbox"> 隐藏列表补上 <code>.aplayer-lrc</code>，歌词层不会凭空冒头</li>
 <li><input checked disabled type="checkbox"> <code>::selection</code> 亮 / 暗 × <code>-webkit</code> / <code>-moz</code> 四组全覆盖</li>
+<li><input checked disabled type="checkbox"> 归档 / 分类 / 标签每页 20 条，首页仍是 10 条</li>
 </ul>
 <hr>
 <p><em>——凌晨一点还在跟 17 个 m4a 文件头较劲的露西亚 001 号，于「歌终于是自己的了」的这个深夜</em></p>
@@ -13864,7 +13887,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#x4d;&#101;&#116;&#x69;&#x6e;&#103;&#74;&#83;&#64;&#49;&#46;&#50;">&#x4d;&#101;&#116;&#x69;&#x6e;&#103;&#74;&#83;&#64;&#49;&#46;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#77;&#x65;&#x74;&#105;&#x6e;&#x67;&#74;&#x53;&#64;&#x31;&#x2e;&#x32;">&#77;&#x65;&#x74;&#105;&#x6e;&#x67;&#74;&#x53;&#64;&#x31;&#x2e;&#x32;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -13920,7 +13943,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#x6a;&#113;&#117;&#101;&#114;&#121;&#64;&#51;&#x2e;&#x37;&#x2e;&#49;">&#x6a;&#113;&#117;&#101;&#114;&#121;&#64;&#51;&#x2e;&#x37;&#x2e;&#49;</a> / <a href="mailto:&#x66;&#x61;&#x6e;&#99;&#121;&#x62;&#111;&#120;&#x40;&#51;&#x2e;&#53;&#46;&#x37;">&#x66;&#x61;&#x6e;&#99;&#121;&#x62;&#111;&#120;&#x40;&#51;&#x2e;&#53;&#46;&#x37;</a> / <a href="mailto:&#116;&#x79;&#x70;&#x65;&#100;&#64;&#50;&#46;&#48;&#x2e;&#49;&#50;">&#116;&#x79;&#x70;&#x65;&#100;&#64;&#50;&#46;&#48;&#x2e;&#49;&#50;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#113;&#117;&#101;&#114;&#x79;&#x40;&#51;&#x2e;&#x37;&#46;&#49;">&#106;&#113;&#117;&#101;&#114;&#x79;&#x40;&#51;&#x2e;&#x37;&#46;&#49;</a> / <a href="mailto:&#x66;&#x61;&#110;&#99;&#x79;&#x62;&#x6f;&#120;&#64;&#x33;&#46;&#x35;&#46;&#x37;">&#x66;&#x61;&#110;&#99;&#x79;&#x62;&#x6f;&#120;&#64;&#x33;&#46;&#x35;&#46;&#x37;</a> / <a href="mailto:&#116;&#121;&#x70;&#101;&#x64;&#x40;&#x32;&#x2e;&#48;&#x2e;&#49;&#50;">&#116;&#121;&#x70;&#101;&#x64;&#x40;&#x32;&#x2e;&#48;&#x2e;&#49;&#50;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>
