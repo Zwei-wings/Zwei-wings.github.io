@@ -304,29 +304,46 @@
     panelEl.style.transform = 'translateX(-50%)';
   }
 
+  // ===== 建播放器：本地歌单直连 APlayer，不再经过 MetingJS =====
+  function buildPlayer() {
+    var engine = document.getElementById('nav-music-engine');
+    if (!engine || typeof APlayer !== 'function') return false;
+    var list = window.MUSIC_LIST;
+    if (!list || !list.length) return false;
+
+    navAp = new APlayer({
+      container: engine,
+      audio: list,
+      fixed: true,
+      mini: false,
+      theme: '#ffcb8e',
+      loop: 'all',
+      order: 'random',
+      preload: 'auto',
+      volume: 0.7,
+      listFolded: true,
+      listMaxHeight: '250px',
+      lrcType: 0,
+      mutex: true,
+      storageName: 'nav-music'
+    });
+
+    // aplayers 这个全局数组原本由 MetingJS 创建，面板与切歌逻辑都依赖它
+    window.aplayers = [navAp];
+    window.__navAp = navAp;
+    engine.classList.add('no-reload');
+    return true;
+  }
+
   // ===== 初始化 =====
   function initMusic() {
     if (initDone) return;
-    if (typeof loadMeting !== 'function') return;
-    loadMeting();
     initDone = true;
-
-    // 劫持 loadMeting
-    var origLoadMeting = window.loadMeting;
-    window.loadMeting = function () {
-      origLoadMeting();
-      var engine = document.getElementById('nav-music-engine');
-      if (engine && navAp) {
-        engine.classList.add('no-reload');
-        if (window.aplayers && window.aplayers.indexOf(navAp) === -1) {
-          window.aplayers.unshift(navAp);
-        }
-      }
-    };
 
     var attempts = 0;
     var timer = setInterval(function () {
       attempts++;
+      if (!navAp) buildPlayer();
       var engine = document.getElementById('nav-music-engine');
       if (engine && engine.classList.contains('aplayer-fixed') && window.aplayers && window.aplayers.length > 0) {
         clearInterval(timer);
@@ -339,7 +356,7 @@
           }
         }
 
-        if (!navAp) { clearInterval(timer); return; }
+        if (!navAp) return;
 
         window.__navAp = navAp;
         engine.classList.add('no-reload');

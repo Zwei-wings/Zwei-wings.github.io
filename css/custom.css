@@ -151,11 +151,14 @@
   #nav-music-ui { min-width: auto; padding: 0 4px; }
 }
 
-/* ===== 音乐引擎：隐藏原生播放器主体、歌单与折叠按钮，仅保留底部歌词层 ===== */
+/* ===== 音乐引擎：隐藏原生播放器全部可见部分 =====
+   改用本地歌单后 lrcType=0，APlayer 不再生成 .aplayer-lrc 歌词层；
+   胶囊控件与下拉面板由 js/music.js 完全接管 ===== */
 #nav-music-engine .aplayer-body,
 #nav-music-engine .aplayer-list,
 #nav-music-engine .aplayer-notice,
-#nav-music-engine .aplayer-miniswitcher {
+#nav-music-engine .aplayer-miniswitcher,
+#nav-music-engine .aplayer-lrc {
   display: none !important;
 }
 
