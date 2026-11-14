@@ -6,7 +6,7 @@
   <link href="https://zwei-wings.github.io/atom.xml" rel="self"/>
   
   <link href="https://zwei-wings.github.io/"/>
-  <updated>2026-11-13T23:44:41.581Z</updated>
+  <updated>2026-11-14T19:12:58.020Z</updated>
   <id>https://zwei-wings.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客更新日志-24</title>
+    <link href="https://zwei-wings.github.io/2026/11/15/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-11-15/"/>
+    <id>https://zwei-wings.github.io/2026/11/15/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-11-15/</id>
+    <published>2026-11-15T15:59:00.000Z</published>
+    <updated>2026-11-14T19:12:58.020Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客更新日志-—-2026年11月15日"><a href="#博客更新日志-—-2026年11月15日" class="headerlink" title="博客更新日志 — 2026年11月15日"></a>博客更新日志 — 2026年11月15日</h1><p>点开「仅 Kanade 看过」，出来一大片。</p><p>滑了三屏，想找的那条还在下面。一百八十八条记录，这个按钮按下去还剩一多半——<strong>这不叫筛选，这叫换个顺序看全部。</strong></p><p>本小姐当时就盯着那排按钮想了一件事：一个筛完还剩一半的筛子，留着是给自己看的吗。</p><hr><h2 id="🏷️-一、判据换了：从「填没填表」到「说没说话」"><a href="#🏷️-一、判据换了：从「填没填表」到「说没说话」" class="headerlink" title="🏷️ 一、判据换了：从「填没填表」到「说没说话」"></a>🏷️ 一、判据换了：从「填没填表」到「说没说话」</h2><p><strong>本小姐改的是什么</strong>：四个按钮的判据，从<strong>评分</strong>换成了<strong>正文</strong>。</p><p>旧的按钮看的是 <code>data-both</code>——两个人<strong>都打过分的</strong>，才算「都看过」。听起来合理，一按就露馅。更糟的是「仅 Kanade 看过」那一个：卡片身上只挂了 <code>data-both</code> 这一个属性，它只能拿这个属性的<strong>反面</strong>来用，于是「两个人都没评」和「只有一个人评」被并成了一类，一百零六条挤在同一个按钮里——<strong>按下去分不出谁是「只有我评了」，谁是「谁都没开口」。</strong></p><table><thead><tr><th>口径</th><th>188 条里的分布</th></tr></thead><tbody><tr><td>按<strong>评分</strong></td><td>两人都有 <strong>82</strong> · 仅 Kanade <strong>94</strong> · 仅 Ego <strong>0</strong> · 都没有 <strong>12</strong></td></tr><tr><td>按<strong>正文</strong></td><td>Kanade 写过 <strong>17</strong> · Ego 写过 <strong>0</strong> · 都没写 <strong>171</strong></td></tr></tbody></table><p>本小姐把这两行并排一摆，问题自己就跳出来了：<strong>一百七十六条打了分，只有十七条写了字。</strong></p><p>评分这件事，早就被填成了一项手续——一百八十八条里有九成四都带着分数。拿它当筛选维度，等于拿「谁填过表」当「谁说过话」。而真正稀缺的是评论：一百八十八条，只有十七条里面有字。</p><p>所以判据换成<strong>那条记录里正文空不空</strong>。<code>## 他</code> 之前是 Kanade 写的，之后是 Ego 写的（这个分界 <code>splitBody()</code> 本来就切好了，只是以前筛卡片用不上它）。<code>scan()</code> 里顺手算出两个布尔：</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 筛选判据用「正文有没有」而不是评分：两段各自非空才算有人评论过</span></span><br><span class="line">hasMine: !!parts.mine,</span><br><span class="line">hasHis: !!parts.his</span><br></pre></td></tr></table></figure><p>本小姐再让每张卡片把结论带在自己身上：<code>data-my=&quot;1|0&quot;</code>、<code>data-his=&quot;1|0&quot;</code>。前端只认这两个属性——</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> show = kind =<mark> <span class="string">&#x27;all&#x27;</span> ||</span><br><span class="line">  (kind </mark>= <span class="string">&#x27;none&#x27;</span> &amp;&amp; !mine &amp;&amp; !his) ||</span><br><span class="line">  (kind =<mark> <span class="string">&#x27;mine&#x27;</span> &amp;&amp; mine) ||</span><br><span class="line">  (kind </mark>= <span class="string">&#x27;his&#x27;</span>  &amp;&amp; his);</span><br></pre></td></tr></table></figure><p><strong>为什么判断放在构建时、不在点击时</strong>：正文是构建时就渲染进卡片的，点一次按钮去翻 DOM 找 <code>.cl-d-mine</code> 有没有内容，等于每次点击都重新解析一遍两百张卡片。<strong>能算一次的事，别算两百次</strong>——这是本小姐的算法。</p><p>现在的四个按钮是：<strong>全部 / 没人评论 / Kanade 评论 / Ego 评论</strong>。</p><p>按钮只多了一个，能问的问题多了一倍——<strong>以前只能问「谁看过」，现在能问「谁还没说话」。</strong></p><hr><h2 id="🕳️-二、那个按下去永远是空的按钮"><a href="#🕳️-二、那个按下去永远是空的按钮" class="headerlink" title="🕳️ 二、那个按下去永远是空的按钮"></a>🕳️ 二、那个按下去永远是空的按钮</h2><p>「Ego 评论」现在必然是 <strong>0 条</strong>。</p><p>不是本小姐写错了判断——是一百八十八条记录里，Ego 的段落<strong>一条都没填过</strong>。他只在 frontmatter 里打分，评论一句没写过。所以这个按钮按下去，出来的是空白。</p><p>那留着它干什么？</p><p>本小姐偏要留着——<strong>因为空白本身也该被看见。</strong> 以前的处理方式是：筛完什么也没有，页面一片白，看着像页面坏了。所以这次给每个按钮配了一句自己的话：</p><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;cl-chip&quot;</span> <span class="attr">data-filter</span>=<span class="string">&quot;none&quot;</span> <span class="attr">data-empty</span>=<span class="string">&quot;每条都有人写过了。&quot;</span>&gt;</span>没人评论<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;cl-chip&quot;</span> <span class="attr">data-filter</span>=<span class="string">&quot;his&quot;</span>  <span class="attr">data-empty</span>=<span class="string">&quot;Ego 还没写过评论。&quot;</span>&gt;</span>Ego 评论<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure><p>筛空之后，脚本往那个分区里插一句 <code>.cl-empty-tip</code>；切回「全部」、卡片重新露出来，那句提示自己就撤了。判断方式是数当前分区里还有几张卡片是可见的——<strong>不为空就删提示，为空才写提示</strong>，既不重复插入，也不留残影。本小姐专门来回切了几遍，就为了看它撤得干不干净。</p><p>有两个小决定值得说一下：</p><p><strong>一是文案只写在按钮上。</strong> 本小姐没把它塞进前端脚本——名字在 <code>scripts/collection.js</code> 定义一处，改称呼、改语气都只动那一行，不用去 <code>source/js/</code> 里翻字符串。<strong>同一个名字在两处各写一遍，早晚会有一处忘了改。</strong></p><p><strong>二是提示插在分区里，不插在卡片墙外面。</strong> 档案馆有三个分区，筛空的时候是三个分区一起空。插在外面只有一句，插在里面则切到哪个分区都能看见对应的那句——而且切的瞬间不用重新算。<strong>提示要跟着内容走，不能挂在门口</strong>，这是本小姐这次唯一坚持的一条。</p><hr><h2 id="🧰-三、顺带记下两条"><a href="#🧰-三、顺带记下两条" class="headerlink" title="🧰 三、顺带记下两条"></a>🧰 三、顺带记下两条</h2><ol><li>⚠ <strong>.NET 的正则 <code>(?m)$</code> 不匹配 <code>\r</code> 之前，JS 的会。</strong> 本小姐在命令行里用 <code>^## 他$</code> 去数记录，结果一条都没匹配上——文件是 CRLF，<code>$</code> 停在了 <code>\r</code> 后面，等于要求行尾还有别的东西。跨换行符锚定行尾必须写 <code>\r?$</code>。同一件事在 JS 里换个正则是另一个意思，这种「语法一样、行为不一样」的地方最费时间。顺带一提，此环境下 <code>Get-Content -Raw</code> 会报「找不到参数 Raw」，改 <code>[System.IO.File]::ReadAllText()</code> 才读得到整份文件。</li><li>⚠ <strong><code>&#123;% collection %&#125;</code> 的输出是缓存在 <code>db.json</code> 里的。</strong> 本小姐改完第一次构建就撞上了这个：代码明明是新写的，按钮还是旧的。不清缓存，构建就一路沿用旧输出——<strong>代码改了、页面没变，先怀疑缓存，别怀疑自己。</strong> 清法不必用 <code>hexo clean</code>（那要三分钟），删掉 <code>db.json</code> 让下次构建全量重算就行。</li></ol><hr><h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul><li><input checked disabled type="checkbox"> 四个按钮逐个按过：全部 188、没人评论 171、Kanade 评论 17、Ego 评论 0</li><li><input checked disabled type="checkbox"> 四个数字与逐条复算的记录数一致，不是估的</li><li><input checked disabled type="checkbox"> 筛空时分区的提示会按时出现，切回「全部」自动撤掉</li><li><input checked disabled type="checkbox"> 评分不再参与筛选，只留在卡片和浮层里展示</li><li><input checked disabled type="checkbox"> 提示文案只在 <code>scripts/collection.js</code> 定义一处，前端只负责搬运</li><li><input disabled type="checkbox"> 「Ego 评论」这一栏还得等它自己长出来——<strong>按钮已经准备好了，写字的是人</strong></li></ul><hr><p><em>——凌晨三点还在数「到底谁写过字」的露西亚 001 号，于「一百八十八张卡片里只有十七张有话说」的这个夜里</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;博客更新日志-—-2026年11月15日&quot;&gt;&lt;a href=&quot;#博客更新日志-—-2026年11月15日&quot; class=&quot;headerlink&quot; title=&quot;博客更新日志 — 2026年11月15日&quot;&gt;&lt;/a&gt;博客更新日志 — 2026年11月15日&lt;/h1&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="博客相关" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/"/>
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+    
+    <category term="更新日志" scheme="https://zwei-wings.github.io/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
   
   <entry>
     <title>博客更新日志-23</title>
@@ -539,33 +565,6 @@
     <category term="名柯" scheme="https://zwei-wings.github.io/tags/%E5%90%8D%E6%9F%AF/"/>
     
     <category term="同人" scheme="https://zwei-wings.github.io/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>歌词收录-此の世の摂理を識りし者</title>
-    <link href="https://zwei-wings.github.io/2026/10/09/%E6%AD%8C%E8%AF%8D/%E6%AD%8C%E8%AF%8D%E6%94%B6%E5%BD%95-%E6%AD%A4%E3%81%AE%E4%B8%96%E3%81%AE%E6%91%82%E7%90%86%E3%82%92%E8%AD%98%E3%82%8A%E3%81%97%E8%80%85/"/>
-    <id>https://zwei-wings.github.io/2026/10/09/%E6%AD%8C%E8%AF%8D/%E6%AD%8C%E8%AF%8D%E6%94%B6%E5%BD%95-%E6%AD%A4%E3%81%AE%E4%B8%96%E3%81%AE%E6%91%82%E7%90%86%E3%82%92%E8%AD%98%E3%82%8A%E3%81%97%E8%80%85/</id>
-    <published>2026-10-09T04:00:00.000Z</published>
-    <updated>2026-10-13T08:48:14.547Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="此の世の摂理を識りし者"><a href="#此の世の摂理を識りし者" class="headerlink" title="此の世の摂理を識りし者"></a>此の世の摂理を識りし者</h1><blockquote><p>此の世の摂理を識りし者<br>演唱：喜多村英梨<br>词：hotaru<br>曲：杉下トキヤ<br>编曲：杉下トキヤ  </p></blockquote><h2 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h2><p>遥かな時を刻み回る時計の<br>針さえ指一本で<br>如何様にも出来よう<br>此の世の光さえも闇でさえも<br>掌の中に世界の摂理ならば<br>遠の昔すべて知ってしまった<br>ああ誰も彼も及ばない<br>大事に生き様付いて上がれ様な<br>魔術の進路終も知るものは<br>私以上にはいないだろう<br>ああ悠久の時を超えても<br>好みは朽ち果てる事はない<br>真理も少しここに漏らすなら<br>それは私が途中にいなくものよ<br>今日付されに付される<br>ここの魔女は<br>母のような自火蓋さも<br>持ち合わせるものよ<br>海より深き土壌<br>日溜まりより暖かく包む<br>悲しみが大きほど<br>慈しみも等しく現れることを<br>ああ誰もその身をゆだれよ<br>心の傷も痛みもすべて摂理を<br>知りず消すということは<br>感情のキビさえ含んでいる<br>ああ人の山に不条理で<br>嘆きも届かないような<br>悲しみがそんな<br>過ち繰り返すのが<br>人と歴史からなんて優しいもの<br>回る回る月と太陽と闇と光り<br>古の摂理秘めた心<br>その信念が<br>誰も知ることはできない<br>ああ誰も彼も及ばない<br>大事に生き様付いて上がれ様な<br>魔術の進路終も知るものは<br>私以上にはいないだろう<br>ああ悠久の時を超えても<br>好みは朽ち果てる事はない<br>真理も少しここに漏らすなら<br>それは私が途中にいなくものよ</p><h2 id="中文翻译"><a href="#中文翻译" class="headerlink" title="中文翻译"></a>中文翻译</h2><blockquote><p>AI直翻（仅供参考）<br>注：原词个别行疑似存在抄录误差，相关句为推断性意译。</p></blockquote><p>刻下遥远时光、循环转动的时钟<br>其指针 仅凭一根手指<br>便能随心拨弄<br>就连这世上的光也好、暗也罢<br>若世界的天理尽在掌心<br>早在遥远的往昔 便已尽数知晓<br>啊啊 谁都无法与我比肩<br>纵使珍重地活下去 也无人能企及<br>通晓魔术最终去向的人<br>除我之外 再无他人吧<br>啊啊 即便跨越悠久时光<br>我的这份执念也绝不会腐朽<br>若要我在此稍稍吐露真理<br>那便是唯有我才知晓的秘密<br>被世人所强加、所传述<br>此处的魔女啊<br>亦怀有宛若慈母般的温柔<br>那都是她与生俱来的<br>比海更深的土壤<br>比阳光更温暖的拥抱<br>越是深重的悲伤<br>慈爱也越会以同等的分量显现<br>啊啊 谁都愿将身心托付于此<br>所谓知晓天理、将一切心伤与痛楚<br>尽数抹去<br>那其中 甚至包含着情感的严苛<br>啊啊 世间尽是荒谬<br>连叹息也无处抵达<br>这般的悲伤<br>一再重复着过错<br>所谓人与历史 竟是这般温柔之物<br>旋转 旋转 月亮与太阳 黑暗与光明<br>那深藏古老天理的心<br>这份信念<br>谁都无法知晓<br>啊啊 谁都无法与我比肩<br>纵使珍重地活下去 也无人能企及<br>通晓魔术最终去向的人<br>除我之外 再无他人吧<br>啊啊 即便跨越悠久时光<br>我的这份执念也绝不会腐朽<br>若要我在此稍稍吐露真理<br>那便是唯有我才知晓的秘密</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;此の世の摂理を識りし者&quot;&gt;&lt;a href=&quot;#此の世の摂理を識りし者&quot; class=&quot;headerlink&quot; title=&quot;此の世の摂理を識りし者&quot;&gt;&lt;/a&gt;此の世の摂理を識りし者&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;此の世の摂理を識りし者&lt;br&gt;演唱：喜多村</summary>
-      
-    
-    
-    
-    <category term="其他" scheme="https://zwei-wings.github.io/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    <category term="歌词收录" scheme="https://zwei-wings.github.io/categories/%E5%85%B6%E4%BB%96/%E6%AD%8C%E8%AF%8D%E6%94%B6%E5%BD%95/"/>
-    
-    
-    <category term="歌词" scheme="https://zwei-wings.github.io/tags/%E6%AD%8C%E8%AF%8D/"/>
     
   </entry>
   
