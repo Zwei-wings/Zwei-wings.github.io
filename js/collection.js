@@ -28,16 +28,48 @@
     if (secs.length) showSection(secs[0].getAttribute('data-sec'));
 
     /* ---------- 筛选 ---------- */
+    // 判据是「那条记录里写没写正文」，构建时已写进 data-my / data-his；
+    // 评分不参与筛选（两人打分几乎同步，筛不出东西）。
     function applyFilter(kind) {
+      var tip = '';
       [].forEach.call(wrap.querySelectorAll('.cl-chip[data-filter]'), function (c) {
-        c.classList.toggle('on', c.getAttribute('data-filter') === kind);
+        var on = c.getAttribute('data-filter') === kind;
+        c.classList.toggle('on', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (on) tip = c.getAttribute('data-empty') || '';
       });
+
       [].forEach.call(wrap.querySelectorAll('.cl-card'), function (card) {
-        var both = card.getAttribute('data-both') === '1';
+        var mine = card.getAttribute('data-my') === '1';
+        var his = card.getAttribute('data-his') === '1';
         var show = kind === 'all' ||
-          (kind === 'both' && both) ||
-          (kind === 'solo' && !both);
+          (kind === 'none' && !mine && !his) ||
+          (kind === 'mine' && mine) ||
+          (kind === 'his' && his);
         card.style.display = show ? '' : 'none';
+      });
+
+      showEmptyTip(tip);
+    }
+
+    // 分区被筛空时补一句话，否则一片白看着像坏了
+    function showEmptyTip(text) {
+      [].forEach.call(wrap.querySelectorAll('.cl-sec'), function (sec) {
+        var visible = 0;
+        [].forEach.call(sec.querySelectorAll('.cl-card'), function (c) {
+          if (c.style.display !== 'none') visible++;
+        });
+        var el = sec.querySelector('.cl-empty-tip');
+        if (visible || !text) {
+          if (el) el.parentNode.removeChild(el);
+          return;
+        }
+        if (!el) {
+          el = document.createElement('p');
+          el.className = 'cl-empty-tip';
+          sec.appendChild(el);
+        }
+        el.textContent = text;
       });
     }
 

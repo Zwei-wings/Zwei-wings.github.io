@@ -106,6 +106,14 @@
 .cl-sec { display: none; }
 .cl-sec.on { display: block; }
 
+/* 筛出 0 条时的提示（由 source/js/collection.js 动态插入） */
+.cl-empty-tip {
+  margin: 40px 0 8px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--cl-muted);
+}
+
 .cl-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
