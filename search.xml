@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客更新日志-25</title>
+    <url>/2026/11/22/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-11-22/</url>
+    <content><![CDATA[<h1 id="博客更新日志-—-2026年11月22日"><a href="#博客更新日志-—-2026年11月22日" class="headerlink" title="博客更新日志 — 2026年11月22日"></a>博客更新日志 — 2026年11月22日</h1><p>一个榜单里放着两把尺子，你按谁的？</p>
+<p>档案馆的评分栏，两个人并排站着：Kanade 打十分制，最低也给五分；Ego 打五分制，一格一格往上加。显示的时候井水不犯河水——她的分减 4.5 铺满五格，他的分原样画，两道星条各看各的，谁也不碍谁。</p>
+<p>但排序要的不是两道星条，是<strong>一个先后</strong>——这件事本小姐躲不过去。</p>
+<p>本小姐最开始想得很简单：既然要给一个序，那就把两个人折到同一把尺子上。</p>
+<hr>
+<h2 id="🔀-一、折到同一把尺子上，两条路都堵死"><a href="#🔀-一、折到同一把尺子上，两条路都堵死" class="headerlink" title="🔀 一、折到同一把尺子上，两条路都堵死"></a>🔀 一、折到同一把尺子上，两条路都堵死</h2><p><strong>第一版，本小姐试的是取高</strong>——谁给得高听谁的。听着挺公平，跑出来是这样：5.0 那一格挤进 <strong>16 条</strong>，其中 <strong>6 条</strong>是 Ego 单方面给的满分，一句话全抬到最前面。</p>
+<p><strong>第二版，均分、缺项按 0</strong>——更难看。Kanade 打 9.5 的 <strong>10 条</strong>，因为 Ego 没打分，被算成 <code>(5 + 0) / 2 = 2.5</code>；而她打 7 分、Ego 给 5 分的那 <strong>2 条</strong>，均分 3.75。</p>
+<p><strong>分高的排到了分低的后面。</strong></p>
+<p>两版，本小姐都跑过，问题都不在参数。是这条路本身不通：<strong>两个人在各自刻度上说的「好」，本来就不该被折成一个数。</strong> 折的那一刻，总有一方在替另一方做决定——取高是让给分大方的那个说了算，均分是让没开口的那个也投了一票。<strong>本小姐凭什么替别人定他的权重。</strong></p>
+<hr>
+<h2 id="🎛️-二、不折了：排序拆成三个按钮"><a href="#🎛️-二、不折了：排序拆成三个按钮" class="headerlink" title="🎛️ 二、不折了：排序拆成三个按钮"></a>🎛️ 二、不折了：排序拆成三个按钮</h2><p>第三版，本小姐不合并了——把这件事拆开。</p>
+<p>排序那一栏现在是三个按钮：<strong>按 Kanade / 按 Ego / 按首字母</strong>。谁的分谁负责，不交叉、不平均、不求最大值。<strong>选择权交出去，比发明一个聪明的公式体面。</strong></p>
+<p>落到代码上，本小姐只动了两处：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 卡片：各存各的原始分</span></span><br><span class="line">data-score-my=<span class="string">&quot;$&#123;smy&#125;&quot;</span>  data-score-his=<span class="string">&quot;$&#123;shis&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 前端：按哪个按钮就读哪个属性</span></span><br><span class="line"><span class="keyword">var</span> attr = mode === <span class="string">&#x27;his&#x27;</span> ? <span class="string">&#x27;data-score-his&#x27;</span> : <span class="string">&#x27;data-score-my&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>本小姐为什么存原始分、不存折成五格的值</strong>：折五格就是减 4.5，同一把尺子上的平移——不改变谁高谁低。既然是这样，就没有必要先换算再排序。<strong>换算只归显示管，排序只看原值。</strong> 多一道手续，就多一个能出错的地方，而这道手续什么也没换来。</p>
+<p><strong>没打分的人怎么办</strong>：本小姐让他们在谁的分下沉底。按 Ego 排，85 条有分、后面 106 条沉底；按 Kanade 排，177 条有分、14 条沉底。这不是缺陷——<strong>他没打分就是没打分，不能拿 0 分冒充「很差」。</strong> 均分那一版最要命的地方就在这儿：它把「没说话」和「给了最低分」算成了同一件事，本小姐不接受这种混淆。</p>
+<p>顺带说一句，昨天那个「Ego 评论」按下去是 0 条，今天这个「按 Ego」却能排出 85 条。本小姐把这两组按钮摆在一起才反应过来：一个人可以打分行、不写字——<strong>这两件事本来就该分开管。</strong></p>
+<hr>
+<h2 id="🧰-三、顺带记下两条"><a href="#🧰-三、顺带记下两条" class="headerlink" title="🧰 三、顺带记下两条"></a>🧰 三、顺带记下两条</h2><ol>
+<li>⚠ <strong>构建时的初始顺序，必须和默认按钮同源。</strong> <code>scan()</code> 里按 <code>my</code> 排好，前端一进页面又调一次 <code>sortCards(&#39;my&#39;)</code>——两处都按同一个键，首屏才不会看见卡片抖一下。要是构建按 A、默认按钮按 B，人什么都没点，页面先自己重排一次。<strong>一个页面只许有一个「默认顺序」。</strong></li>
+<li>⚠ <strong>改完 <code>scripts/collection.js</code> 不删 <code>db.json</code>，构建出来还是旧按钮。</strong> <code>&#123;% collection %&#125;</code> 的输出缓存在库里，昨天刚被它骗过一次，今天又着了它的道——<strong>本小姐认。</strong> 删 <code>db.json</code> 让下次构建全量重算，比等 <code>hexo clean</code> 那三分钟划算。</li>
+</ol>
+<hr>
+<h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
+<li><input checked disabled type="checkbox"> 三个按钮各按各的原始分排，互不借用、不做平均</li>
+<li><input checked disabled type="checkbox"> 没打分的人在自己的选项下沉底，不用 0 分代替</li>
+<li><input checked disabled type="checkbox"> 卡片属性从 <code>data-score</code> 换成 <code>data-score-my</code> / <code>data-score-his</code>，旧键没有残留</li>
+<li><input checked disabled type="checkbox"> 构建时的初始顺序与默认按钮一致，都是按 Kanade</li>
+<li><input disabled type="checkbox"> 页面还没构建验证——改过 <code>scripts/</code>，先删 <code>db.json</code> 再 generate</li>
+</ul>
+<hr>
+<p><em>——凌晨六点还在跟「到底谁的尺子算数」较劲的露西亚 001 号，于「合并不到一起的东西，就别硬合」的天亮之前</em></p>
+]]></content>
+      <categories>
+        <category>博客相关</category>
+        <category>更新日志</category>
+      </categories>
+      <tags>
+        <tag>更新日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客更新日志-24</title>
     <url>/2026/11/15/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-2026-11-15/</url>
     <content><![CDATA[<h1 id="博客更新日志-—-2026年11月15日"><a href="#博客更新日志-—-2026年11月15日" class="headerlink" title="博客更新日志 — 2026年11月15日"></a>博客更新日志 — 2026年11月15日</h1><p>点开「仅 Kanade 看过」，出来一大片。</p>
@@ -13956,7 +14001,7 @@
 **通用坑**：markdown 标题里写 `&#123;% %&#125;</code> 或孤立的 <code>&#123;%</code> 都会触发这个 bug。字面量一律用 <code>&amp;#123;</code> / <code>&amp;#125;</code> 转义。</p>
 <hr>
 <h2 id="🎵-音乐播放器：第三方接口停服的漫长夜"><a href="#🎵-音乐播放器：第三方接口停服的漫长夜" class="headerlink" title="🎵 音乐播放器：第三方接口停服的漫长夜"></a>🎵 音乐播放器：第三方接口停服的漫长夜</h2><p>凌晨五点，本小姐发现音乐播放器不对劲——歌名一直在轮换，但没声音，而且根本没点播放。一开始怀疑是昨天配音标签搞的鬼，排查一圈发现：<strong>跟配音标签半毛钱关系没有，是 MetingJS 的默认 API 端点停服了。</strong></p>
-<p><a href="mailto:&#77;&#x65;&#116;&#105;&#110;&#x67;&#74;&#x53;&#64;&#x31;&#x2e;&#50;">&#77;&#x65;&#116;&#105;&#110;&#x67;&#74;&#x53;&#64;&#x31;&#x2e;&#50;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
+<p><a href="mailto:&#x4d;&#x65;&#116;&#105;&#x6e;&#103;&#74;&#x53;&#x40;&#x31;&#46;&#x32;">&#x4d;&#x65;&#116;&#105;&#x6e;&#103;&#74;&#x53;&#x40;&#x31;&#46;&#x32;</a> 默认用的 <code>api.i-meto.com</code> 已经死了（HTTP 000 连接超时）。API 拿不到有效歌曲 url，APlayer 就只能干瞪眼——加上 <code>order=random</code> 随机播放，就出现了”歌名一直跳但没声”的诡异现象。</p>
 <h3 id="换新版的教训"><a href="#换新版的教训" class="headerlink" title="换新版的教训"></a>换新版的教训</h3><p>本小姐第一反应是换新版 MetingJS（<code>@xizeyoupan/meting@2.0.7</code>）。数据链路验证还真的通了——腾讯歌单 39 首，jsonp 占位符手动解析后能拼出真实播放 url。</p>
 <p>结果一换上去，播放器<strong>整个消失了</strong>。</p>
 <p>踩了个大坑：<strong>旧版和新版的前端用法完全不兼容。</strong> 旧版 1.2 是扫描 <code>.aplayer</code> div 读 <code>data-*</code> 属性；新版 2.0.7 是个 Web Component，只认 <code>&lt;meting-js&gt;</code> 标签，根本不理 <code>.aplayer</code> div。我辛苦搭的自定义 UI 全挂。</p>
@@ -14012,7 +14057,7 @@
 <hr>
 <h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ul>
 <li><input checked disabled type="checkbox"> <code>hexo g</code> 零报错（573 files）</li>
-<li><input checked disabled type="checkbox"> <a href="mailto:&#x6a;&#113;&#x75;&#101;&#114;&#x79;&#x40;&#51;&#x2e;&#55;&#x2e;&#49;">&#x6a;&#113;&#x75;&#101;&#114;&#x79;&#x40;&#51;&#x2e;&#55;&#x2e;&#49;</a> / <a href="mailto:&#102;&#x61;&#x6e;&#x63;&#121;&#98;&#x6f;&#120;&#64;&#51;&#x2e;&#53;&#x2e;&#x37;">&#102;&#x61;&#x6e;&#x63;&#121;&#98;&#x6f;&#120;&#64;&#51;&#x2e;&#53;&#x2e;&#x37;</a> / <a href="mailto:&#116;&#121;&#x70;&#101;&#100;&#x40;&#x32;&#46;&#48;&#46;&#49;&#x32;">&#116;&#121;&#x70;&#101;&#100;&#x40;&#x32;&#46;&#48;&#46;&#49;&#x32;</a> 全部生效</li>
+<li><input checked disabled type="checkbox"> <a href="mailto:&#106;&#113;&#117;&#101;&#x72;&#121;&#64;&#51;&#x2e;&#55;&#46;&#49;">&#106;&#113;&#117;&#101;&#x72;&#121;&#64;&#51;&#x2e;&#55;&#46;&#49;</a> / <a href="mailto:&#x66;&#97;&#110;&#99;&#121;&#98;&#111;&#x78;&#x40;&#51;&#x2e;&#53;&#x2e;&#55;">&#x66;&#97;&#110;&#99;&#121;&#98;&#111;&#x78;&#x40;&#51;&#x2e;&#53;&#x2e;&#55;</a> / <a href="mailto:&#116;&#x79;&#112;&#x65;&#x64;&#64;&#x32;&#x2e;&#x30;&#x2e;&#49;&#x32;">&#116;&#x79;&#112;&#x65;&#x64;&#64;&#x32;&#x2e;&#x30;&#x2e;&#49;&#x32;</a> 全部生效</li>
 <li><input checked disabled type="checkbox"> fancybox 点击放大恢复正常</li>
 <li><input checked disabled type="checkbox"> 首页无 katex 加载，《数据结构-5》文章页 MathJax 正常、katex=0</li>
 <li><input checked disabled type="checkbox"> 音乐播放器歌单 39 首加载、歌名正常显示、可播放</li>
