@@ -78,7 +78,8 @@
     });
 
     /* ---------- 排序 ---------- */
-    // 卡片上带 data-score（10 分制原值）与 data-name，重排靠挪 DOM，不用重渲染
+    // 三个选项：按 Kanade 的分、按 Ego 的分、按首字母。两张卡各存各的原始分
+    // （data-score-my / data-score-his），重排靠挪 DOM，不用重渲染
     // 「首字母」口径：数字/英文排前面（A→Z），中文按拼音。直接 localeCompare('zh')
     // 会把拉丁字母整体排到汉字后面，AKB0048 就掉到表尾了，所以先按字符类型分组。
     function cmpName(a, b) {
@@ -91,15 +92,16 @@
     }
 
     function sortCards(mode) {
+      var attr = mode === 'his' ? 'data-score-his' : 'data-score-my';
       [].forEach.call(wrap.querySelectorAll('.cl-grid'), function (grid) {
         var cards = [].slice.call(grid.querySelectorAll('.cl-card'));
         cards.sort(function (a, b) {
           if (mode === 'name') return cmpName(a, b);
-          var sa = parseFloat(a.getAttribute('data-score'));
-          var sb = parseFloat(b.getAttribute('data-score'));
+          var sa = parseFloat(a.getAttribute(attr));
+          var sb = parseFloat(b.getAttribute(attr));
           var na = isNaN(sa), nb = isNaN(sb);
           if (na && nb) return cmpName(a, b);
-          if (na) return 1;              // 没打分的沉底
+          if (na) return 1;              // 这个人没打分的沉底
           if (nb) return -1;
           return (sb - sa) || cmpName(a, b);   // 分数高→低
         });
@@ -116,7 +118,7 @@
       b.addEventListener('click', function () { sortCards(b.getAttribute('data-sort')); });
     });
 
-    sortCards('score');   // 默认：分数高→低
+    sortCards('my');   // 默认：按 Kanade 的分高→低
 
     /* ---------- 详情浮层 ---------- */
     function open(card) {
